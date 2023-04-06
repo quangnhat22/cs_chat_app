@@ -17,7 +17,7 @@ class AppRoutes {
           const WelcomePage(),
         );
       case RouteName.loginPage:
-        return _buildRouteDialog(
+        return _buildRoute(
           settings,
           const LoginPage(),
         );
