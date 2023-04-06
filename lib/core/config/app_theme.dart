@@ -20,13 +20,13 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     useMaterial3: true,
     textTheme: ThemeData.light().textTheme.apply(
-          fontFamily: "Roboto",
+        //fontFamily: "Roboto",
         ),
     colorScheme: colorScheme,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       elevation: 0,
-      foregroundColor: Colors.white,
-      backgroundColor: colorScheme.primary,
+      foregroundColor: Colors.black,
+      backgroundColor: Colors.white,
     ),
     filledButtonTheme: const FilledButtonThemeData(
       style: ButtonStyle(
