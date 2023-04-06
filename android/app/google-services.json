@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1035746945209",
+    "project_id": "cs-chat-app-eac8a",
+    "storage_bucket": "cs-chat-app-eac8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035746945209:android:0a1162e1d47e9762905368",
+        "android_client_info": {
+          "package_name": "xyz.coffeesolution.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035746945209-8ahmd3ba8ua335mm47sitar8pscu2tar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZxGrFHeLm11I13eInp-i7wLtQlkrZvKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035746945209-8ahmd3ba8ua335mm47sitar8pscu2tar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
