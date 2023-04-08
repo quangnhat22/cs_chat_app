@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 20.0,
@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 8,
+              flex: 9,
               child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                   )
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 50, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(22, 40, 9, 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +116,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 20.0,
+                        height: 30.0,
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
@@ -164,7 +164,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 25.0,
+                        height: 28.0,
                       ),
                       const Center(
                         child: Text(
@@ -179,27 +179,60 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 25.0,
+                        height: 28.0,
                       ),
-                      Container(
-                        height: 50,
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          color: Color.fromRGBO(73, 188, 246, 1),
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
+                      Center(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromRGBO(73,188,246,1),
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size.fromHeight(55),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                          )),
+                          onPressed: () {},
+                          child: const Padding(
+                            padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                            child: Text(
+                              'Sign in',
+                              style: TextStyle(
+                                fontSize: 22,
+                                // color: ,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              ),
+                              ),
                           ),
-                        )),
+                        ),
                         const SizedBox(
-                        height: 25.0,
+                        height: 71.0,
+                        ),
+                        Row(
+                            children: const [
+                              Expanded(
+                                child: Divider(
+                                  color: Color.fromRGBO(151, 151, 151, 1),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                                child: Text(
+                                  "Or",
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(151, 151, 151, 1),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                  ),),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  color: Color.fromRGBO(151, 151, 151, 1)
+                                ),
+                              ),
+                            ],
+                          ),
+                        const SizedBox(
+                        height: 71.0,
                         ),
                         Center(
                           child:
@@ -207,8 +240,6 @@ class LoginPage extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color.fromRGBO(239, 237, 237, 1),
                                 foregroundColor: const Color.fromRGBO(120, 120, 120, 1),
-                                shadowColor: Colors.greenAccent,
-                                elevation: 3,
                                 minimumSize: const Size.fromHeight(55),
                                 shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -222,8 +253,8 @@ class LoginPage extends StatelessWidget {
                                   children: const [
                                     Image(
                                       image: AssetImage("assets/icons/google_logo.png"),
-                                      height: 24.0,
-                                      width: 24,
+                                      height: 33.0,
+                                      width: 33.0,
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(left: 20, right: 8),
@@ -242,7 +273,7 @@ class LoginPage extends StatelessWidget {
                             )
                           ),
                         const SizedBox(
-                        height: 25.0,
+                        height: 95.0,
                         ),
                       Center(
                         child: RichText(text: const TextSpan(
@@ -255,7 +286,7 @@ class LoginPage extends StatelessWidget {
                                   children: <TextSpan> [
                                     TextSpan(text: 'Sign up',
                                     style: TextStyle(
-                                      color: Colors.blue,
+                                      color: Color.fromRGBO(39, 101, 193, 1),
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w700))
                                   ]
