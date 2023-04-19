@@ -1,3 +1,18 @@
 {
-  "language": "Vietnamese"
+  "language": "Ngôn ngữ",
+  "login": "Đăng nhập",
+  "sign_in_your_account_to_see_your_chatting": "Đăng nhập để chat với những người bạn",
+  "password": "Mật khẩu",
+  "forgot_password": "Quên mật khẩu",
+  "sign_in": "Đăng nhập",
+  "sign_in_with_google": "Đăng nhập Google",
+  "dont_have_account": "Không có tài khoản",
+  "sign_up": "Đăng ký",
+  "email_label": "Email",
+  "please_enter_email": "Vui lòng nhập email",
+  "email_is_invalid": "Email không hợp lệ",
+  "please_enter_password": "Vui lòng nhập password",
+  "please_enter_confirm_password": "Vui lòng nhập lại mật khẩu",
+  "password_must_be_at_least_8_characters": "Mật khẩu phải có ít nhất 8 kí tự",
+  "or": "Hoặc"
 }
