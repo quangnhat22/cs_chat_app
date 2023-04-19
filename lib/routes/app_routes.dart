@@ -1,5 +1,4 @@
-import 'package:chatapp/presentation/auth/login/views/views.dart';
-import 'package:chatapp/presentation/auth/welcome/welcome.dart';
+import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -11,11 +10,6 @@ class AppRoutes {
 
   static Route unAuthorizedRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RouteName.welcomePage:
-        return _buildRoute(
-          settings,
-          const WelcomePage(),
-        );
       case RouteName.loginPage:
         return _buildRoute(
           settings,

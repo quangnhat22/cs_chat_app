@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/global_keys.dart';
+import '../core/utils/global_keys.dart';
 
 class NavigationUtil {
   static NavigatorState? get _navigatorKey =>

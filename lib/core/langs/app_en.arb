@@ -1,3 +1,18 @@
 {
-  "language": "English"
+  "language": "Language",
+  "login": "Login",
+  "sign_in_your_account_to_see_your_chatting": "Sign in your account to see your chatting",
+  "password": "Password",
+  "forgot_password": "Forgot Password",
+  "sign_in": "Sign In",
+  "sign_in_with_google": "Sign in with Google",
+  "dont_have_account": "Don't have account",
+  "sign_up": "Sign Up",
+  "email_label": "Email",
+  "please_enter_email": "Please enter email",
+  "email_is_invalid": "Email is invalid",
+  "please_enter_password": "Please enter password",
+  "please_enter_confirm_password": "Please enter confirm password",
+  "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
+  "or": "Or"
 }
