@@ -14,5 +14,7 @@
   "please_enter_password": "Please enter password",
   "please_enter_confirm_password": "Please enter confirm password",
   "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
-  "or": "Or"
+  "or": "Or",
+  "create_your_new_account": "Create your new account",
+  "confirm_password": "Confirm Password"
 }

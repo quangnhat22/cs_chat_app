@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordTextFormField extends StatefulWidget {
-  final TextEditingController passwordController;
+  const PasswordTextFormField({
+    super.key,
+    required this.controller,
+    this.label,
+  });
 
-  const PasswordTextFormField(this.passwordController, {super.key});
+  final String? label;
+  final TextEditingController controller;
 
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
@@ -37,7 +42,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
-        controller: widget.passwordController,
+        controller: widget.controller,
         validator: validatePassword,
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.lock),
@@ -47,7 +52,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
                 _passwordVisible ? Icons.visibility : Icons.visibility_off),
           ),
           label: Text(
-            AppLocalizations.of(context)!.password,
+            widget.label ?? AppLocalizations.of(context)!.password,
           ),
           border: const OutlineInputBorder(
               borderSide: BorderSide(width: 1),

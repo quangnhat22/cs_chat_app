@@ -3,6 +3,10 @@ part of login;
 class SignUpTextButton extends StatelessWidget {
   const SignUpTextButton({super.key});
 
+  void _handleTapSignUpButton(BuildContext ctx) {
+    Navigator.pushNamed(ctx, RouteName.signUpPage);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -11,7 +15,7 @@ class SignUpTextButton extends StatelessWidget {
         child: RichText(
           text: TextSpan(
             text: "Don't have account? ",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16.0,
               color: Colors.grey,
               fontWeight: FontWeight.w700,
@@ -20,6 +24,8 @@ class SignUpTextButton extends StatelessWidget {
               TextSpan(
                 text: 'Sign up',
                 style: AppTextStyles.textSpanSignUpStyle,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => _handleTapSignUpButton(context),
               )
             ],
           ),

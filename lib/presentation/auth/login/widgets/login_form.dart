@@ -31,7 +31,7 @@ class _LoginFormState extends State<LoginForm> {
         key: _formKey,
         child: Column(children: [
           EmailTextFormField(emailController),
-          PasswordTextFormField(passwordController),
+          PasswordTextFormField(controller: passwordController),
           const Padding(
             padding: EdgeInsets.only(top: 8.0),
             child: ForgotPasswordTextButton(),
