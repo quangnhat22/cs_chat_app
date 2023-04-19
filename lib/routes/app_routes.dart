@@ -1,4 +1,5 @@
 import 'package:chatapp/presentation/auth/login/login.dart';
+import 'package:chatapp/presentation/auth/register/register.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -14,6 +15,11 @@ class AppRoutes {
         return _buildRoute(
           settings,
           const LoginPage(),
+        );
+      case RouteName.signUpPage:
+        return _buildRoute(
+          settings,
+          const RegisterPage(),
         );
       default:
         return _errorRoute();

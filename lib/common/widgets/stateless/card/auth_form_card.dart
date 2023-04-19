@@ -14,7 +14,7 @@ class AuthFormCard extends StatelessWidget {
       left: 0,
       right: 0,
       bottom: 0,
-      height: AppScreenUtils.isLandscape() ? 0.7.sh : 0.8.sh,
+      height: AppScreenUtils.isLandscape() ? 0.7.sh : 0.75.sh,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(

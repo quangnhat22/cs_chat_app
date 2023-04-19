@@ -1,7 +1,7 @@
-part of login;
+part of register;
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +13,17 @@ class LoginPage extends StatelessWidget {
           alignment: AlignmentDirectional.bottomCenter,
           children: [
             AuthHeader(
-              title: AppLocalizations.of(context)!.sign_in,
+              title: AppLocalizations.of(context)!.sign_up,
               subTitle: AppLocalizations.of(context)!
                   .sign_in_your_account_to_see_your_chatting,
               mainColor: Theme.of(context).colorScheme.primary,
+              isShowBackButton: true,
             ),
-            const LoginForm(),
+            const RegisterForm(),
           ],
         ),
       ),
     );
+    ;
   }
 }

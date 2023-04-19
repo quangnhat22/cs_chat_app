@@ -10,7 +10,7 @@ class AppTextStyles {
 
   static const TextStyle mediumTitleTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 18,
+    fontSize: AppFontSize.titleFontSize,
   );
 
   static const TextStyle captionTextStyle = TextStyle(
@@ -41,7 +41,12 @@ class AppTextStyles {
   //using in text span login and send code again
   static final TextStyle textSpanSignUpStyle = TextStyle(
     color: Colors.blue[700],
-    fontSize: 16.0,
+    fontSize: AppFontSize.normalFontSize,
+    fontWeight: FontWeight.w700,
+  );
+  static const TextStyle subTitleGreyText = TextStyle(
+    fontSize: AppFontSize.normalFontSize,
+    color: Colors.grey,
     fontWeight: FontWeight.w700,
   );
 }
