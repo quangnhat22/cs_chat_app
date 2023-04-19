@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+
 class AppAssets {
-  //static const appIcon = AssetsImage('assets/app_icon.png')
+  static final logoGoogle = Image.asset(
+    'assets/icons/google.png',
+    width: 26,
+  );
 }
