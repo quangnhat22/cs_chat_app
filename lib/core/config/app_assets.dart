@@ -14,5 +14,6 @@ class AppAssets {
   static final logoApp = Image.asset(
     'assets/logos/logo.png',
     fit: BoxFit.cover,
+    color: Colors.white,
   );
 }

@@ -1,8 +1,7 @@
 import 'package:chatapp/common/widgets/stateless/app_bar/m_home_app_bar.dart';
-import 'package:chatapp/presentation/chat/chats/pages/chats_page.dart';
+import 'package:chatapp/presentation/chat/chat_main/widgets/list_chat_room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatMainPage extends StatefulWidget {
   const ChatMainPage({Key? key}) : super(key: key);
@@ -15,13 +14,13 @@ class _ChatMainPageState extends State<ChatMainPage> {
   final List<String> _tabName = ['All', 'Message', 'Group'];
   final List<Tab> _tabs = const <Tab>[
     Tab(
-      child: ChatsPage(),
+      child: ListChatRoom(),
     ),
     Tab(
-      child: ChatsPage(),
+      child: ListChatRoom(),
     ),
     Tab(
-      child: ChatsPage(),
+      child: ListChatRoom(),
     ),
   ];
 
