@@ -1,3 +1,4 @@
+import 'package:chatapp/core/config/app_color.dart';
 import 'package:flutter/material.dart';
 
 import 'app_font_size.dart';
@@ -20,7 +21,7 @@ class AppTextStyles {
 
   //app bar
   static const TextStyle titleAppBarTextStyle = TextStyle(
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w500,
   );
 
   static const TextStyle authHeadTitleTextStyle = TextStyle(

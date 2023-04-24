@@ -16,16 +16,15 @@ class App extends StatelessWidget {
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
           switch (state.runtimeType) {
-            case AppLoading:
-              return const MaterialApp(
-                home: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
             case AppUnAuthorized:
               return const MMaterialApp(
                 initialRoute: RouteName.loginPage,
                 onGenerateRoute: AppRoutes.unAuthorizedRoute,
+              );
+            case AppAuthorized:
+              return const MMaterialApp(
+                initialRoute: RouteName.homePage,
+                onGenerateRoute: AppRoutes.authorizedRoute,
               );
             default:
               return const MaterialApp(

@@ -1,8 +1,14 @@
 import 'package:chatapp/core/config/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class AppTheme {
   AppTheme._();
+
+  static bool isDarkTheme() {
+    return SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+        Brightness.dark;
+  }
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     useMaterial3: true,
@@ -13,12 +19,20 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       elevation: 0,
       foregroundColor: Colors.black,
-      backgroundColor: AppColors.lightColorScheme.background,
+      backgroundColor: AppColors.darkColorScheme.background,
     ),
     filledButtonTheme: const FilledButtonThemeData(
       style: ButtonStyle(
         foregroundColor: MaterialStatePropertyAll(Colors.white),
       ),
+    ),
+    elevatedButtonTheme: const ElevatedButtonThemeData(
+        style: ButtonStyle(
+      foregroundColor: MaterialStatePropertyAll(Colors.white),
+    )),
+    cardTheme: CardTheme(
+      elevation: 1,
+      surfaceTintColor: AppColors.lightColorScheme.surface,
     ),
   );
 
@@ -26,7 +40,7 @@ class AppTheme {
     scaffoldBackgroundColor: const Color(0xff1a1d1f),
     useMaterial3: true,
     textTheme: ThemeData.dark().textTheme.apply(
-          fontFamily: "Roboto",
+        //fontFamily: "Roboto",
         ),
     colorScheme: AppColors.darkColorScheme,
     appBarTheme: AppBarTheme(
@@ -38,6 +52,13 @@ class AppTheme {
       style: ButtonStyle(
         foregroundColor: MaterialStatePropertyAll(Colors.white),
       ),
+    ),
+    elevatedButtonTheme: const ElevatedButtonThemeData(
+        style: ButtonStyle(
+            foregroundColor: MaterialStatePropertyAll(Colors.white))),
+    cardTheme: CardTheme(
+      elevation: 1,
+      surfaceTintColor: AppColors.darkColorScheme.surface,
     ),
   );
 }
