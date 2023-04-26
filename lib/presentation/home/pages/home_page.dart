@@ -1,4 +1,5 @@
 import 'package:chatapp/presentation/chat/chat_main/pages/chat_main_page.dart';
+import 'package:chatapp/presentation/chat/chat_main/pages/chat_place_holder.dart';
 import 'package:chatapp/presentation/contacts/contacts_main/pages/contacts_main.dart';
 import 'package:chatapp/presentation/home/widgets/list_bottom_navigation.dart';
 import 'package:chatapp/presentation/search/pages/search_page.dart';
@@ -16,7 +17,8 @@ class _HomePageState extends State<HomePage> {
   int _currentTabIndex = 0;
 
   final List<Widget> _pages = const <Widget>[
-    ChatMainPage(),
+    // ChatMainPage(),
+    ChatPlaceHolder(),
     SearchPage(),
     ContactsMainPage(),
     SettingMainPage(),
