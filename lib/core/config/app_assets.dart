@@ -1,3 +1,4 @@
+import 'package:chatapp/presentation/chat/chat_main/pages/chat_place_holder.dart';
 import 'package:flutter/material.dart';
 
 class AppAssets {
@@ -15,5 +16,12 @@ class AppAssets {
     'assets/logos/logo.png',
     fit: BoxFit.cover,
     color: Colors.white,
+  );
+
+  static final ChatPlaceHolder = Image.asset(
+    'assets/images/ChatPlaceholder.png',
+    fit: BoxFit.cover,
+    width: 256.0,
+    height: 256.0,
   );
 }

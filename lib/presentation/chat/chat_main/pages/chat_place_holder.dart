@@ -1,4 +1,5 @@
 import 'package:chatapp/common/widgets/stateless/app_bar/m_home_app_bar.dart';
+import 'package:chatapp/core/config/app_assets.dart';
 import 'package:chatapp/presentation/chat/chat_main/widgets/list_chat_room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -68,10 +69,7 @@ class _ChatPlaceHolderState extends State<ChatPlaceHolder> {
               const SizedBox(
                 height: 100,
               ),
-              Image.asset(
-                'assets/images/ChatPlaceholder.png',
-                fit: BoxFit.cover,
-              )
+              Center(child: AppAssets.ChatPlaceHolder)
             ],
           ),
         ),
