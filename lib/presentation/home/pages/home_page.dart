@@ -17,8 +17,8 @@ class _HomePageState extends State<HomePage> {
   int _currentTabIndex = 0;
 
   final List<Widget> _pages = const <Widget>[
-    // ChatMainPage(),
-    ChatPlaceHolder(),
+    ChatMainPage(),
+    // ChatPlaceHolder(),
     SearchPage(),
     ContactsMainPage(),
     SettingMainPage(),
