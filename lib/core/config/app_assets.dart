@@ -17,6 +17,12 @@ class AppAssets {
     color: Colors.white,
   );
 
+  static final loadingGif = Image.asset(
+    'assets/gifs/loading.gif',
+    height: 256.0,
+    width: 256.0,
+  );
+
   static final chatPlaceHolder = Image.asset(
     'assets/images/ChatPlaceholder.png',
     fit: BoxFit.cover,

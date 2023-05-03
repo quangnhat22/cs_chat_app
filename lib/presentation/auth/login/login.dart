@@ -1,9 +1,15 @@
 library login;
 
+import 'package:chatapp/core/di/injector.dart';
+import 'package:chatapp/core/utils/snack_bar.dart';
+import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../app/bloc/app_bloc.dart';
+import './bloc/login_bloc.dart';
 import '../../../common/widgets/stateless/auth_header.dart';
 import '../../../common/widgets/stateless/button/custom_elevated_button.dart';
 import '../../../common/widgets/stateless/button/custom_outline_button.dart';
