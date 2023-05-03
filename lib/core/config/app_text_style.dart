@@ -1,4 +1,3 @@
-import 'package:chatapp/core/config/app_color.dart';
 import 'package:flutter/material.dart';
 
 import 'app_font_size.dart';
