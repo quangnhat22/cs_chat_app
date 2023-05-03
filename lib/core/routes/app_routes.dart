@@ -1,3 +1,4 @@
+import 'package:chatapp/presentation/auth/fogot_password/forgot_password.dart';
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
@@ -15,7 +16,7 @@ class AppRoutes {
       case RouteName.loginPage:
         return _buildRoute(
           settings,
-          const LoginPage(),
+          const SucessConfirmPage(),
         );
       case RouteName.signUpPage:
         return _buildRoute(

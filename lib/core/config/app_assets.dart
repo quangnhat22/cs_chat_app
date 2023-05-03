@@ -16,4 +16,14 @@ class AppAssets {
     fit: BoxFit.cover,
     color: Colors.white,
   );
+  // ignore: non_constant_identifier_names
+  static final CSChat = Image.asset(
+    'assets/icons/CSChat.png',
+    fit: BoxFit.cover,
+  );
+  // ignore: non_constant_identifier_names
+  static final ChatPlaceholder = Image.asset(
+    'assets/images/ChatPlaceholder.png',
+    fit: BoxFit.cover
+  );
 }
