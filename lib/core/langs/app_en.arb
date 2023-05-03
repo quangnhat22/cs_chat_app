@@ -20,5 +20,8 @@
   "chat": "Chat",
   "search": "Search",
   "contact": "Contact",
-  "setting": "Setting"
+  "setting": "Setting",
+  "friend_request": "Friend request",
+  "add_new_friend": "Add new friend",
+  "friends": "Friends"
 }
