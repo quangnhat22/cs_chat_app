@@ -23,5 +23,8 @@
   "setting": "Cài đặt",
   "friend_request": "Lời mời kết bạn",
   "add_new_friend": "Thêm bạn mới",
-  "friends": "Bạn bè"
+  "friends": "Bạn bè",
+  "deny": "Từ chối",
+  "accept": "Đồng ý",
+  "cancel": "Hủy"
 }

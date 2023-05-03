@@ -1,5 +1,6 @@
 import 'package:chatapp/common/widgets/stateless/app_bar/m_home_app_bar.dart';
 import 'package:chatapp/presentation/contacts/contacts_main/pages/contact_page.dart';
+import 'package:chatapp/presentation/contacts/contacts_main/pages/friend_request_page.dart';
 import 'package:chatapp/presentation/contacts/contacts_main/widgets/list_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -55,7 +56,7 @@ class _ContactsMainPageState extends State<ContactsMainPage> {
             }),
           ),
         ),
-        body: const ContactPage(),
+        body: const FriendRequestPage(),
       ),
     );
   }

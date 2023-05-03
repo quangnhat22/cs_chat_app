@@ -23,5 +23,8 @@
   "setting": "Setting",
   "friend_request": "Friend request",
   "add_new_friend": "Add new friend",
-  "friends": "Friends"
+  "friends": "Friends",
+  "deny": "Deny",
+  "accept": "Accept",
+  "cancel": "Cancel"
 }
