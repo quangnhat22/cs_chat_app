@@ -16,5 +16,9 @@
   "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
   "or": "Or",
   "create_your_new_account": "Create your new account",
-  "confirm_password": "Confirm Password"
+  "confirm_password": "Confirm Password",
+  "chat": "Chat",
+  "search": "Search",
+  "contact": "Contact",
+  "setting": "Setting"
 }

@@ -1,5 +1,6 @@
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
+import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -28,11 +29,11 @@ class AppRoutes {
 
   static Route authorizedRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case '/':
-      //   return _buildRoute(
-      //     settings,
-      //     const WelcomePage(),
-      //   );
+      case RouteName.homePage:
+        return _buildRoute(
+          settings,
+          const HomePage(),
+        );
       default:
         return _errorRoute();
     }

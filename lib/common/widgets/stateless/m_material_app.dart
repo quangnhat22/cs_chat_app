@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/app_theme.dart';
-import '../../../routes/app_routes.dart';
+import '../../../core/routes/app_routes.dart';
 
 class MMaterialApp extends StatelessWidget {
   const MMaterialApp({
@@ -30,6 +30,7 @@ class MMaterialApp extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
           //navigatorKey: AppGlobalKeys.navigatorKey,
           navigatorObservers: [
             AppRoutes.routeObserver,

@@ -16,5 +16,9 @@
   "password_must_be_at_least_8_characters": "Mật khẩu phải có ít nhất 8 kí tự",
   "or": "Hoặc",
   "create_your_new_account": "Tạo tài khoản mới của bạn",
-  "confirm_password": "Xác nhận lại mật khẩu"
+  "confirm_password": "Xác nhận lại mật khẩu",
+  "chat": "Nhắn tin",
+  "search": "Tìm kiếm",
+  "contact": "Liên hệ",
+  "setting": "Cài đặt"
 }
