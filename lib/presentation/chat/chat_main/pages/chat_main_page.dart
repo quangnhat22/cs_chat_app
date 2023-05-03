@@ -1,5 +1,5 @@
 import 'package:chatapp/common/widgets/stateless/app_bar/m_home_app_bar.dart';
-import 'package:chatapp/presentation/chat/chat_main/pages/chatPage.dart';
+import 'package:chatapp/presentation/chat/chat_main/pages/chat_page.dart';
 import 'package:chatapp/presentation/chat/chat_main/widgets/list_chat_room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -61,7 +61,7 @@ class _ChatMainPageState extends State<ChatMainPage> {
             ),
           ),
         ),
-        body: ChatPage(),
+        body: const ChatPage(),
       ),
     );
   }

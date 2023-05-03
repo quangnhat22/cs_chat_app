@@ -1,8 +1,6 @@
-import 'package:chatapp/presentation/chat/chat_main/model/chatUsersModel.dart';
-import 'package:chatapp/presentation/chat/chat_main/widgets/coversationList.dart';
+import 'package:chatapp/presentation/chat/chat_main/model/chat_users_model.dart';
+import 'package:chatapp/presentation/chat/chat_main/widgets/coversation_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -59,15 +57,15 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             ListView.builder(
               itemCount: chatUsers.length,
               shrinkWrap: true,
-              padding: EdgeInsets.only(top: 16),
-              physics: NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(top: 16),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return ConversationList(
                   name: chatUsers[index].name,

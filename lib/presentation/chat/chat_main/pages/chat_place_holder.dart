@@ -69,7 +69,7 @@ class _ChatPlaceHolderState extends State<ChatPlaceHolder> {
               const SizedBox(
                 height: 100,
               ),
-              Center(child: AppAssets.ChatPlaceHolder)
+              Center(child: AppAssets.chatPlaceHolder)
             ],
           ),
         ),

@@ -1,4 +1,3 @@
-import 'package:chatapp/presentation/chat/chat_main/pages/chat_place_holder.dart';
 import 'package:flutter/material.dart';
 
 class AppAssets {
@@ -18,7 +17,7 @@ class AppAssets {
     color: Colors.white,
   );
 
-  static final ChatPlaceHolder = Image.asset(
+  static final chatPlaceHolder = Image.asset(
     'assets/images/ChatPlaceholder.png',
     fit: BoxFit.cover,
     width: 256.0,

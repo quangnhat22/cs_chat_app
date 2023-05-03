@@ -1,15 +1,15 @@
 import 'package:chatapp/core/config/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class ConversationList extends StatefulWidget {
-  String name;
-  String messageText;
-  String imageUrl;
-  String time;
-  bool isMessageRead;
-  ConversationList({
+  final String name;
+  final String messageText;
+  final String imageUrl;
+  final String time;
+  final bool isMessageRead;
+
+  const ConversationList({
+    super.key,
     required this.name,
     required this.messageText,
     required this.imageUrl,
@@ -27,7 +27,8 @@ class _ConversationListState extends State<ConversationList> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+        padding:
+            const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -37,7 +38,7 @@ class _ConversationListState extends State<ConversationList> {
                     backgroundImage: NetworkImage(widget.imageUrl),
                     maxRadius: 30,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
                   Expanded(
@@ -52,7 +53,7 @@ class _ConversationListState extends State<ConversationList> {
                                 fontSize: 16,
                                 color: AppColors.lightColorScheme.scrim),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                           Text(
