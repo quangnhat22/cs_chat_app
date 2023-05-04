@@ -43,5 +43,14 @@
   "select_gender": "Thay đổi giới tính",
   "please_not_empty": "Vui lòng không để trống ô này!",
   "update_profile_success": "Cập nhật thông tin của bạn thành công",
-  "update_profile_fail": "Cập nhật thông tin của bạn thất bại"
+  "update_profile_fail": "Cập nhật thông tin của bạn thất bại",
+  "friend_request": "Lời mời kết bạn",
+  "add_new_friend": "Thêm bạn mới",
+  "friends": "Bạn bè",
+  "deny": "Từ chối",
+  "accept": "Đồng ý",
+  "find_friend": "Tìm kiếm bạn",
+  "result": "Kết quả",
+  "email_verified": "Email xác thực",
+  "add_friend": "Thêm bạn bè"
 }

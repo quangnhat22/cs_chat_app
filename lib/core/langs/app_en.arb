@@ -43,5 +43,14 @@
   "select_gender": "Select Gender",
   "please_not_empty": "Please fill out this field!",
   "update_profile_success": "Update your profile success",
-  "update_profile_fail": "Update your profile fail"
+  "update_profile_fail": "Update your profile fail",
+  "friend_request": "Friend request",
+  "add_new_friend": "Add new friend",
+  "friends": "Friends",
+  "deny": "Deny",
+  "accept": "Accept",
+  "find_friend": "Find friend",
+  "result": "Result",
+  "email_verified": "Email verified",
+  "add_friend": "Add friend"
 }
