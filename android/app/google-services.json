@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1035746945209-abk6uqm2331h01g2uipsbapmgsdgmv6m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.coffeesolution.chatapp",
+            "certificate_hash": "9c147db9b8f137177c5bf2bea346cfc5f745f6c6"
+          }
+        },
+        {
+          "client_id": "1035746945209-v0vp05f1pj1t11qbim9spv6rqh9rsc69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.coffeesolution.chatapp",
+            "certificate_hash": "d82441259d6b2125790d817fce14f210fcbe3e58"
+          }
+        },
+        {
           "client_id": "1035746945209-8ahmd3ba8ua335mm47sitar8pscu2tar.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,13 @@
             {
               "client_id": "1035746945209-8ahmd3ba8ua335mm47sitar8pscu2tar.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1035746945209-liaq6nerf8ckb7gf9g95i9c3o9ifb8rk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.coffeesolution.chatapp"
+              }
             }
           ]
         }

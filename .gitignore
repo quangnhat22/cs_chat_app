@@ -45,3 +45,5 @@ app.*.map.json
 
 #Config for project
 /lib/core/config/firebase_options.dart
+
+*.freezed.dart

@@ -8,14 +8,18 @@ import '../../../core/routes/app_routes.dart';
 class MMaterialApp extends StatelessWidget {
   const MMaterialApp({
     Key? key,
+    required this.keyMaterialApp,
     required this.initialRoute,
     this.onGenerateRoute,
     this.homeWidget,
+    this.navigatorKey,
   }) : super(key: key);
 
+  final String keyMaterialApp;
   final String initialRoute;
   final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
   final Widget? homeWidget;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +30,13 @@ class MMaterialApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: 'CS Chat App',
+          key: ValueKey(keyMaterialApp),
           debugShowCheckedModeBanner: false,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          //navigatorKey: AppGlobalKeys.navigatorKey,
+          navigatorKey: navigatorKey,
           navigatorObservers: [
             AppRoutes.routeObserver,
           ],
