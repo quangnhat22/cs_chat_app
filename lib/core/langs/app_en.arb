@@ -20,5 +20,11 @@
   "chat": "Chat",
   "search": "Search",
   "contact": "Contact",
-  "setting": "Setting"
+  "setting": "Setting",
+  "theme": "Theme",
+  "notifications": "Notifications",
+  "devices": "Devices",
+  "change_profile_photo": "Change Profile Photo",
+  "edit_profile": "Edit Profile",
+  "change_password": "Change Password"
 }

@@ -20,5 +20,11 @@
   "chat": "Nhắn tin",
   "search": "Tìm kiếm",
   "contact": "Liên hệ",
-  "setting": "Cài đặt"
+  "setting": "Cài đặt",
+   "theme": "Chủ đề",
+  "notifications": "Thông báo",
+  "devices": "Danh sách thiết bị",
+  "change_profile_photo": "Thay đổi ảnh đại diện",
+  "edit_profile": "Chỉnh sửa thông tin",
+  "change_password": "Thay đổi mật khẩu"
 }
