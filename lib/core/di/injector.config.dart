@@ -35,14 +35,16 @@ import 'package:chatapp/domain/modules/user/user_repository.dart' as _i17;
 import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i19;
 import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.dart'
     as _i15;
-import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i26;
-import 'package:chatapp/presentation/auth/login/bloc/login_bloc.dart' as _i24;
-import 'package:chatapp/presentation/setting/edit_profile/edit_profile_form_cubit/edit_profile_form_cubit.dart'
+import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i27;
+import 'package:chatapp/presentation/auth/login/bloc/login_bloc.dart' as _i25;
+import 'package:chatapp/presentation/setting/edit_profile/bloc/edit_form_submit_bloc.dart'
     as _i23;
+import 'package:chatapp/presentation/setting/edit_profile/edit_profile_form_cubit/edit_profile_form_cubit.dart'
+    as _i24;
 import 'package:chatapp/presentation/setting/setting_language/cubit/setting_language_cubit.dart'
     as _i12;
 import 'package:chatapp/presentation/setting/setting_main/cubit/setting_main_cubit.dart'
-    as _i25;
+    as _i26;
 import 'package:chatapp/presentation/setting/setting_theme/cubit/setting_theme_cubit.dart'
     as _i13;
 import 'package:get_it/get_it.dart' as _i1;
@@ -95,17 +97,19 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i22.AuthUseCase>(
         () => _i22.AuthUseCaeImpl(repo: gh<_i20.AuthRepository>()));
-    gh.factory<_i23.EditProfileFormCubit>(
-        () => _i23.EditProfileFormCubit(userUseCase: gh<_i19.UserUseCase>()));
-    gh.factory<_i24.LoginBloc>(
-        () => _i24.LoginBloc(authRepo: gh<_i20.AuthRepository>()));
-    gh.factory<_i25.SettingMainCubit>(() => _i25.SettingMainCubit(
+    gh.factory<_i23.EditFormSubmitBloc>(
+        () => _i23.EditFormSubmitBloc(userUseCase: gh<_i19.UserUseCase>()));
+    gh.factory<_i24.EditProfileFormCubit>(
+        () => _i24.EditProfileFormCubit(userUseCase: gh<_i19.UserUseCase>()));
+    gh.factory<_i25.LoginBloc>(
+        () => _i25.LoginBloc(authRepo: gh<_i20.AuthRepository>()));
+    gh.factory<_i26.SettingMainCubit>(() => _i26.SettingMainCubit(
           authUseCase: gh<_i22.AuthUseCase>(),
           userUseCase: gh<_i19.UserUseCase>(),
           appSettingsUseCase: gh<_i10.AppSettingsUseCase>(),
         ));
-    gh.lazySingleton<_i26.AppBloc>(
-        () => _i26.AppBloc(authUseCase: gh<_i22.AuthUseCase>()));
+    gh.lazySingleton<_i27.AppBloc>(
+        () => _i27.AppBloc(authUseCase: gh<_i22.AuthUseCase>()));
     return this;
   }
 }

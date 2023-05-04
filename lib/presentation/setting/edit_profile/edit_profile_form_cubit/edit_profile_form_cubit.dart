@@ -12,9 +12,23 @@ part 'edit_profile_form_cubit.freezed.dart';
 class EditProfileFormCubit extends Cubit<EditProfileFormState> {
   EditProfileFormCubit({required UserUseCase userUseCase})
       : _userUseCase = userUseCase,
-        super(const EditProfileFormState.initial());
+        super(const EditProfileFormState.initial()) {
+    initValue();
+  }
 
   final UserUseCase _userUseCase;
+
+  Future<void> initValue() async {
+    final userInfo = await _userUseCase.getSelfFromLocal();
+    if (userInfo == null) return;
+    emit(state.copyWith(
+      name: userInfo.name,
+      phoneNumber: PhoneNumber.dirty(userInfo.phone ?? ""),
+      birthday: userInfo.birthday,
+      gender: AppGender.checkGenderEnum(userInfo.gender),
+      bio: "",
+    ));
+  }
 
   Future<void> fullnameChanged(String? value) async {
     emit(state.copyWith(name: value));
@@ -35,19 +49,4 @@ class EditProfileFormCubit extends Cubit<EditProfileFormState> {
   void bioChanged(String? value) {
     emit(state.copyWith(bio: value));
   }
-
-  // Future<void> submitEditProfileForm({
-  //   String? name,
-  //   String? gender,
-  //   String? phone,
-  //   DateTime? birthday,
-  // }) async {
-  //   try {
-  //     await _userUseCase.updateSelf(
-  //         name: name, gender: gender, phone: phone, birthday: birthday);
-  //     emit(const ChangedEditProfileSuccess());
-  //   } catch (e) {
-  //     emit(ChangedEditProfileFailure(message: e.toString()));
-  //   }
-  // }
 }

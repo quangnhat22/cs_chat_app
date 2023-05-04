@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../entities/user_entities.dart';
 
 abstract class UserUseCase {
-  Future<void> updateSelf(
+  Future<bool> updateSelf(
       {String? name,
       String? avatar,
       String? gender,

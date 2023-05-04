@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-enum TypeValueCheck { email, password, confirmedPassword, text }
+enum TypeValueCheck { email, password, confirmedPassword, text, none }
 
 class AppCheckValid {
   AppCheckValid._();
@@ -18,6 +18,8 @@ class AppCheckValid {
           return AppLocalizations.of(ctx)!.please_enter_confirm_password;
         case TypeValueCheck.text:
           return AppLocalizations.of(ctx)!.please_not_empty;
+        case TypeValueCheck.none:
+          null;
       }
     }
     return null;

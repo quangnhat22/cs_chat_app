@@ -34,6 +34,8 @@ class _InputGenderState extends State<InputGender> {
     return BlocBuilder<EditProfileFormCubit, EditProfileFormState>(
       buildWhen: (previous, current) => previous.gender != current.gender,
       builder: (context, state) {
+        // chưa biết xử lý sao cho ổn nên để tạm dòng này
+        genderController.text = state.gender.value;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: TextFormField(

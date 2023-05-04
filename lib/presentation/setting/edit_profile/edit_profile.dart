@@ -1,11 +1,11 @@
 library edit_profile;
 
-import 'dart:developer';
-
 import 'package:chatapp/core/di/injector.dart';
 import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:chatapp/core/utils/formz/check_valid.dart';
+import 'package:chatapp/core/utils/formz/phone_number.dart';
 import 'package:chatapp/core/utils/snack_bar.dart';
+import 'package:chatapp/presentation/setting/edit_profile/bloc/edit_form_submit_bloc.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile_form_cubit/edit_profile_form_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,3 +25,4 @@ part 'widgets/input_bio.dart';
 part 'widgets/input_birthday.dart';
 part 'widgets/input_gender.dart';
 part 'widgets/dialog_gender.dart';
+part 'widgets/btn_edit_profile.dart';

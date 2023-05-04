@@ -41,5 +41,7 @@
   "please_check_form_again": "Please check form again!",
   "birthday": "Birthday",
   "select_gender": "Select Gender",
-  "please_not_empty": "Please fill out this field!"
+  "please_not_empty": "Please fill out this field!",
+  "update_profile_success": "Update your profile success",
+  "update_profile_fail": "Update your profile fail"
 }

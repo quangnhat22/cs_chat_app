@@ -41,5 +41,7 @@
   "please_check_form_again": "Vui lòng kiểm tra lại form đã điền!",
   "birthday": "Ngày sinh",
   "select_gender": "Thay đổi giới tính",
-  "please_not_empty": "Vui lòng không để trống ô này!"
+  "please_not_empty": "Vui lòng không để trống ô này!",
+  "update_profile_success": "Cập nhật thông tin của bạn thành công",
+  "update_profile_fail": "Cập nhật thông tin của bạn thất bại"
 }

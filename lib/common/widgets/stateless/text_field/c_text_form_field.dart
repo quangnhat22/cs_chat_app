@@ -1,3 +1,4 @@
+import 'package:chatapp/core/utils/formz/check_valid.dart';
 import 'package:flutter/material.dart';
 
 enum InputType { text, phoneNumber, multiline }
@@ -5,24 +6,22 @@ enum InputType { text, phoneNumber, multiline }
 class CTextFormField extends StatelessWidget {
   const CTextFormField({
     super.key,
+    this.controller,
     required this.icon,
     required this.label,
     this.type = InputType.text,
-    this.errorText,
-    this.initVal,
-    this.onChanged,
     this.isReadOnly = false,
     this.onTap,
+    this.typeCheck = TypeValueCheck.none,
   });
 
+  final TextEditingController? controller;
   final Icon icon;
   final String label;
   final InputType type;
-  final String? errorText;
-  final String? initVal;
-  final Function(String?)? onChanged;
   final VoidCallback? onTap;
   final bool isReadOnly;
+  final TypeValueCheck typeCheck;
 
   TextInputType _checkType() {
     switch (type) {
@@ -42,11 +41,12 @@ class CTextFormField extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
+        controller: controller,
         minLines: 1,
         maxLines: null,
-        initialValue: initVal,
+        validator: (value) =>
+            AppCheckValid.checkValid(value, typeCheck, context),
         decoration: InputDecoration(
-          errorText: errorText,
           prefixIcon: icon,
           label: Text(label),
           border: const OutlineInputBorder(
@@ -55,7 +55,6 @@ class CTextFormField extends StatelessWidget {
           ),
         ),
         keyboardType: _checkType(),
-        onChanged: onChanged,
         readOnly: isReadOnly,
         onTap: onTap,
       ),

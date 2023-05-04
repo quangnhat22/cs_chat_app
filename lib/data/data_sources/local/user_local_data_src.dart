@@ -56,12 +56,12 @@ class UserLocalDataSrc {
     });
   }
 
-  Future<void> deleteBoxAuth() async {
+  Future<void> deleteBoxUser() async {
     // getBox().then((box) {
     //   return print(
     //       box.get(refreshTokenKeyName, defaultValue: "no refresh token"));
     // });
-    await Hive.box(_userBox).clear();
+    await _openBox().then((box) => box.clear());
     // _openBox().then((box) {
     //   return print(
     //       box.get(_accessTokenKeyName, defaultValue: "no refresh token"));

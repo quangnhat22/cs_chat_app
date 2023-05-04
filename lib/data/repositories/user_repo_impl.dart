@@ -96,4 +96,9 @@ class UserRepositoryImpl extends UserRepository {
       );
     });
   }
+
+  @override
+  Future<void> clearBox() async {
+    await local.deleteBoxUser();
+  }
 }

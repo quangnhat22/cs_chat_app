@@ -14,4 +14,5 @@ abstract class UserRepository {
   Stream<UserEntity?> getStreamSelfFromLocal();
   Future<void> getUserByEmail(String email);
   Future<void> getUserById(String id);
+  Future<void> clearBox();
 }

@@ -17,12 +17,12 @@ class UserService {
     DateTime? birthday,
   ) async {
     try {
-      return await _service.dio.post(
+      return await _service.dio.put(
         "${BaseService.userPath}/self",
         data: {
           "name": name,
-          "avatar": avatar,
-          "gender": gender,
+          "avatar": avatar ?? "https://picsum.photos/200",
+          "gender": gender?.toLowerCase(),
           "phone": phone,
           "birthday": birthday?.toIso8601String(),
         },

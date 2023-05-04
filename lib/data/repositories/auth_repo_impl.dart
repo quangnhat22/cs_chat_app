@@ -79,6 +79,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<void> logOut() async {
+    await _userRepo.clearBox();
     await _authLocalDataSrc.deleteBoxAuth();
   }
 }

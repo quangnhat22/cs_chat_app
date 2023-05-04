@@ -8,4 +8,10 @@ class AppDateTimeFormat {
         ? DateFormat('dd-MM-yyyy').format(date)
         : DateFormat('dd-MM-yyyy').format(DateTime.now());
   }
+
+  static DateTime parseDDMMYYYY(String? string) {
+    return string != null
+        ? DateFormat("yyyy-MM-dd").parse(string)
+        : DateTime.now();
+  }
 }
