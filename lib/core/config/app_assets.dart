@@ -28,9 +28,8 @@ class AppAssets {
     'assets/icons/CSChat.png',
     fit: BoxFit.cover,
   );
-  // ignore: non_constant_identifier_names
-  static final ChatPlaceholder = Image.asset(
-    'assets/images/ChatPlaceholder.png',
-    fit: BoxFit.cover
+  static final checkIcon = Image.asset(
+    'assets/icons/CheckIcon.png',
+    fit: BoxFit.cover,
   );
 }

@@ -12,14 +12,42 @@ class SucessConfirmPage extends StatelessWidget {
           fit: StackFit.expand,
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            AuthHeader(
-              title: AppLocalizations.of(context)!.sign_in,
-              subTitle: AppLocalizations.of(context)!
-                  .sign_in_your_account_to_see_your_chatting,
-              mainColor: Theme.of(context).colorScheme.primary,
+            Container(
+              padding: EdgeInsets.only(
+                top: AppScreenUtils.isLandscape() ? 40 : 117),  
+              decoration: BoxDecoration(color: AppColors.lightColorScheme.tertiary),
+              child: Center(
+                child: Column(
+                  children: [
+                    AppAssets.checkIcon,
+                    Container(
+                      width: 150,
+                      height: 50,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(top: 33),
+                      decoration: BoxDecoration(
+                        color: AppColors.lightColorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(20),),
+                      child: Text(
+                        "Awesome !",
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: AppColors.lightColorScheme.tertiary,
+                        ),),
+                    ),
+                  ]),
+              ),
             ),
-            // const LoginForm(),
-          ],
+            ShortFormCard(
+              childWidget: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: Text(
+                  "Your password resets successfully !!!",
+                  style: TextStyle(
+                    color: AppColors.lightColorScheme.tertiary
+                  ),
+                ),),
+        )],
         ),
       ),
     );
