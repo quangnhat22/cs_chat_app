@@ -1,5 +1,4 @@
 import 'package:chatapp/core/config/app_color.dart';
-import 'package:chatapp/presentation/contacts/contacts_main/model/friend_model.dart';
 import 'package:chatapp/presentation/contacts/contacts_main/widgets/friend_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,29 +11,6 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
-  List<Friend> friend = [
-    Friend(
-      name: 'Jane Russel',
-      imageURL: "images/userImage1.jpeg",
-    ),
-    Friend(
-      name: "Glady's Murphy",
-      imageURL: "images/userImage2.jpeg",
-    ),
-    Friend(
-      name: "Jorge Henry",
-      imageURL: "images/userImage3.jpeg",
-    ),
-    Friend(
-      name: "Philip Fox",
-      imageURL: "images/userImage4.jpeg",
-    ),
-    Friend(
-      name: "Debra Hawkins",
-      imageURL: "images/userImage5.jpeg",
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,14 +102,14 @@ class _ContactPageState extends State<ContactPage> {
                   ),
                 ),
                 ListView.builder(
-                  itemCount: friend.length,
+                  itemCount: 10,
                   shrinkWrap: true,
                   padding: const EdgeInsets.only(top: 16),
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return FriendList(
-                      name: friend[index].name,
-                      imageURL: friend[index].imageURL,
+                    return const FriendList(
+                      name: "123",
+                      imageURL: "https://picsum.photos/200/300",
                     );
                   },
                 )
