@@ -6,4 +6,6 @@ abstract class UserRepository {
     String? phone,
     DateTime? birthday,
   );
+
+  Future<void> getSelf();
 }

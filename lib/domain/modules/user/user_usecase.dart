@@ -8,6 +8,8 @@ abstract class UserUseCase {
       String? gender,
       String? phone,
       DateTime? birthday});
+
+  Future<void> getSelf();
 }
 
 @Injectable(as: UserUseCase)
@@ -24,5 +26,10 @@ class UserUseCaseImpl extends UserUseCase {
       String? phone,
       DateTime? birthday}) async {
     return await repo.updateSelf(name, avatar, gender, phone, birthday);
+  }
+
+  @override
+  Future<void> getSelf() async {
+    return await repo.getSelf();
   }
 }

@@ -18,7 +18,7 @@ class UserService {
   ) async {
     try {
       return await _service.dio.post(
-        "${BaseService.authLoginWithFirebasePath}/self",
+        "${BaseService.userPath}/self",
         data: {
           "name": name,
           "avatar": avatar,
@@ -26,6 +26,36 @@ class UserService {
           "phone": phone,
           "birthday": birthday?.toIso8601String(),
         },
+      );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> getUserDetailByEmail(String? email) async {
+    try {
+      return await _service.dio.get(
+        "${BaseService.userPath}?email=$email",
+      );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> getUserDetailById(String? id) async {
+    try {
+      return await _service.dio.get(
+        "${BaseService.userPath}/$id",
+      );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> getSelf() async {
+    try {
+      return await _service.dio.get(
+        "${BaseService.userPath}/self",
       );
     } catch (e) {
       throw Exception(e.toString());
