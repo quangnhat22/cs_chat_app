@@ -1,7 +1,8 @@
-part of forgot_password;
+part of register;
 
-class SucessConfirmPage extends StatelessWidget {
-  const SucessConfirmPage({super.key});
+
+class RegisterConfirmPage extends StatelessWidget {
+  const RegisterConfirmPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class SucessConfirmPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 100, ),
                     child: Text(
-                      "Your password resets successfully !!!",
+                      "Your account created successfully !!!",
                       style: TextStyle(
                         color: AppColors.lightColorScheme.tertiary,
                         fontSize: 25,
@@ -53,7 +54,7 @@ class SucessConfirmPage extends StatelessWidget {
                   ),),
                   const Padding(
                     padding: EdgeInsets.only(top: 80, bottom: 90),
-                    child: Center(child: SendButton(applyText: "Back to login",),),
+                    child: Center(child: SendButton(applyText: "Go to chat",),),
                   ) 
                 ],
               ),

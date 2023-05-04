@@ -1,7 +1,7 @@
-part of forgot_password;
+part of register;
 
-class ShortFormCard extends StatelessWidget {
-  const ShortFormCard({Key? key, required this.childWidget}) : super(key: key);
+class PhotoHighFormCard extends StatelessWidget {
+  const PhotoHighFormCard({Key? key, required this.childWidget}) : super(key: key);
 
   final Widget childWidget;
 
@@ -11,7 +11,7 @@ class ShortFormCard extends StatelessWidget {
       left: 0,
       right: 0,
       bottom: 0,
-      height: 0.45.sh,
+      height: 0.8.sh,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(

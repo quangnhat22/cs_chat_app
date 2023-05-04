@@ -16,7 +16,7 @@ class AppRoutes {
       case RouteName.loginPage:
         return _buildRoute(
           settings,
-          const SucessConfirmPage(),
+          const RegisterConfirmPage(),
         );
       case RouteName.signUpPage:
         return _buildRoute(

@@ -29,7 +29,7 @@ part "pages/forgot_password_step3.dart";
 part "pages/forgot_password_step4.dart";
 part "widgets/go_back_btn.dart";
 part 'widgets/form/forgot_pass_form.dart';
-part 'widgets/blue_send_btn.dart';
+part 'widgets/send_form_btn.dart';
 part 'widgets/form/validate_sendcode_form.dart';
 part "widgets/send_code_again_btn.dart";
 part "widgets/build_square.dart";
