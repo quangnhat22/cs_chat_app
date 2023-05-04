@@ -32,7 +32,7 @@ class _FriendListState extends State<FriendList> {
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.transparent,
+                      color: Color.fromARGB(67, 0, 0, 0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[

@@ -26,5 +26,10 @@
   "friends": "Friends",
   "deny": "Deny",
   "accept": "Accept",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "phone_number": "Phone number",
+  "find_friend": "Find friend",
+  "result": "Result",
+  "email_verified": "Email verified",
+  "add_friend": "Add friend"
 }

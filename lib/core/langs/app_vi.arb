@@ -26,5 +26,10 @@
   "friends": "Bạn bè",
   "deny": "Từ chối",
   "accept": "Đồng ý",
-  "cancel": "Hủy"
+  "cancel": "Hủy",
+  "phone_number": "Số điện thoại",
+  "find_friend": "Tìm kiếm bạn",
+  "result": "Kết quả",
+  "email_verified": "Email xác thực",
+  "add_friend": "Thêm bạn bè"
 }
