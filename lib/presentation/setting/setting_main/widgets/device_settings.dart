@@ -1,22 +1,14 @@
-import 'package:chatapp/common/widgets/stateless/divider/divider_space_left.dart';
-import 'package:chatapp/presentation/setting/setting_main/cubit/setting_main_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../common/widgets/ink_well/ink_well_dynamic_border.dart';
+part of setting_main;
 
 class DeviceSettings extends StatelessWidget {
   const DeviceSettings({Key? key}) : super(key: key);
 
   Future<void> _onTapLanguageBtn(BuildContext ctx, String currentLang) {
-    // return _showEditDialog(ctx, const EditLanguageView());
-    throw Exception();
+    return _showEditDialog(ctx, const EditLanguageView());
   }
 
   Future<void> _onTapThemeBtn(BuildContext ctx, String currentTheme) {
-    //return _showEditDialog(ctx, const EditThemeView());
-    throw Exception();
+    return _showEditDialog(ctx, const EditThemeView());
   }
 
   Future<void> _showEditDialog(BuildContext ctx, Widget form) {
@@ -24,7 +16,7 @@ class DeviceSettings extends StatelessWidget {
       context: ctx,
       builder: (context) => form,
     ).then((_) {
-      //ctx.read<SettingCubit>().getValueThemeAndLang();
+      ctx.read<SettingMainCubit>().getValueThemeAndLang();
     });
   }
 

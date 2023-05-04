@@ -1,6 +1,9 @@
 {
   "language": "Language",
   "login": "Login",
+  "log_out": "Log out",
+  "logout_success": "Logout success",
+  "logout_fail": "Logput fail! Please try again.",
   "sign_in_your_account_to_see_your_chatting": "Sign in your account to see your chatting",
   "password": "Password",
   "forgot_password": "Forgot Password",
@@ -26,5 +29,10 @@
   "devices": "Devices",
   "change_profile_photo": "Change Profile Photo",
   "edit_profile": "Edit Profile",
-  "change_password": "Change Password"
+  "change_password": "Change Password",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "are_you_sure_want_to_log_out": "Are you sure want to log out",
+  "select_theme": "Select Theme",
+  "select_language": "Select Language"
 }

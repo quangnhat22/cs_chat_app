@@ -1,14 +1,4 @@
-import 'package:chatapp/common/widgets/stateless/app_bar/m_home_app_bar.dart';
-import 'package:chatapp/core/di/injector.dart';
-import 'package:chatapp/presentation/setting/setting_main/cubit/setting_main_cubit.dart';
-import 'package:chatapp/presentation/setting/setting_main/widgets/device_settings.dart';
-import 'package:chatapp/presentation/setting/setting_main/widgets/profile_settings.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../common/widgets/stateless/circle_avatar/custom_avatar_image.dart';
+part of setting_main;
 
 class SettingMainPage extends StatelessWidget {
   const SettingMainPage({super.key});
@@ -51,6 +41,10 @@ class SettingMainView extends StatelessWidget {
                   height: 4.h,
                 ),
                 const DeviceSettings(),
+                SizedBox(
+                  height: 8.h,
+                ),
+                const LogOutButton(),
               ],
             ),
           ),

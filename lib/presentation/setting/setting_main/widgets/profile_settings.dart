@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../common/widgets/ink_well/ink_well_dynamic_border.dart';
-import '../../../../common/widgets/stateless/divider/divider_space_left.dart';
+part of setting_main;
 
 class ProfileSetting extends StatelessWidget {
   const ProfileSetting({super.key});

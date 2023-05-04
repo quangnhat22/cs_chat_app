@@ -1,6 +1,7 @@
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
+import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -27,6 +28,18 @@ class AppRoutes {
     }
   }
 
+  static Route loadingRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case "/":
+        return _buildRoute(
+          settings,
+          const LoadingPage(),
+        );
+      default:
+        return _errorRoute();
+    }
+  }
+
   static Route authorizedRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteName.homePage:
@@ -46,14 +59,14 @@ class AppRoutes {
     );
   }
 
-  static MaterialPageRoute _buildRouteDialog(
-      RouteSettings settings, Widget builder) {
-    return MaterialPageRoute(
-      settings: settings,
-      fullscreenDialog: true,
-      builder: (BuildContext context) => builder,
-    );
-  }
+  // static MaterialPageRoute _buildRouteDialog(
+  //     RouteSettings settings, Widget builder) {
+  //   return MaterialPageRoute(
+  //     settings: settings,
+  //     fullscreenDialog: true,
+  //     builder: (BuildContext context) => builder,
+  //   );
+  // }
 
   static Route _errorRoute() {
     return MaterialPageRoute(builder: (_) {

@@ -1,6 +1,9 @@
 {
   "language": "Ngôn ngữ",
   "login": "Đăng nhập",
+  "log_out": "Đăng xuất",
+  "logout_success": "Đăng xuất thành công",
+  "logout_fail": "Đăng xuất thất bại! Vui lòng thử lại.",
   "sign_in_your_account_to_see_your_chatting": "Đăng nhập để chat với những người bạn",
   "password": "Mật khẩu",
   "forgot_password": "Quên mật khẩu",
@@ -26,5 +29,10 @@
   "devices": "Danh sách thiết bị",
   "change_profile_photo": "Thay đổi ảnh đại diện",
   "edit_profile": "Chỉnh sửa thông tin",
-  "change_password": "Thay đổi mật khẩu"
+  "change_password": "Thay đổi mật khẩu",
+  "cancel": "Huỷ",
+  "confirm": "Xác nhận",
+  "are_you_sure_want_to_log_out": "Bạn có chắc muốn đăng xuất",
+  "select_theme": "Lựa chọn chủ đề",
+  "select_language": "Lựa chọn ngôn ngữ"
 }

@@ -2,7 +2,7 @@ import 'package:chatapp/presentation/chat/chat_main/pages/chat_main_page.dart';
 import 'package:chatapp/presentation/contacts/contacts_main/pages/contacts_main.dart';
 import 'package:chatapp/presentation/home/widgets/list_bottom_navigation.dart';
 import 'package:chatapp/presentation/search/pages/search_page.dart';
-import 'package:chatapp/presentation/setting/setting_main/pages/setting_main_page.dart';
+import 'package:chatapp/presentation/setting/setting_main/setting_main.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
