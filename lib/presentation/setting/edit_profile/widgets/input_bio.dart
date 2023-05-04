@@ -21,12 +21,11 @@ class _InputBioState extends State<InputBio> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<EditProfileFormCubit, EditProfileFormState>(
-      listenWhen: (previous, current) => previous.bio != current.bio,
+      listenWhen: (previous, current) =>
+          previous.bio != current.bio && previous.bio == null,
       listener: (context, state) {
         if (state.bio != null) {
           _controller.text = state.bio!;
-          _controller.selection = TextSelection.fromPosition(
-              TextPosition(offset: _controller.text.length));
         }
       },
       child: CTextFormField(
@@ -35,5 +34,11 @@ class _InputBioState extends State<InputBio> {
         label: AppLocalizations.of(context)!.bio,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

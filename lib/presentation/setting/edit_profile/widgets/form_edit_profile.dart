@@ -28,9 +28,4 @@ class _EditProfileFormState extends State<EditProfileForm> {
       ),
     );
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

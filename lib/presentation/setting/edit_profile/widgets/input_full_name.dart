@@ -21,12 +21,11 @@ class _InputFullNameState extends State<InputFullName> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<EditProfileFormCubit, EditProfileFormState>(
-      listenWhen: (previous, current) => previous.name != current.name,
+      listenWhen: (previous, current) =>
+          previous.name != current.name && previous.name == null,
       listener: (context, state) {
         if (state.name != null) {
           _controller.text = state.name!;
-          _controller.selection = TextSelection.fromPosition(
-              TextPosition(offset: _controller.text.length));
         }
       },
       child: CTextFormField(

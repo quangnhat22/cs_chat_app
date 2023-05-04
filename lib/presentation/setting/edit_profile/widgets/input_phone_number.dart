@@ -22,12 +22,11 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
   Widget build(BuildContext context) {
     return BlocListener<EditProfileFormCubit, EditProfileFormState>(
       listenWhen: (previous, current) =>
-          previous.phoneNumber != current.phoneNumber,
+          previous.phoneNumber != current.phoneNumber &&
+          previous.phoneNumber == null,
       listener: (context, state) {
         if (state.phoneNumber != null) {
           _controller.text = state.phoneNumber?.value ?? "";
-          _controller.selection = TextSelection.fromPosition(
-              TextPosition(offset: _controller.text.length));
         }
       },
       child: CTextFormField(

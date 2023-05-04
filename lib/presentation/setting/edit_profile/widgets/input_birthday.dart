@@ -31,8 +31,8 @@ class _InputBirthdayState extends State<InputBirthday> {
       listener: (context, state) {
         if (state.birthday != null) {
           _controller.text = AppDateTimeFormat.formatDDMMYYYY(state.birthday);
-          _controller.selection = TextSelection.fromPosition(
-              TextPosition(offset: _controller.text.length));
+          // _controller.selection = TextSelection.fromPosition(
+          //     TextPosition(offset: _controller.text.length));
         }
       },
       child: CTextFormField(

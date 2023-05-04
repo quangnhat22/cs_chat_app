@@ -8,7 +8,7 @@ class InputGender extends StatefulWidget {
 }
 
 class _InputGenderState extends State<InputGender> {
-  final TextEditingController genderController = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   Future<void> _showDialog(BuildContext ctx, AppGender currentGender) {
     return showDialog(
@@ -18,28 +18,24 @@ class _InputGenderState extends State<InputGender> {
       ),
     ).then((gender) {
       setState(() {
-        genderController.text = (gender as AppGender).value;
+        _controller.text = (gender as AppGender).value;
       });
       ctx.read<EditProfileFormCubit>().genderChanged(gender);
     });
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EditProfileFormCubit, EditProfileFormState>(
-      buildWhen: (previous, current) => previous.gender != current.gender,
+    return BlocConsumer<EditProfileFormCubit, EditProfileFormState>(
+      listenWhen: (previous, current) => previous.gender != current.gender,
+      listener: (context, state) {
+        _controller.text = state.name!;
+      },
       builder: (context, state) {
-        // chưa biết xử lý sao cho ổn nên để tạm dòng này
-        genderController.text = state.gender.value;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: TextFormField(
-            controller: genderController,
+            controller: _controller,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.people_outline),
               suffixIcon: const Icon(Icons.expand_more_outlined),
@@ -57,5 +53,11 @@ class _InputGenderState extends State<InputGender> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
