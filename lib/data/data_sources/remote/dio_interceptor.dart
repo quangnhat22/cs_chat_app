@@ -13,8 +13,9 @@ class DioInterceptor {
     dio.interceptors.add(
       QueuedInterceptorsWrapper(
         onRequest: ((options, handler) async {
-          options.headers.putIfAbsent('Authorization',
-              () => 'Bearer ${_authLocalDataSrc.getAccessToken()}');
+          final String? accessToken = await _authLocalDataSrc.getAccessToken();
+          options.headers
+              .putIfAbsent('Authorization', () => 'Bearer $accessToken');
           handler.next(options);
         }),
         onResponse: ((response, handler) async {

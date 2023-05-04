@@ -1,5 +1,6 @@
 library setting_main;
 
+import 'package:chatapp/core/config/app_text_style.dart';
 import 'package:chatapp/core/routes/app_navigation.dart';
 import 'package:chatapp/core/routes/route_name.dart';
 import 'package:chatapp/presentation/setting/setting_language/setting_language.dart';
@@ -13,12 +14,14 @@ import '../../../common/widgets/stateless/button/custom_outline_button.dart';
 import '../../../common/widgets/stateless/circle_avatar/custom_avatar_image.dart';
 import '../../../common/widgets/stateless/divider/divider_space_left.dart';
 import '../../../common/widgets/stateless/ink_well/ink_well_dynamic_border.dart';
+import '../../../core/config/app_font_size.dart';
 import '../../../core/di/injector.dart';
 import '../../../core/utils/show_diaglog.dart';
 import '../setting_theme/setting_theme.dart';
 import 'cubit/setting_main_cubit.dart';
 
 part 'pages/setting_main_page.dart';
+part 'widgets/profile_info.dart';
 part 'widgets/device_settings.dart';
 part 'widgets/log_out_button.dart';
 part 'widgets/profile_settings.dart';

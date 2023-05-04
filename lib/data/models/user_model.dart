@@ -1,17 +1,22 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
 @freezed
-class UserModel with _$UserModel {
+@HiveType(typeId: 0)
+class UserModel extends HiveObject with _$UserModel {
+  UserModel._();
+
   factory UserModel({
-    required String id,
-    String? name,
-    String? avatar,
-    String? phone,
-    String? gender,
-    DateTime? birthday,
+    @HiveField(0) required String id,
+    @HiveField(1) String? name,
+    @HiveField(2) String? avatar,
+    @HiveField(3) String? email,
+    @HiveField(4) String? phone,
+    @HiveField(5) String? gender,
+    @HiveField(6) DateTime? birthday,
     // ignore: invalid_annotation_target
     @JsonKey(name: "common_friend_count", ignore: true) int? commonFriendCount,
     // ignore: invalid_annotation_target

@@ -2,6 +2,7 @@ import 'package:chatapp/data/data_sources/firebase/auth_firebase.dart';
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:chatapp/data/data_sources/remote/service/auth_service.dart';
 import 'package:chatapp/domain/modules/auth/auth_repository.dart';
+import 'package:chatapp/domain/modules/user/user_repository.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../core/utils/detect_info_device.dart';
@@ -10,15 +11,18 @@ import '../../core/utils/detect_info_device.dart';
 class AuthRepositoryImpl extends AuthRepository {
   final AuthFirebase _authFirebase;
   final AuthService _authService;
+  final UserRepository _userRepo;
   final AuthLocalDataSrc _authLocalDataSrc;
 
   AuthRepositoryImpl({
     required AuthFirebase authFirebase,
     required AuthService authService,
+    required UserRepository userRepo,
     required AuthLocalDataSrc authLocalDataSrc,
   })  : _authFirebase = authFirebase,
         _authService = authService,
-        _authLocalDataSrc = authLocalDataSrc;
+        _authLocalDataSrc = authLocalDataSrc,
+        _userRepo = userRepo;
 
   @override
   Stream<String?> checkAccessTokenStream() {
@@ -50,7 +54,10 @@ class AuthRepositoryImpl extends AuthRepository {
         if (res.statusCode == 200) {
           final data = res.data["data"];
           await _authLocalDataSrc.saveAuth(
-              data["access_token"]["token"], data["refresh_token"]["token"]);
+            data["access_token"]["token"],
+            data["refresh_token"]["token"],
+          );
+          await _userRepo.getSelf();
         }
       }
     } catch (e) {

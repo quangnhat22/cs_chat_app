@@ -30,9 +30,7 @@ class SettingMainView extends StatelessWidget {
                 SizedBox(
                   height: 32.h,
                 ),
-                const CustomAvatarImage(
-                  maxRadiusEmptyImg: 64,
-                ),
+                const ProfileInfo(),
                 SizedBox(
                   height: 16.h,
                 ),

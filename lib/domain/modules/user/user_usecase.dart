@@ -1,6 +1,8 @@
 import 'package:chatapp/domain/modules/user/user_repository.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../entities/user_entities.dart';
+
 abstract class UserUseCase {
   Future<void> updateSelf(
       {String? name,
@@ -10,6 +12,10 @@ abstract class UserUseCase {
       DateTime? birthday});
 
   Future<void> getSelf();
+  Future<UserEntity?> getSelfFromLocal();
+  Stream<UserEntity?> getStreamSelfFromLocal();
+  Future<void> getUserByEmail(String email);
+  Future<void> getUserById(String id);
 }
 
 @Injectable(as: UserUseCase)
@@ -19,7 +25,7 @@ class UserUseCaseImpl extends UserUseCase {
   UserUseCaseImpl({required this.repo});
 
   @override
-  Future<void> updateSelf(
+  Future<bool> updateSelf(
       {String? name,
       String? avatar,
       String? gender,
@@ -31,5 +37,25 @@ class UserUseCaseImpl extends UserUseCase {
   @override
   Future<void> getSelf() async {
     return await repo.getSelf();
+  }
+
+  @override
+  Future<UserEntity?> getSelfFromLocal() async {
+    return await repo.getSelfFromLocal();
+  }
+
+  @override
+  Stream<UserEntity?> getStreamSelfFromLocal() {
+    return repo.getStreamSelfFromLocal();
+  }
+
+  @override
+  Future<void> getUserByEmail(String email) {
+    return repo.getUserByEmail(email);
+  }
+
+  @override
+  Future<void> getUserById(String id) {
+    return repo.getUserById(id);
   }
 }

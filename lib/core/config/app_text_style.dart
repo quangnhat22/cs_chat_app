@@ -1,3 +1,4 @@
+import 'package:chatapp/core/config/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'app_font_size.dart';
@@ -26,13 +27,12 @@ class AppTextStyles {
   );
 
   static const TextStyle authHeadTitleTextStyle = TextStyle(
-      fontWeight: FontWeight.w600,
-      fontSize: AppFontSize.headlineFontSize,
-      color: Colors.white);
+    fontWeight: FontWeight.w600,
+    fontSize: AppFontSize.headlineFontSize,
+  );
 
   static const TextStyle authHeadSubtitleTextStyle = TextStyle(
     fontSize: AppFontSize.normalFontSize,
-    color: Colors.white,
   );
 
   static const TextStyle textButtonStyle = TextStyle(
