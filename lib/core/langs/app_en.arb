@@ -40,5 +40,6 @@
   "bio": "Bio",
   "please_check_form_again": "Please check form again!",
   "birthday": "Birthday",
-  "select_gender": "Select Gender"
+  "select_gender": "Select Gender",
+  "please_not_empty": "Please fill out this field!"
 }

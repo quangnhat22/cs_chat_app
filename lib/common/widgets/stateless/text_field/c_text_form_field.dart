@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum InputType { text, phoneNumber, multiline }
 
 class CTextFormField extends StatelessWidget {
   const CTextFormField({
     super.key,
-    required this.controller,
     required this.icon,
     required this.label,
     this.type = InputType.text,
     this.errorText,
+    this.initVal,
+    this.onChanged,
+    this.isReadOnly = false,
+    this.onTap,
   });
 
-  final TextEditingController controller;
   final Icon icon;
   final String label;
   final InputType type;
   final String? errorText;
-
-  String? validateValue(String? value, BuildContext context) {
-    print(value);
-    if (value == null || value.isEmpty || value == "") {
-      return AppLocalizations.of(context)!.please_enter_email;
-    }
-    return null;
-  }
+  final String? initVal;
+  final Function(String?)? onChanged;
+  final VoidCallback? onTap;
+  final bool isReadOnly;
 
   TextInputType _checkType() {
     switch (type) {
@@ -45,19 +42,22 @@ class CTextFormField extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
-        controller: controller,
-        validator: (value) => validateValue(value, context),
         minLines: 1,
         maxLines: null,
+        initialValue: initVal,
         decoration: InputDecoration(
           errorText: errorText,
           prefixIcon: icon,
           label: Text(label),
           border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(8))),
+            borderSide: BorderSide(width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
         ),
         keyboardType: _checkType(),
+        onChanged: onChanged,
+        readOnly: isReadOnly,
+        onTap: onTap,
       ),
     );
   }

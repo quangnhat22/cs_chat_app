@@ -39,13 +39,8 @@ class _EditProfileFormState extends State<EditProfileForm> {
           children: <Widget>[
             const InputFullName(),
             const InputPhoneNumber(),
-            BirthdayInput(
-              controller: birthdayInput,
-            ),
-            GenderInput(
-              controller: genderController,
-              handleChanged: handleChangeGender,
-            ),
+            const InputBirthday(),
+            const InputGender(),
             const InputBio(),
             Padding(
               padding: const EdgeInsets.only(top: 48),

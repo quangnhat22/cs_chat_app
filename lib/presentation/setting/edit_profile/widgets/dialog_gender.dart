@@ -1,19 +1,19 @@
 part of edit_profile;
 
-class GenderFormDialog extends StatefulWidget {
-  const GenderFormDialog({
+class DialogGender extends StatefulWidget {
+  const DialogGender({
     Key? key,
     required this.initGender,
   }) : super(key: key);
 
-  final String initGender;
+  final AppGender initGender;
 
   @override
-  State<GenderFormDialog> createState() => _GenderFormDialogState();
+  State<DialogGender> createState() => _DialogGenderState();
 }
 
-class _GenderFormDialogState extends State<GenderFormDialog> {
-  String _selectGender = "";
+class _DialogGenderState extends State<DialogGender> {
+  late AppGender _selectGender;
 
   @override
   void initState() {
@@ -22,8 +22,18 @@ class _GenderFormDialogState extends State<GenderFormDialog> {
   }
 
   void _handleChangeRadioValue(String value) {
+    if (value == AppGender.male.value) {
+      _handleChangeGender(AppGender.male);
+    } else if (value == AppGender.female.value) {
+      _handleChangeGender(AppGender.female);
+    } else {
+      _handleChangeGender(AppGender.others);
+    }
+  }
+
+  void _handleChangeGender(AppGender gender) {
     setState(() {
-      _selectGender = value;
+      _selectGender = gender;
     });
   }
 
@@ -41,17 +51,17 @@ class _GenderFormDialogState extends State<GenderFormDialog> {
           children: <Widget>[
             CRadioListTile(
               value: AppGender.male.value,
-              groupValue: _selectGender,
+              groupValue: _selectGender.value,
               onChanged: _handleChangeRadioValue,
             ),
             CRadioListTile(
               value: AppGender.female.value,
-              groupValue: _selectGender,
+              groupValue: _selectGender.value,
               onChanged: _handleChangeRadioValue,
             ),
             CRadioListTile(
               value: AppGender.others.value,
-              groupValue: _selectGender,
+              groupValue: _selectGender.value,
               onChanged: _handleChangeRadioValue,
             ),
           ],

@@ -20,8 +20,8 @@ class EditProfileFormCubit extends Cubit<EditProfileFormState> {
     emit(state.copyWith(name: value));
   }
 
-  void phoneNumberChanged(String value) {
-    emit(state.copyWith(phoneNumber: PhoneNumber.dirty(value)));
+  void phoneNumberChanged(String? value) {
+    emit(state.copyWith(phoneNumber: PhoneNumber.dirty(value ?? "")));
   }
 
   void birthdayChanged(DateTime value) {
@@ -32,7 +32,7 @@ class EditProfileFormCubit extends Cubit<EditProfileFormState> {
     emit(state.copyWith(gender: value));
   }
 
-  void bioChanged(String value) {
+  void bioChanged(String? value) {
     emit(state.copyWith(bio: value));
   }
 

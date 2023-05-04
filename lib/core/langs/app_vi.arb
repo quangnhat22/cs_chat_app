@@ -40,5 +40,6 @@
   "bio": "Giới thiệu bản thân",
   "please_check_form_again": "Vui lòng kiểm tra lại form đã điền!",
   "birthday": "Ngày sinh",
-  "select_gender": "Thay đổi giới tính"
+  "select_gender": "Thay đổi giới tính",
+  "please_not_empty": "Vui lòng không để trống ô này!"
 }
