@@ -3,6 +3,10 @@ part of setting_main;
 class ProfileSetting extends StatelessWidget {
   const ProfileSetting({super.key});
 
+  void _onTapEditProfile() {
+    NavigationUtil.pushNamed(route: RouteName.editProfile);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -20,7 +24,7 @@ class ProfileSetting extends StatelessWidget {
             title: AppLocalizations.of(context)!.edit_profile,
             leading: const Icon(Icons.account_circle_outlined),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: _onTapEditProfile,
             hasTopBorderRadius: false,
             hasBottomBorderRadius: false,
           ),

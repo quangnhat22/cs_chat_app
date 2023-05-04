@@ -17,24 +17,30 @@ import 'package:chatapp/data/data_sources/local/setting_local_data_src.dart'
 import 'package:chatapp/data/data_sources/remote/base_service.dart' as _i10;
 import 'package:chatapp/data/data_sources/remote/dio_interceptor.dart' as _i5;
 import 'package:chatapp/data/data_sources/remote/service/auth_service.dart'
-    as _i14;
-import 'package:chatapp/data/repositories/app_settings_repository_impl.dart'
-    as _i8;
-import 'package:chatapp/data/repositories/auth_repository_impl.dart' as _i16;
+    as _i15;
+import 'package:chatapp/data/data_sources/remote/service/user_service.dart'
+    as _i13;
+import 'package:chatapp/data/repositories/app_settings_repo_impl.dart' as _i8;
+import 'package:chatapp/data/repositories/auth_repo_impl.dart' as _i20;
+import 'package:chatapp/data/repositories/user_repo_impl.dart' as _i17;
 import 'package:chatapp/domain/modules/app_settings/app_settings_repository.dart'
     as _i7;
 import 'package:chatapp/domain/modules/app_settings/app_settings_usecase.dart'
     as _i9;
-import 'package:chatapp/domain/modules/auth/auth_repository.dart' as _i15;
-import 'package:chatapp/domain/modules/auth/auth_usecase.dart' as _i17;
+import 'package:chatapp/domain/modules/auth/auth_repository.dart' as _i19;
+import 'package:chatapp/domain/modules/auth/auth_usecase.dart' as _i21;
+import 'package:chatapp/domain/modules/user/user_repository.dart' as _i16;
+import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i18;
 import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.dart'
-    as _i13;
-import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i20;
-import 'package:chatapp/presentation/auth/login/bloc/login_bloc.dart' as _i18;
+    as _i14;
+import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i25;
+import 'package:chatapp/presentation/auth/login/bloc/login_bloc.dart' as _i23;
+import 'package:chatapp/presentation/setting/edit_profile/edit_profile_form_cubit/edit_profile_form_cubit.dart'
+    as _i22;
 import 'package:chatapp/presentation/setting/setting_language/cubit/setting_language_cubit.dart'
     as _i11;
 import 'package:chatapp/presentation/setting/setting_main/cubit/setting_main_cubit.dart'
-    as _i19;
+    as _i24;
 import 'package:chatapp/presentation/setting/setting_theme/cubit/setting_theme_cubit.dart'
     as _i12;
 import 'package:get_it/get_it.dart' as _i1;
@@ -66,25 +72,33 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i11.SettingLanguageCubit(usecase: gh<_i9.AppSettingsUseCase>()));
     gh.factory<_i12.SettingThemeCubit>(
         () => _i12.SettingThemeCubit(usecase: gh<_i9.AppSettingsUseCase>()));
-    gh.factory<_i13.AppSettingsCubit>(
-        () => _i13.AppSettingsCubit(useCase: gh<_i9.AppSettingsUseCase>()));
-    gh.lazySingleton<_i14.AuthService>(
-        () => _i14.AuthService(service: gh<_i10.BaseService>()));
-    gh.factory<_i15.AuthRepository>(() => _i16.AuthRepositoryImpl(
+    gh.lazySingleton<_i13.UserService>(
+        () => _i13.UserService(service: gh<_i10.BaseService>()));
+    gh.factory<_i14.AppSettingsCubit>(
+        () => _i14.AppSettingsCubit(useCase: gh<_i9.AppSettingsUseCase>()));
+    gh.lazySingleton<_i15.AuthService>(
+        () => _i15.AuthService(service: gh<_i10.BaseService>()));
+    gh.factory<_i16.UserRepository>(
+        () => _i17.UserRepositoryImpl(userService: gh<_i13.UserService>()));
+    gh.factory<_i18.UserUseCase>(
+        () => _i18.UserUseCaseImpl(repo: gh<_i16.UserRepository>()));
+    gh.factory<_i19.AuthRepository>(() => _i20.AuthRepositoryImpl(
           authFirebase: gh<_i3.AuthFirebase>(),
-          authService: gh<_i14.AuthService>(),
+          authService: gh<_i15.AuthService>(),
           authLocalDataSrc: gh<_i4.AuthLocalDataSrc>(),
         ));
-    gh.factory<_i17.AuthUseCase>(
-        () => _i17.AuthUseCaeImpl(repo: gh<_i15.AuthRepository>()));
-    gh.factory<_i18.LoginBloc>(
-        () => _i18.LoginBloc(authRepo: gh<_i15.AuthRepository>()));
-    gh.factory<_i19.SettingMainCubit>(() => _i19.SettingMainCubit(
-          authUseCase: gh<_i17.AuthUseCase>(),
+    gh.factory<_i21.AuthUseCase>(
+        () => _i21.AuthUseCaeImpl(repo: gh<_i19.AuthRepository>()));
+    gh.factory<_i22.EditProfileFormCubit>(
+        () => _i22.EditProfileFormCubit(userUseCase: gh<_i18.UserUseCase>()));
+    gh.factory<_i23.LoginBloc>(
+        () => _i23.LoginBloc(authRepo: gh<_i19.AuthRepository>()));
+    gh.factory<_i24.SettingMainCubit>(() => _i24.SettingMainCubit(
+          authUseCase: gh<_i21.AuthUseCase>(),
           appSettingsUseCase: gh<_i9.AppSettingsUseCase>(),
         ));
-    gh.lazySingleton<_i20.AppBloc>(
-        () => _i20.AppBloc(authUseCase: gh<_i17.AuthUseCase>()));
+    gh.lazySingleton<_i25.AppBloc>(
+        () => _i25.AppBloc(authUseCase: gh<_i21.AuthUseCase>()));
     return this;
   }
 }
