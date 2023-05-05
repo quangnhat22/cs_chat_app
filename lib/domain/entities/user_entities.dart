@@ -5,9 +5,10 @@ class UserEntity {
   final String? email;
   final String? phone;
   final String? gender;
-  DateTime? birthday;
-  int? commonFriendCount;
-  bool? isFriend;
+  final String? bio;
+  final DateTime? birthday;
+  final int? commonFriendCount;
+  final bool? isFriend;
 
   UserEntity({
     required this.id,
@@ -16,6 +17,7 @@ class UserEntity {
     this.email,
     this.phone,
     this.gender,
+    this.bio,
     this.birthday,
     this.commonFriendCount,
     this.isFriend,
@@ -23,14 +25,15 @@ class UserEntity {
 
   static UserEntity convertToUserEntity({
     required id,
-    name,
-    avatar,
-    email,
-    phone,
-    gender,
-    birthday,
-    commonFriendCount,
-    isFriend,
+    String? name,
+    String? avatar,
+    String? email,
+    String? phone,
+    String? gender,
+    String? bio,
+    DateTime? birthday,
+    int? commonFriendCount,
+    bool? isFriend,
   }) {
     return UserEntity(
       id: id,
@@ -39,6 +42,7 @@ class UserEntity {
       email: email,
       phone: phone,
       gender: gender,
+      bio: bio,
       birthday: birthday,
       commonFriendCount: commonFriendCount,
       isFriend: isFriend,

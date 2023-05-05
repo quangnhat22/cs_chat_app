@@ -29,7 +29,7 @@ class _InputGenderState extends State<InputGender> {
     return BlocConsumer<EditProfileFormCubit, EditProfileFormState>(
       listenWhen: (previous, current) => previous.gender != current.gender,
       listener: (context, state) {
-        _controller.text = state.name!;
+        _controller.text = state.gender.value;
       },
       builder: (context, state) {
         return Padding(

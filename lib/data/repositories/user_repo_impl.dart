@@ -14,16 +14,11 @@ class UserRepositoryImpl extends UserRepository {
   UserRepositoryImpl({required this.service, required this.local});
 
   @override
-  Future<bool> updateSelf(
-    String? name,
-    String? avatar,
-    String? gender,
-    String? phone,
-    DateTime? birthday,
-  ) async {
+  Future<bool> updateSelf(String? name, String? avatar, String? gender,
+      String? phone, DateTime? birthday, String? bio) async {
     try {
       final res =
-          await service.updateSelf(name, avatar, gender, phone, birthday);
+          await service.updateSelf(name, avatar, gender, phone, birthday, bio);
       if (res.statusCode == 200) {
         await local.updateUser(
           name: name,
@@ -31,6 +26,7 @@ class UserRepositoryImpl extends UserRepository {
           gender: gender,
           phone: phone,
           birthday: birthday,
+          bio: bio,
         );
         return true;
       }
@@ -67,6 +63,7 @@ class UserRepositoryImpl extends UserRepository {
       phone: userModel.phone,
       gender: userModel.gender,
       birthday: userModel.birthday,
+      bio: userModel.bio,
     );
     return userEnity;
   }
@@ -93,6 +90,7 @@ class UserRepositoryImpl extends UserRepository {
         phone: usermodel.phone,
         gender: usermodel.gender,
         birthday: usermodel.birthday,
+        bio: usermodel.bio,
       );
     });
   }

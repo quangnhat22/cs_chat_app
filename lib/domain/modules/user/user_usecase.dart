@@ -9,7 +9,8 @@ abstract class UserUseCase {
       String? avatar,
       String? gender,
       String? phone,
-      DateTime? birthday});
+      DateTime? birthday,
+      String? bio});
 
   Future<void> getSelf();
   Future<UserEntity?> getSelfFromLocal();
@@ -30,8 +31,9 @@ class UserUseCaseImpl extends UserUseCase {
       String? avatar,
       String? gender,
       String? phone,
-      DateTime? birthday}) async {
-    return await repo.updateSelf(name, avatar, gender, phone, birthday);
+      DateTime? birthday,
+      String? bio}) async {
+    return await repo.updateSelf(name, avatar, gender, phone, birthday, bio);
   }
 
   @override

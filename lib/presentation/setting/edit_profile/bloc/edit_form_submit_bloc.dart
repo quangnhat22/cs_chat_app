@@ -39,9 +39,10 @@ class EditFormSubmitBloc
       emit(const EditFormSubmitLoading());
       final isUpdateSuccess = await _userUseCase.updateSelf(
         name: event.name,
-        birthday: event.birthday,
-        gender: event.gender!.value,
+        birthday: event.birthday?.toUtc(),
+        gender: event.gender!.value.toLowerCase(),
         phone: event.phoneNumber!.value,
+        bio: event.bio?.trim(),
       );
       if (isUpdateSuccess) {
         emit(const EditFormSubmitSuccess());

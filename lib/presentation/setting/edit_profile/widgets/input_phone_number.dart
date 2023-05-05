@@ -22,8 +22,8 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
   Widget build(BuildContext context) {
     return BlocListener<EditProfileFormCubit, EditProfileFormState>(
       listenWhen: (previous, current) =>
-          previous.phoneNumber != current.phoneNumber &&
-          previous.phoneNumber == null,
+          previous.phoneNumber!.value != current.phoneNumber!.value &&
+          previous.phoneNumber!.value == "",
       listener: (context, state) {
         if (state.phoneNumber != null) {
           _controller.text = state.phoneNumber?.value ?? "";

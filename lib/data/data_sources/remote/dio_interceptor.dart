@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -24,6 +26,9 @@ class DioInterceptor {
           }
           handler.next(response);
         }),
+        onError: (e, handler) {
+          log(e.toString(), name: "API Error");
+        },
       ),
     );
     return dio;

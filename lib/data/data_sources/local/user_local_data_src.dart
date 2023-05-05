@@ -31,6 +31,7 @@ class UserLocalDataSrc {
     String? name,
     String? avatar,
     String? phone,
+    String? bio,
     DateTime? birthday,
     String? gender,
   }) async {
@@ -43,6 +44,7 @@ class UserLocalDataSrc {
           phone: phone ?? currentUser.phone,
           birthday: birthday ?? currentUser.birthday,
           gender: gender ?? currentUser.gender,
+          bio: bio ?? currentUser.bio,
         );
         setUser(tempUser);
       }

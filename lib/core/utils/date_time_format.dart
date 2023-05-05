@@ -11,7 +11,7 @@ class AppDateTimeFormat {
 
   static DateTime parseDDMMYYYY(String? string) {
     return string != null
-        ? DateFormat("yyyy-MM-dd").parse(string)
+        ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(string)
         : DateTime.now();
   }
 }

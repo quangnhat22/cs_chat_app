@@ -26,7 +26,7 @@ class EditProfileFormCubit extends Cubit<EditProfileFormState> {
       phoneNumber: PhoneNumber.dirty(userInfo.phone ?? ""),
       birthday: userInfo.birthday,
       gender: AppGender.checkGenderEnum(userInfo.gender),
-      bio: "",
+      bio: userInfo.bio,
     ));
   }
 

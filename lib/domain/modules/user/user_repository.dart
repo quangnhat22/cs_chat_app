@@ -7,6 +7,7 @@ abstract class UserRepository {
     String? gender,
     String? phone,
     DateTime? birthday,
+    String? bio,
   );
 
   Future<void> getSelf();

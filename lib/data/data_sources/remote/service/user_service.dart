@@ -9,22 +9,18 @@ class UserService {
 
   final BaseService _service;
 
-  Future<Response> updateSelf(
-    String? name,
-    String? avatar,
-    String? gender,
-    String? phone,
-    DateTime? birthday,
-  ) async {
+  Future<Response> updateSelf(String? name, String? avatar, String? gender,
+      String? phone, DateTime? birthday, String? bio) async {
     try {
-      return await _service.dio.put(
+      return await _service.dio.patch(
         "${BaseService.userPath}/self",
         data: {
           "name": name,
-          "avatar": avatar ?? "https://picsum.photos/200",
           "gender": gender?.toLowerCase(),
           "phone": phone,
+          "address": "123",
           "birthday": birthday?.toIso8601String(),
+          "bio": bio,
         },
       );
     } catch (e) {
