@@ -21,14 +21,14 @@ class ListBottomNavigation extends StatelessWidget {
           label: AppLocalizations.of(context)!.chat,
         ),
         NavigationDestination(
-          icon: const Icon(Icons.search_outlined),
-          selectedIcon: const Icon(Icons.search),
-          label: AppLocalizations.of(context)!.search,
+          icon: const Icon(Icons.emoji_people_outlined),
+          selectedIcon: const Icon(Icons.emoji_people),
+          label: AppLocalizations.of(context)!.friends,
         ),
         NavigationDestination(
           icon: const Icon(Icons.groups_outlined),
           selectedIcon: const Icon(Icons.groups),
-          label: AppLocalizations.of(context)!.contact,
+          label: AppLocalizations.of(context)!.groups,
         ),
         NavigationDestination(
           icon: const Icon(Icons.settings_outlined),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppAssets {
   static final logoGoogle = Image.asset(
@@ -41,5 +42,10 @@ class AppAssets {
   static final checkIcon = Image.asset(
     'assets/icons/CheckIcon.png',
     fit: BoxFit.cover,
+  );
+
+  static final notFoundSvg = SvgPicture.asset(
+    'assets/images/not_found.svg',
+    semanticsLabel: 'A red up arrow',
   );
 }
