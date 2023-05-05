@@ -31,13 +31,17 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     add(AppUserChanged());
   }
 
+
   final AuthUseCase authUseCase;
+
   late final StreamSubscription<String?> _accessTokenSubscription;
   late final StreamSubscription<String?> _refreshTokenSubscription;
 
   Future<void> _onAppUserChanged(
       AppUserChanged event, Emitter<AppState> emit) async {
+
     final isLoggedIn = await authUseCase.checkIsLoggedIn();
+
     emit(isLoggedIn ? AppAuthorized() : AppUnAuthorized());
   }
 

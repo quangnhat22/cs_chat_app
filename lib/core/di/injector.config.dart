@@ -12,6 +12,7 @@
 import 'package:chatapp/data/data_sources/firebase/auth_firebase.dart' as _i3;
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart'
     as _i4;
+
 import 'package:chatapp/data/data_sources/local/setting_local_data_src.dart'
     as _i6;
 import 'package:chatapp/data/data_sources/local/user_local_data_src.dart'
