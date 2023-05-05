@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chatapp/domain/entities/user_entities.dart';
+import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/modules/app_settings/app_settings_usecase.dart';
 import 'package:chatapp/domain/modules/user/user_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

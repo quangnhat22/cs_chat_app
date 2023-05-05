@@ -66,20 +66,78 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> loginWithEmailAndPassword(String email, String password) {
-    // TODO: implement loginWithEmailAndPassword
-    throw UnimplementedError();
+  Future<void> loginWithEmailAndPassword(String email, String password) async {
+    try {
+      // get device name
+      final deviceName = await DetectDeviceInfo.getDeviceName();
+      //call api
+      final res = await _authService.login(email, password, deviceName);
+      // handle res data
+      if (res.statusCode == 200) {
+        final data = res.data["data"];
+        await _authLocalDataSrc.saveAuth(
+          data["access_token"]["token"],
+          data["refresh_token"]["token"],
+          isEmailVerify: data["email_verified"],
+          isProfileUpdate: data["profile_updated"],
+        );
+
+        await _userRepo.getSelf();
+        await _sendEmailVerify();
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   @override
-  Future<void> signUpWithEmailAndPassword(String email, String password) {
-    // TODO: implement signUpWithEmailAndPassword
-    throw UnimplementedError();
+  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      // get device name
+      final deviceName = await DetectDeviceInfo.getDeviceName();
+      //call api
+      final res = await _authService.register(email, password, deviceName);
+      // handle res data
+      if (res.statusCode == 200) {
+        final data = res.data["data"];
+        await _authLocalDataSrc.saveAuth(
+          data["access_token"]["token"],
+          data["refresh_token"]["token"],
+          isEmailVerify: data["email_verified"],
+          isProfileUpdate: data["profile_updated"],
+        );
+        await _userRepo.getSelf();
+        await _sendEmailVerify();
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   @override
   Future<void> logOut() async {
-    await _userRepo.clearBox();
+    await _authService.logOut();
     await _authLocalDataSrc.deleteBoxAuth();
+    await _userRepo.clearBox();
+  }
+
+  Future<void> _sendEmailVerify() async {
+    final isVerifyEmail = await _authLocalDataSrc.getIsVerifyEmail();
+    if (isVerifyEmail) {
+      await _authService.sendVerifyEmail();
+    }
+  }
+
+  @override
+  Future<bool> updatePassword(String password, String oldPassword) async {
+    try {
+      final res = await _authService.updatePassword(password, oldPassword);
+      if (res.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Exception(e..toString());
+    }
   }
 }

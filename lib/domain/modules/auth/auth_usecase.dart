@@ -6,6 +6,7 @@ abstract class AuthUseCase {
   Future<void> loginWithEmailAndPassword(String email, String password);
   Future<void> signUpWithEmailAndPassword(String email, String password);
   Future<void> logOut();
+  Future<bool> updatePassword(String password, String oldPassword);
   Future<bool> checkIsLoggedIn();
   Stream<String?> checkAccessTokenStream();
   Stream<String?> checkRefreshTokenStream();
@@ -30,6 +31,11 @@ class AuthUseCaeImpl extends AuthUseCase {
   @override
   Future<void> signUpWithEmailAndPassword(String email, String password) async {
     await repo.signUpWithEmailAndPassword(email, password);
+  }
+
+  @override
+  Future<bool> updatePassword(String password, String oldPassword) async {
+    return repo.updatePassword(password, oldPassword);
   }
 
   @override
