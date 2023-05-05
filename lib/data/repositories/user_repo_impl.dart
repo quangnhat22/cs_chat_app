@@ -1,6 +1,6 @@
 import 'package:chatapp/data/data_sources/local/user_local_data_src.dart';
 import 'package:chatapp/data/models/user_model.dart';
-import 'package:chatapp/domain/entities/user_entities.dart';
+import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/modules/user/user_repository.dart';
@@ -55,16 +55,7 @@ class UserRepositoryImpl extends UserRepository {
   Future<UserEntity?> getSelfFromLocal() async {
     final userModel = await local.getUser();
     if (userModel == null) return null;
-    final userEnity = UserEntity.convertToUserEntity(
-      id: userModel.id,
-      name: userModel.name,
-      avatar: userModel.avatar,
-      email: userModel.email,
-      phone: userModel.phone,
-      gender: userModel.gender,
-      birthday: userModel.birthday,
-      bio: userModel.bio,
-    );
+    final userEnity = UserEntity.convertToUserEntity(userModel: userModel);
     return userEnity;
   }
 
@@ -82,16 +73,7 @@ class UserRepositoryImpl extends UserRepository {
   Stream<UserEntity?> getStreamSelfFromLocal() {
     return local.getUserStream().map((usermodel) {
       if (usermodel == null) return null;
-      return UserEntity.convertToUserEntity(
-        id: usermodel.id,
-        name: usermodel.name,
-        avatar: usermodel.avatar,
-        email: usermodel.email,
-        phone: usermodel.phone,
-        gender: usermodel.gender,
-        birthday: usermodel.birthday,
-        bio: usermodel.bio,
-      );
+      return UserEntity.convertToUserEntity(userModel: usermodel);
     });
   }
 

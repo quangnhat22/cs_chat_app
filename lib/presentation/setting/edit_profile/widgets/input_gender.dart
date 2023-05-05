@@ -25,6 +25,15 @@ class _InputGenderState extends State<InputGender> {
   }
 
   @override
+  void initState() {
+    if (mounted) {
+      _controller.text =
+          context.read<EditProfileFormCubit>().state.gender.value;
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<EditProfileFormCubit, EditProfileFormState>(
       listenWhen: (previous, current) => previous.gender != current.gender,

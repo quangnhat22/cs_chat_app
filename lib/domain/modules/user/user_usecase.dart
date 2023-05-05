@@ -1,7 +1,7 @@
 import 'package:chatapp/domain/modules/user/user_repository.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../entities/user_entities.dart';
+import '../../entities/user_entity.dart';
 
 abstract class UserUseCase {
   Future<bool> updateSelf(

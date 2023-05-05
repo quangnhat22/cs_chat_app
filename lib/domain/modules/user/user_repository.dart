@@ -1,4 +1,4 @@
-import 'package:chatapp/domain/entities/user_entities.dart';
+import 'package:chatapp/domain/entities/user_entity.dart';
 
 abstract class UserRepository {
   Future<bool> updateSelf(
