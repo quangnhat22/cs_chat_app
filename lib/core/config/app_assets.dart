@@ -33,4 +33,13 @@ class AppAssets {
     width: 256.0,
     height: 256.0,
   );
+  // ignore: non_constant_identifier_names
+  static final CSChat = Image.asset(
+    'assets/icons/CSChat.png',
+    fit: BoxFit.cover,
+  );
+  static final checkIcon = Image.asset(
+    'assets/icons/CheckIcon.png',
+    fit: BoxFit.cover,
+  );
 }
