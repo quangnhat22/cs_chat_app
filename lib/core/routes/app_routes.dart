@@ -18,12 +18,17 @@ class AppRoutes {
       case RouteName.loginPage:
         return _buildRoute(
           settings,
-          const RegisterConfirmPage(),
+          const LoginPage(),
         );
       case RouteName.signUpPage:
         return _buildRoute(
           settings,
           const RegisterPage(),
+        );
+      case RouteName.forgotPasswordPage:
+        return _buildRoute(
+          settings,
+          const ForgotPasswordPage(),
         );
       default:
         return _errorRoute();
