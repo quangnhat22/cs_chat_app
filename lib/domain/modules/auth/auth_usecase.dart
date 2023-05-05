@@ -6,6 +6,7 @@ abstract class AuthUseCase {
   Future<void> loginWithEmailAndPassword(String email, String password);
   Future<void> signUpWithEmailAndPassword(String email, String password);
   Future<void> logOut();
+  Future<bool> checkIsLoggedIn();
   Stream<String?> checkAccessTokenStream();
   Stream<String?> checkRefreshTokenStream();
 }
@@ -34,6 +35,11 @@ class AuthUseCaeImpl extends AuthUseCase {
   @override
   Future<void> logOut() {
     return repo.logOut();
+  }
+
+  @override
+  Future<bool> checkIsLoggedIn() {
+    return repo.checkIsLoggedIn();
   }
 
   @override

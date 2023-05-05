@@ -43,11 +43,15 @@ dependencies:
   firebase_core: ^2.9.0
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+  hive_generator: ^2.0.0
   equatable: ^2.0.5
   flutter_screenutil: ^5.7.0
   firebase_auth: ^4.4.2
   google_sign_in: ^6.1.0
   device_info_plus: ^8.2.2
+  cached_network_image: ^3.2.3
+  formz: ^0.6.0
+
 
 dev_dependencies:
   flutter_test:

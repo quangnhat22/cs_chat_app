@@ -17,7 +17,7 @@ class AppColors {
     //secondaryFixedDim: Color(0xFFCBBEFF),
     //onSecondaryFixedVariant: Color(0xFF49398C),
     tertiary: Color(0xFF006C45),
-    onTertiary: Color(0xFFFFFFFF),
+    onTertiary: Color(0xFF34A853),
     tertiaryContainer: Color(0xFF8FF7BF),
     onTertiaryContainer: Color(0xFF002112),
     //tertiaryFixedDim: Color(0xFF73DAA4),

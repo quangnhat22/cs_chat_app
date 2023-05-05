@@ -1,4 +1,5 @@
 import 'package:chatapp/core/config/firebase_options.dart';
+import 'package:chatapp/data/models/user_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:chatapp/presentation/app/app.dart';
@@ -21,5 +22,10 @@ Future<void> _initialize() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
+  _registerApdateHive();
   await di.configureDependencies();
+}
+
+void _registerApdateHive() {
+  Hive.registerAdapter(UserModelAdapter());
 }

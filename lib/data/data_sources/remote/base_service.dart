@@ -12,6 +12,7 @@ class BaseService {
   // api route
   static const String authLoginWithFirebasePath = "/auth/login-with-firebase";
   static const String userPath = "/user";
+  static const String friendPath = "/friend";
 
   BaseService({required this.interceptor}) {
     initDio();

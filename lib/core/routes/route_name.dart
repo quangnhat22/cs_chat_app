@@ -6,4 +6,5 @@ class RouteName {
 
   //author
   static const String homePage = "/";
+  static const String editProfile = "/edit-profile";
 }

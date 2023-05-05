@@ -23,6 +23,10 @@ class AppAssets {
     width: 256.0,
   );
 
+  static const emptyAvatar = AssetImage(
+    'assets/images/empty_avatar.png',
+  );
+
   static final chatPlaceHolder = Image.asset(
     'assets/images/ChatPlaceholder.png',
     fit: BoxFit.cover,

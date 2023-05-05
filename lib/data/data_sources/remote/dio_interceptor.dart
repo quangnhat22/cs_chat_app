@@ -1,3 +1,6 @@
+
+import 'dart:developer';
+
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -13,8 +16,9 @@ class DioInterceptor {
     dio.interceptors.add(
       QueuedInterceptorsWrapper(
         onRequest: ((options, handler) async {
-          options.headers.putIfAbsent('Authorization',
-              () => 'Bearer ${_authLocalDataSrc.getAccessToken()}');
+          final String? accessToken = await _authLocalDataSrc.getAccessToken();
+          options.headers
+              .putIfAbsent('Authorization', () => 'Bearer $accessToken');
           handler.next(options);
         }),
         onResponse: ((response, handler) async {
@@ -23,6 +27,9 @@ class DioInterceptor {
           }
           handler.next(response);
         }),
+        onError: (e, handler) {
+          log(e.toString(), name: "API Error");
+        },
       ),
     );
     return dio;

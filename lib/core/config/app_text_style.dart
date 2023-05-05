@@ -20,17 +20,18 @@ class AppTextStyles {
 
   //app bar
   static const TextStyle titleAppBarTextStyle = TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
+    color: Colors.blue,
+    fontSize: 24,
   );
 
   static const TextStyle authHeadTitleTextStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: AppFontSize.headlineFontSize,
-      color: Colors.white);
+    fontWeight: FontWeight.w600,
+    fontSize: AppFontSize.headlineFontSize,
+  );
 
   static const TextStyle authHeadSubtitleTextStyle = TextStyle(
     fontSize: AppFontSize.normalFontSize,
-    color: Colors.white,
   );
 
   static const TextStyle textButtonStyle = TextStyle(
