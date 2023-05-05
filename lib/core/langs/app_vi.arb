@@ -63,5 +63,6 @@
   "friend_block": "Chặn",
   "friend_mutual_friends": "Bạn chung",
   "friend_mutual_groups": "Nhóm chung",
-  "friend_unfriend": "Huỷ kết bạn"
+  "friend_unfriend": "Huỷ kết bạn",
+  "send_success": "Đã gửi yêu cầu thành công"
 }

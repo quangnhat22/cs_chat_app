@@ -60,8 +60,17 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<void> getUserByEmail(String email) {
-    return service.getUserDetailByEmail(email);
+  Future<UserEntity?> getUserByEmail(String email) async {
+    try {
+      final res = await service.getUserDetailByEmail(email);
+      if (res.statusCode == 200) {
+        final resultFriend = UserModel.fromJson(res.data["data"]);
+        return UserEntity.convertToUserEntity(userModel: resultFriend);
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/presentation/auth/fogot_password/forgot_password.dart';
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
@@ -6,6 +7,7 @@ import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -64,7 +66,9 @@ class AppRoutes {
       case RouteName.friendInfo:
         return _buildRoute(
           settings,
-          const FriendsInforPage(),
+          FriendsInforPage(
+            userInfo: settings.arguments as UserEntity,
+          ),
         );
       case RouteName.findFriend:
         return _buildRouteDialog(

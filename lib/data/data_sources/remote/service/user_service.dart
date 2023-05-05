@@ -23,6 +23,8 @@ class UserService {
           "bio": bio,
         },
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -33,6 +35,8 @@ class UserService {
       return await _service.dio.get(
         "${BaseService.userPath}?email=$email",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -43,6 +47,8 @@ class UserService {
       return await _service.dio.get(
         "${BaseService.userPath}/$id",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -53,6 +59,8 @@ class UserService {
       return await _service.dio.get(
         "${BaseService.userPath}/self",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }

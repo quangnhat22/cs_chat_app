@@ -11,6 +11,14 @@ class _InputFindFriendState extends State<InputFindFriend> {
   final _controller = TextEditingController();
 
   @override
+  void initState() {
+    _controller.addListener(() {
+      context.read<FindFriendFormCubit>().emailChanged(_controller.text);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -25,7 +33,7 @@ class _InputFindFriendState extends State<InputFindFriend> {
 
   @override
   void dispose() {
-    _controller.clear();
+    _controller.dispose();
     super.dispose();
   }
 }

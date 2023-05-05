@@ -63,5 +63,6 @@
   "friend_block": "Block",
   "friend_mutual_friends": "Mutual friends",
   "friend_mutual_groups": "Mutual groups",
-  "friend_unfriend": "Unfriend"
+  "friend_unfriend": "Unfriend",
+  "send_success":"Send your request success"
 }

@@ -14,7 +14,7 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     _tabController.addListener(_handleTabIndex);
   }
 
@@ -32,6 +32,7 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
   Widget? _bottomButtons() {
     if (_tabController.index == 0) {
       return FloatingActionButton(
+        heroTag: null,
         onPressed: () {
           NavigationUtil.pushNamed(route: RouteName.findFriend);
         },

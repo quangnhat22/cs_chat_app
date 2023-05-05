@@ -11,7 +11,7 @@ class FriendService {
   Future<Response> sendRequest(String id) async {
     try {
       return await _service.dio.post(
-        "${BaseService.friendPath}/request/id",
+        "${BaseService.friendPath}/request/$id",
       );
     } catch (e) {
       throw Exception(e.toString());
