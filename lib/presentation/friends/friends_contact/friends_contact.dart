@@ -12,3 +12,4 @@ import '../../../common/widgets/stateless/divider/divider_space_left.dart';
 
 part 'pages/friends_contact_page.dart';
 part 'widgets/list_friend.dart';
+part 'widgets/list_friend_item.dart';

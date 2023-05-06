@@ -30,13 +30,27 @@ enum AppThemeEnum {
   final String value;
 }
 
-//langue in app
+//language in app
 enum AppLangEnum {
   en("English"),
   vi("Vietnamese"),
   system("System");
 
   const AppLangEnum(this.value);
+
+  final String value;
+}
+
+//relation with other user
+enum AppFriendRelation {
+  self("self"),
+  friend("friend"),
+  received("received"),
+  sent("sent"),
+  blocked("blocked"),
+  non("non");
+
+  const AppFriendRelation(this.value);
 
   final String value;
 }

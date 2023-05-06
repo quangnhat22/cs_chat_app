@@ -7,8 +7,8 @@ class CTextFormField extends StatelessWidget {
   const CTextFormField({
     super.key,
     this.controller,
-    required this.icon,
-    required this.label,
+    this.icon,
+    this.label,
     this.type = InputType.text,
     this.isReadOnly = false,
     this.onTap,
@@ -16,8 +16,8 @@ class CTextFormField extends StatelessWidget {
   });
 
   final TextEditingController? controller;
-  final Icon icon;
-  final String label;
+  final Icon? icon;
+  final String? label;
   final InputType type;
   final VoidCallback? onTap;
   final bool isReadOnly;
@@ -48,7 +48,7 @@ class CTextFormField extends StatelessWidget {
             AppCheckValid.checkValid(value, typeCheck, context),
         decoration: InputDecoration(
           prefixIcon: icon,
-          label: Text(label),
+          label: label != null ? Text(label!) : null,
           border: const OutlineInputBorder(
             borderSide: BorderSide(width: 1),
             borderRadius: BorderRadius.all(Radius.circular(8)),

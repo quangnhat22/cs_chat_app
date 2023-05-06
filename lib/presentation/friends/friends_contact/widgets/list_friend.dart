@@ -12,33 +12,24 @@ class ListFriend extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           success: (friends) {
-            return ListView.separated(
-              shrinkWrap: true,
-              separatorBuilder: (context, index) => const DividerSpaceLeft(),
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    NavigationUtil.pushNamed(
-                        route: RouteName.friendInfo, args: friends[index]);
-                  },
-                  child: ListTile(
-                    title: Text(friends[index].name ?? ""),
-                    subtitle: Text(friends[index].email ?? ""),
-                    leading: CustomAvatarImage(
-                      urlImage: friends[index].avatar,
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.comment_outlined,
-                          color:
-                              Theme.of(context).colorScheme.onTertiaryContainer,
-                        )),
-                  ),
-                );
-              },
-              itemCount: friends.length,
-            );
+            return friends.isEmpty
+                ? const Center(
+                    child: Text("No friends now!"),
+                  )
+                : ListView.separated(
+                    shrinkWrap: true,
+                    separatorBuilder: (context, index) =>
+                        const DividerSpaceLeft(),
+                    itemBuilder: (context, index) {
+                      return ListFriendItem(
+                        id: friends[index].id,
+                        name: friends[index].name,
+                        avatar: friends[index].avatar,
+                        email: friends[index].email,
+                      );
+                    },
+                    itemCount: friends.length,
+                  );
           },
           failure: (message) {
             return const Center(

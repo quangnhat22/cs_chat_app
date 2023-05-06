@@ -9,4 +9,5 @@ class RouteName {
   static const String editProfile = "/edit-profile";
   static const String friendInfo = "/friend-info";
   static const String findFriend = "/find-friend";
+  static const String chatRoom = "/chat-room";
 }

@@ -20,15 +20,17 @@ class FriendService {
     }
   }
 
-  // Future<Response> getListChat(String id, String ) async {
-  //   try {
-  //     return await _service.dio.post(
-  //       "${BaseService.userPath}/request/id",
-  //     );
-  //   } catch (e) {
-  //     throw Exception(e.toString());
-  //   }
-  // }
+  Future<Response> getListChat(String userId) async {
+    try {
+      return await _service.dio.post(
+        "${BaseService.friendPath}/$userId/chat",
+      );
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
   //get list friend
   Future<Response> findFriend() async {

@@ -12,6 +12,7 @@ class UserEntity {
   final int? commonFriendCount;
   final bool? isFriend;
   final DateTime? lastSeenAt;
+  final String relation;
 
   UserEntity({
     required this.id,
@@ -25,6 +26,7 @@ class UserEntity {
     this.commonFriendCount,
     this.isFriend,
     this.lastSeenAt,
+    this.relation = "non",
   });
 
   static final userEntityEmpty = UserEntity(id: "-1");
@@ -45,6 +47,7 @@ class UserEntity {
       commonFriendCount: userModel.commonFriendCount,
       isFriend: userModel.isFriend,
       lastSeenAt: userModel.lastSeenAt,
+      relation: userModel.relation ?? "non",
     );
   }
 }

@@ -2,12 +2,12 @@ import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/presentation/auth/fogot_password/forgot_password.dart';
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
+import 'package:chatapp/presentation/chat/chat_room/pages/chat_room_page.dart';
 import 'package:chatapp/presentation/friends/find_new_friend/find_new_friend.dart';
 import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -74,6 +74,11 @@ class AppRoutes {
         return _buildRouteDialog(
           settings,
           const FindNewFriendPage(),
+        );
+      case RouteName.chatRoom:
+        return _buildRoute(
+          settings,
+          const ChatRoomPage(),
         );
       default:
         return _errorRoute();

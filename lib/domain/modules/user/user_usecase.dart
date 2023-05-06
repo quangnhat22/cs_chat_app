@@ -13,10 +13,14 @@ abstract class UserUseCase {
       String? bio});
 
   Future<void> getSelf();
+
   Future<UserEntity?> getSelfFromLocal();
+
   Stream<UserEntity?> getStreamSelfFromLocal();
-  Future<void> getUserByEmail(String email);
-  Future<void> getUserById(String id);
+
+  Future<UserEntity?> getUserByEmail(String email);
+
+  Future<UserEntity?> getUserById(String id);
 }
 
 @Injectable(as: UserUseCase)
@@ -52,12 +56,12 @@ class UserUseCaseImpl extends UserUseCase {
   }
 
   @override
-  Future<void> getUserByEmail(String email) {
+  Future<UserEntity?> getUserByEmail(String email) {
     return repo.getUserByEmail(email);
   }
 
   @override
-  Future<void> getUserById(String id) {
+  Future<UserEntity?> getUserById(String id) {
     return repo.getUserById(id);
   }
 }

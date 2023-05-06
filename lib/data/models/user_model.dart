@@ -18,6 +18,7 @@ class UserModel extends HiveObject with _$UserModel {
     @HiveField(5) String? gender,
     @HiveField(6) String? bio,
     @HiveField(7) DateTime? birthday,
+    @HiveField(8) String? relation,
     // ignore: invalid_annotation_target
     @JsonKey(name: "common_friend_count", ignore: true) int? commonFriendCount,
     // ignore: invalid_annotation_target

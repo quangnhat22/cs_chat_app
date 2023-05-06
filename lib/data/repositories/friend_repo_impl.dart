@@ -1,6 +1,8 @@
 import 'package:chatapp/data/data_sources/remote/service/friend_service.dart';
 import 'package:chatapp/data/models/friend_request_model.dart';
+import 'package:chatapp/data/models/message_model.dart';
 import 'package:chatapp/data/models/user_model.dart';
+import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/entities/friend_request_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_repository.dart';
@@ -55,9 +57,28 @@ class FriendRepositoryImpl extends FriendRepository {
   }
 
   @override
-  Future<void> getListChatWithFriends() {
-    // TODO: implement getListChatWithFriends
-    throw UnimplementedError();
+  Future<List<MessageEntity>> getListChatWithFriends(String userId) async {
+    try {
+      final res = await _service.getListChat(userId);
+      if (res.statusCode == 200) {
+        final listMessageJson = res.data["data"] as List<dynamic>?;
+        if (listMessageJson != null) {
+          final listMessageModel = listMessageJson
+              .map((messageJson) => MessageModel.fromJson(messageJson))
+              .toList();
+
+          final listMessageEntity = listMessageModel
+              .map((messageModel) =>
+                  MessageEntity.convertToMessageEntity(model: messageModel))
+              .toList();
+
+          return listMessageEntity;
+        }
+      }
+      return List<MessageEntity>.empty();
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   @override

@@ -1,18 +1,15 @@
-import 'package:chatapp/core/config/app_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // ignore: camel_case_types
 class Text_Form_Field extends StatelessWidget {
   const Text_Form_Field({
     super.key,
     required this.textformController,
-    required this.iconData, 
+    required this.iconData,
     required this.label,
     required this.keyboardType1,
     this.maxLines,
-    });
+  });
 
   final TextEditingController textformController;
   final Icon iconData;
@@ -27,25 +24,22 @@ class Text_Form_Field extends StatelessWidget {
     return null;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
-        maxLines: maxLines,
-        controller: textformController,
-        validator: (value) => validateTextField(value, context),
-        decoration: InputDecoration(
-          prefixIcon: iconData, 
-          label: Text(
-            label),
-          border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(8))),
-        ),
-        keyboardType: keyboardType1
-      ),
+          maxLines: maxLines,
+          controller: textformController,
+          validator: (value) => validateTextField(value, context),
+          decoration: InputDecoration(
+            prefixIcon: iconData,
+            label: Text(label),
+            border: const OutlineInputBorder(
+                borderSide: BorderSide(width: 1),
+                borderRadius: BorderRadius.all(Radius.circular(8))),
+          ),
+          keyboardType: keyboardType1),
     );
   }
 }

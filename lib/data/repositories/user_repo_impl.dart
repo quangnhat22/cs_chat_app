@@ -55,8 +55,8 @@ class UserRepositoryImpl extends UserRepository {
   Future<UserEntity?> getSelfFromLocal() async {
     final userModel = await local.getUser();
     if (userModel == null) return null;
-    final userEnity = UserEntity.convertToUserEntity(userModel: userModel);
-    return userEnity;
+    final userEntity = UserEntity.convertToUserEntity(userModel: userModel);
+    return userEntity;
   }
 
   @override
@@ -74,8 +74,17 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<void> getUserById(String id) {
-    return service.getUserDetailById(id);
+  Future<UserEntity?> getUserById(String id) async {
+    try {
+      final res = await service.getUserDetailById(id);
+      if (res.statusCode == 200) {
+        final resultFriend = UserModel.fromJson(res.data["data"]);
+        return UserEntity.convertToUserEntity(userModel: resultFriend);
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ChatTabs extends StatelessWidget {
-  const ChatTabs({super.key});
+class ButtonActionHeader extends StatelessWidget {
+  const ButtonActionHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -6,15 +7,25 @@ import '../../entities/user_entity.dart';
 
 abstract class FriendUseCase {
   Future<bool> sendRequest(String id);
-  Future<void> getListChatWithFriends();
+
+  Future<void> getListChatWithFriends(String userId);
+
   Future<List<UserEntity>> getListFriend();
+
   Future<bool> deleteFriend(String id);
+
   Future<bool> blockFriend(String id);
-  Future<bool> unBlockFruiend(String id);
+
+  Future<bool> unBlockFriend(String id);
+
   Future<List<FriendRequestEntity>> getSendRequest();
+
   Future<bool> recallRequest(String id);
+
   Future<List<FriendRequestEntity>> getReceiveRequest();
+
   Future<bool> acceptReceiveRequest(String userId);
+
   Future<bool> rejectReceiveRequest(String userId);
 }
 
@@ -40,8 +51,8 @@ class FriendUseCaseImpl extends FriendUseCase {
   }
 
   @override
-  Future<void> getListChatWithFriends() async {
-    return await repo.getListChatWithFriends();
+  Future<List<MessageEntity>> getListChatWithFriends(String userId) async {
+    return await repo.getListChatWithFriends(userId);
   }
 
   @override
@@ -75,7 +86,7 @@ class FriendUseCaseImpl extends FriendUseCase {
   }
 
   @override
-  Future<bool> unBlockFruiend(String id) {
+  Future<bool> unBlockFriend(String id) {
     return repo.unBlockFruiend(id);
   }
 }

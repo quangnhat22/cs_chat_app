@@ -138,10 +138,11 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<void> logOut() async {
     try {
       await _authService.logOut();
+      await _authFirebase.logOut();
+      await _authLocalDataSrc.deleteBoxAuth();
     } catch (e) {
       throw Exception(e.toString());
     } finally {
-      await _authLocalDataSrc.deleteBoxAuth();
       await _userRepo.clearBox();
     }
   }
