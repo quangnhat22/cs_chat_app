@@ -13,7 +13,7 @@ abstract class UserRepository {
   Future<void> getSelf();
   Future<UserEntity?> getSelfFromLocal();
   Stream<UserEntity?> getStreamSelfFromLocal();
-  Future<void> getUserByEmail(String email);
+  Future<UserEntity?> getUserByEmail(String email);
   Future<void> getUserById(String id);
   Future<void> clearBox();
 }

@@ -10,7 +10,7 @@ class AppTextStyles {
 
   static const TextStyle mediumTitleTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: AppFontSize.titleFontSize,
+    fontSize: 18,
   );
 
   static const TextStyle captionTextStyle = TextStyle(
@@ -21,7 +21,6 @@ class AppTextStyles {
   //app bar
   static const TextStyle titleAppBarTextStyle = TextStyle(
     fontWeight: FontWeight.w600,
-    color: Colors.blue,
     fontSize: 24,
   );
 

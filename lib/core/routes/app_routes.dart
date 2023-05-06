@@ -1,9 +1,13 @@
+import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/presentation/auth/fogot_password/forgot_password.dart';
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
+import 'package:chatapp/presentation/friends/find_new_friend/find_new_friend.dart';
+import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -18,12 +22,17 @@ class AppRoutes {
       case RouteName.loginPage:
         return _buildRoute(
           settings,
-          const RegisterConfirmPage(),
+          const LoginPage(),
         );
       case RouteName.signUpPage:
         return _buildRoute(
           settings,
           const RegisterPage(),
+        );
+      case RouteName.forgotPasswordPage:
+        return _buildRoute(
+          settings,
+          const ForgotPasswordPage(),
         );
       default:
         return _errorRoute();
@@ -54,6 +63,18 @@ class AppRoutes {
           settings,
           const EditProfilePage(),
         );
+      case RouteName.friendInfo:
+        return _buildRoute(
+          settings,
+          FriendsInforPage(
+            userInfo: settings.arguments as UserEntity,
+          ),
+        );
+      case RouteName.findFriend:
+        return _buildRouteDialog(
+          settings,
+          const FindNewFriendPage(),
+        );
       default:
         return _errorRoute();
     }
@@ -66,14 +87,14 @@ class AppRoutes {
     );
   }
 
-  // static MaterialPageRoute _buildRouteDialog(
-  //     RouteSettings settings, Widget builder) {
-  //   return MaterialPageRoute(
-  //     settings: settings,
-  //     fullscreenDialog: true,
-  //     builder: (BuildContext context) => builder,
-  //   );
-  // }
+  static MaterialPageRoute _buildRouteDialog(
+      RouteSettings settings, Widget builder) {
+    return MaterialPageRoute(
+      settings: settings,
+      fullscreenDialog: true,
+      builder: (BuildContext context) => builder,
+    );
+  }
 
   static Route _errorRoute() {
     return MaterialPageRoute(builder: (_) {

@@ -1,7 +1,6 @@
 import 'package:chatapp/presentation/chat/chat_main/pages/chat_main_page.dart';
-import 'package:chatapp/presentation/contacts/contacts_main/pages/contacts_main.dart';
+import 'package:chatapp/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:chatapp/presentation/home/widgets/list_bottom_navigation.dart';
-import 'package:chatapp/presentation/search/pages/search_page.dart';
 import 'package:chatapp/presentation/setting/setting_main/setting_main.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +16,11 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = const <Widget>[
     ChatMainPage(),
-    // ChatPlaceHolder(),
-    SearchPage(),
-    ContactsMainPage(),
+    FriendsDashBoardPage(),
+    //group
+    FriendsDashBoardPage(),
+    //notifications
+    //SearchPage(),
     SettingMainPage(),
   ];
 

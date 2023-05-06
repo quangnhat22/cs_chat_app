@@ -114,13 +114,6 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
-  @override
-  Future<void> logOut() async {
-    await _authService.logOut();
-    await _authLocalDataSrc.deleteBoxAuth();
-    await _userRepo.clearBox();
-  }
-
   Future<void> _sendEmailVerify() async {
     final isVerifyEmail = await _authLocalDataSrc.getIsVerifyEmail();
     if (isVerifyEmail) {
@@ -138,6 +131,18 @@ class AuthRepositoryImpl extends AuthRepository {
       return false;
     } catch (e) {
       throw Exception(e..toString());
+    }
+  }
+
+  @override
+  Future<void> logOut() async {
+    try {
+      await _authService.logOut();
+    } catch (e) {
+      throw Exception(e.toString());
+    } finally {
+      await _authLocalDataSrc.deleteBoxAuth();
+      await _userRepo.clearBox();
     }
   }
 }

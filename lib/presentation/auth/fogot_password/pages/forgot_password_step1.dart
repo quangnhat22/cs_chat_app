@@ -1,6 +1,5 @@
 part of forgot_password;
 
-
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({super.key});
   @override
@@ -10,13 +9,15 @@ class ForgotPasswordPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-              children: const [
-                GoBackTextButton(applyText: "Back to Login",),
-                ValidateEmailForm(),
-              ],
+            children: const [
+              GoBackTextButton(
+                applyText: "Back to Login",
+              ),
+              ValidateEmailForm(),
+            ],
           ),
-        ),  
         ),
-      );
+      ),
+    );
   }
 }

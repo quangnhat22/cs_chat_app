@@ -13,13 +13,12 @@ class _ValidateSendCodeFormState extends State<ValidateSendCodeForm> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 35),
-      child: 
-        Center(
-        child: Column(
+        padding: const EdgeInsets.only(top: 35),
+        child: Center(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppAssets.CSChat,
+            AppAssets.csChat,
             Padding(
               padding: const EdgeInsets.only(top: 75, left: 17, right: 17),
               child: Text(
@@ -29,27 +28,40 @@ class _ValidateSendCodeFormState extends State<ValidateSendCodeForm> {
                   color: AppColors.darkColorScheme.outline,
                   fontWeight: FontWeight.w700,
                   fontSize: 17,
-                  ),),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 70),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  BuildSquare(message: "1",),
-                  BuildSquare(message: "2",),
-                  BuildSquare(message: "3",),
-                  BuildSquare(message: "4",),
-              ]),),
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    BuildSquare(
+                      message: "1",
+                    ),
+                    BuildSquare(
+                      message: "2",
+                    ),
+                    BuildSquare(
+                      message: "3",
+                    ),
+                    BuildSquare(
+                      message: "4",
+                    ),
+                  ]),
+            ),
             const Padding(
               padding: EdgeInsets.only(top: 47),
-              child: SendCodeAgainTextButton(),),
+              child: SendCodeAgainTextButton(),
+            ),
             const Padding(
-              padding: EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 54),
-              child: SendButton(applyText: "Confirm",),)
+              padding:
+                  EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 54),
+              child: SendButton(
+                applyText: "Confirm",
+              ),
+            )
           ],
-        ))
-      );
+        )));
   }
 }
-

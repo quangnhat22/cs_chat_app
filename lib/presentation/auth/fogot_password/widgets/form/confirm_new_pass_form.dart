@@ -14,38 +14,43 @@ class _ValidateNewPasswordState extends State<ValidateNewPassword> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 35),
-      child: 
-        Center(
-        child: Column(
+        padding: const EdgeInsets.only(top: 35),
+        child: Center(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppAssets.CSChat,
+            AppAssets.csChat,
             const Padding(
               padding: EdgeInsets.only(top: 35),
               child: Text(
-              "Enter New Password",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),),),
-            
+                "Enter New Password",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-              child: PasswordTextFormField(controller: passwordController,),
+              child: PasswordTextFormField(
+                controller: passwordController,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
               child: PasswordTextFormField(
                 controller: confirmPasswordController,
-                label: "Confirm password",),
+                label: "Confirm password",
+              ),
             ),
             const Padding(
-              padding: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 54),
-              child: SendButton(applyText: "Confirm",),)
+              padding:
+                  EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 54),
+              child: SendButton(
+                applyText: "Confirm",
+              ),
+            )
           ],
-        ))
-      );
+        )));
   }
-
 }

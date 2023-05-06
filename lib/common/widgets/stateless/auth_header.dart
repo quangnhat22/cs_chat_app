@@ -36,13 +36,15 @@ class AuthHeader extends StatelessWidget {
               padding: const EdgeInsets.only(top: 12),
               child: Text(
                 title,
-                style: AppTextStyles.authHeadTitleTextStyle,
+                style: AppTextStyles.authHeadTitleTextStyle
+                    .copyWith(color: Colors.white),
               )),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Text(
               subTitle,
-              style: AppTextStyles.authHeadSubtitleTextStyle,
+              style: AppTextStyles.authHeadSubtitleTextStyle
+                  .copyWith(color: Colors.white),
             ),
           )
         ],
