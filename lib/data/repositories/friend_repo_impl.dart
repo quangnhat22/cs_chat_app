@@ -65,20 +65,21 @@ class FriendRepositoryImpl extends FriendRepository {
     try {
       final res = await _service.findFriend();
       if (res.statusCode == 200) {
-        final listFriendJson = res.data["data"] as List<dynamic>;
+        final listFriendJson = res.data["data"] as List<dynamic>?;
 
-        final friendModels = listFriendJson
-            .map((friendJson) => UserModel.fromJson(friendJson))
-            .toList();
+        if (listFriendJson != null) {
+          final friendModels = listFriendJson
+              .map((friendJson) => UserModel.fromJson(friendJson))
+              .toList();
 
-        final friendEntities = friendModels
-            .map((friendModel) =>
-                UserEntity.convertToUserEntity(userModel: friendModel))
-            .toList();
+          final friendEntities = friendModels
+              .map((friendModel) =>
+                  UserEntity.convertToUserEntity(userModel: friendModel))
+              .toList();
 
-        return friendEntities;
+          return friendEntities;
+        }
       }
-
       return List<UserEntity>.empty();
     } catch (e) {
       throw Exception(e..toString());
@@ -90,21 +91,20 @@ class FriendRepositoryImpl extends FriendRepository {
     try {
       final res = await _service.getReceiveRequest();
       if (res.statusCode == 200) {
-        final listReceiveJson = res.data["data"] as List<dynamic>;
+        final listReceiveJson = res.data["data"] as List<dynamic>?;
+        if (listReceiveJson != null) {
+          final recevieModels = listReceiveJson
+              .map((receiveJson) => FriendRequestModel.fromJson(receiveJson))
+              .toList();
 
-        final recevieModels = listReceiveJson
-            .map((receiveJson) => FriendRequestModel.fromJson(receiveJson))
-            .toList();
-
-        final receiveEntities = recevieModels
-            .map((receiveEntity) =>
-                FriendRequestEntity.convertToFriendRequestEntity(
-                    model: receiveEntity))
-            .toList();
-
-        return receiveEntities;
+          final receiveEntities = recevieModels
+              .map((receiveEntity) =>
+                  FriendRequestEntity.convertToFriendRequestEntity(
+                      model: receiveEntity))
+              .toList();
+          return receiveEntities;
+        }
       }
-
       return List<FriendRequestEntity>.empty();
     } catch (e) {
       throw Exception(e..toString());
@@ -116,21 +116,22 @@ class FriendRepositoryImpl extends FriendRepository {
     try {
       final res = await _service.getSendRequest();
       if (res.statusCode == 200) {
-        final listSendJson = res.data["data"] as List<dynamic>;
+        final listSendJson = res.data["data"] as List<dynamic>?;
 
-        final sendModels = listSendJson
-            .map((sendModel) => FriendRequestModel.fromJson(sendModel))
-            .toList();
+        if (listSendJson != null) {
+          final sendModels = listSendJson
+              .map((sendModel) => FriendRequestModel.fromJson(sendModel))
+              .toList();
 
-        final sendEntities = sendModels
-            .map((sendEntity) =>
-                FriendRequestEntity.convertToFriendRequestEntity(
-                    model: sendEntity))
-            .toList();
+          final sendEntities = sendModels
+              .map((sendEntity) =>
+                  FriendRequestEntity.convertToFriendRequestEntity(
+                      model: sendEntity))
+              .toList();
 
-        return sendEntities;
+          return sendEntities;
+        }
       }
-
       return List<FriendRequestEntity>.empty();
     } catch (e) {
       throw Exception(e..toString());

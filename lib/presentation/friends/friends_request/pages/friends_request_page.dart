@@ -7,7 +7,18 @@ class FriendsRequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const FriendsRequestView();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<ListFriendRequestBloc>()
+            ..add(const ListFriendRequestEvent.started()),
+        ),
+        BlocProvider(
+          create: (_) => getIt<FriendRequestActionCubit>(),
+        ),
+      ],
+      child: const FriendsRequestView(),
+    );
   }
 }
 
@@ -31,20 +42,64 @@ class _FriendsRequestViewState extends State<FriendsRequestView> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[SegmentButtonFriendRequest(handleViewChange)],
-            ),
-          ),
-          view == Request.sent
-              ? const ListRequestFriendSend()
-              : const ListRequestFriendReceive(),
-        ],
+    return BlocListener<FriendRequestActionCubit, FriendRequestActionState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        state.whenOrNull(
+            failure: (message) =>
+                SnackBarApp.showSnackBar(context, message, TypesSnackBar.error),
+            success: () {
+              context
+                  .read<ListFriendRequestBloc>()
+                  .add(const ListSentFriendRequestRefreshed());
+              SnackBarApp.showSnackBar(
+                  context, "Success", TypesSnackBar.success);
+            });
+      },
+      child: BlocBuilder<ListFriendRequestBloc, ListFriendRequestState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            getDataSuccess: (friendRequestSent, friendRequestReceive) {
+              return SingleChildScrollView(
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<ListFriendRequestBloc>().add(
+                        const ListFriendRequestEvent.listRequestRefreshed());
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, top: 16, bottom: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SegmentButtonFriendRequest(handleViewChange)
+                          ],
+                        ),
+                      ),
+                      view == Request.sent
+                          ? ListRequestFriendSend(
+                              listSentRequest: friendRequestSent,
+                            )
+                          : ListRequestFriendReceive(
+                              listReceiveRequest: friendRequestReceive,
+                            ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            getDataFail: (_) {
+              return const SomeThingWrong();
+            },
+            orElse: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          );
+        },
       ),
     );
   }

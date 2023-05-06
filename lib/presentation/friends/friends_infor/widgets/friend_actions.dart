@@ -26,8 +26,6 @@ class FriendActions extends StatelessWidget {
                 return Column(
                   children: [
                     ListTile(
-                      enabled:
-                          (state is SentAddRequestFriendSuccess) ? true : false,
                       title: Text(
                         AppLocalizations.of(context)!.add_friend,
                         style: TextStyle(

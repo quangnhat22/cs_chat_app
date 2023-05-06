@@ -13,6 +13,8 @@ class FriendService {
       return await _service.dio.post(
         "${BaseService.friendPath}/request/$id",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -34,6 +36,8 @@ class FriendService {
       return await _service.dio.get(
         "${BaseService.friendPath}/",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -44,6 +48,8 @@ class FriendService {
       return await _service.dio.delete(
         "${BaseService.friendPath}/$id",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -54,6 +60,8 @@ class FriendService {
       return await _service.dio.put(
         "${BaseService.friendPath}/$id/block",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -64,6 +72,8 @@ class FriendService {
       return await _service.dio.put(
         "${BaseService.friendPath}/$id/unblock",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -74,6 +84,8 @@ class FriendService {
       return await _service.dio.get(
         "${BaseService.friendPath}/request/sent",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -84,6 +96,8 @@ class FriendService {
       return await _service.dio.delete(
         "${BaseService.friendPath}/request/$id",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -94,6 +108,8 @@ class FriendService {
       return await _service.dio.get(
         "${BaseService.friendPath}/request/received",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -104,6 +120,8 @@ class FriendService {
       return await _service.dio.post(
         "${BaseService.friendPath}/request/$userId/accept",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -114,6 +132,8 @@ class FriendService {
       return await _service.dio.delete(
         "${BaseService.friendPath}/request/$userId/reject",
       );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
