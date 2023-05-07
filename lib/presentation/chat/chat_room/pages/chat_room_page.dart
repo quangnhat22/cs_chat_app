@@ -1,5 +1,6 @@
 import 'package:chatapp/core/di/injector.dart';
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart';
+import 'package:chatapp/presentation/chat/chat_room/input_message_cubit/input_message_cubit.dart';
 import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message_stream_cubit.dart';
 import 'package:chatapp/presentation/chat/chat_room/widgets/footer_chat_actions.dart';
 import 'package:chatapp/presentation/chat/chat_room/widgets/list_message.dart';
@@ -22,6 +23,9 @@ class ChatRoomPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => getIt<MessageStreamCubit>()..started(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<InputMessageCubit>(),
         ),
       ],
       child: const ChatRoomView(),

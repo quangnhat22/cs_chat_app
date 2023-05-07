@@ -44,26 +44,6 @@ class _ListMessageState extends State<ListMessage> {
       builder: (context, state) {
         return state.maybeWhen(
           getChatRoomInfoSuccess: (messages, _, __) {
-            // return SliverList(
-            //   delegate: SliverChildBuilderDelegate(
-            //     (BuildContext context, int index) {
-            //       return Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: Row(
-            //           children: [
-            //             FactoryMessageItem.buildMessageItem(
-            //               messages[index].type,
-            //               false,
-            //               messages[index].message,
-            //               messages[index].sender?.name ?? "",
-            //             )
-            //           ],
-            //         ),
-            //       );
-            //     },
-            //     childCount: messages.length,
-            //   ),
-            // );
             return PagedSliverList<String, MessageEntity>(
               pagingController: _pagingController,
               builderDelegate: PagedChildBuilderDelegate<MessageEntity>(

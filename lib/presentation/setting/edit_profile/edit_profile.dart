@@ -17,12 +17,12 @@ import '../../../common/widgets/stateless/list_tile/radio_list_tile.dart';
 import '../../../common/widgets/stateless/text_field/c_text_form_field.dart';
 import '../../../core/config/app_enum.dart';
 
-part 'pages/edit_profile.page.dart';
+part 'pages/edit_profile_page.dart';
+part 'widgets/btn_edit_profile.dart';
+part 'widgets/dialog_gender.dart';
 part 'widgets/form_edit_profile.dart';
-part 'widgets/input_full_name.dart';
-part 'widgets/input_phone_number.dart';
 part 'widgets/input_bio.dart';
 part 'widgets/input_birthday.dart';
+part 'widgets/input_full_name.dart';
 part 'widgets/input_gender.dart';
-part 'widgets/dialog_gender.dart';
-part 'widgets/btn_edit_profile.dart';
+part 'widgets/input_phone_number.dart';

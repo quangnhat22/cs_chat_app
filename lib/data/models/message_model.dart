@@ -20,11 +20,4 @@ class MessageModel with _$MessageModel {
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
       _$MessageModelFromJson(json);
-
-  // "id": "64561ba36de2403c19e5c9ab",
-  //       "type": "text",
-  //       "sender": "6455d0636de2403c19e5c9a3",
-  //       "receiver": "6455cfdd6de2403c19e5c99f",
-  //       "message": "Hello world",
-  //       "created_at": "2023-05-06T09:19:31.066Z"
 }

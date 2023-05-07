@@ -49,7 +49,11 @@ class ChatWebSocket {
 
   void sendMessage(String type, String message, String receiverUserId) {
     try {
-      _channel.sink.add(message);
+      _channel.sink.add(jsonEncode({
+        "type": type,
+        "receiver_id": receiverUserId,
+        "message": message,
+      }));
     } catch (e) {
       throw Exception(e.toString());
     }

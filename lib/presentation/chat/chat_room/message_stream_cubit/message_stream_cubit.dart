@@ -35,6 +35,17 @@ class MessageStreamCubit extends Cubit<MessageStreamState> {
     }
   }
 
+  Future<void> sendMessage(
+      String type, String message, String receiverUserId) async {
+    try {
+      await _messageUseCase.sendMessage(type, message, receiverUserId);
+      emit(const MessageSendSuccess());
+    } catch (e) {
+      emit(MessageSendFailure(message: e.toString()));
+      throw Exception(e.toString());
+    }
+  }
+
   @override
   Future<void> close() {
     _subNewMessageStream.cancel();
