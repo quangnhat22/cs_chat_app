@@ -33,9 +33,11 @@ class ListChatRoomItem extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: <Widget>[
-                      CustomAvatarImage(
-                        urlImage: avatar,
-                        widthImage: 30,
+                      const CustomAvatarImage(
+                        urlImage:
+                            "https://t3.ftcdn.net/jpg/02/43/51/48/360_F_243514868_XDIMJHNNJYKLRST05XnnTj0MBpC4hdT5.jpg",
+                        widthImage: 48,
+                        heightImage: 48,
                       ),
                       const SizedBox(
                         width: 16,

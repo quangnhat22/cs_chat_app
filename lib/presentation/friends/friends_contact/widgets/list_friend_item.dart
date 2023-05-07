@@ -28,7 +28,7 @@ class ListFriendItem extends StatelessWidget {
         ),
         trailing: IconButton(
             onPressed: () {
-              NavigationUtil.pushNamed(route: RouteName.chatRoom);
+              NavigationUtil.pushNamed(route: RouteName.chatRoom, args: id);
             },
             icon: Icon(
               Icons.comment_outlined,

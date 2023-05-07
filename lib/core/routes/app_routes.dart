@@ -78,7 +78,9 @@ class AppRoutes {
       case RouteName.chatRoom:
         return _buildRoute(
           settings,
-          const ChatRoomPage(),
+          ChatRoomPage(
+            userId: settings.arguments as String,
+          ),
         );
       default:
         return _errorRoute();

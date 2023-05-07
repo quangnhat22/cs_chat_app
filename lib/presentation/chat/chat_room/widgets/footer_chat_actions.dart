@@ -43,7 +43,7 @@ class FooterChatActions extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          if (false) const RowMediaButton(),
+          if (true) const RowMediaButton(),
         ],
       ),
     );

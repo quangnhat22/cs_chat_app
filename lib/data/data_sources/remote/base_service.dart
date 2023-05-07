@@ -21,7 +21,7 @@ class BaseService {
   Future<Dio> initDio() async {
     dio = Dio(
       BaseOptions(
-          baseUrl: AppConfig.baseUrl,
+          baseUrl: AppConfig.httpScheme,
           connectTimeout: const Duration(milliseconds: 10000),
           receiveTimeout: const Duration(milliseconds: 10000),
           responseType: ResponseType.json,

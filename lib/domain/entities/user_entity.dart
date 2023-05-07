@@ -23,7 +23,7 @@ class UserEntity {
     this.gender,
     this.bio,
     this.birthday,
-    this.commonFriendCount,
+    this.commonFriendCount = 0,
     this.isFriend,
     this.lastSeenAt,
     this.relation = "non",

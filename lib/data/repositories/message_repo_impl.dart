@@ -1,4 +1,5 @@
 import 'package:chatapp/data/data_sources/web_socket/chat_web_socket.dart';
+import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/modules/message/message_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -28,8 +29,13 @@ class MessageRepositoryImpl extends MessageRepository {
   }
 
   @override
-  Stream<dynamic> getNewMessage() {
-    return _socket.getStream();
+  Stream<MessageEntity> getNewMessage() {
+    try {
+      return _socket.getStream().map(
+          (message) => MessageEntity.convertToMessageEntity(model: message));
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override

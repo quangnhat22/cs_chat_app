@@ -20,11 +20,21 @@ class FriendService {
     }
   }
 
-  Future<Response> getListChat(String userId) async {
+  Future<Response> getListChat({
+    required String userId,
+    String? latestMessageId,
+    int? limit = 20,
+  }) async {
     try {
-      return await _service.dio.post(
-        "${BaseService.friendPath}/$userId/chat",
-      );
+      if (latestMessageId == null) {
+        return await _service.dio.get(
+          "${BaseService.friendPath}/$userId/chat",
+        );
+      } else {
+        return await _service.dio.get(
+          "${BaseService.friendPath}/$userId/chat?last_id=$latestMessageId",
+        );
+      }
     } on DioError catch (e) {
       throw Exception(e.message);
     } catch (e) {

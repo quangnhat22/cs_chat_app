@@ -50,7 +50,8 @@ class CustomAvatarImage extends StatelessWidget {
         ),
       ),
       //placeholder: (context, url) => const Skeleton.circle(),
-      placeholder: (context, url) => const CircularProgressIndicator(),
+      placeholder: (context, url) =>
+          Container(child: const CircularProgressIndicator()),
       errorWidget: (context, url, error) {
         return const Icon(Icons.error);
       },

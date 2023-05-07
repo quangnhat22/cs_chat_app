@@ -8,7 +8,11 @@ import '../../entities/user_entity.dart';
 abstract class FriendUseCase {
   Future<bool> sendRequest(String id);
 
-  Future<void> getListChatWithFriends(String userId);
+  Future<List<MessageEntity>> getListChatWithFriends({
+    required String userId,
+    String? latestMessageId,
+    int? limit,
+  });
 
   Future<List<UserEntity>> getListFriend();
 
@@ -51,8 +55,13 @@ class FriendUseCaseImpl extends FriendUseCase {
   }
 
   @override
-  Future<List<MessageEntity>> getListChatWithFriends(String userId) async {
-    return await repo.getListChatWithFriends(userId);
+  Future<List<MessageEntity>> getListChatWithFriends({
+    required String userId,
+    String? latestMessageId,
+    int? limit,
+  }) async {
+    return await repo.getListChatWithFriends(
+        userId: userId, latestMessageId: latestMessageId, limit: limit);
   }
 
   @override
@@ -87,6 +96,6 @@ class FriendUseCaseImpl extends FriendUseCase {
 
   @override
   Future<bool> unBlockFriend(String id) {
-    return repo.unBlockFruiend(id);
+    return repo.unBlockFriend(id);
   }
 }

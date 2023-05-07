@@ -2,9 +2,9 @@ import 'package:chatapp/data/data_sources/remote/service/friend_service.dart';
 import 'package:chatapp/data/models/friend_request_model.dart';
 import 'package:chatapp/data/models/message_model.dart';
 import 'package:chatapp/data/models/user_model.dart';
+import 'package:chatapp/domain/entities/friend_request_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
-import 'package:chatapp/domain/entities/friend_request_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -57,9 +57,17 @@ class FriendRepositoryImpl extends FriendRepository {
   }
 
   @override
-  Future<List<MessageEntity>> getListChatWithFriends(String userId) async {
+  Future<List<MessageEntity>> getListChatWithFriends({
+    required String userId,
+    String? latestMessageId,
+    int? limit,
+  }) async {
     try {
-      final res = await _service.getListChat(userId);
+      final res = await _service.getListChat(
+        userId: userId,
+        latestMessageId: latestMessageId,
+        limit: limit,
+      );
       if (res.statusCode == 200) {
         final listMessageJson = res.data["data"] as List<dynamic>?;
         if (listMessageJson != null) {
@@ -114,11 +122,11 @@ class FriendRepositoryImpl extends FriendRepository {
       if (res.statusCode == 200) {
         final listReceiveJson = res.data["data"] as List<dynamic>?;
         if (listReceiveJson != null) {
-          final recevieModels = listReceiveJson
+          final receiveModels = listReceiveJson
               .map((receiveJson) => FriendRequestModel.fromJson(receiveJson))
               .toList();
 
-          final receiveEntities = recevieModels
+          final receiveEntities = receiveModels
               .map((receiveEntity) =>
                   FriendRequestEntity.convertToFriendRequestEntity(
                       model: receiveEntity))
@@ -199,7 +207,7 @@ class FriendRepositoryImpl extends FriendRepository {
   }
 
   @override
-  Future<bool> unBlockFruiend(String id) async {
+  Future<bool> unBlockFriend(String id) async {
     try {
       final res = await _service.unBlockFriend(id);
       if (res.statusCode == 200) {
