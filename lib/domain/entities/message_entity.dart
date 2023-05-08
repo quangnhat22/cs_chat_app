@@ -8,15 +8,16 @@ class MessageEntity {
   final UserEntity? receiver;
   final String? message;
   final DateTime? createdAt;
+  final bool? isMe;
 
-  MessageEntity({
-    required this.id,
-    this.type,
-    this.sender,
-    this.receiver,
-    this.message,
-    this.createdAt,
-  });
+  MessageEntity(
+      {required this.id,
+      this.type,
+      this.sender,
+      this.receiver,
+      this.message,
+      this.createdAt,
+      this.isMe});
 
   static final messageEntityEmpty = MessageEntity(id: "-1");
 
@@ -31,6 +32,7 @@ class MessageEntity {
       receiver: UserEntity.convertToUserEntity(userModel: model.receiver),
       message: model.message,
       createdAt: model.createdAt,
+      isMe: model.isMe,
     );
   }
 }

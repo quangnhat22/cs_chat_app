@@ -26,8 +26,6 @@ class FriendsInfoView extends StatelessWidget {
     super.key,
   });
 
-  final bool isFriend = false;
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<FriendsActionCubit, FriendsActionState>(
@@ -42,6 +40,7 @@ class FriendsInfoView extends StatelessWidget {
                 context,
                 AppLocalizations.of(context)!.send_success,
                 TypesSnackBar.success);
+            NavigationUtil.pushNamedAndRemoveUntil(route: RouteName.homePage);
           },
         );
       },
@@ -51,11 +50,10 @@ class FriendsInfoView extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: [
-              const FriendMutualInfor(),
-              const FriendDetailsInfor(),
-              if (isFriend) const FriendUnfriend(),
-              if (!isFriend) const FriendActions()
+            children: const [
+              FriendMutualInfor(),
+              FriendDetailsInfor(),
+              FriendActions()
             ],
           ),
         ),

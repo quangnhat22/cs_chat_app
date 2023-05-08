@@ -3,6 +3,7 @@ import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_blo
 import 'package:chatapp/presentation/chat/chat_room/input_message_cubit/input_message_cubit.dart';
 import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message_stream_cubit.dart';
 import 'package:chatapp/presentation/chat/chat_room/widgets/footer_chat_actions.dart';
+import 'package:chatapp/presentation/chat/chat_room/widgets/header_button_detail_friend.dart';
 import 'package:chatapp/presentation/chat/chat_room/widgets/list_message.dart';
 import 'package:chatapp/presentation/chat/chat_room/widgets/title_chat_room.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,9 @@ class ChatRoomView extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
           title: const TitleChatRoom(),
+          actions: const [
+            HeaderButtonDetailFriends(),
+          ],
         ),
         body: Column(
           children: const <Widget>[

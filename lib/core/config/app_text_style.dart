@@ -20,8 +20,8 @@ class AppTextStyles {
 
   //app bar
   static const TextStyle titleAppBarTextStyle = TextStyle(
-    fontWeight: FontWeight.w600,
-    fontSize: 24,
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
   );
 
   static const TextStyle authHeadTitleTextStyle = TextStyle(

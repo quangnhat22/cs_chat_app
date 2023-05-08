@@ -29,11 +29,12 @@ class AppAssets {
   );
 
   static final chatPlaceHolder = Image.asset(
-    'assets/images/ChatPlaceholder.png',
+    'assets/images/chat_place_holder.png',
     fit: BoxFit.cover,
     width: 256.0,
     height: 256.0,
   );
+
   // ignore: non_constant_identifier_names
   static final csChat = Image.asset(
     'assets/icons/CSChat.png',

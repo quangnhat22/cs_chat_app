@@ -48,13 +48,17 @@ class _ListMessageState extends State<ListMessage> {
               pagingController: _pagingController,
               builderDelegate: PagedChildBuilderDelegate<MessageEntity>(
                 itemBuilder: (context, item, index) {
+                  final isMe = item.isMe ?? false;
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
+                      mainAxisAlignment: isMe
+                          ? MainAxisAlignment.end
+                          : MainAxisAlignment.start,
                       children: [
                         FactoryMessageItem.buildMessageItem(
                           item.type,
-                          false,
+                          isMe,
                           item.message,
                           item.sender?.name ?? "",
                         )

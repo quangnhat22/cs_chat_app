@@ -26,7 +26,7 @@ class EditFormSubmitBloc
 
   Future<void> _editProfileSubmitted(
       EditFormSubmitted event, Emitter<EditFormSubmitState> emit) async {
-    if (event.name == null || event.gender == null || event.birthday == null) {
+    if (event.name == null) {
       return;
     }
 

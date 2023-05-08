@@ -1,9 +1,6 @@
 part of friends_infor;
 
 class FriendMutualInfor extends StatelessWidget {
-  final int mutualFriends = 0;
-  final int mutualGroups = 0;
-
   const FriendMutualInfor({super.key});
 
   @override
@@ -57,7 +54,9 @@ class FriendMutualInfor extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              mutualFriends.toString(),
+                              state.user.commonFriendCount != null
+                                  ? state.user.commonFriendCount.toString()
+                                  : "0",
                               style: const TextStyle(fontSize: 30),
                             ),
                             const SizedBox(
@@ -81,9 +80,9 @@ class FriendMutualInfor extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              mutualGroups.toString(),
-                              style: const TextStyle(fontSize: 30),
+                            const Text(
+                              "0",
+                              style: TextStyle(fontSize: 30),
                             ),
                             const SizedBox(
                               height: 12,

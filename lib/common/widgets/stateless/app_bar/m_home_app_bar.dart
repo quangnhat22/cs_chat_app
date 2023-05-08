@@ -39,6 +39,7 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         overflow: TextOverflow.ellipsis,
         style: AppTextStyles.titleAppBarTextStyle,
       ),
+      actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
       bottom: bottomWidget,
     );
   }

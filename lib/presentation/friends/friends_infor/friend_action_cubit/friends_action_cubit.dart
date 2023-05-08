@@ -14,9 +14,23 @@ class FriendsActionCubit extends Cubit<FriendsActionState> {
 
   final FriendUseCase _friendUseCase;
 
-  Future<void> sentAddFriednRequest(String id) async {
+  Future<void> sentAddFriendRequest(String id) async {
     try {
       final isSentSuccess = await _friendUseCase.sendRequest(id);
+      if (isSentSuccess) {
+        emit(const SentAddRequestFriendSuccess());
+      } else {
+        emit(const SentAddRequestFriendFailure(
+            message: "Something wrong! Try again"));
+      }
+    } catch (e) {
+      emit(SentAddRequestFriendFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> deleteFriendRequest(String id) async {
+    try {
+      final isSentSuccess = await _friendUseCase.deleteFriend(id);
       if (isSentSuccess) {
         emit(const SentAddRequestFriendSuccess());
       } else {

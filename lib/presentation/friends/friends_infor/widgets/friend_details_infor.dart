@@ -53,13 +53,12 @@ class FriendDetailsInfor extends StatelessWidget {
                     leading: Icons.people,
                     ctx: context),
                 const Divider(),
-                if (state.user.birthday != null)
-                  _buildInfoItem(
-                      title: AppLocalizations.of(context)!.birthday,
-                      subtitle:
-                          AppDateTimeFormat.formatDDMMYYYY(state.user.birthday),
-                      leading: Icons.people,
-                      ctx: context),
+                _buildInfoItem(
+                    title: AppLocalizations.of(context)!.birthday,
+                    subtitle:
+                        AppDateTimeFormat.formatDDMMYYYY(state.user.birthday),
+                    leading: Icons.people,
+                    ctx: context),
               ],
             );
           },

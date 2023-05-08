@@ -14,8 +14,8 @@ class MessageModel with _$MessageModel {
     UserModel? sender,
     UserModel? receiver,
     String? message,
-    // ignore: invalid_annotation_target
-    @JsonKey(name: "created_at", ignore: true) DateTime? createdAt,
+    @JsonKey(name: "created_at") DateTime? createdAt,
+    @JsonKey(name: "is_me") bool? isMe,
   }) = _MessageModel;
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>

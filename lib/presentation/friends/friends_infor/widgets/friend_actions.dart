@@ -5,7 +5,12 @@ class FriendActions extends StatelessWidget {
 
   void _handleAddFriend(BuildContext ctx) {
     final userId = ctx.read<FriendInfoCubit>().state.user.id;
-    ctx.read<FriendsActionCubit>().sentAddFriednRequest(userId);
+    ctx.read<FriendsActionCubit>().sentAddFriendRequest(userId);
+  }
+
+  void _handleDeleteFriend(BuildContext ctx) {
+    final userId = ctx.read<FriendInfoCubit>().state.user.id;
+    ctx.read<FriendsActionCubit>().deleteFriendRequest(userId);
   }
 
   @override
@@ -29,7 +34,28 @@ class FriendActions extends StatelessWidget {
                     return Column(
                       children: [
                         if (friendInfoState.user.relation ==
-                            AppFriendRelation.non.value)
+                            AppFriendRelation.friend.value)
+                          ListTile(
+                            title: Text(
+                              AppLocalizations.of(context)!.friend_unfriend,
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.error),
+                            ),
+                            leading: Icon(
+                              Icons.person_remove,
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
+                            onTap: () => _handleDeleteFriend(context),
+                          ),
+                        if (friendInfoState.user.relation ==
+                                AppFriendRelation.non.value &&
+                            friendInfoState.user.relation !=
+                                AppFriendRelation.sent.value &&
+                            friendInfoState.user.relation !=
+                                AppFriendRelation.received.value)
                           ListTile(
                             title: Text(
                               AppLocalizations.of(context)!.add_friend,

@@ -1,6 +1,8 @@
 import 'package:chatapp/presentation/chat/chat_main/pages/chat_main_page.dart';
 import 'package:chatapp/presentation/friends/friends_dash_board/friends_dash_board.dart';
+import 'package:chatapp/presentation/group/group_main/group_main_page.dart';
 import 'package:chatapp/presentation/home/widgets/list_bottom_navigation.dart';
+import 'package:chatapp/presentation/notification/page/notification_page.dart';
 import 'package:chatapp/presentation/setting/setting_main/setting_main.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,8 @@ class _HomePageState extends State<HomePage> {
     ChatMainPage(),
     FriendsDashBoardPage(),
     //group
-    FriendsDashBoardPage(),
+    GroupMainPage(),
+    NotificationPage(),
     //notifications
     //SearchPage(),
     SettingMainPage(),
