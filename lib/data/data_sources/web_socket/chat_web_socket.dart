@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:chatapp/data/models/message_model.dart';
 import 'package:injectable/injectable.dart';
@@ -12,13 +13,14 @@ import '../../../core/config/app_config.dart';
 @Injectable()
 class ChatWebSocket {
   final AuthLocalDataSrc localDataSrc;
+  final FileStorageFirebase storageFirebase;
   late final IOWebSocketChannel _channel;
 
   final String url = "${AppConfig.baseUrl}/ws/chat";
 
   late final StreamController _streamController;
 
-  ChatWebSocket({required this.localDataSrc}) {
+  ChatWebSocket({required this.localDataSrc, required this.storageFirebase}) {
     _streamController = StreamController();
   }
 
@@ -47,8 +49,19 @@ class ChatWebSocket {
     }
   }
 
-  void sendMessage(String type, String message, String receiverUserId) {
+  Future<void> sendMessage(
+      String type, String message, String receiverUserId) async {
     try {
+      if (type == "image") {
+        final imageUrl = await storageFirebase.uploadFile(message);
+        if (imageUrl == null) return;
+        _channel.sink.add(jsonEncode({
+          "type": type,
+          "receiver_id": receiverUserId,
+          "message": imageUrl,
+        }));
+        return;
+      }
       _channel.sink.add(jsonEncode({
         "type": type,
         "receiver_id": receiverUserId,

@@ -12,6 +12,8 @@ abstract class UserUseCase {
       DateTime? birthday,
       String? bio});
 
+  Future<bool> updateAvatar(String? filePath);
+
   Future<void> getSelf();
 
   Future<UserEntity?> getSelfFromLocal();
@@ -63,5 +65,10 @@ class UserUseCaseImpl extends UserUseCase {
   @override
   Future<UserEntity?> getUserById(String id) {
     return repo.getUserById(id);
+  }
+
+  @override
+  Future<bool> updateAvatar(String? filePath) {
+    return repo.updateAvatar(filePath);
   }
 }

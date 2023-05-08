@@ -41,6 +41,14 @@ class SettingMainCubit extends Cubit<SettingMainState> {
     emit(state.copyWith(theme: theme, lang: lang));
   }
 
+  Future<void> updateAvatar(String? filePath) async {
+    if (filePath == null) return;
+    final isUpdateAvatarSuccess = await userUseCase.updateAvatar(filePath);
+    if (isUpdateAvatarSuccess) {
+      //handle
+    }
+  }
+
   Future<void> userInforChanged() async {
     final userInfo = await userUseCase.getSelfFromLocal();
     if (userInfo != null) {

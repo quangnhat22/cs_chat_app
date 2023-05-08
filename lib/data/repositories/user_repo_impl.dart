@@ -1,3 +1,4 @@
+import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/local/user_local_data_src.dart';
 import 'package:chatapp/data/models/user_model.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
@@ -10,15 +11,24 @@ import '../data_sources/remote/service/user_service.dart';
 class UserRepositoryImpl extends UserRepository {
   final UserService service;
   final UserLocalDataSrc local;
+  final FileStorageFirebase storageFirebase;
 
-  UserRepositoryImpl({required this.service, required this.local});
+  UserRepositoryImpl(
+      {required this.service,
+      required this.local,
+      required this.storageFirebase});
 
   @override
   Future<bool> updateSelf(String? name, String? avatar, String? gender,
       String? phone, DateTime? birthday, String? bio) async {
     try {
-      final res =
-          await service.updateSelf(name, avatar, gender, phone, birthday, bio);
+      final res = await service.updateSelf(
+          name: name,
+          avatar: avatar,
+          gender: gender,
+          phone: phone,
+          birthday: birthday,
+          bio: bio);
       if (res.statusCode == 200) {
         await local.updateUser(
           name: name,
@@ -98,5 +108,25 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<void> clearBox() async {
     await local.deleteBoxUser();
+  }
+
+  @override
+  Future<bool> updateAvatar(String? filePath) async {
+    try {
+      if (filePath == null) return false;
+      final urlImage = await storageFirebase.uploadFile(filePath);
+      final res = await service.updateSelf(
+        avatar: urlImage,
+      );
+      if (res.statusCode == 200) {
+        await local.updateUser(
+          avatar: urlImage,
+        );
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

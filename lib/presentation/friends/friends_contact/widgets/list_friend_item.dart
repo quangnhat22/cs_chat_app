@@ -25,6 +25,9 @@ class ListFriendItem extends StatelessWidget {
         subtitle: Text(email ?? ""),
         leading: CustomAvatarImage(
           urlImage: avatar,
+          maxRadiusEmptyImg: 20,
+          widthImage: 48,
+          heightImage: 48,
         ),
         trailing: IconButton(
             onPressed: () {
