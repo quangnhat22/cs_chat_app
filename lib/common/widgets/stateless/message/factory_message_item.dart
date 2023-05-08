@@ -50,7 +50,11 @@ class FactoryMessageItem {
       //   }
       default:
         {
-          return TextMessageItem(content: content, isMe: isMe ?? false);
+          return TextMessageItem(
+            content: content,
+            isMe: isMe ?? false,
+            createdAt: createdAt,
+          );
         }
     }
   }
