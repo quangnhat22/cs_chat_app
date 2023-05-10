@@ -67,5 +67,7 @@
   "send_success": "Thành công",
   "all": "Tất cả",
   "group": "Nhóm",
-  "personal": "Cá nhân"
+  "personal": "Cá nhân",
+  "take_photo": "Chụp ảnh mới",
+  "choose_from_gallery": "Chọn ảnh đại diện có sẵn"
 }

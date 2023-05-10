@@ -44,9 +44,15 @@ class AppTextStyles {
     fontSize: AppFontSize.normalFontSize,
     fontWeight: FontWeight.w700,
   );
+
   static const TextStyle subTitleGreyText = TextStyle(
     fontSize: AppFontSize.normalFontSize,
     color: Colors.grey,
     fontWeight: FontWeight.w700,
+  );
+
+  //use in menu bottom modal sheet
+  static const TextStyle menuOptionBottomModelText = TextStyle(
+    fontSize: AppFontSize.normalFontSize,
   );
 }

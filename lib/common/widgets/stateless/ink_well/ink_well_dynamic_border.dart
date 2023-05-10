@@ -9,6 +9,7 @@ class InkWellDynamicBorder extends StatelessWidget {
     this.onTap,
     this.hasTopBorderRadius = false,
     this.hasBottomBorderRadius = false,
+    this.radius = 10.0,
   }) : super(key: key);
 
   final String title;
@@ -17,13 +18,14 @@ class InkWellDynamicBorder extends StatelessWidget {
   final VoidCallback? onTap;
   final bool hasTopBorderRadius;
   final bool hasBottomBorderRadius;
+  final double? radius;
 
   Radius _isNeedToTopRadius() {
-    return hasTopBorderRadius ? const Radius.circular(10) : Radius.zero;
+    return hasTopBorderRadius ? Radius.circular(radius ?? 10) : Radius.zero;
   }
 
   Radius _isNeedToBottomRadius() {
-    return hasBottomBorderRadius ? const Radius.circular(10) : Radius.zero;
+    return hasBottomBorderRadius ? Radius.circular(radius ?? 10) : Radius.zero;
   }
 
   @override

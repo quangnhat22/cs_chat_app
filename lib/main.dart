@@ -1,9 +1,9 @@
 import 'package:chatapp/core/config/firebase_options.dart';
+import 'package:chatapp/core/di/injector.dart' as di;
 import 'package:chatapp/data/models/user_model.dart';
+import 'package:chatapp/presentation/app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:chatapp/presentation/app/app.dart';
-import 'package:chatapp/core/di/injector.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -22,10 +22,10 @@ Future<void> _initialize() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
-  _registerApdateHive();
+  _registerAdapterHive();
   await di.configureDependencies();
 }
 
-void _registerApdateHive() {
+void _registerAdapterHive() {
   Hive.registerAdapter(UserModelAdapter());
 }

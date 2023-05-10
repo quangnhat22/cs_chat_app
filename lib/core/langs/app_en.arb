@@ -64,8 +64,10 @@
   "friend_mutual_friends": "Mutual friends",
   "friend_mutual_groups": "Mutual groups",
   "friend_unfriend": "Unfriend",
-  "send_success":"Success",
+  "send_success": "Success",
   "all": "All",
   "group": "Group",
-  "personal": "Personal"
+  "personal": "Personal",
+  "take_photo": "Take Photo",
+  "choose_from_gallery": "Choose from gallery"
 }
