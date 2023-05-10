@@ -28,7 +28,12 @@ class ListRequestFriendReceive extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(listReceiveRequest[index].receiver?.name ?? ""),
-                leading: const CircleAvatar(child: Text('A')),
+                leading: CustomAvatarImage(
+                  urlImage: listReceiveRequest[index].receiver?.avatar,
+                  maxRadiusEmptyImg: 20,
+                  widthImage: 48,
+                  heightImage: 48,
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

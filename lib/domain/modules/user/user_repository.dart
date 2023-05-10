@@ -12,6 +12,8 @@ abstract class UserRepository {
 
   Future<void> getSelf();
 
+  Future<bool> updateAvatar(String? filePath);
+
   Future<UserEntity?> getSelfFromLocal();
 
   Stream<UserEntity?> getStreamSelfFromLocal();

@@ -26,7 +26,9 @@ class FriendMutualInfor extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   CustomAvatarImage(
-                    maxRadiusEmptyImg: 45,
+                    maxRadiusEmptyImg: 64,
+                    heightImage: 120,
+                    widthImage: 120,
                     urlImage: state.user.avatar,
                   ),
                   Padding(

@@ -16,6 +16,8 @@ class ProfileInfo extends StatelessWidget {
             children: <Widget>[
               CustomAvatarImage(
                 maxRadiusEmptyImg: 64,
+                widthImage: 120,
+                heightImage: 120,
                 urlImage: avatar,
               ),
               const SizedBox(

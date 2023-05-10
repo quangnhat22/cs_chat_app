@@ -3,20 +3,24 @@ import 'message_item/image_message_item.dart';
 import 'message_item/text_message_item.dart';
 
 class FactoryMessageItem {
-  static IMessageItem buildMessageItem(
-    String? type,
-    bool? isMe,
-    String? content,
-    String? nameActor,
-  ) {
+  static IMessageItem buildMessageItem(String? type, bool? isMe,
+      String? content, String? nameActor, DateTime? createdAt) {
     switch (type) {
       case "text":
         {
-          return TextMessageItem(content: content, isMe: isMe ?? false);
+          return TextMessageItem(
+            content: content,
+            isMe: isMe ?? false,
+            createdAt: createdAt,
+          );
         }
       case "image":
         {
-          return ImageMessageItem(content: content, isMe: isMe ?? false);
+          return ImageMessageItem(
+            content: content,
+            isMe: isMe ?? false,
+            createdAt: createdAt,
+          );
         }
       // case "emoji":
       //   {
@@ -46,7 +50,11 @@ class FactoryMessageItem {
       //   }
       default:
         {
-          return TextMessageItem(content: content, isMe: isMe ?? false);
+          return TextMessageItem(
+            content: content,
+            isMe: isMe ?? false,
+            createdAt: createdAt,
+          );
         }
     }
   }

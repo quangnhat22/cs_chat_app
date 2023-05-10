@@ -31,6 +31,9 @@ class ListRequestFriendSend extends StatelessWidget {
                 ),
                 leading: CustomAvatarImage(
                   urlImage: listSentRequest[index].receiver?.avatar,
+                  maxRadiusEmptyImg: 20,
+                  widthImage: 48,
+                  heightImage: 48,
                 ),
                 trailing: SizedBox(
                   child: ElevatedButton(

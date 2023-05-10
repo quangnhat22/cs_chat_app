@@ -9,8 +9,13 @@ class UserService {
 
   final BaseService _service;
 
-  Future<Response> updateSelf(String? name, String? avatar, String? gender,
-      String? phone, DateTime? birthday, String? bio) async {
+  Future<Response> updateSelf(
+      {String? name,
+      String? avatar,
+      String? gender,
+      String? phone,
+      DateTime? birthday,
+      String? bio}) async {
     try {
       return await _service.dio.patch(
         "${BaseService.userPath}/self",
@@ -21,6 +26,7 @@ class UserService {
           "address": "123",
           "birthday": birthday?.toIso8601String(),
           "bio": bio,
+          "avatar": avatar,
         },
       );
     } on DioError catch (e) {

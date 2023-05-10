@@ -14,4 +14,21 @@ class AppDateTimeFormat {
         ? DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(string)
         : DateTime.now();
   }
+
+  static String convertToHourMinuteFollowDay(DateTime time) {
+    final checkToday = _calculateDifference(time);
+    if (checkToday == 0) {
+      return DateFormat.jm().format(time.toLocal());
+    } else if (checkToday == -1) {
+      return "Yesterday";
+    }
+    return DateFormat("dd/MM/yyyy").format(time.toLocal());
+  }
+
+  static int _calculateDifference(DateTime date) {
+    DateTime now = DateTime.now();
+    return DateTime(date.year, date.month, date.day)
+        .difference(DateTime(now.year, now.month, now.day))
+        .inDays;
+  }
 }

@@ -3,6 +3,16 @@ part of setting_main;
 class ProfileSetting extends StatelessWidget {
   const ProfileSetting({super.key});
 
+  void _onPickAvatar(BuildContext ctx) async {
+    final filePath = await AppAssetsPicker.pickSingleAssets(ctx);
+    if (filePath == null) return;
+
+    log(filePath);
+    if (ctx.mounted) {
+      ctx.read<SettingMainCubit>().updateAvatar(filePath);
+    }
+  }
+
   void _onTapEditProfile() {
     NavigationUtil.pushNamed(route: RouteName.editProfile);
   }
@@ -15,7 +25,7 @@ class ProfileSetting extends StatelessWidget {
           InkWellDynamicBorder(
             title: AppLocalizations.of(context)!.change_profile_photo,
             leading: const Icon(Icons.add_a_photo_outlined),
-            onTap: () {},
+            onTap: () => _onPickAvatar(context),
             hasTopBorderRadius: true,
             hasBottomBorderRadius: false,
           ),
