@@ -10,31 +10,22 @@ class DeviceList extends StatelessWidget {
     return ListView.builder(
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: RichText(
-              text: TextSpan(
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                TextSpan(
-                  text: devices[index],
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-                TextSpan(
-                  text: AppLocalizations.of(context)!.want_to_friend_with_you,
-                  style: const TextStyle(fontWeight: FontWeight.w300),
-                )
-              ])),
-          leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            child: Icon(
-              Icons.smartphone,
-              color: Theme.of(context).colorScheme.primaryContainer)),
-          tileColor: Theme.of(context).colorScheme.surfaceVariant,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+        return Container(
+          margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0, top: 4.0),
+          child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Icon(
+                  Icons.smartphone,
+                  color: Theme.of(context).colorScheme.primaryContainer)),
+              title: Text(devices[index]),
+              tileColor: Theme.of(context).colorScheme.surfaceVariant,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+            ),
         );
       },
       itemCount: devices.length,
