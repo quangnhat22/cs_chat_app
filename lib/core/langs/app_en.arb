@@ -69,5 +69,8 @@
   "group": "Group",
   "personal": "Personal",
   "take_photo": "Take Photo",
-  "choose_from_gallery": "Choose from gallery"
+  "choose_from_gallery": "Choose from gallery",
+  "want_to_friend_with_you": " want to friend with you",
+  "current": "Current",
+  "active": "Active"
 }

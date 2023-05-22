@@ -10,11 +10,13 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.bottomWidget,
     this.numberNotification = 0,
+    this.actionButton,
   });
 
   final String title;
   final PreferredSizeWidget? bottomWidget;
   final int numberNotification;
+  final Widget? actionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,12 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         overflow: TextOverflow.ellipsis,
         style: AppTextStyles.titleAppBarTextStyle,
       ),
-      actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.search)),
+          if(actionButton != null) actionButton!
+          ],
       bottom: bottomWidget,
     );
   }
