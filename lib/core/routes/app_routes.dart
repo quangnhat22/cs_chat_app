@@ -13,6 +13,7 @@ import 'package:chatapp/presentation/notification/notication_lib.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 
+import '../../presentation/search/pages/search_page.dart';
 import 'route_name.dart';
 
 class AppRoutes {
@@ -25,7 +26,7 @@ class AppRoutes {
       case RouteName.loginPage:
         return _buildRoute(
           settings,
-          const DeviceMainPage(),
+          const SearchPage(),
         );
       case RouteName.signUpPage:
         return _buildRoute(

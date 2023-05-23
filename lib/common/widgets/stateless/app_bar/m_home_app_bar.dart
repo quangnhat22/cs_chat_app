@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/config/app_assets.dart';
 import '../../../../core/config/app_text_style.dart';
 import '../../../../core/config/app_theme.dart';
+import '../../../../presentation/search/widgets/custom_search_delegate.dart';
 
 class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MHomeAppBar({
@@ -43,7 +44,12 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(),
+              );
+          },
           icon: const Icon(Icons.search)),
           if(actionButton != null) actionButton!
           ],
