@@ -1,6 +1,5 @@
 import 'package:chatapp/common/widgets/stateless/message/factory_message_item.dart';
 import 'package:chatapp/common/widgets/stateless/skeleton/list_skeleton.dart';
-import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
