@@ -71,5 +71,8 @@
   "take_photo": "Chụp ảnh mới",
   "choose_from_gallery": "Chọn ảnh đại diện có sẵn",
   "your_groups": "Nhóm của bạn",
-  "group_request": "Lời mời nhóm"
+  "group_request": "Lời mời nhóm",
+  "requests_received_text_button_segment": "Đã nhận",
+  "group_on_going": "On going",
+  "group_join_text_button": "Join"
 }

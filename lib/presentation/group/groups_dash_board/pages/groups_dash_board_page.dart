@@ -1,6 +1,4 @@
-import 'package:chatapp/common/widgets/stateless/app_bar/m_home_app_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+part of groups_dash_board;
 
 class GroupsDashBoardPage extends StatefulWidget {
   const GroupsDashBoardPage({super.key});
@@ -36,21 +34,20 @@ class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: MHomeAppBar(
-          title: AppLocalizations.of(context)!.groups,
-          bottomWidget: TabBar(
-            controller: _tabController,
-            tabs: [
-              Tab(
-                child: Text(AppLocalizations.of(context)!.your_groups),
-              ),
-              Tab(
-                child: Text(AppLocalizations.of(context)!.group_request),
-              )
-            ],
-          ),
+          appBar: MHomeAppBar(
+        title: AppLocalizations.of(context)!.groups,
+        bottomWidget: TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(
+              child: Text(AppLocalizations.of(context)!.your_groups),
+            ),
+            Tab(
+              child: Text(AppLocalizations.of(context)!.group_request),
+            )
+          ],
         ),
-      ),
+      )),
     );
   }
 }
