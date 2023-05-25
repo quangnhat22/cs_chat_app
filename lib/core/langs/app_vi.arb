@@ -69,5 +69,7 @@
   "group": "Nhóm",
   "personal": "Cá nhân",
   "take_photo": "Chụp ảnh mới",
-  "choose_from_gallery": "Chọn ảnh đại diện có sẵn"
+  "choose_from_gallery": "Chọn ảnh đại diện có sẵn",
+  "your_groups": "Nhóm của bạn",
+  "group_request": "Lời mời nhóm"
 }

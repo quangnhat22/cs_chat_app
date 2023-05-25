@@ -69,5 +69,7 @@
   "group": "Group",
   "personal": "Personal",
   "take_photo": "Take Photo",
-  "choose_from_gallery": "Choose from gallery"
+  "choose_from_gallery": "Choose from gallery",
+  "your_groups": "Your Groups",
+  "group_request": "Request"
 }
