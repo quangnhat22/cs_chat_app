@@ -79,5 +79,10 @@
   "camera_source_option": "Chụp ảnh mới",
   "gallery_source_option": "Chọn ảnh từ thư viện",
   "create_group_app_bar_title": "Tạo Nhóm",
-  "set_new_photo": "Đổi Ảnh Mới"
+  "set_new_photo": "Đổi Ảnh Mới",
+  "group_name": "Tên nhóm",
+  "add_members": "Thêm Thành Viên",
+  "search_friends": "Tìm kiếm bạn bè",
+  "selected_text": "đã chọn",
+  "user_status_online": "Đang hoạt động"
 }

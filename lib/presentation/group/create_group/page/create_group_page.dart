@@ -1,9 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:wechat_camera_picker/wechat_camera_picker.dart';
-import 'package:image_picker/image_picker.dart';
+part of create_group;
 
 class CreateGroupPage extends StatefulWidget {
   const CreateGroupPage({super.key});
@@ -86,8 +81,88 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
     }
   }
 
+  void _showImageDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              AppLocalizations.of(context)!.choose_image_source_dialog_title,
+              style: const TextStyle(fontSize: 20),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                InkWellDynamicBorder(
+                  title: AppLocalizations.of(context)!.camera_source_option,
+                  leading: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _getFromCamera();
+                  },
+                ),
+                InkWellDynamicBorder(
+                  title: AppLocalizations.of(context)!.gallery_source_option,
+                  leading: const Icon(
+                    Icons.image,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _getFromGallery();
+                  },
+                )
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.create_group_app_bar_title),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        leading: IconButton(
+          onPressed: () {
+            NavigationUtil.pop();
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              debugPrint(selectedFriends.toString());
+            },
+            icon: const Icon(Icons.done),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              GroupSetPhoto(imageFile, _showImageDialog),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: TextField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      label: Text(AppLocalizations.of(context)!.group_name)),
+                ),
+              ),
+              GroupAddMembers(selectedFriends, friendResults,
+                  handleSelectMembers, handleTextChange)
+            ]),
+      ),
+    );
   }
 }

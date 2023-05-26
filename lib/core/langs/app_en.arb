@@ -79,5 +79,10 @@
   "camera_source_option": "Take photo",
   "gallery_source_option": "Choose from gallery",
   "create_group_app_bar_title": "Create Group",
-  "set_new_photo": "Set New Photo"
+  "set_new_photo": "Set New Photo",
+  "group_name": "Group name",
+  "add_members": "Add Members",
+  "search_friends": "Search friends",
+  "selected_text": "selected",
+  "user_status_online": "Online"
 }
