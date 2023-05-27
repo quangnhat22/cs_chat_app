@@ -69,5 +69,20 @@
   "group": "Nhóm",
   "personal": "Cá nhân",
   "take_photo": "Chụp ảnh mới",
-  "choose_from_gallery": "Chọn ảnh đại diện có sẵn"
+  "choose_from_gallery": "Chọn ảnh đại diện có sẵn",
+  "your_groups": "Nhóm của bạn",
+  "group_request": "Lời mời nhóm",
+  "requests_received_text_button_segment": "Đã nhận",
+  "group_on_going": "Đang diễn ra",
+  "group_join_text_button": "Tham gia",
+  "choose_image_source_dialog_title": "Vui lòng chọn nguồn ảnh",
+  "camera_source_option": "Chụp ảnh mới",
+  "gallery_source_option": "Chọn ảnh từ thư viện",
+  "create_group_app_bar_title": "Tạo Nhóm",
+  "set_new_photo": "Đổi Ảnh Mới",
+  "group_name": "Tên nhóm",
+  "add_members": "Thêm Thành Viên",
+  "search_friends": "Tìm kiếm bạn bè",
+  "selected_text": "đã chọn",
+  "user_status_online": "Đang hoạt động"
 }
