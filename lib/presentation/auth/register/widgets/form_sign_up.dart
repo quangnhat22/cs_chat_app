@@ -1,9 +1,7 @@
 part of register;
 
-class PhotoHighFormCard extends StatelessWidget {
-  const PhotoHighFormCard({Key? key, required this.childWidget}) : super(key: key);
-
-  final Widget childWidget;
+class FormSignUp extends StatelessWidget {
+  const FormSignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +9,7 @@ class PhotoHighFormCard extends StatelessWidget {
       left: 0,
       right: 0,
       bottom: 0,
-      height: 0.8.sh,
+      height: AppScreenUtils.isLandscape() ? 1.sh : 0.7.sh,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
@@ -22,7 +20,17 @@ class PhotoHighFormCard extends StatelessWidget {
           ),
         ),
         child: SingleChildScrollView(
-          child: childWidget,
+          child: Form(
+            child: Column(
+              children: <Widget>[
+                const InputEmail(),
+                const InputPassword(),
+                const InputConfirmPassword(),
+                const ButtonSignUp(),
+                if (AppScreenUtils.isLandscape()) const TextButtonBackToLogin()
+              ],
+            ),
+          ),
         ),
       ),
     );

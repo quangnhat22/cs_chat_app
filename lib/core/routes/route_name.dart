@@ -11,4 +11,5 @@ class RouteName {
   static const String findFriend = "/find-friend";
   static const String chatRoom = "/chat-room";
   static const String teamDetails = '/team-details';
+  static const String deviceAdministration = "/device-administration";
 }

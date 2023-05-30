@@ -46,8 +46,10 @@ import 'package:chatapp/domain/modules/user/user_repository.dart' as _i32;
 import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i34;
 import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.dart'
     as _i24;
-import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i46;
+import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i47;
 import 'package:chatapp/presentation/auth/login/bloc/login_bloc.dart' as _i44;
+import 'package:chatapp/presentation/auth/register/cubit_sign_up/sign_up_cubit.dart'
+    as _i46;
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart'
     as _i38;
 import 'package:chatapp/presentation/chat/chat_room/input_message_cubit/input_message_cubit.dart'
@@ -176,8 +178,10 @@ extension GetItInjectableX on _i1.GetIt {
           userUseCase: gh<_i34.UserUseCase>(),
           appSettingsUseCase: gh<_i14.AppSettingsUseCase>(),
         ));
-    gh.lazySingleton<_i46.AppBloc>(
-        () => _i46.AppBloc(authUseCase: gh<_i37.AuthUseCase>()));
+    gh.factory<_i46.SignUpCubit>(
+        () => _i46.SignUpCubit(authUC: gh<_i37.AuthUseCase>()));
+    gh.lazySingleton<_i47.AppBloc>(
+        () => _i47.AppBloc(authUseCase: gh<_i37.AuthUseCase>()));
     return this;
   }
 }

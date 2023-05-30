@@ -37,7 +37,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> checkIsLoggedIn() async {
     final isTokenLocalAvailable = await _authLocalDataSrc.checkTokenValid();
-    return isTokenLocalAvailable ? true : false;
+    return isTokenLocalAvailable;
   }
 
   @override
@@ -54,8 +54,8 @@ class AuthRepositoryImpl extends AuthRepository {
         if (res.statusCode == 200) {
           final data = res.data["data"];
           await _authLocalDataSrc.saveAuth(
-            data["access_token"]["token"],
-            data["refresh_token"]["token"],
+            accessToken: data["access_token"]["token"],
+            refreshToken: data["refresh_token"]["token"],
           );
           await _userRepo.getSelf();
         }
@@ -76,8 +76,8 @@ class AuthRepositoryImpl extends AuthRepository {
       if (res.statusCode == 200) {
         final data = res.data["data"];
         await _authLocalDataSrc.saveAuth(
-          data["access_token"]["token"],
-          data["refresh_token"]["token"],
+          accessToken: data["access_token"]["token"],
+          refreshToken: data["refresh_token"]["token"],
           isEmailVerify: data["email_verified"],
           isProfileUpdate: data["profile_updated"],
         );
@@ -101,13 +101,13 @@ class AuthRepositoryImpl extends AuthRepository {
       if (res.statusCode == 200) {
         final data = res.data["data"];
         await _authLocalDataSrc.saveAuth(
-          data["access_token"]["token"],
-          data["refresh_token"]["token"],
+          accessToken: data["access_token"]["token"],
+          refreshToken: data["refresh_token"]["token"],
           isEmailVerify: data["email_verified"],
           isProfileUpdate: data["profile_updated"],
         );
         await _userRepo.getSelf();
-        await _sendEmailVerify();
+        // await _sendEmailVerify();
       }
     } catch (e) {
       throw Exception(e);

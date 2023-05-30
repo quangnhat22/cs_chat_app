@@ -21,7 +21,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       },
     );
 
-    _refreshTokenSubscription = authUseCase.checkAccessTokenStream().listen(
+    _refreshTokenSubscription = authUseCase.checkRefreshTokenStream().listen(
       (event) {
         log(event.toString(), name: "eventRefresh");
         add(AppUserChanged());

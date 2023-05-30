@@ -10,9 +10,11 @@ import 'base_service.dart';
 class DioInterceptor {
   DioInterceptor({required AuthLocalDataSrc authLocalDataSrc})
       : _authLocal = authLocalDataSrc;
+
   //_authService = authService;
 
   final AuthLocalDataSrc _authLocal;
+
   //final AuthService _authService;
 
   Future<Dio> addInterceptor(Dio dio) async {
@@ -62,7 +64,7 @@ class DioInterceptor {
             data: {"refresh_token": refreshToken});
         if (res.statusCode == 200) {
           final newAccessToken = res.data["data"]["token"];
-          await _authLocal.saveAuth(newAccessToken, refreshToken);
+          // await _authLocal.set ;
         }
       }
     } catch (e) {
@@ -70,25 +72,25 @@ class DioInterceptor {
     }
   }
 
-  // static Future<Dio> addInterceptorRefreshToken(Dio dio) async {
-  //   dio.interceptors.add(
-  //     QueuedInterceptorsWrapper(
-  //       onRequest: ((options, handler) async {
-  //         options.headers["uuid"] = "abc";
-  //         options.headers["platform"] = "userApp";
-  //         options.headers["refreshToken"] = await HiveAuth().getRefreshToken();
-  //         handler.next(options);
-  //       }),
-  //       onResponse: ((response, handler) async {
-  //         //save new access token and refresh token
-  //         final String newAccessToken = response.headers["newaccesstoken"]![0];
-  //         final String newRefreshToken =
-  //             response.headers["newrefreshtoken"]![0];
-  //         await HiveAuth().saveAuth(newAccessToken, newRefreshToken);
-  //         handler.next(response);
-  //       }),
-  //     ),
-  //   );
-  //   return dio;
-  // }
+// static Future<Dio> addInterceptorRefreshToken(Dio dio) async {
+//   dio.interceptors.add(
+//     QueuedInterceptorsWrapper(
+//       onRequest: ((options, handler) async {
+//         options.headers["uuid"] = "abc";
+//         options.headers["platform"] = "userApp";
+//         options.headers["refreshToken"] = await HiveAuth().getRefreshToken();
+//         handler.next(options);
+//       }),
+//       onResponse: ((response, handler) async {
+//         //save new access token and refresh token
+//         final String newAccessToken = response.headers["newaccesstoken"]![0];
+//         final String newRefreshToken =
+//             response.headers["newrefreshtoken"]![0];
+//         await HiveAuth().saveAuth(newAccessToken, newRefreshToken);
+//         handler.next(response);
+//       }),
+//     ),
+//   );
+//   return dio;
+// }
 }

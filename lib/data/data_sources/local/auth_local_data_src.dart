@@ -17,18 +17,18 @@ class AuthLocalDataSrc {
     return _box!;
   }
 
-  Future<void> saveAuth(
-    String accessToken,
-    String refreshToken, {
+  Future<void> saveAuth({
+    required String accessToken,
+    required String refreshToken,
     bool isEmailVerify = true,
     bool isProfileUpdate = true,
   }) async {
-    await _openBox().then((box) async {
-      await box.put(_accessTokenKeyName, accessToken);
-      await box.put(_refreshTokenKeyName, refreshToken);
-      await box.put(_emailVerifyKeyname, isEmailVerify);
-      await box.put(_profileUpdateKeyname, isProfileUpdate);
-    });
+    await _openBox().then((box) async => {
+          await box.put(_accessTokenKeyName, accessToken),
+          await box.put(_refreshTokenKeyName, refreshToken),
+          await box.put(_emailVerifyKeyname, isEmailVerify),
+          await box.put(_profileUpdateKeyname, isProfileUpdate),
+        });
   }
 
   Future<bool> checkTokenValid() async {
