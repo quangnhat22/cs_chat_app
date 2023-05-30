@@ -2,14 +2,18 @@ import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/presentation/auth/fogot_password/forgot_password.dart';
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
+import 'package:chatapp/presentation/chat/chat_main/pages/chat_main_page.dart';
 import 'package:chatapp/presentation/chat/chat_room/pages/chat_room_page.dart';
+import 'package:chatapp/presentation/device/device_administration.dart';
 import 'package:chatapp/presentation/friends/find_new_friend/find_new_friend.dart';
 import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
+import 'package:chatapp/presentation/notification/notication_lib.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 
+import '../../presentation/search/pages/search_page.dart';
 import 'route_name.dart';
 
 class AppRoutes {
@@ -22,7 +26,7 @@ class AppRoutes {
       case RouteName.loginPage:
         return _buildRoute(
           settings,
-          const LoginPage(),
+          const SearchPage(),
         );
       case RouteName.signUpPage:
         return _buildRoute(

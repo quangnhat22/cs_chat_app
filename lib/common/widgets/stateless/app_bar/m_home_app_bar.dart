@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/config/app_assets.dart';
 import '../../../../core/config/app_text_style.dart';
 import '../../../../core/config/app_theme.dart';
+import '../../../../presentation/search/widgets/custom_search_delegate.dart';
 
 class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MHomeAppBar({
@@ -10,11 +11,13 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.bottomWidget,
     this.numberNotification = 0,
+    this.actionButton,
   });
 
   final String title;
   final PreferredSizeWidget? bottomWidget;
   final int numberNotification;
+  final Widget? actionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,17 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         overflow: TextOverflow.ellipsis,
         style: AppTextStyles.titleAppBarTextStyle,
       ),
-      actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+      actions: [
+        IconButton(
+          onPressed: () {
+            showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(),
+              );
+          },
+          icon: const Icon(Icons.search)),
+          if(actionButton != null) actionButton!
+          ],
       bottom: bottomWidget,
     );
   }
