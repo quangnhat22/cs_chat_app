@@ -1,6 +1,6 @@
 import 'package:chatapp/presentation/chat/chat_main/pages/chat_main_page.dart';
 import 'package:chatapp/presentation/friends/friends_dash_board/friends_dash_board.dart';
-import 'package:chatapp/presentation/group/group_main/group_main_page.dart';
+import 'package:chatapp/presentation/group/groups_dash_board/groups_dash_board.dart';
 import 'package:chatapp/presentation/home/widgets/list_bottom_navigation.dart';
 import 'package:chatapp/presentation/notification/notication_lib.dart';
 import 'package:chatapp/presentation/setting/setting_main/setting_main.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     ChatMainPage(),
     FriendsDashBoardPage(),
     //group
-    GroupMainPage(),
+    GroupsDashBoardPage(),
     NotificationPage(),
     //notifications
     //SearchPage(),

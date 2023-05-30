@@ -73,5 +73,20 @@
   "want_to_friend_with_you": " want to friend with you",
   "current": "Current",
   "active": "Active",
-  "search": "Search"
+  "search": "Search",
+  "your_groups": "Your Groups",
+  "group_request": "Request",
+  "requests_received_text_button_segment": "Received",
+  "group_on_going": "On going",
+  "group_join_text_button": "Join",
+  "choose_image_source_dialog_title": "Please choose image source",
+  "camera_source_option": "Take photo",
+  "gallery_source_option": "Choose from gallery",
+  "create_group_app_bar_title": "Create Group",
+  "set_new_photo": "Set New Photo",
+  "group_name": "Group name",
+  "add_members": "Add Members",
+  "search_friends": "Search friends",
+  "selected_text": "selected",
+  "user_status_online": "Online"
 }
