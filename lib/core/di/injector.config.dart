@@ -47,7 +47,8 @@ import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i34;
 import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.dart'
     as _i24;
 import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i47;
-import 'package:chatapp/presentation/auth/login/bloc/login_bloc.dart' as _i44;
+import 'package:chatapp/presentation/auth/login/cubit_login/login_cubit.dart'
+    as _i44;
 import 'package:chatapp/presentation/auth/register/cubit_sign_up/sign_up_cubit.dart'
     as _i46;
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart'
@@ -171,8 +172,8 @@ extension GetItInjectableX on _i1.GetIt {
           useCase: gh<_i28.FriendUseCase>(),
           userUseCase: gh<_i34.UserUseCase>(),
         ));
-    gh.factory<_i44.LoginBloc>(
-        () => _i44.LoginBloc(authRepo: gh<_i35.AuthRepository>()));
+    gh.factory<_i44.LoginCubit>(
+        () => _i44.LoginCubit(authUC: gh<_i37.AuthUseCase>()));
     gh.factory<_i45.SettingMainCubit>(() => _i45.SettingMainCubit(
           authUseCase: gh<_i37.AuthUseCase>(),
           userUseCase: gh<_i34.UserUseCase>(),

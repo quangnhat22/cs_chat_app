@@ -1,7 +1,7 @@
 part of login;
 
-class SignUpTextButton extends StatelessWidget {
-  const SignUpTextButton({super.key});
+class TextButtonSignUp extends StatelessWidget {
+  const TextButtonSignUp({super.key});
 
   void _handleTapSignUpButton(BuildContext ctx) {
     Navigator.pushNamed(ctx, RouteName.signUpPage);

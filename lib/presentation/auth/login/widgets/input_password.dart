@@ -1,21 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../common/widgets/stateless/form/password_text_field.dart';
+part of login;
 
 class InputPassword extends StatelessWidget {
   const InputPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CPasswordTextField(
-      key: const Key('signUpForm_passwordInput_textField'),
-      label: AppLocalizations.of(context)!.confirm_password,
-      // onChange: (password) =>
-      //     context.read<SignUpCubit>().passwordChanged(password),
-      // errorText: state.password.displayError != null
-      //     ? state.password.error?.message
-      //     : null,
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        return CPasswordTextField(
+          key: const Key('signUpForm_passwordInput_textField'),
+          label: AppLocalizations.of(context)!.password,
+          onChange: (password) =>
+              context.read<LoginCubit>().passwordChanged(password),
+          errorText: state.password.displayError != null
+              ? state.password.error?.message
+              : null,
+        );
+      },
     );
   }
 }

@@ -1,10 +1,4 @@
-import 'package:chatapp/presentation/auth/login/widgets/button_sign_in.dart';
-import 'package:chatapp/presentation/auth/login/widgets/input_login_email.dart';
-import 'package:chatapp/presentation/auth/login/widgets/input_password.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/utils/screen_utils.dart';
+part of login;
 
 class FormLogin extends StatelessWidget {
   const FormLogin({super.key});
@@ -15,7 +9,7 @@ class FormLogin extends StatelessWidget {
       left: 0,
       right: 0,
       bottom: 0,
-      height: AppScreenUtils.isLandscape() ? 1.sh : 0.7.sh,
+      height: AppScreenUtils.isLandscape() ? 1.sh : 0.75.sh,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
@@ -31,8 +25,20 @@ class FormLogin extends StatelessWidget {
               children: <Widget>[
                 const InputLoginEmail(),
                 const InputPassword(),
-                const ButtonSignIn()
-                // if (AppScreenUtils.isLandscape()) const TextButtonBackToLogin()
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: ForgotPasswordTextButton(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 24.0),
+                  child: ButtonSignIn(),
+                ),
+                DividerWithText(text: AppLocalizations.of(context)!.or),
+                const LoginWithGoogleButton(),
+                const Padding(
+                  padding: EdgeInsets.only(top: 36.0),
+                  child: TextButtonSignUp(),
+                ),
               ],
             ),
           ),
