@@ -45,7 +45,7 @@ class LoginView extends StatelessWidget {
                           .sign_in_your_account_to_see_your_chatting,
                       mainColor: Theme.of(context).colorScheme.primary,
                     ),
-                    const LoginForm(),
+                    const FormLogin(),
                   ],
                 ),
               ),

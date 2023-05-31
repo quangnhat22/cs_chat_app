@@ -2,6 +2,7 @@ library login;
 
 import 'package:chatapp/core/di/injector.dart';
 import 'package:chatapp/core/utils/snack_bar.dart';
+import 'package:chatapp/presentation/auth/login/widgets/form_login.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
