@@ -1,15 +1,27 @@
 part of create_group;
 
-class CreateGroupPage extends StatefulWidget {
+class CreateGroupPage extends StatelessWidget {
   const CreateGroupPage({super.key});
 
   @override
-  State<CreateGroupPage> createState() => _CreateGroupPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<CreateGroupCubit>(),
+      child: const CreateGroupView(),
+    );
+  }
 }
 
-class _CreateGroupPageState extends State<CreateGroupPage> {
+class CreateGroupView extends StatefulWidget {
+  const CreateGroupView({super.key});
+
+  @override
+  State<CreateGroupView> createState() => _CreateGroupViewState();
+}
+
+class _CreateGroupViewState extends State<CreateGroupView> {
   final List<String> allFriends = [
-    'Nguyễn Đình Nhật Quan',
+    'Nguyễn Đình Nhật Quang',
     'Trần Đình Lộc',
     'Lê Hà Gia Bảo',
     'Lê Đức Hậu',
@@ -53,74 +65,6 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
     }
   }
 
-  void _getFromGallery() async {
-    XFile? pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    _cropImage(pickedFile!.path);
-  }
-
-  void _getFromCamera() async {
-    XFile? pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    _cropImage(pickedFile!.path);
-  }
-
-  void _cropImage(filePath) async {
-    CroppedFile? croppedFile = await ImageCropper()
-        .cropImage(sourcePath: filePath, maxHeight: 1080, maxWidth: 1080);
-    if (croppedFile != null) {
-      setState(() {
-        imageFile = File(croppedFile.path);
-      });
-    }
-  }
-
-  void _showImageDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              AppLocalizations.of(context)!.choose_image_source_dialog_title,
-              style: const TextStyle(fontSize: 20),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                InkWellDynamicBorder(
-                  title: AppLocalizations.of(context)!.camera_source_option,
-                  leading: const Icon(
-                    Icons.camera_alt,
-                    color: Colors.black,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _getFromCamera();
-                  },
-                ),
-                InkWellDynamicBorder(
-                  title: AppLocalizations.of(context)!.gallery_source_option,
-                  leading: const Icon(
-                    Icons.image,
-                    color: Colors.black,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _getFromGallery();
-                  },
-                )
-              ],
-            ),
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,18 +91,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              GroupSetPhoto(imageFile, _showImageDialog),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      label: Text(AppLocalizations.of(context)!.group_name)),
-                ),
-              ),
+              // const GroupSetPhoto(),
+              const InputGroupName(),
               GroupAddMembers(selectedFriends, friendResults,
                   handleSelectMembers, handleTextChange)
             ]),

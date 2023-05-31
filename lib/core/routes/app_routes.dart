@@ -2,11 +2,11 @@ import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/presentation/auth/fogot_password/forgot_password.dart';
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/auth/register/register.dart';
-import 'package:chatapp/presentation/chat/chat_main/pages/chat_main_page.dart';
 import 'package:chatapp/presentation/chat/chat_room/pages/chat_room_page.dart';
 import 'package:chatapp/presentation/device/device_administration.dart';
 import 'package:chatapp/presentation/friends/find_new_friend/find_new_friend.dart';
 import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
+import 'package:chatapp/presentation/group/create_group/create_group.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
@@ -86,6 +86,8 @@ class AppRoutes {
         );
       case RouteName.deviceAdministration:
         return _buildRoute(settings, const DeviceMainPage());
+      case RouteName.createGroup:
+        return _buildRoute(settings, const CreateGroupPage());
       default:
         return _errorRoute();
     }
