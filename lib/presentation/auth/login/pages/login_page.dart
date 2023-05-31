@@ -21,9 +21,6 @@ class LoginView extends StatelessWidget {
       listenWhen: (prev, current) => prev.statusSubmit != current.statusSubmit,
       buildWhen: (prev, current) => prev.statusSubmit != current.statusSubmit,
       listener: (context, state) {
-        if (state.statusSubmit == FormzSubmissionStatus.success) {
-          state.copyWith(statusSubmit: FormzSubmissionStatus.inProgress);
-        }
         if (state.statusSubmit == FormzSubmissionStatus.failure) {
           SnackBarApp.showSnackBar(
               context, state.errorMessage, TypesSnackBar.error);

@@ -2,13 +2,20 @@ import 'package:chatapp/domain/modules/auth/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthUseCase {
-  Future<void> loginWitGoogle();
+  Future<void> loginWithGoogle();
+
   Future<void> loginWithEmailAndPassword(String email, String password);
+
   Future<void> signUpWithEmailAndPassword(String email, String password);
+
   Future<void> logOut();
+
   Future<bool> updatePassword(String password, String oldPassword);
+
   Future<bool> checkIsLoggedIn();
+
   Stream<String?> checkAccessTokenStream();
+
   Stream<String?> checkRefreshTokenStream();
 }
 
@@ -19,7 +26,7 @@ class AuthUseCaeImpl extends AuthUseCase {
   AuthUseCaeImpl({required this.repo});
 
   @override
-  Future<void> loginWitGoogle() async {
+  Future<void> loginWithGoogle() async {
     return await repo.loginWithGoogle();
   }
 
