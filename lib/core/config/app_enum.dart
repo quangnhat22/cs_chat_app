@@ -54,3 +54,14 @@ enum AppFriendRelation {
 
   final String value;
 }
+
+//Media Resource
+
+enum AppMediaResource {
+  gallery("gallery"),
+  camera("camera");
+
+  const AppMediaResource(this.value);
+
+  final String value;
+}

@@ -1,93 +1,90 @@
-// part of create_group;
+part of create_group;
 
-// class GroupSetPhoto extends StatelessWidget {
-//   const GroupSetPhoto({super.key});
+class GroupSetPhoto extends StatelessWidget {
+  const GroupSetPhoto({super.key});
 
-//   void _showImageDialog(BuildContext ctx) {
-//     showDialog(
-//         context: ctx,
-//         builder: (context) {
-//           return AlertDialog(
-//             title: Text(
-//               AppLocalizations.of(context)!.choose_image_source_dialog_title,
-//               style: const TextStyle(fontSize: 20),
-//             ),
-//             content: Column(
-//               mainAxisSize: MainAxisSize.min,
-//               children: <Widget>[
-//                 InkWellDynamicBorder(
-//                   title: AppLocalizations.of(context)!.camera_source_option,
-//                   leading: const Icon(
-//                     Icons.camera_alt,
-//                     color: Colors.black,
-//                   ),
-//                   onTap: () {
-//                     Navigator.pop(context);
-//                     _getFromCamera();
-//                   },
-//                 ),
-//                 InkWellDynamicBorder(
-//                   title: AppLocalizations.of(context)!.gallery_source_option,
-//                   leading: const Icon(
-//                     Icons.image,
-//                     color: Colors.black,
-//                   ),
-//                   onTap: () {
-//                     Navigator.pop(context);
-//                     _getFromGallery();
-//                   },
-//                 )
-//               ],
-//             ),
-//           );
-//         });
-//   }
+  void _showImageDialog(BuildContext ctx) {
+    showDialog(
+        context: ctx,
+        builder: (_) {
+          return AssetDialog(
+            handlePhotoFromCamera: () async {
+              Navigator.of(ctx).pop(AppMediaResource.camera);
+            },
+            handlePhotoFromGallery: () async {
+              Navigator.of(ctx).pop(AppMediaResource.gallery);
+            },
+          );
+        }).then(
+      (value) async {
+        String? filePath;
+        switch (value) {
+          case AppMediaResource.gallery:
+            {
+              filePath = await AppAssetsPicker.pickImageFromGallery(ctx);
+              break;
+            }
+          case AppMediaResource.camera:
+            {
+              filePath = await AppAssetsPicker.pickImageFromCamera(ctx);
+              break;
+            }
+        }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         SizedBox(
-//           height: 25.h,
-//         ),
-//         Row(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Column(
-//               children: [
-//                 CircleAvatar(
-//                   radius: 55,
-//                   backgroundImage:
-//                       imageFile != null ? FileImage(imageFile!) : null,
-//                   child: imageFile != null
-//                       ? null
-//                       : IconButton(
-//                           onPressed: () {
-//                             showImageDialog();
-//                           },
-//                           icon: const Icon(
-//                             Icons.camera_alt_rounded,
-//                             size: 35,
-//                           ),
-//                         ),
-//                 ),
-//                 Padding(
-//                   padding: const EdgeInsets.only(top: 10),
-//                   child: GestureDetector(
-//                     onTap: () {
-//                       showImageDialog();
-//                     },
-//                     child: Text(
-//                       AppLocalizations.of(context)!.set_new_photo,
-//                       style: const TextStyle(fontSize: 18),
-//                     ),
-//                   ),
-//                 )
-//               ],
-//             )
-//           ],
-//         ),
-//       ],
-//     );
-//   }
-// }
+        if (ctx.mounted) {
+          ctx.read<CreateGroupCubit>().groupImageChanged(filePath);
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CreateGroupCubit, CreateGroupState>(
+      buildWhen: (prev, current) => prev.groupImage != current.groupName,
+      builder: (context, state) {
+        return Column(
+          children: [
+            SizedBox(
+              height: 25.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 55,
+                      backgroundImage: state.groupImage != null
+                          ? FileImage(File(state.groupImage!))
+                          : null,
+                      child: state.groupImage != null
+                          ? null
+                          : IconButton(
+                              onPressed: () => _showImageDialog(context),
+                              icon: const Icon(
+                                Icons.camera_alt_rounded,
+                                size: 35,
+                              ),
+                            ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: GestureDetector(
+                        onTap: () => _showImageDialog(context),
+                        child: Text(
+                          AppLocalizations.of(context)!.set_new_photo,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

@@ -91,7 +91,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              // const GroupSetPhoto(),
+              const GroupSetPhoto(),
               const InputGroupName(),
               GroupAddMembers(selectedFriends, friendResults,
                   handleSelectMembers, handleTextChange)
