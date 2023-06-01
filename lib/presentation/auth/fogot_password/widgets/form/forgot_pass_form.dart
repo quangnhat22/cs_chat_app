@@ -41,10 +41,10 @@ class _ValidateEmailFormState extends State<ValidateEmailForm> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 44, left: 20, right: 20),
-              child: EmailTextFormField(emailController),
-            ),
+            // Padding(
+            //   padding:  EdgeInsets.only(top: 44, left: 20, right: 20),
+            //   child: CTextFormField(emailController),
+            // ),
             const Padding(
               padding:
                   EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 54),

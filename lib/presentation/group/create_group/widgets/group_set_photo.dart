@@ -41,7 +41,7 @@ class GroupSetPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreateGroupCubit, CreateGroupState>(
-      buildWhen: (prev, current) => prev.groupImage != current.groupName,
+      buildWhen: (prev, current) => prev.groupImage != current.groupImage,
       builder: (context, state) {
         return Column(
           children: [
@@ -68,16 +68,17 @@ class GroupSetPhoto extends StatelessWidget {
                               ),
                             ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: GestureDetector(
-                        onTap: () => _showImageDialog(context),
-                        child: Text(
-                          AppLocalizations.of(context)!.set_new_photo,
-                          style: const TextStyle(fontSize: 18),
+                    if (state.groupImage != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 32),
+                        child: GestureDetector(
+                          onTap: () => _showImageDialog(context),
+                          child: Text(
+                            AppLocalizations.of(context)!.set_new_photo,
+                            style: AppTextStyles.captionTextStyle,
+                          ),
                         ),
-                      ),
-                    )
+                      )
                   ],
                 )
               ],

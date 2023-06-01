@@ -1,14 +1,44 @@
 part of create_group;
 
 class GroupAddMembers extends StatelessWidget {
-  final List<String> selectedFriends;
-  final List<String> friendResults;
-  final Function onSelectMembers;
-  final Function onTextChange;
+  GroupAddMembers({Key? key}) : super(key: key);
 
-  const GroupAddMembers(this.selectedFriends, this.friendResults,
-      this.onSelectMembers, this.onTextChange,
-      {super.key});
+  final List<String> allFriends = [
+    'Nguyễn Đình Nhật Quang',
+    'Trần Đình Lộc',
+    'Lê Hà Gia Bảo',
+    'Lê Đức Hậu',
+  ];
+
+  final List<String> selectedFriends = [];
+  late List<String> friendResults = [];
+
+  void handleSelectMembers(String member) {
+    if (!selectedFriends.contains(member)) {
+      // setState(() {
+      //   selectedFriends.add(member);
+      // });
+    } else {
+      // setState(() {
+      //   selectedFriends.remove(member);
+      // });
+    }
+  }
+
+  void handleTextChange(String value) {
+    // if (value == '') {
+    //   setState(() {
+    //     friendResults = [...allFriends];
+    //   });
+    // } else {
+    //   setState(() {
+    //     friendResults = allFriends
+    //         .where(
+    //             (friend) => friend.toLowerCase().contains(value.toLowerCase()))
+    //         .toList();
+    //   });
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +57,16 @@ class GroupAddMembers extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
           child: TextField(
             decoration: InputDecoration(
-                suffixIcon: const Icon(Icons.search),
-                filled: true,
-                fillColor: Theme.of(context).colorScheme.onInverseSurface,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                hintText: AppLocalizations.of(context)!.search_friends),
+              suffixIcon: const Icon(Icons.search),
+              filled: true,
+              fillColor: Theme.of(context).colorScheme.onInverseSurface,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+              hintText: AppLocalizations.of(context)!.search_friends,
+            ),
             onChanged: (value) {
-              onTextChange(value);
+              //onTextChange(value);
             },
           ),
         ),
@@ -47,23 +78,6 @@ class GroupAddMembers extends StatelessWidget {
             style: AppTextStyles.mediumTitleTextStyle,
           ),
         ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return CheckboxListTile(
-                title: Text(friendResults[index]),
-                subtitle: Text(
-                  AppLocalizations.of(context)!.user_status_online,
-                  style: const TextStyle(color: Colors.green),
-                ),
-                secondary: const CircleAvatar(child: Text('A')),
-                value: selectedFriends.contains(friendResults[index]),
-                onChanged: (bool? value) =>
-                    onSelectMembers(friendResults[index]));
-          },
-          itemCount: friendResults.length,
-        )
       ],
     );
   }

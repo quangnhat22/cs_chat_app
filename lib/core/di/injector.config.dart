@@ -74,10 +74,10 @@ import 'package:chatapp/presentation/friends/friends_request/friend_request_acti
     as _i46;
 import 'package:chatapp/presentation/friends/friends_request/list_friend_request_bloc/list_friend_request_bloc.dart'
     as _i34;
-import 'package:chatapp/presentation/group/create_group/cubit/cubit_submit_new_group_cubit.dart'
-    as _i6;
 import 'package:chatapp/presentation/group/create_group/cubit_create_group_form/create_group_cubit.dart'
     as _i5;
+import 'package:chatapp/presentation/group/create_group/cubit_group/cubit_submit_new_group_cubit.dart'
+    as _i6;
 import 'package:chatapp/presentation/setting/edit_profile/bloc/edit_form_submit_bloc.dart'
     as _i43;
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile_form_cubit/edit_profile_form_cubit.dart'

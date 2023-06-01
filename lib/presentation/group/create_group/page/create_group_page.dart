@@ -20,51 +20,6 @@ class CreateGroupView extends StatefulWidget {
 }
 
 class _CreateGroupViewState extends State<CreateGroupView> {
-  final List<String> allFriends = [
-    'Nguyễn Đình Nhật Quang',
-    'Trần Đình Lộc',
-    'Lê Hà Gia Bảo',
-    'Lê Đức Hậu',
-  ];
-
-  final List<String> selectedFriends = [];
-  late List<String> friendResults;
-
-  File? imageFile;
-
-  @override
-  void initState() {
-    super.initState();
-    friendResults = [...allFriends];
-  }
-
-  void handleSelectMembers(String member) {
-    if (!selectedFriends.contains(member)) {
-      setState(() {
-        selectedFriends.add(member);
-      });
-    } else {
-      setState(() {
-        selectedFriends.remove(member);
-      });
-    }
-  }
-
-  void handleTextChange(String value) {
-    if (value == '') {
-      setState(() {
-        friendResults = [...allFriends];
-      });
-    } else {
-      setState(() {
-        friendResults = allFriends
-            .where(
-                (friend) => friend.toLowerCase().contains(value.toLowerCase()))
-            .toList();
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +36,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
         actions: [
           IconButton(
             onPressed: () {
-              debugPrint(selectedFriends.toString());
+              // debugPrint(selectedFriends.toString());
             },
             icon: const Icon(Icons.done),
           )
@@ -89,13 +44,13 @@ class _CreateGroupViewState extends State<CreateGroupView> {
       ),
       body: SingleChildScrollView(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const GroupSetPhoto(),
-              const InputGroupName(),
-              GroupAddMembers(selectedFriends, friendResults,
-                  handleSelectMembers, handleTextChange)
-            ]),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            GroupSetPhoto(),
+            InputGroupName(),
+            GroupAddMembers(),
+          ],
+        ),
       ),
     );
   }
