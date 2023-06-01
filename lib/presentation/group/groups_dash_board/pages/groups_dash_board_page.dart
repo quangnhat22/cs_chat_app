@@ -34,20 +34,26 @@ class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-          appBar: MHomeAppBar(
-        title: AppLocalizations.of(context)!.groups,
-        bottomWidget: TabBar(
-          controller: _tabController,
-          tabs: [
-            Tab(
-              child: Text(AppLocalizations.of(context)!.your_groups),
-            ),
-            Tab(
-              child: Text(AppLocalizations.of(context)!.group_request),
-            )
-          ],
+        appBar: MHomeAppBar(
+          title: AppLocalizations.of(context)!.groups,
+          bottomWidget: TabBar(
+            controller: _tabController,
+            tabs: [
+              Tab(
+                child: Text(AppLocalizations.of(context)!.your_groups),
+              ),
+              Tab(
+                child: Text(AppLocalizations.of(context)!.group_request),
+              )
+            ],
+          ),
         ),
-      )),
+        floatingActionButton: FloatingActionStadiumButton(() {
+          if (_tabController.index == 0) {
+            NavigationUtil.pushNamed(route: RouteName.createGroup);
+          }
+        }, null),
+      ),
     );
   }
 }

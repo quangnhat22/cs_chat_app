@@ -19,6 +19,7 @@
   "password_must_be_at_least_8_characters": "Mật khẩu phải có ít nhất 8 kí tự",
   "or": "Hoặc",
   "create_your_new_account": "Tạo tài khoản mới của bạn",
+  "create_your_new_account_success": "Tài khoản của bạn đã được tạo thành công!",
   "confirm_password": "Xác nhận lại mật khẩu",
   "chat": "Nhắn tin",
   "search": "Tìm kiếm",
@@ -88,5 +89,6 @@
   "add_members": "Thêm Thành Viên",
   "search_friends": "Tìm kiếm bạn bè",
   "selected_text": "đã chọn",
-  "user_status_online": "Đang hoạt động"
+  "user_status_online": "Đang hoạt động",
+  "back_to_login": "Quay trở lại Đăng nhập"
 }

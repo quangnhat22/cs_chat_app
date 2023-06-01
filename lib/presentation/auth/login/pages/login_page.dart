@@ -6,7 +6,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<LoginBloc>(),
+      create: (_) => getIt<LoginCubit>(),
       child: const LoginView(),
     );
   }
@@ -17,22 +17,25 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginBloc, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
+      listenWhen: (prev, current) => prev.statusSubmit != current.statusSubmit,
+      buildWhen: (prev, current) => prev.statusSubmit != current.statusSubmit,
       listener: (context, state) {
-        state.whenOrNull(
-          success: () {
-            context.read<AppBloc>().add(AppUserChanged());
-          },
-          failure: (message) {
-            SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
-          },
-        );
+        if (state.statusSubmit == FormzSubmissionStatus.failure) {
+          SnackBarApp.showSnackBar(
+              context, state.errorMessage, TypesSnackBar.error);
+        }
       },
       builder: (context, state) {
-        return state.maybeWhen(
-          loading: () => const LoadingPage(),
-          orElse: () {
-            return Scaffold(
+        if (state.statusSubmit == FormzSubmissionStatus.inProgress) {
+          return const LoadingPage();
+        } else {
+          return GestureDetector(
+            onTap: () {
+              //hide keyboard when click random on screen
+              AppScreenUtils.hideInputKeyboard();
+            },
+            child: Scaffold(
               resizeToAvoidBottomInset: false,
               body: SafeArea(
                 child: Stack(
@@ -45,13 +48,13 @@ class LoginView extends StatelessWidget {
                           .sign_in_your_account_to_see_your_chatting,
                       mainColor: Theme.of(context).colorScheme.primary,
                     ),
-                    const LoginForm(),
+                    const FormLogin(),
                   ],
                 ),
               ),
-            );
-          },
-        );
+            ),
+          );
+        }
       },
     );
   }

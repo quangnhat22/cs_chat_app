@@ -1,9 +1,7 @@
 import 'package:chatapp/common/widgets/stateless/button/custom_outline_icon_button.dart';
-import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message_stream_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/assets_picker.dart';
 import '../chat_room_bloc/chat_room_bloc.dart';
 
 class RowMediaButton extends StatelessWidget {
@@ -13,13 +11,13 @@ class RowMediaButton extends StatelessWidget {
     final stateChatRoom = ctx.read<ChatRoomBloc>().state;
     if (stateChatRoom is ChatRoomInfoSuccess) {
       final receiverUserId = stateChatRoom.user.id;
-      final filePath = await AppAssetsPicker.pickSingleAssets(ctx);
-      if (filePath == null) return;
-      if (ctx.mounted) {
-        ctx
-            .read<MessageStreamCubit>()
-            .sendMessage("image", filePath, receiverUserId);
-      }
+      //final filePath = await AppAssetsPicker.pickSingleAssets(ctx);
+      // if (filePath == null) return;
+      // if (ctx.mounted) {
+      //   ctx
+      //       .read<MessageStreamCubit>()
+      //       .sendMessage("image", filePath, receiverUserId);
+      // }
     }
   }
 

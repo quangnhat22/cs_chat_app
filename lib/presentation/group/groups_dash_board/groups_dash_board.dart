@@ -5,6 +5,7 @@ import 'package:chatapp/common/widgets/stateless/divider/divider_space_left.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../common/widgets/stateless/button/float_action_stadium_button.dart';
 import '../../../core/routes/app_navigation.dart';
 import '../../../core/routes/route_name.dart';
 
