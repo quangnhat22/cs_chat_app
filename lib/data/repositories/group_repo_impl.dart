@@ -101,9 +101,29 @@ class GroupRepoImpl extends GroupRepository {
   }
 
   @override
-  Future<void> getSentRequest() {
-    // TODO: implement getSentRequest
-    throw UnimplementedError();
+  Future<List<GroupEntity>> getSentRequest() async {
+    try {
+      final res = await _groupService.getSentRequest();
+      if (res.statusCode == 200) {
+        final listGroupJson = res.data['data'] as List<dynamic>?;
+
+        if (listGroupJson != null) {
+          final listGroupModel = listGroupJson
+              .map((groupJson) => GroupModel.fromJson(groupJson))
+              .toList();
+          final listGroupEntity = listGroupModel
+              .map((groupModel) =>
+                  GroupEntity.convertToGroupEntity(groupModel: groupModel))
+              .toList();
+
+          return listGroupEntity;
+        }
+      }
+
+      return List<GroupEntity>.empty();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override
