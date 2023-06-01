@@ -1,50 +1,47 @@
+import 'package:chatapp/presentation/group/your_groups/bloc/list_group_bloc.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../common/widgets/stateless/divider/divider_space_left.dart';
-import '../../../../core/routes/app_navigation.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../../core/routes/route_name.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'group_list_item.dart';
 
 class GroupList extends StatelessWidget {
   const GroupList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: ((context, index) {
-          return Column(
-            children: <Widget>[
-              ListTile(
-                title: GestureDetector(
-                  child: const Text(
-                    'Team anh em siêu nhơn',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  onTap: () {
-                    NavigationUtil.pushNamed(route: RouteName.teamDetails);
-                  },
-                ),
-                subtitle: Text(
-                  AppLocalizations.of(context)!.group_on_going,
-                  style: const TextStyle(color: Colors.green),
-                ),
-                leading: const CircleAvatar(child: Text('T')),
-                trailing: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                        AppLocalizations.of(context)!.group_join_text_button)),
+    return BlocBuilder<ListGroupBloc, ListGroupState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return state.maybeWhen(
+          inSuccess: (listGroup) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: ((context, index) {
+                  return Column(
+                    children: <Widget>[
+                      ListGroupItem(
+                        groupItem: listGroup[index],
+                      ),
+                      //if (index != 11) const DividerSpaceLeft()
+                    ],
+                  );
+                }),
+                itemCount: listGroup.length,
               ),
-              if (index != 11) const DividerSpaceLeft()
-            ],
-          );
-        }),
-        itemCount: 12,
-      ),
+            );
+          },
+          inProgress: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          orElse: () {
+            return Container();
+          },
+        );
+      },
     );
   }
 }
