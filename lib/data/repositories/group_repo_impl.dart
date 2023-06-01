@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/remote/service/group_service.dart';
+import 'package:chatapp/data/models/group_model.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -53,8 +54,21 @@ class GroupRepoImpl extends GroupRepository {
   Future<List<GroupEntity>> getListGroup() async {
     try {
       final res = await _groupService.getListGroup();
-      if (res.statusCode == 200) {
-        print(res.data);
+      //TODO: convert 200
+      if (res.statusCode == 201) {
+        final listGroupJson = res.data["data"] as List<dynamic>?;
+        if (listGroupJson != null) {
+          final listGroupModel = listGroupJson
+              .map((groupJson) => GroupModel.fromJson(groupJson))
+              .toList();
+
+          final listGroupEntity = listGroupModel
+              .map((groupModel) =>
+                  GroupEntity.convertToGroupEntity(groupModel: groupModel))
+              .toList();
+
+          return listGroupEntity;
+        }
       }
       return [];
     } catch (e) {
