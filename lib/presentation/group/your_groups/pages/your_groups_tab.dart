@@ -1,4 +1,6 @@
-part of groups_dash_board;
+import 'package:flutter/material.dart';
+
+import '../../groups_dash_board/groups_dash_board.dart';
 
 class YourGroupsTab extends StatelessWidget {
   const YourGroupsTab({super.key});
@@ -16,7 +18,9 @@ class YourGroupsTab extends StatelessWidget {
             padding: const EdgeInsets.only(right: 20, top: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [DropdownGroupsFilterButton(handleDropdownChange)],
+              children: [
+                DropdownGroupsFilterButton(handleDropdownChange),
+              ],
             ),
           ),
           const GroupList(),

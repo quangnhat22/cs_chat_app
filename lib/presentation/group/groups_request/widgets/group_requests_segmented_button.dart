@@ -1,4 +1,8 @@
-part of groups_dash_board;
+import 'package:flutter/material.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+enum Request { sent, received }
 
 class GroupRequestsSegmentedButton extends StatefulWidget {
   final Function onViewChange;

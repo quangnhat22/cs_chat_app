@@ -1,4 +1,10 @@
-part of groups_dash_board;
+import 'package:flutter/material.dart';
+
+import '../../../../common/widgets/stateless/divider/divider_space_left.dart';
+import '../../../../core/routes/app_navigation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/routes/route_name.dart';
 
 class GroupList extends StatelessWidget {
   const GroupList({super.key});

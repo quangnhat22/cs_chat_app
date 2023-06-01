@@ -1,10 +1,11 @@
+import 'package:chatapp/domain/entities/group_entity.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class GroupUseCase {
   Future<bool> createGroup(String name, String imageUrl, List<String> members);
 
-  Future<void> getListGroup();
+  Future<List<GroupEntity>> getListGroup();
 
   Future<void> getSentRequest();
 
@@ -36,7 +37,7 @@ class GroupUseCaseImpl extends GroupUseCase {
   }
 
   @override
-  Future<void> getListGroup() {
+  Future<List<GroupEntity>> getListGroup() {
     return _repo.getListGroup();
   }
 

@@ -1,7 +1,11 @@
+import 'dart:math';
+
 import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/remote/service/group_service.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/entities/group_entity.dart';
 
 @Injectable(as: GroupRepository)
 class GroupRepoImpl extends GroupRepository {
@@ -46,9 +50,16 @@ class GroupRepoImpl extends GroupRepository {
   }
 
   @override
-  Future<void> getListGroup() {
-    // TODO: implement getListGroup
-    throw UnimplementedError();
+  Future<List<GroupEntity>> getListGroup() async {
+    try {
+      final res = await _groupService.getListGroup();
+      if (res.statusCode == 200) {
+        print(res.data);
+      }
+      return [];
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override
