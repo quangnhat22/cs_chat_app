@@ -1,6 +1,8 @@
 import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/remote/service/group_service.dart';
 import 'package:chatapp/data/models/group_model.dart';
+import 'package:chatapp/data/models/group_request_model.dart';
+import 'package:chatapp/domain/entities/group_request_entity.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -76,51 +78,55 @@ class GroupRepoImpl extends GroupRepository {
   }
 
   @override
-  Future<List<GroupEntity>> getReceiveRequest() async {
+  Future<List<GroupRequestEntity>> getReceiveRequest() async {
     try {
       final res = await _groupService.getReceiveRequest();
       if (res.statusCode == 200) {
         final listGroupJson = res.data["data"] as List<dynamic>?;
         if (listGroupJson != null) {
-          final listGroupModel = listGroupJson
-              .map((groupJson) => GroupModel.fromJson(groupJson))
-              .toList();
-          final listGroupEntity = listGroupModel
-              .map((groupModel) =>
-                  GroupEntity.convertToGroupEntity(groupModel: groupModel))
+          final receiveModels = listGroupJson
+              .map((receiveJson) => GroupRequestModel.fromJson(receiveJson))
               .toList();
 
-          return listGroupEntity;
+          final receiveEntities = receiveModels
+              .map((receiveEntity) =>
+                  GroupRequestEntity.convertToGroupRequestEntity(
+                      model: receiveEntity))
+              .toList();
+
+          return receiveEntities;
         }
       }
 
-      return List<GroupEntity>.empty();
+      return List<GroupRequestEntity>.empty();
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
   @override
-  Future<List<GroupEntity>> getSentRequest() async {
+  Future<List<GroupRequestEntity>> getSentRequest() async {
     try {
       final res = await _groupService.getSentRequest();
       if (res.statusCode == 200) {
         final listGroupJson = res.data['data'] as List<dynamic>?;
 
         if (listGroupJson != null) {
-          final listGroupModel = listGroupJson
-              .map((groupJson) => GroupModel.fromJson(groupJson))
-              .toList();
-          final listGroupEntity = listGroupModel
-              .map((groupModel) =>
-                  GroupEntity.convertToGroupEntity(groupModel: groupModel))
+          final sendModels = listGroupJson
+              .map((sendModel) => GroupRequestModel.fromJson(sendModel))
               .toList();
 
-          return listGroupEntity;
+          final sendEntities = sendModels
+              .map((sendEntity) =>
+                  GroupRequestEntity.convertToGroupRequestEntity(
+                      model: sendEntity))
+              .toList();
+
+          return sendEntities;
         }
       }
 
-      return List<GroupEntity>.empty();
+      return List<GroupRequestEntity>.empty();
     } catch (e) {
       throw Exception(e.toString());
     }
