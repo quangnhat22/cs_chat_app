@@ -1,13 +1,14 @@
 import 'package:chatapp/domain/entities/group_entity.dart';
+import 'package:chatapp/domain/entities/group_request_entity.dart';
 
 abstract class GroupRepository {
   Future<bool> createGroup(String name, String imageUrl, List<String> members);
 
   Future<List<GroupEntity>> getListGroup();
 
-  Future<void> getSentRequest();
+  Future<List<GroupRequestEntity>> getSentRequest();
 
-  Future<void> getReceiveRequest();
+  Future<List<GroupRequestEntity>> getReceiveRequest();
 
   Future<bool> rejectRequest(String id);
 

@@ -1,4 +1,5 @@
 import 'package:chatapp/domain/entities/group_entity.dart';
+import 'package:chatapp/domain/entities/group_request_entity.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,9 +8,9 @@ abstract class GroupUseCase {
 
   Future<List<GroupEntity>> getListGroup();
 
-  Future<void> getSentRequest();
+  Future<List<GroupRequestEntity>> getSentRequest();
 
-  Future<void> getReceiveRequest();
+  Future<List<GroupRequestEntity>> getReceiveRequest();
 
   Future<bool> rejectRequest(String id);
 
@@ -42,12 +43,12 @@ class GroupUseCaseImpl extends GroupUseCase {
   }
 
   @override
-  Future<void> getReceiveRequest() {
+  Future<List<GroupRequestEntity>> getReceiveRequest() {
     return _repo.getReceiveRequest();
   }
 
   @override
-  Future<void> getSentRequest() {
+  Future<List<GroupRequestEntity>> getSentRequest() {
     return _repo.getSentRequest();
   }
 

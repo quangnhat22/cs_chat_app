@@ -6,4 +6,12 @@ class ListGroupRequestState with _$ListGroupRequestState {
 
   const factory ListGroupRequestState.getDataInProgress() =
       GetListGroupRequestInProgress;
+
+  const factory ListGroupRequestState.getDataSuccess(
+          {required List<GroupRequestEntity> groupRequestSent,
+          required List<GroupRequestEntity> groupRequestReceive}) =
+      GetListGroupRequestSuccess;
+
+  const factory ListGroupRequestState.getDataFail({required String message}) =
+      GetListGroupRequestFail;
 }
