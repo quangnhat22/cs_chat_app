@@ -1,4 +1,8 @@
-part of groups_dash_board;
+import 'package:flutter/material.dart';
+
+import '../../../../core/routes/app_navigation.dart';
+import '../../../../core/routes/route_name.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GroupReceivedRequestList extends StatelessWidget {
   const GroupReceivedRequestList({super.key});

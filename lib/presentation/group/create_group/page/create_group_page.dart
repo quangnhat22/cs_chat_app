@@ -5,10 +5,14 @@ class CreateGroupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<CreateGroupCubit>(),
-      child: const CreateGroupView(),
-    );
+    return MultiBlocProvider(providers: [
+      BlocProvider(
+        create: (_) => getIt<CreateGroupCubit>(),
+      ),
+      BlocProvider(
+        create: (_) => getIt<CubitSubmitNewGroupCubit>(),
+      )
+    ], child: const CreateGroupView());
   }
 }
 
@@ -22,34 +26,41 @@ class CreateGroupView extends StatefulWidget {
 class _CreateGroupViewState extends State<CreateGroupView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.create_group_app_bar_title),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        leading: IconButton(
-          onPressed: () {
-            NavigationUtil.pop();
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-        actions: [
-          IconButton(
+    return BlocListener<CubitSubmitNewGroupCubit, CubitSubmitNewGroupState>(
+      listener: (context, state) {
+        state.whenOrNull(submitSuccess: () {
+          SnackBarApp.showSnackBar(
+              context, "Create group success", TypesSnackBar.success);
+          NavigationUtil.pop();
+        }, submitFailed: (message) {
+          SnackBarApp.showSnackBar(
+              context, "Create group failed", TypesSnackBar.error);
+        });
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.create_group_app_bar_title),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          leading: IconButton(
             onPressed: () {
-              // debugPrint(selectedFriends.toString());
+              NavigationUtil.pop();
             },
-            icon: const Icon(Icons.done),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            GroupSetPhoto(),
-            InputGroupName(),
-            GroupAddMembers(),
+            icon: const Icon(Icons.arrow_back),
+          ),
+          actions: const [
+            ButtonGroupSubmit(),
           ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const GroupSetPhoto(),
+              const InputGroupName(),
+              GroupAddMembers(),
+            ],
+          ),
         ),
       ),
     );

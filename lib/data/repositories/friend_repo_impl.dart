@@ -26,7 +26,7 @@ class FriendRepositoryImpl extends FriendRepository {
     } on DioError catch (e) {
       throw Exception(e.message);
     } catch (e) {
-      throw Exception(e..toString());
+      throw Exception(e.toString());
     }
   }
 
