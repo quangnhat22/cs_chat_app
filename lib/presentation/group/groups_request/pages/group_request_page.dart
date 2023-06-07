@@ -3,6 +3,7 @@ import 'package:chatapp/core/utils/snack_bar.dart';
 import 'package:chatapp/presentation/friends/friends_request/friends_request.dart';
 import 'package:chatapp/presentation/group/groups_request/bloc/list_group_request_bloc.dart';
 import 'package:chatapp/presentation/group/groups_request/cubit/group_request_action_cubit.dart';
+import 'package:chatapp/presentation/group/groups_request/widgets/list_request_group_send.dart';
 import 'package:chatapp/presentation/group/groups_request/widgets/segment_button_group_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -88,14 +89,13 @@ class _GroupRequestViewState extends State<GroupRequestView> {
                         ],
                       ),
                     ),
-                    // TODO: Fix bug type The argument type 'List<GroupRequestEntity>' can't be assigned to the parameter
-                    // view == Request.sent
-                    //     ? ListRequestFriendSend(
-                    //         listSentRequest: groupRequestSent,
-                    //       )
-                    //     : ListRequestFriendReceive(
-                    //         listReceiveRequest: groupRequestReceive,
-                    //       ),
+                    view == Request.sent
+                        ? const ListRequestGroupSend(
+                            listSendRequest: [],
+                          )
+                        : const ListRequestFriendReceive(
+                            listReceiveRequest: [],
+                          )
                   ],
                 ),
               ),
