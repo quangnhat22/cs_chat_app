@@ -31,7 +31,10 @@ class ListGroupItem extends StatelessWidget {
         style: const TextStyle(color: Colors.green),
       ),
       leading: CustomAvatarImage(
-        urlImage: groupItem.imageUrl,
+        urlImage:
+            "https://firebasestorage.googleapis.com/v0/b/cs-chat-app-eac8a.appspot.com/o/TypeFile.images%2F1685613868579159?alt=media&token=dcbbea07-52c7-4b1b-b36b-4ecbe756a020&_gl=1*l076i0*_ga*MTQ5NjYyOTQwNC4xNjg0MjI4Njc2*_ga_CW55HF8NVT*MTY4NjIzOTQ4My42LjEuMTY4NjI0MjI4NS4wLjAuMA..",
+        widthImage: 50,
+        heightImage: 50,
       ),
       trailing: TextButton(
           onPressed: () {},
