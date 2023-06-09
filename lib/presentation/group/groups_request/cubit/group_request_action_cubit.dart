@@ -1,10 +1,12 @@
 import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
-part 'group_request_action_state.dart';
 part 'group_request_action_cubit.freezed.dart';
+part 'group_request_action_state.dart';
 
+@Injectable()
 class GroupRequestActionCubit extends Cubit<GroupRequestActionState> {
   GroupRequestActionCubit({required GroupUseCase groupUC})
       : _groupUC = groupUC,
