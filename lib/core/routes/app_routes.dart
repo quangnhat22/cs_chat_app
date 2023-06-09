@@ -31,10 +31,12 @@ class AppRoutes {
           settings,
           const RegisterPage(),
         );
-      case RouteName.forgotPasswordPage:
+      case RouteName.forgotPassword:
         return _buildRoute(
           settings,
-          const ForgotPasswordPage(),
+          ForgotPasswordPage(
+            urlCode: settings.arguments as String?,
+          ),
         );
       default:
         return _errorRoute();
@@ -73,7 +75,6 @@ class AppRoutes {
           ),
         );
       case RouteName.findFriend:
-        print(settings.arguments);
         return _buildRouteDialog(
           settings,
           const FindNewFriendPage(),
