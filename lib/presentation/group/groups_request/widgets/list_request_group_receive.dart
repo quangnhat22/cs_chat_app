@@ -1,10 +1,4 @@
-import 'package:chatapp/common/widgets/stateless/circle_avatar/custom_avatar_image.dart';
-import 'package:chatapp/core/utils/date_time_format.dart';
-import 'package:chatapp/domain/entities/group_request_entity.dart';
-import 'package:chatapp/presentation/group/groups_request/cubit/group_request_action_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+part of groups_request;
 
 class ListRequestGroupReceive extends StatelessWidget {
   const ListRequestGroupReceive({super.key, required this.listReceiveRequest});

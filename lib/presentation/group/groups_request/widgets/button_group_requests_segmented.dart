@@ -1,21 +1,17 @@
-import 'package:flutter/material.dart';
+part of groups_request;
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-enum Request { sent, received }
-
-class GroupRequestsSegmentedButton extends StatefulWidget {
+class ButtonGroupRequestsSegmented extends StatefulWidget {
   final Function onViewChange;
 
-  const GroupRequestsSegmentedButton(this.onViewChange, {super.key});
+  const ButtonGroupRequestsSegmented(this.onViewChange, {super.key});
 
   @override
-  State<GroupRequestsSegmentedButton> createState() =>
-      _GroupRequestsSegmentedButtonState();
+  State<ButtonGroupRequestsSegmented> createState() =>
+      _ButtonGroupRequestsSegmentedState();
 }
 
-class _GroupRequestsSegmentedButtonState
-    extends State<GroupRequestsSegmentedButton> {
+class _ButtonGroupRequestsSegmentedState
+    extends State<ButtonGroupRequestsSegmented> {
   Request requestView = Request.sent;
 
   @override
