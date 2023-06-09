@@ -4,7 +4,7 @@ import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class GroupUseCase {
-  Future<bool> createGroup(String name, String imageUrl, List<String> members);
+  Future<bool> createGroup(String name, String? imageUrl, List<String> members);
 
   Future<List<GroupEntity>> getListGroup();
 
@@ -18,7 +18,7 @@ abstract class GroupUseCase {
 
   Future<bool> recallGroupRequest(String groupId, String friendId);
 
-  Future<bool> acceptRequestt(String groupId);
+  Future<bool> acceptRequest(String groupId);
 }
 
 @Injectable(as: GroupUseCase)
@@ -28,12 +28,13 @@ class GroupUseCaseImpl extends GroupUseCase {
   GroupUseCaseImpl({required GroupRepository groupRepo}) : _repo = groupRepo;
 
   @override
-  Future<bool> acceptRequestt(String groupId) {
+  Future<bool> acceptRequest(String groupId) {
     return _repo.acceptRequestt(groupId);
   }
 
   @override
-  Future<bool> createGroup(String name, String imageUrl, List<String> members) {
+  Future<bool> createGroup(
+      String name, String? imageUrl, List<String> members) {
     return _repo.createGroup(name, imageUrl, members);
   }
 

@@ -29,7 +29,8 @@ class AppColors {
     outline: Color(0xFF71787D),
     background: Color(0xFFFBFCFE),
     onBackground: Color(0xFF191C1E),
-    surface: Color(0xFFF8F9FC),
+    surface: Color(0xFFFFFFFF),
+    //0xFFF8F9FC
     onSurface: Color(0xFF191C1E),
     surfaceVariant: Color(0xFFDCE3E9),
     onSurfaceVariant: Color(0xFF41484D),

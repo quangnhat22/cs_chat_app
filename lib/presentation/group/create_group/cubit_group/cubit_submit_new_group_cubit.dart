@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-part 'cubit_submit_new_group_state.dart';
 part 'cubit_submit_new_group_cubit.freezed.dart';
+part 'cubit_submit_new_group_state.dart';
 
 @Injectable()
 class CubitSubmitNewGroupCubit extends Cubit<CubitSubmitNewGroupState> {
@@ -20,8 +20,8 @@ class CubitSubmitNewGroupCubit extends Cubit<CubitSubmitNewGroupState> {
       List<String>? members}) async {
     try {
       emit(const CreateGroupInProgress());
-      final isSuccess = await _groupUC.createGroup(
-          groupName, groupAvatar ?? "", members ?? []);
+      final isSuccess =
+          await _groupUC.createGroup(groupName, groupAvatar, members ?? []);
       if (isSuccess) {
         emit(const CreateGroupSuccess());
       } else {

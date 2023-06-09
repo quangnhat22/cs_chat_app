@@ -73,6 +73,7 @@ class AppRoutes {
           ),
         );
       case RouteName.findFriend:
+        print(settings.arguments);
         return _buildRouteDialog(
           settings,
           const FindNewFriendPage(),

@@ -47,6 +47,10 @@ class _ListMessageState extends State<ListMessage> {
             return PagedSliverList<String, MessageEntity>(
               pagingController: _pagingController,
               builderDelegate: PagedChildBuilderDelegate<MessageEntity>(
+                noItemsFoundIndicatorBuilder: (context) {
+                  return Container();
+                },
+                animateTransitions: true,
                 itemBuilder: (context, item, index) {
                   final isMe = item.isMe ?? false;
                   return Padding(

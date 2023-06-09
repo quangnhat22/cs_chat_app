@@ -35,11 +35,14 @@ class GroupRepoImpl extends GroupRepository {
 
   @override
   Future<bool> createGroup(
-      String name, String imageUrl, List<String> members) async {
+      String name, String? imageUrl, List<String> members) async {
     try {
-      final imageAvatarUrl = await _storageFirebase.uploadFile(imageUrl);
+      String? avatarUrl = "";
+      if (imageUrl != null) {
+        avatarUrl = await _storageFirebase.uploadFile(imageUrl);
+      }
       final res =
-          await _groupService.createGroup(name, imageAvatarUrl ?? "", members);
+          await _groupService.createGroup(name, avatarUrl ?? "", members);
       if (res.statusCode == 201) {
         return true;
       } else {

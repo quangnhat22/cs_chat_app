@@ -45,7 +45,7 @@ class SettingMainCubit extends Cubit<SettingMainState> {
     if (filePath == null) return;
     final isUpdateAvatarSuccess = await userUseCase.updateAvatar(filePath);
     if (isUpdateAvatarSuccess) {
-      //handle
+      await userInforChanged();
     }
   }
 

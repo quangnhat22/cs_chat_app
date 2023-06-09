@@ -13,7 +13,7 @@ class AvatarResourceItem extends StatelessWidget {
 
   final String title;
   final IconData? icon;
-  final VoidCallbackAction? onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class AvatarResourceItem extends StatelessWidget {
         child: Icon(icon),
       ),
       title: title,
-      onTap: () => onTap,
+      onTap: onTap,
       hasBottomBorderRadius: true,
       hasTopBorderRadius: true,
       radius: 16,

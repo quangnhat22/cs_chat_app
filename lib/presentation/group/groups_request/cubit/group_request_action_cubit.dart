@@ -31,7 +31,7 @@ class GroupRequestActionCubit extends Cubit<GroupRequestActionState> {
   Future<void> acceptRequest(String groupId) async {
     try {
       emit(const GroupActionLoading());
-      final isSuccess = await _groupUC.acceptRequestt(groupId);
+      final isSuccess = await _groupUC.acceptRequest(groupId);
       if (isSuccess) {
         emit(const GroupActionSuccess());
       } else {

@@ -1,7 +1,4 @@
-import 'package:chatapp/presentation/group/your_groups/bloc/list_group_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'group_list_item.dart';
+part of your_groups;
 
 class GroupList extends StatelessWidget {
   const GroupList({super.key});
@@ -13,32 +10,40 @@ class GroupList extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           inSuccess: (listGroup) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: ((context, index) {
-                  return Column(
-                    children: <Widget>[
-                      ListGroupItem(
-                        groupItem: listGroup[index],
-                      ),
-                      //if (index != 11) const DividerSpaceLeft()
-                    ],
-                  );
-                }),
-                itemCount: listGroup.length,
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  if (index.isEven) {
+                    return ListGroupItem(
+                      groupItem: listGroup[index],
+                    );
+                  }
+                  return const DividerSpaceLeft();
+                },
+                semanticIndexCallback: (Widget widget, int localIndex) {
+                  if (localIndex.isEven) {
+                    return localIndex ~/ 2;
+                  }
+                  return null;
+                },
+                childCount: listGroup.length,
               ),
             );
           },
           inProgress: () {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return const SliverToBoxAdapter(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           },
           orElse: () {
-            return Container();
+            return SliverToBoxAdapter(
+              child: Center(
+                child: Text(
+                    AppLocalizations.of(context)!.something_wrong_try_again),
+              ),
+            );
           },
         );
       },

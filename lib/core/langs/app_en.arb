@@ -90,5 +90,6 @@
   "search_friends": "Search friends",
   "selected_text": "selected",
   "user_status_online": "Online",
-  "back_to_login": "Back to Login"
+  "back_to_login": "Back to Login",
+  "something_wrong_try_again": "Some things wrong! Try again."
 }
