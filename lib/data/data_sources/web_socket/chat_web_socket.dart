@@ -49,8 +49,8 @@ class ChatWebSocket {
     }
   }
 
-  Future<void> sendMessage(
-      String type, String message, String receiverUserId) async {
+  Future<void> sendMessage(String type, String message, String receiverUserId,
+      String? option) async {
     try {
       if (type == "image") {
         final imageUrl = await storageFirebase.uploadFile(message);
@@ -66,6 +66,7 @@ class ChatWebSocket {
         "type": type,
         "receiver_id": receiverUserId,
         "message": message,
+        "optional": option
       }));
     } catch (e) {
       throw Exception(e.toString());

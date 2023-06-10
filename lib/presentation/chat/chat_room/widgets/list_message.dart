@@ -1,4 +1,3 @@
-import 'package:chatapp/common/widgets/stateless/message/factory_message_item.dart';
 import 'package:chatapp/common/widgets/stateless/skeleton/list_skeleton.dart';
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../domain/entities/message_entity.dart';
+import 'list_message_item.dart';
 
 class ListMessage extends StatefulWidget {
   const ListMessage({
@@ -50,7 +50,6 @@ class _ListMessageState extends State<ListMessage> {
                 noItemsFoundIndicatorBuilder: (context) {
                   return Container();
                 },
-                animateTransitions: true,
                 itemBuilder: (context, item, index) {
                   final isMe = item.isMe ?? false;
                   return Padding(
@@ -60,13 +59,11 @@ class _ListMessageState extends State<ListMessage> {
                           ? MainAxisAlignment.end
                           : MainAxisAlignment.start,
                       children: [
-                        FactoryMessageItem.buildMessageItem(
-                          item.type,
-                          isMe,
-                          item.message,
-                          item.sender?.name ?? "",
-                          item.createdAt,
-                        ),
+                        MessgeItem(
+                          isMe: isMe,
+                          message: item,
+                          isSendStatus: item.sendStatus,
+                        )
                       ],
                     ),
                   );

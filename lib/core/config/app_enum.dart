@@ -64,3 +64,14 @@ enum AppMediaResource {
 
   final String value;
 }
+
+//Media Resource
+enum AppSendMessageStatus {
+  sending("sending"),
+  fail("fail"),
+  success("success");
+
+  const AppSendMessageStatus(this.value);
+
+  final String value;
+}

@@ -60,6 +60,8 @@ class DioInterceptor {
             data: {"refresh_token": refreshToken});
         if (res.statusCode == 200) {
           final newAccessToken = res.data["data"]["token"];
+          await _authLocal.saveAuth(
+              accessToken: newAccessToken, refreshToken: refreshToken);
           // await _authLocal.set ;
         }
       }

@@ -8,6 +8,10 @@ class ChatRoomEvent with _$ChatRoomEvent {
 
   const factory ChatRoomEvent.refreshed() = ChatRoomRefreshed;
 
+  const factory ChatRoomEvent.addMessageTemp({
+    required MessageEntity newMessage,
+  }) = ChatRoomAddMessageTemp;
+
   const factory ChatRoomEvent.newMessageNotified({
     required MessageEntity newMessage,
   }) = ChatRoomNewMessageNotified;

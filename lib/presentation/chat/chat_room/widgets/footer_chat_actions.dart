@@ -2,27 +2,24 @@ import 'package:chatapp/presentation/chat/chat_room/widgets/button_send_message.
 import 'package:chatapp/presentation/chat/chat_room/widgets/input_message.dart';
 import 'package:chatapp/presentation/chat/chat_room/widgets/row_media_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FooterChatActions extends StatelessWidget {
+class FooterChatActions extends StatefulWidget {
   const FooterChatActions({Key? key}) : super(key: key);
+
+  @override
+  State<FooterChatActions> createState() => _FooterChatActionsState();
+}
+
+class _FooterChatActionsState extends State<FooterChatActions> {
+  bool _isShowMenu = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withOpacity(0.08),
-        borderRadius: const BorderRadius.horizontal(
-          left: Radius.circular(16),
-          right: Radius.circular(16),
-        ),
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, 4),
-            blurRadius: 32,
-            color: Theme.of(context).primaryColor.withOpacity(0.08),
-          ),
-        ],
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
       ),
       child: Column(
         children: [
@@ -31,8 +28,15 @@ class FooterChatActions extends StatelessWidget {
             children: <Widget>[
               if (true)
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    setState(() {
+                      _isShowMenu = !_isShowMenu;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.add_circle_outline,
+                    size: 28.sp,
+                  ),
                 ),
               const Expanded(
                 child: InputMessage(),
@@ -43,7 +47,7 @@ class FooterChatActions extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          if (true) const RowMediaButton(),
+          if (_isShowMenu) const RowMediaButton(),
         ],
       ),
     );

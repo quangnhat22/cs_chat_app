@@ -10,11 +10,14 @@ class ButtonSendMessage extends StatelessWidget {
   void _handleSendMessage(BuildContext ctx, String? message) {
     if (message != null && message.trim().isNotEmpty) {
       final stateChatRoom = ctx.read<ChatRoomBloc>().state;
+
       if (stateChatRoom is ChatRoomInfoSuccess) {
         final receiverUserId = stateChatRoom.user.id;
-        ctx
-            .read<MessageStreamCubit>()
-            .sendMessage("text", message, receiverUserId);
+        ctx.read<MessageStreamCubit>().sendMessage(
+            type: "text",
+            message: message.trim(),
+            receiverUserId: receiverUserId);
+
         ctx.read<InputMessageCubit>().inputMessageChanged("");
       }
     }
@@ -25,12 +28,16 @@ class ButtonSendMessage extends StatelessWidget {
     return BlocBuilder<InputMessageCubit, InputMessageState>(
       builder: (context, state) {
         return state.when(
-          initial: (input) => IconButton(
-            onPressed: () {
-              _handleSendMessage(context, input);
-            },
-            icon: const Icon(Icons.send_rounded),
-          ),
+          initial: (input) {
+            return input != null && input.isNotEmpty
+                ? IconButton(
+                    onPressed: () {
+                      _handleSendMessage(context, input);
+                    },
+                    icon: const Icon(Icons.near_me),
+                  )
+                : Container();
+          },
         );
       },
     );

@@ -5,7 +5,8 @@ abstract class MessageRepository {
 
   Future<void> disconnectSocket();
 
-  Future<void> sendMessage(String type, String message, String receiverUserId);
+  Future<void> sendMessage(
+      String type, String message, String receiverUserId, String? option);
 
   Stream<MessageEntity> getNewMessage();
 }

@@ -7,7 +7,11 @@ abstract class MessageUseCase {
 
   Future<void> disconnectSocket();
 
-  Future<void> sendMessage(String type, String message, String receiverUserId);
+  Future<void> sendMessage(
+      {required String type,
+      required String message,
+      required String receiverUserId,
+      String? option});
 
   Stream<MessageEntity> getNewMessage();
 }
@@ -34,7 +38,11 @@ class MessageUseCaseImpl extends MessageUseCase {
   }
 
   @override
-  Future<void> sendMessage(String type, String message, String receiverUserId) {
-    return repo.sendMessage(type, message, receiverUserId);
+  Future<void> sendMessage(
+      {required String type,
+      required String message,
+      required String receiverUserId,
+      String? option}) {
+    return repo.sendMessage(type, message, receiverUserId, option);
   }
 }

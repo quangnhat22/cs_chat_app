@@ -6,6 +6,7 @@ import 'package:chatapp/domain/entities/friend_request_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_repository.dart';
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -75,10 +76,15 @@ class FriendRepositoryImpl extends FriendRepository {
               .map((messageJson) => MessageModel.fromJson(messageJson))
               .toList();
 
-          final listMessageEntity = listMessageModel
-              .map((messageModel) =>
-                  MessageEntity.convertToMessageEntity(model: messageModel))
-              .toList();
+          DateTime? dateTimePrev;
+          final listMessageEntity =
+              listMessageModel.mapIndexed((index, messageModel) {
+            if (index == 0) dateTimePrev = messageModel.createdAt;
+
+            return MessageEntity.convertToMessageEntity(
+                model: messageModel,
+                isSameDate: messageModel.createdAt == dateTimePrev);
+          }).toList();
 
           return listMessageEntity;
         }
