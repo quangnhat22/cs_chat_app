@@ -1,5 +1,6 @@
 import 'message_item.dart';
 import 'message_item/audio_message_item.dart';
+import 'message_item/file_message_item.dart';
 import 'message_item/image_message_item.dart';
 import 'message_item/text_message_item.dart';
 import 'message_item/video_message_item.dart';
@@ -46,6 +47,13 @@ class FactoryMessageItem {
       case "audio":
         {
           return AudioMessage(
+            content: content!,
+            isMe: isMe ?? false,
+          );
+        }
+      case "file":
+        {
+          return FileMessageItem(
             content: content!,
             isMe: isMe ?? false,
           );
