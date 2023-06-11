@@ -64,6 +64,9 @@ dependencies:
   app_links: ^3.4.3
   uuid: ^3.0.7
   video_player: ^2.6.1
+  flutter_sound: ^9.2.13
+  permission_handler: ^10.3.0
+  audioplayers: ^4.1.0
 
 dev_dependencies:
   flutter_test:

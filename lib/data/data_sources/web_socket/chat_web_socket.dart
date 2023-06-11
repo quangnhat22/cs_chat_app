@@ -53,7 +53,7 @@ class ChatWebSocket {
       String? option) async {
     String? messageContent = message;
     try {
-      if (type == "image") {
+      if (type == "image" || type == "video" || type == "audio") {
         messageContent = await storageFirebase.uploadFile(message);
         if (messageContent == null) return;
       }

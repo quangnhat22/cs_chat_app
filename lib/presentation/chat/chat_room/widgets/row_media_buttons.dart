@@ -1,9 +1,13 @@
+import 'dart:developer';
+
+import 'package:chatapp/common/widgets/stateless/bottom_sheet/voice_bottom_sheet.dart';
 import 'package:chatapp/common/widgets/stateless/button/custom_outline_icon_button.dart';
 import 'package:chatapp/core/config/app_enum.dart';
 import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message_stream_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/utils/assets_picker.dart';
 import '../chat_room_bloc/chat_room_bloc.dart';
@@ -46,6 +50,29 @@ class RowMediaButton extends StatelessWidget {
     }
   }
 
+  void _pickRecord(BuildContext ctx) async {
+    final stateChatRoom = ctx.read<ChatRoomBloc>().state;
+    if (stateChatRoom is ChatRoomInfoSuccess) {
+      await showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        context: ctx,
+        builder: ((context) {
+          return const VoiceSoundBottomSheet();
+        }),
+      ).then((value) {
+        if (value != null) {
+          ctx.read<MessageStreamCubit>().sendMessage(
+                type: "audio",
+                message: value,
+                receiverUserId: stateChatRoom.user.id,
+              );
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -80,7 +107,7 @@ class RowMediaButton extends StatelessWidget {
           COutlineIconButton(
             icon: Icons.mic_outlined,
             title: AppLocalizations.of(context)!.voice,
-            onPress: () {},
+            onPress: () => _pickRecord(context),
           ),
           COutlineIconButton(
             icon: Icons.emoji_emotions_outlined,

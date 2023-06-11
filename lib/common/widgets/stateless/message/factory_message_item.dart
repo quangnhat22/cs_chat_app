@@ -1,4 +1,5 @@
 import 'message_item.dart';
+import 'message_item/audio_message_item.dart';
 import 'message_item/image_message_item.dart';
 import 'message_item/text_message_item.dart';
 import 'message_item/video_message_item.dart';
@@ -42,13 +43,13 @@ class FactoryMessageItem {
             content: content,
           );
         }
-      // case "record":
-      //   {
-      //     return AudioMessage(
-      //       content: content!,
-      //       isMe: isMe ?? false,
-      //     );
-      //   }
+      case "audio":
+        {
+          return AudioMessage(
+            content: content!,
+            isMe: isMe ?? false,
+          );
+        }
       default:
         {
           return TextMessageItem(

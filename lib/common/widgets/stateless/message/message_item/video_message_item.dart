@@ -18,26 +18,18 @@ class VideoMessageItem extends IMessageItem {
   final String? content;
   final bool isMe;
 
-  BorderRadius _borderMessageLeft() {
-    return BorderRadius.circular(16);
-  }
-
-  BorderRadius _borderMessageRight() {
-    return BorderRadius.circular(16);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 0,
-      borderRadius: isMe ? _borderMessageRight() : _borderMessageLeft(),
+      borderRadius: BorderRadius.circular(16),
       child: Container(
         constraints: BoxConstraints(maxWidth: 0.6.sw),
         decoration: BoxDecoration(
           color: isMe
               ? Theme.of(context).colorScheme.primaryContainer
               : Colors.white,
-          borderRadius: isMe ? _borderMessageRight() : _borderMessageLeft(),
+          borderRadius: BorderRadius.circular(16),
         ),
         child: content != null ? VideoPlayerView(url: content!) : Container(),
       ),
