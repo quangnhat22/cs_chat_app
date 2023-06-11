@@ -74,7 +74,6 @@
   "want_to_friend_with_you": " want to friend with you",
   "current": "Current",
   "active": "Active",
-  "search": "Search",
   "your_groups": "Your Groups",
   "group_request": "Request",
   "requests_received_text_button_segment": "Received",
@@ -91,5 +90,11 @@
   "selected_text": "selected",
   "user_status_online": "Online",
   "back_to_login": "Back to Login",
-  "something_wrong_try_again": "Some things wrong! Try again."
+  "something_wrong_try_again": "Some things wrong! Try again.",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "video": "Video",
+  "voice": "Voice",
+  "sticker": "Sticker",
+  "location": "Location"
 }

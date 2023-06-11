@@ -58,7 +58,8 @@ enum AppFriendRelation {
 //Media Resource
 enum AppMediaResource {
   gallery("gallery"),
-  camera("camera");
+  camera("camera"),
+  video("video");
 
   const AppMediaResource(this.value);
 

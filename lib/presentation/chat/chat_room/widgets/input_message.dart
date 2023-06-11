@@ -38,7 +38,7 @@ class _InputMessageState extends State<InputMessage> {
         );
       },
       child: AnimatedSize(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
         child: TextFormField(
           controller: _controller,

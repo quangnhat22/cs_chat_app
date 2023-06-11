@@ -1,231 +1,341 @@
-// import 'package:chat_app_mobile/common/widgets/stateless/message_item/message_item.dart';
-// import 'package:chat_app_mobile/common/widgets/stateless/skeleton/skeleton.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:video_player/video_player.dart';
-//
-// class VideoMessageItem extends IMessageItem {
-//   const VideoMessageItem({
-//     super.key,
-//     this.content,
-//     this.isMe = false,
-//   });
-//
-//   final String? content;
-//   final bool isMe;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Material(
-//       elevation: 2,
-//       borderRadius: isMe
-//           ? const BorderRadius.only(
-//               topLeft: Radius.circular(16),
-//               bottomLeft: Radius.circular(16),
-//               topRight: Radius.circular(16))
-//           : const BorderRadius.only(
-//               topLeft: Radius.circular(16),
-//               bottomRight: Radius.circular(16),
-//               topRight: Radius.circular(16)),
-//       child: Container(
-//         constraints:
-//             BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.6),
-//         padding: const EdgeInsets.symmetric(
-//           horizontal: 1,
-//           vertical: 1,
-//         ),
-//         decoration: BoxDecoration(
-//           color: isMe ? Colors.blue[500] : Colors.white,
-//           borderRadius: isMe
-//               ? const BorderRadius.only(
-//                   topLeft: Radius.circular(16),
-//                   bottomLeft: Radius.circular(16),
-//                   topRight: Radius.circular(16))
-//               : const BorderRadius.only(
-//                   topLeft: Radius.circular(16),
-//                   bottomRight: Radius.circular(16),
-//                   topRight: Radius.circular(16)),
-//           border: Border.all(
-//             color: Theme.of(context).primaryColor,
-//           ),
-//         ),
-//         child: content != null ? VideoPlayerView(url: content!) : Container(),
-//       ),
-//     );
-//   }
-// }
-//
-// class VideoPlayerView extends StatefulWidget {
-//   const VideoPlayerView({
-//     super.key,
-//     required this.url,
-//   });
-//   final String url;
-//
-//   @override
-//   State<VideoPlayerView> createState() => _VideoPlayerViewState();
-// }
-//
-// class _VideoPlayerViewState extends State<VideoPlayerView> {
-//   late VideoPlayerController _controller;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = VideoPlayerController.network(widget.url)
-//       ..initialize().then((_) {
-//         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-//         setState(() {});
-//       });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       children: [
-//         Container(
-//           child: _controller.value.isInitialized
-//               ? AspectRatio(
-//                   aspectRatio: _controller.value.aspectRatio,
-//                   child: ClipRRect(
-//                       borderRadius: BorderRadius.circular(15),
-//                       child: VideoPlayer(_controller)),
-//                 )
-//               : Skeleton.rectangular(
-//                   width: 200.w,
-//                   height: 280.h,
-//                 ),
-//         ),
-//         if (_controller.value.isInitialized)
-//           Positioned(
-//             bottom: 0,
-//             right: 0,
-//             left: 0,
-//             top: 0,
-//             child: Center(
-//               child: FloatingActionButton(
-//                 backgroundColor: Colors.black38,
-//                 onPressed: () {
-//                   Navigator.of(context).push(
-//                     MaterialPageRoute<void>(
-//                       builder: (BuildContext context) => VideoPlayPage(
-//                         url: widget.url,
-//                       ),
-//                     ),
-//                   );
-//                 },
-//                 child: Icon(
-//                   _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-//                 ),
-//               ),
-//             ),
-//           ),
-//       ],
-//     );
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-// }
-//
-// class VideoPlayPage extends StatefulWidget {
-//   const VideoPlayPage({super.key, required this.url});
-//
-//   static String namePage = "video-play-page";
-//
-//   final String url;
-//
-//   @override
-//   State<VideoPlayPage> createState() => _VideoPlayPageState();
-// }
-//
-// class _VideoPlayPageState extends State<VideoPlayPage> {
-//   late VideoPlayerController _controller;
-//   bool isPlay = false;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = VideoPlayerController.network(widget.url)
-//       ..initialize().then((_) {
-//         setState(() {});
-//         _controller.addListener(() {
-//           if (_controller.value.isPlaying) {
-//             setState(() {
-//               isPlay = true;
-//             });
-//           }
-//           if (!_controller.value.isPlaying) {
-//             setState(() {
-//               isPlay = false;
-//             });
-//           }
-//         });
-//       });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.black,
-//       appBar: AppBar(
-//         title: const Text("Video"),
-//         backgroundColor: Colors.black,
-//       ),
-//       body: Stack(children: [
-//         Center(
-//           child: _controller.value.isInitialized
-//               ? AspectRatio(
-//                   aspectRatio: _controller.value.aspectRatio,
-//                   child: VideoPlayer(_controller),
-//                 )
-//               : Center(
-//                   child: Column(
-//                     mainAxisSize: MainAxisSize.min,
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: const <Widget>[
-//                       CircularProgressIndicator(),
-//                       SizedBox(
-//                         height: 16,
-//                       ),
-//                       Text(
-//                         "Loading....",
-//                         style: TextStyle(color: Colors.white),
-//                       )
-//                     ],
-//                   ),
-//                 ),
-//         ),
-//         _controller.value.isInitialized
-//             ? Positioned(
-//                 bottom: 0,
-//                 right: 0,
-//                 left: 0,
-//                 child: FloatingActionButton(
-//                   elevation: 20,
-//                   onPressed: () {
-//                     setState(() {
-//                       _controller.value.isPlaying
-//                           ? _controller.pause()
-//                           : _controller.play();
-//                     });
-//                   },
-//                   child: Icon(
-//                     isPlay ? Icons.pause : Icons.play_arrow,
-//                   ),
-//                 ),
-//               )
-//             : Container(),
-//       ]),
-//     );
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-// }
+import 'package:chatapp/common/widgets/stateless/app_bar/m_page_app_bar.dart';
+import 'package:chatapp/common/widgets/stateless/message/message_item.dart';
+import 'package:chatapp/core/utils/media_duration.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:video_player/video_player.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../skeleton/skeleton.dart';
+
+class VideoMessageItem extends IMessageItem {
+  const VideoMessageItem({
+    super.key,
+    this.content,
+    this.isMe = false,
+  });
+
+  final String? content;
+  final bool isMe;
+
+  BorderRadius _borderMessageLeft() {
+    return BorderRadius.circular(16);
+  }
+
+  BorderRadius _borderMessageRight() {
+    return BorderRadius.circular(16);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 0,
+      borderRadius: isMe ? _borderMessageRight() : _borderMessageLeft(),
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 0.6.sw),
+        decoration: BoxDecoration(
+          color: isMe
+              ? Theme.of(context).colorScheme.primaryContainer
+              : Colors.white,
+          borderRadius: isMe ? _borderMessageRight() : _borderMessageLeft(),
+        ),
+        child: content != null ? VideoPlayerView(url: content!) : Container(),
+      ),
+    );
+  }
+}
+
+class VideoPlayerView extends StatefulWidget {
+  const VideoPlayerView({
+    super.key,
+    required this.url,
+  });
+  final String url;
+
+  @override
+  State<VideoPlayerView> createState() => _VideoPlayerViewState();
+}
+
+class _VideoPlayerViewState extends State<VideoPlayerView> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(widget.url)
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          child: _controller.value.isInitialized
+              ? AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: VideoPlayer(_controller),
+                  ),
+                )
+              : Skeleton.rectangular(
+                  width: 200.w,
+                  height: 280.h,
+                ),
+        ),
+        if (_controller.value.isInitialized)
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            top: 0,
+            child: Center(
+              child: FloatingActionButton(
+                backgroundColor: Theme.of(context)
+                    .colorScheme
+                    .primaryContainer
+                    .withOpacity(0.5),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => VideoPlayPage(
+                        url: widget.url,
+                      ),
+                    ),
+                  );
+                },
+                child: Icon(
+                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+class VideoPlayPage extends StatefulWidget {
+  const VideoPlayPage({super.key, required this.url});
+
+  static String namePage = "video-play-page";
+
+  final String url;
+
+  @override
+  State<VideoPlayPage> createState() => _VideoPlayPageState();
+}
+
+class _VideoPlayPageState extends State<VideoPlayPage> {
+  late VideoPlayerController _controller;
+  bool _isPlay = false;
+  bool _isShow = true;
+
+  Future<void> _seekTo(
+      {required Duration position, bool isBack = false}) async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+
+    final currentPos = await _controller.position;
+
+    if (currentPos == null) return;
+
+    final newPos = (isBack) ? (currentPos - position) : (currentPos + position);
+
+    if (isBack && newPos < _controller.value.duration) {
+      _controller.seekTo(const Duration(seconds: 0));
+      setState(() {});
+    }
+
+    if (!isBack && newPos > _controller.value.duration) {
+      _controller.seekTo(_controller.value.duration);
+      setState(() {});
+    }
+
+    await _controller.seekTo(newPos);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(widget.url)
+      ..addListener(() {
+        setState(() {});
+      })
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.addListener(() {
+          if (_controller.value.isPlaying) {
+            setState(() {
+              _isPlay = true;
+            });
+          }
+          if (!_controller.value.isPlaying) {
+            setState(() {
+              _isPlay = false;
+            });
+          }
+        });
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: MPageAppBar(title: AppLocalizations.of(context)!.video),
+      body: GestureDetector(
+        onTap: () {
+          setState(() {
+            _isShow = !_isShow;
+          });
+        },
+        child: Stack(
+          children: [
+            Center(
+              child: _controller.value.isInitialized
+                  ? AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(_controller),
+                    )
+                  : Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const <Widget>[
+                          CircularProgressIndicator(),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            "Loading....",
+                          )
+                        ],
+                      ),
+                    ),
+            ),
+            _controller.value.isInitialized
+                ? Positioned(
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    child: _isShow
+                        ? Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 16.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: Colors.black.withOpacity(0.7),
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0,
+                                    horizontal: 20.0,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      VideoProgressIndicator(
+                                        _controller,
+                                        allowScrubbing: true,
+                                        colors: VideoProgressColors(
+                                          playedColor: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          ValueListenableBuilder(
+                                            valueListenable: _controller,
+                                            builder: (context,
+                                                VideoPlayerValue value, child) {
+                                              return Text(AppMediaDuration
+                                                  .convertDurationToString(
+                                                      value.position));
+                                            },
+                                          ),
+                                          ValueListenableBuilder(
+                                            valueListenable: _controller,
+                                            builder: (context,
+                                                VideoPlayerValue value, child) {
+                                              return Text(AppMediaDuration
+                                                  .convertDurationToString(
+                                                      _controller
+                                                          .value.duration));
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () => _seekTo(
+                                          position: const Duration(seconds: 15),
+                                          isBack: true),
+                                      icon:
+                                          const Icon(Icons.restart_alt_rounded),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _controller.value.isPlaying
+                                              ? _controller.pause()
+                                              : _controller.play();
+                                        });
+                                      },
+                                      icon: Icon(
+                                        _isPlay
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () => _seekTo(
+                                          position:
+                                              const Duration(seconds: 15)),
+                                      icon: const Icon(
+                                          Icons.not_started_outlined),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                  )
+                : Container(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}

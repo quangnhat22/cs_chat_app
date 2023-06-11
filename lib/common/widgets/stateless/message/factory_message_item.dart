@@ -1,6 +1,7 @@
 import 'message_item.dart';
 import 'message_item/image_message_item.dart';
 import 'message_item/text_message_item.dart';
+import 'message_item/video_message_item.dart';
 
 class FactoryMessageItem {
   static IMessageItem buildMessageItem(String? type, bool? isMe,
@@ -34,13 +35,13 @@ class FactoryMessageItem {
       //   {
       //     return SystemMessageItem(nameActor: nameActor, content: content!);
       //   }
-      // case "video":
-      //   {
-      //     return VideoMessageItem(
-      //       isMe: isMe ?? false,
-      //       content: content,
-      //     );
-      //   }
+      case "video":
+        {
+          return VideoMessageItem(
+            isMe: isMe ?? false,
+            content: content,
+          );
+        }
       // case "record":
       //   {
       //     return AudioMessage(

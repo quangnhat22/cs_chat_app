@@ -21,34 +21,38 @@ class _FooterChatActionsState extends State<FooterChatActions> {
       decoration: const BoxDecoration(
         color: Colors.transparent,
       ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              if (true)
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isShowMenu = !_isShowMenu;
-                    });
-                  },
-                  icon: Icon(
-                    Icons.add_circle_outline,
-                    size: 28.sp,
+      child: AnimatedSize(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.linear,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                if (true)
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isShowMenu = !_isShowMenu;
+                      });
+                    },
+                    icon: Icon(
+                      _isShowMenu ? Icons.add_circle : Icons.add_circle_outline,
+                      size: 28.sp,
+                    ),
                   ),
+                const Expanded(
+                  child: InputMessage(),
                 ),
-              const Expanded(
-                child: InputMessage(),
-              ),
-              const ButtonSendMessage()
-            ],
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          if (_isShowMenu) const RowMediaButton(),
-        ],
+                const ButtonSendMessage()
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            if (_isShowMenu) const RowMediaButton(),
+          ],
+        ),
       ),
     );
   }

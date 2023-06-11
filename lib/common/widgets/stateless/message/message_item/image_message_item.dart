@@ -22,7 +22,9 @@ class ImageMessageItem extends IMessageItem {
   @override
   Widget build(BuildContext context) {
     if (content == null || content == "") {
-      return Image.asset("assets/images/image_not_found.jpg");
+      return Skeleton.rectangular(
+        height: 48.h,
+      );
     }
     return CachedNetworkImage(
       width: 250.w,
@@ -75,7 +77,9 @@ class ImageMessageItem extends IMessageItem {
       },
       placeholder: (context, url) => const Skeleton.rectangular(),
       errorWidget: (context, url, error) {
-        return Image.asset("assets/images/image_not_found.jpg");
+        return Skeleton.rectangular(
+          height: 48.h,
+        );
       },
     );
   }

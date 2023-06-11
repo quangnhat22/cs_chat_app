@@ -40,7 +40,31 @@ class AppAssetsPicker {
       if (file == null) return null;
 
       final filePath = file.path;
-      
+
+      return filePath;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<String?>? pickVideo(BuildContext context,
+      {int limit = 1}) async {
+    try {
+      final List<AssetEntity>? result = await AssetPicker.pickAssets(
+        context,
+        pickerConfig: AssetPickerConfig(
+          maxAssets: limit,
+          requestType: RequestType.video,
+        ),
+      );
+      if (result == null) return null;
+
+      final file = await result[0].file;
+
+      if (file == null) return null;
+
+      final filePath = file.path;
+
       return filePath;
     } catch (e) {
       throw Exception(e.toString());

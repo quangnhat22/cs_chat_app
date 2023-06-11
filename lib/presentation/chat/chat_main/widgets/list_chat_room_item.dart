@@ -86,7 +86,7 @@ class ListChatRoomItem extends StatelessWidget {
                             isMessageRead ? FontWeight.bold : FontWeight.normal,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 4,
                     ),
                     Padding(
