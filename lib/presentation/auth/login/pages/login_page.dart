@@ -84,7 +84,7 @@ class LoginView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 170,
+                  height: 150,
                   width: double.infinity,
                   child: CustomAvatarImage()),
                 const Padding(
