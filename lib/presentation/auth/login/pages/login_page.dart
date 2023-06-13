@@ -148,7 +148,7 @@ class ListGroupDetail extends StatelessWidget {
               ),
             ),
             title: Text(details[index]),
-            tileColor: Theme.of(context).colorScheme.surfaceVariant,
+            // tileColor: Theme.of(context).colorScheme.surfaceVariant,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
