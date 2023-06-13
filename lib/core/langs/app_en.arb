@@ -96,5 +96,6 @@
   "video": "Video",
   "voice": "Voice",
   "sticker": "Sticker",
-  "location": "Location"
+  "location": "Location",
+  "change_profile_picture_or_your_name": "Change profile picture or your name"
 }
