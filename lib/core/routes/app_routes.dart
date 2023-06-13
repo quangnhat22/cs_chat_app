@@ -9,6 +9,7 @@ import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/group/create_group/create_group.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
+import 'package:chatapp/presentation/map/pages/map_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -90,6 +91,8 @@ class AppRoutes {
         return _buildRoute(settings, const DeviceMainPage());
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
+      case RouteName.googleMap:
+        return _buildRoute(settings, const MapPage());
       default:
         return _errorRoute();
     }

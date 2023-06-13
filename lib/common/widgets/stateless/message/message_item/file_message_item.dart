@@ -140,6 +140,7 @@ class _FileItemState extends State<FileItem> {
   @override
   void dispose() {
     AssetsUtils.removeSendPort;
+    _port.close();
     super.dispose();
   }
 

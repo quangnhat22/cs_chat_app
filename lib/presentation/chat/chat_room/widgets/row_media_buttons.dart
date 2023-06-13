@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/assets_picker.dart';
+import '../../../map/pages/map_page.dart';
 import '../chat_room_bloc/chat_room_bloc.dart';
 
 class RowMediaButton extends StatelessWidget {
@@ -85,6 +86,16 @@ class RowMediaButton extends StatelessWidget {
     }
   }
 
+  void _pickLocation(BuildContext ctx) async {
+    showDialog(
+      context: ctx,
+      builder: (context) {
+        return const MapPage();
+      },
+    );
+    //NavigationUtil.pushNamed(route: RouteName.googleMap);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -137,7 +148,7 @@ class RowMediaButton extends StatelessWidget {
             icon: Icons.location_on_outlined,
             color: Colors.green,
             title: AppLocalizations.of(context)!.location,
-            onPress: () {},
+            onPress: () => _pickLocation(context),
           ),
         ],
       ),

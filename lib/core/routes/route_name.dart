@@ -13,4 +13,5 @@ class RouteName {
   static const String teamDetails = '/team-details';
   static const String deviceAdministration = "/device-administration";
   static const String createGroup = '/create-group';
+  static const String googleMap = '/google-map';
 }
