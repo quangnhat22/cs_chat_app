@@ -13,7 +13,7 @@ class ListGroupItem extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () {
-        NavigationUtil.pushNamed(route: RouteName.teamDetails);
+        NavigationUtil.pushNamed(route: RouteName.groupDetails);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6.0),
