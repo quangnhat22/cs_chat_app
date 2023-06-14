@@ -49,15 +49,6 @@ class GroupDetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Text(
-                    "Hoạt động hôm nay",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: CustomTextButton(
