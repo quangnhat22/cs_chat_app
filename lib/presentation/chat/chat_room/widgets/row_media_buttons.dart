@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chatapp/common/widgets/stateless/bottom_sheet/voice_bottom_sheet.dart';
 import 'package:chatapp/common/widgets/stateless/button/custom_outline_icon_button.dart';
 import 'package:chatapp/core/config/app_enum.dart';
@@ -7,9 +5,9 @@ import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../../../core/utils/assets_picker.dart';
+import '../../../map/pages/map_page.dart';
 import '../chat_room_bloc/chat_room_bloc.dart';
 
 class RowMediaButton extends StatelessWidget {
@@ -73,6 +71,31 @@ class RowMediaButton extends StatelessWidget {
     }
   }
 
+  void _pickFile(BuildContext ctx) async {
+    final stateChatRoom = ctx.read<ChatRoomBloc>().state;
+    if (stateChatRoom is ChatRoomInfoSuccess) {
+      String? filePath = await AppAssetsPicker.pickFile(ctx);
+
+      if (filePath != null && ctx.mounted) {
+        ctx.read<MessageStreamCubit>().sendMessage(
+              type: "file",
+              message: filePath,
+              receiverUserId: stateChatRoom.user.id,
+            );
+      }
+    }
+  }
+
+  void _pickLocation(BuildContext ctx) async {
+    showDialog(
+      context: ctx,
+      builder: (context) {
+        return const MapPage();
+      },
+    );
+    //NavigationUtil.pushNamed(route: RouteName.googleMap);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -110,6 +133,12 @@ class RowMediaButton extends StatelessWidget {
             onPress: () => _pickRecord(context),
           ),
           COutlineIconButton(
+            icon: Icons.attach_file_outlined,
+            color: Colors.pink,
+            title: AppLocalizations.of(context)!.files,
+            onPress: () => _pickFile(context),
+          ),
+          COutlineIconButton(
             icon: Icons.emoji_emotions_outlined,
             color: Colors.orange,
             title: AppLocalizations.of(context)!.sticker,
@@ -119,7 +148,7 @@ class RowMediaButton extends StatelessWidget {
             icon: Icons.location_on_outlined,
             color: Colors.green,
             title: AppLocalizations.of(context)!.location,
-            onPress: () {},
+            onPress: () => _pickLocation(context),
           ),
         ],
       ),

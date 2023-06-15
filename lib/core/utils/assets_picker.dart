@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
@@ -11,6 +12,7 @@ class AppAssetsPicker {
         pickerConfig: AssetPickerConfig(
           maxAssets: limit,
           requestType: RequestType.image,
+          textDelegate: const EnglishAssetPickerTextDelegate(),
         ),
       );
       if (result == null) return null;
@@ -31,7 +33,9 @@ class AppAssetsPicker {
     try {
       final AssetEntity? result = await CameraPicker.pickFromCamera(
         context,
-        pickerConfig: const CameraPickerConfig(),
+        pickerConfig: const CameraPickerConfig(
+          textDelegate: EnglishCameraPickerTextDelegate(),
+        ),
       );
       if (result == null) return null;
 
@@ -66,6 +70,19 @@ class AppAssetsPicker {
       final filePath = file.path;
 
       return filePath;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<String?>? pickFile(BuildContext context) async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+      if (result != null) {
+        return result.paths[0];
+      } else {
+        return null;
+      }
     } catch (e) {
       throw Exception(e.toString());
     }
