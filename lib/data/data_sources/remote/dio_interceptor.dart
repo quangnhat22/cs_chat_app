@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -45,10 +43,8 @@ class DioInterceptor {
                 options: opts,
                 data: e.requestOptions.data,
                 queryParameters: e.requestOptions.queryParameters);
-
             return handler.resolve(cloneReq);
           }
-          log(e.toString(), name: "API Error");
           handler.next(e);
         },
       ),
@@ -64,6 +60,8 @@ class DioInterceptor {
             data: {"refresh_token": refreshToken});
         if (res.statusCode == 200) {
           final newAccessToken = res.data["data"]["token"];
+          await _authLocal.saveAuth(
+              accessToken: newAccessToken, refreshToken: refreshToken);
           // await _authLocal.set ;
         }
       }

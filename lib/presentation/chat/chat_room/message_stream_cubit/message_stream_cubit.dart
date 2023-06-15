@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../domain/entities/message_entity.dart';
 import '../../../../domain/modules/message/message_usecase.dart';
@@ -36,9 +37,25 @@ class MessageStreamCubit extends Cubit<MessageStreamState> {
   }
 
   Future<void> sendMessage(
-      String type, String message, String receiverUserId) async {
+      {required String type,
+      required String message,
+      required String receiverUserId,
+      String? optional}) async {
     try {
-      await _messageUseCase.sendMessage(type, message, receiverUserId);
+      final id = const Uuid().v4();
+      emit(MessageSendInProgress(
+        id: id,
+        message: message,
+        type: type,
+      ));
+
+      await _messageUseCase.sendMessage(
+        type: type,
+        message: message,
+        receiverUserId: receiverUserId,
+        option: id,
+      );
+
       emit(const MessageSendSuccess());
     } catch (e) {
       emit(MessageSendFailure(message: e.toString()));

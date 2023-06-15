@@ -7,6 +7,7 @@ import 'package:chatapp/presentation/device/device_administration.dart';
 import 'package:chatapp/presentation/friends/find_new_friend/find_new_friend.dart';
 import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/group/create_group/create_group.dart';
+import 'package:chatapp/presentation/group/group_details/pages/group_details_page.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/loading/loading_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
@@ -31,10 +32,12 @@ class AppRoutes {
           settings,
           const RegisterPage(),
         );
-      case RouteName.forgotPasswordPage:
+      case RouteName.forgotPassword:
         return _buildRoute(
           settings,
-          const ForgotPasswordPage(),
+          ForgotPasswordPage(
+            urlCode: settings.arguments as String?,
+          ),
         );
       default:
         return _errorRoute();
@@ -88,6 +91,8 @@ class AppRoutes {
         return _buildRoute(settings, const DeviceMainPage());
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
+      case RouteName.groupDetails:
+        return _buildRoute(settings, const GroupDetailPage());
       default:
         return _errorRoute();
     }

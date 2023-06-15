@@ -31,7 +31,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
         state.whenOrNull(submitSuccess: () {
           SnackBarApp.showSnackBar(
               context, "Create group success", TypesSnackBar.success);
-          NavigationUtil.pop();
+          NavigationUtil.pop(result: true);
         }, submitFailed: (message) {
           SnackBarApp.showSnackBar(
               context, "Create group failed", TypesSnackBar.error);

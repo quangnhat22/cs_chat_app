@@ -2,49 +2,57 @@ import 'package:chatapp/presentation/chat/chat_room/widgets/button_send_message.
 import 'package:chatapp/presentation/chat/chat_room/widgets/input_message.dart';
 import 'package:chatapp/presentation/chat/chat_room/widgets/row_media_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FooterChatActions extends StatelessWidget {
+class FooterChatActions extends StatefulWidget {
   const FooterChatActions({Key? key}) : super(key: key);
+
+  @override
+  State<FooterChatActions> createState() => _FooterChatActionsState();
+}
+
+class _FooterChatActionsState extends State<FooterChatActions> {
+  bool _isShowMenu = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withOpacity(0.08),
-        borderRadius: const BorderRadius.horizontal(
-          left: Radius.circular(16),
-          right: Radius.circular(16),
-        ),
-        boxShadow: [
-          BoxShadow(
-            offset: const Offset(0, 4),
-            blurRadius: 32,
-            color: Theme.of(context).primaryColor.withOpacity(0.08),
-          ),
-        ],
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
       ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              if (true)
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.menu),
+      child: AnimatedSize(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.linear,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                if (true)
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isShowMenu = !_isShowMenu;
+                      });
+                    },
+                    icon: Icon(
+                      _isShowMenu ? Icons.add_circle : Icons.add_circle_outline,
+                      size: 28.sp,
+                    ),
+                  ),
+                const Expanded(
+                  child: InputMessage(),
                 ),
-              const Expanded(
-                child: InputMessage(),
-              ),
-              const ButtonSendMessage()
-            ],
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          if (true) const RowMediaButton(),
-        ],
+                const ButtonSendMessage()
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            if (_isShowMenu) const RowMediaButton(),
+          ],
+        ),
       ),
     );
   }

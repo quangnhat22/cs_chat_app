@@ -46,7 +46,18 @@ class ListFriendRequestBloc
   Future<void> _listRequestRefreshed(ListSentFriendRequestRefreshed event,
       Emitter<ListFriendRequestState> emit) async {
     if (state is GetListFriendRequestSuccess) {
-      add(const ListFriendRequestEvent.started());
+      try {
+        final listSentRequest = await _friendUC.getSendRequest();
+        final listReceivedRequest = await _friendUC.getReceiveRequest();
+        //sort list
+        listReceivedRequest.sortBy((receive) => receive.createdAt!);
+        listSentRequest.sortBy((sent) => sent.createdAt!);
+        emit(GetListFriendRequestSuccess(
+            friendRequestSent: listSentRequest,
+            friendRequestReceive: listReceivedRequest));
+      } catch (e) {
+        emit(GetListFriendRequestFail(message: e.toString()));
+      }
     } else {
       return;
     }

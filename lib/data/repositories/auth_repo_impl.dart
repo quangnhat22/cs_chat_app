@@ -19,7 +19,8 @@ class AuthRepositoryImpl extends AuthRepository {
     required AuthService authService,
     required UserRepository userRepo,
     required AuthLocalDataSrc authLocalDataSrc,
-  })  : _authFirebase = authFirebase,
+  })
+      : _authFirebase = authFirebase,
         _authService = authService,
         _authLocalDataSrc = authLocalDataSrc,
         _userRepo = userRepo;
@@ -137,11 +138,9 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<void> logOut() async {
     try {
-      await _authService.logOut();
-      await _authFirebase.logOut();
       await _authLocalDataSrc.deleteBoxAuth();
-    } catch (e) {
-      throw Exception(e.toString());
+      await _authFirebase.logOut();
+      await _authService.logOut();
     } finally {
       await _userRepo.clearBox();
     }

@@ -17,7 +17,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -34,11 +33,12 @@ class App extends StatelessWidget {
             builder: (context, AppSettingsState appSettingState) {
               switch (state.runtimeType) {
                 case AppUnAuthorized:
-                  return const MMaterialApp(
+                  return MMaterialApp(
                     keyMaterialApp: "App_UnAuthorized",
                     initialRoute: RouteName.loginPage,
+                    navigatorKey: AppGlobalKeys.unAuthNavigatorKey,
                     onGenerateRoute: AppRoutes.unAuthorizedRoute,
-                    homeWidget: LoginPage(),
+                    homeWidget: const LoginPage(),
                   );
                 case AppAuthorized:
                   return MMaterialApp(
@@ -62,7 +62,6 @@ class App extends StatelessWidget {
               }
             },
           );
-
         },
       ),
     );

@@ -2,6 +2,7 @@ import 'package:chatapp/common/widgets/stateless/circle_avatar/custom_avatar_ima
 import 'package:chatapp/common/widgets/stateless/divider/divider_space_left.dart';
 import 'package:chatapp/core/config/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListChatRoomItem extends StatelessWidget {
   const ListChatRoomItem({
@@ -74,13 +75,30 @@ class ListChatRoomItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text(
-                  time ?? "",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight:
-                        isMessageRead ? FontWeight.bold : FontWeight.normal,
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      time ?? "",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight:
+                            isMessageRead ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 4.0),
+                      child: Icon(
+                        Icons.check_outlined,
+                        color: Colors.green,
+                        size: 14.sp,
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),

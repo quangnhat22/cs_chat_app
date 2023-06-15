@@ -1,7 +1,9 @@
 part of forgot_password;
 
 class ForgotPasswordPage extends StatelessWidget {
-  const ForgotPasswordPage({super.key});
+  final String? urlCode;
+
+  const ForgotPasswordPage({super.key, this.urlCode});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,11 +11,12 @@ class ForgotPasswordPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: const [
+            children: [
               GoBackTextButton(
-                applyText: "Back to Login",
+                applyText: urlCode ?? "",
               ),
-              ValidateEmailForm(),
+              Text(urlCode ?? ""),
+              const ValidateEmailForm(),
             ],
           ),
         ),

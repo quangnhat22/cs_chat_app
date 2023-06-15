@@ -49,23 +49,19 @@ class ChatWebSocket {
     }
   }
 
-  Future<void> sendMessage(
-      String type, String message, String receiverUserId) async {
+  Future<void> sendMessage(String type, String message, String receiverUserId,
+      String? option) async {
+    String? messageContent = message;
     try {
-      if (type == "image") {
-        final imageUrl = await storageFirebase.uploadFile(message);
-        if (imageUrl == null) return;
-        _channel.sink.add(jsonEncode({
-          "type": type,
-          "receiver_id": receiverUserId,
-          "message": imageUrl,
-        }));
-        return;
+      if (type == "image" || type == "video" || type == "audio") {
+        messageContent = await storageFirebase.uploadFile(message);
+        if (messageContent == null) return;
       }
       _channel.sink.add(jsonEncode({
         "type": type,
         "receiver_id": receiverUserId,
-        "message": message,
+        "message": messageContent,
+        "optional": option
       }));
     } catch (e) {
       throw Exception(e.toString());

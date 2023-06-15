@@ -55,11 +55,11 @@ class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
             GroupRequestPage(),
           ],
         ),
-        floatingActionButton: FloatingActionStadiumButton(() {
-          if (_tabController.index == 0) {
-            NavigationUtil.pushNamed(route: RouteName.createGroup);
-          }
-        }, null),
+        // floatingActionButton: FloatingActionStadiumButton(() {
+        //   if (_tabController.index == 0) {
+        //     NavigationUtil.pushNamed(route: RouteName.createGroup);
+        //   }
+        // }, null),
       ),
     );
   }

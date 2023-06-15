@@ -4,19 +4,24 @@ class ProfileSetting extends StatelessWidget {
   const ProfileSetting({super.key});
 
   void _onPickAvatar(BuildContext ctx) async {
-    // final filePath = await AppAssetsPicker.pickSingleAssets(ctx);
-    // if (filePath == null) return;
-    //
-    // log(filePath);
-    // if (ctx.mounted) {
-    //   ctx.read<SettingMainCubit>().updateAvatar(filePath);
-    // }
     showModalBottomSheet(
       context: ctx,
       builder: (context) {
         return const MenuSelectAvatarResource();
       },
-    );
+    ).then((value) async {
+      if (value == null) return;
+      String? filePath;
+      if (value == AppMediaResource.camera) {
+        filePath = await AppAssetsPicker.pickImageFromCamera(ctx);
+      } else {
+        filePath = await AppAssetsPicker.pickImageFromGallery(ctx);
+      }
+      if (filePath == null) return;
+      if (ctx.mounted) {
+        ctx.read<SettingMainCubit>().updateAvatar(filePath);
+      }
+    });
   }
 
   void _onTapEditProfile() {

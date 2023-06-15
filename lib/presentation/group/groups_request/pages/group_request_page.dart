@@ -1,12 +1,4 @@
-import 'package:chatapp/core/di/injector.dart';
-import 'package:chatapp/core/utils/snack_bar.dart';
-import 'package:chatapp/presentation/friends/friends_request/friends_request.dart';
-import 'package:chatapp/presentation/group/groups_request/bloc/list_group_request_bloc.dart';
-import 'package:chatapp/presentation/group/groups_request/cubit/group_request_action_cubit.dart';
-import 'package:chatapp/presentation/group/groups_request/widgets/list_request_group_send.dart';
-import 'package:chatapp/presentation/group/groups_request/widgets/segment_button_group_request.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of groups_request;
 
 enum Request { sent, received }
 
@@ -65,48 +57,50 @@ class _GroupRequestViewState extends State<GroupRequestView> {
       child: BlocBuilder<ListGroupRequestBloc, ListGroupRequestState>(
         builder: (context, state) {
           return state.maybeWhen(
-              getDataSuccess: (groupRequestSent, groupRequestReceive) {
-            return SingleChildScrollView(
-              child: RefreshIndicator(
-                onRefresh: () async {
-                  context
-                      .read<ListGroupRequestBloc>()
-                      .add(const ListGroupRequestEvent.listRequestRefreshed());
-                },
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        top: 16,
-                        bottom: 8,
+            getDataSuccess: (groupRequestSent, groupRequestReceive) {
+              return SingleChildScrollView(
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<ListGroupRequestBloc>().add(
+                        const ListGroupRequestEvent.listRequestRefreshed());
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          top: 16,
+                          bottom: 8,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            ButtonGroupRequestsSegmented(handleViewChange),
+                          ],
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SegmentButtonGroupRequest(handleViewChange)
-                        ],
-                      ),
-                    ),
-                    view == Request.sent
-                        ? const ListRequestGroupSend(
-                            listSendRequest: [],
-                          )
-                        : const ListRequestFriendReceive(
-                            listReceiveRequest: [],
-                          )
-                  ],
+                      view == Request.sent
+                          ? ListRequestGroupSend(
+                              listSendRequest: groupRequestSent,
+                            )
+                          : ListRequestGroupReceive(
+                              listReceiveRequest: groupRequestReceive,
+                            )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }, getDataFail: (_) {
-            return const SomeThingWrong();
-          }, orElse: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          });
+              );
+            },
+            getDataFail: (_) {
+              return const SomeThingWrong();
+            },
+            orElse: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          );
         },
       ),
     );

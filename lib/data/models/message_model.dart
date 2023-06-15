@@ -14,6 +14,7 @@ class MessageModel with _$MessageModel {
     UserModel? sender,
     UserModel? receiver,
     String? message,
+    String? optional,
     @JsonKey(name: "created_at") DateTime? createdAt,
     @JsonKey(name: "is_me") bool? isMe,
   }) = _MessageModel;

@@ -3,11 +3,13 @@ import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
+part 'list_group_request_bloc.freezed.dart';
 part 'list_group_request_event.dart';
 part 'list_group_request_state.dart';
-part 'list_group_request_bloc.freezed.dart';
 
+@Injectable()
 class ListGroupRequestBloc
     extends Bloc<ListGroupRequestEvent, ListGroupRequestState> {
   ListGroupRequestBloc({required GroupUseCase groupUseCase})

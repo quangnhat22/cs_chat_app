@@ -1,4 +1,3 @@
-import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,46 +18,29 @@ class TextMessageItem extends IMessageItem {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 2,
+      elevation: 0,
       borderRadius: isMe ? _borderMessageRight() : _borderMessageLeft(),
       child: Container(
         constraints: BoxConstraints(maxWidth: 0.6.sw),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: isMe ? Theme.of(context).colorScheme.primary : Colors.white,
+          color: isMe
+              ? Theme.of(context).colorScheme.primaryContainer
+              : Colors.white,
           borderRadius: isMe ? _borderMessageRight() : _borderMessageLeft(),
           border: Border.all(
-              color: Theme.of(context).colorScheme.primary, width: 2),
+            color: Theme.of(context).colorScheme.primaryContainer,
+            width: 1,
+          ),
         ),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                content ?? '',
-                style: TextStyle(
-                  color: isMe ? Colors.white : Colors.black,
-                  fontSize: 15.sp,
-                  height: 1.5,
-                  //fontWeight: FontWeight.w300,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Text(
-                AppDateTimeFormat.convertToHourMinuteFollowDay(
-                    createdAt ?? DateTime.now()),
-                style: TextStyle(
-                  color: isMe ? Colors.white : Colors.black,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 12.sp,
-                  height: 1.5,
-                  //fontWeight: FontWeight.w300,
-                ),
-              ),
-            ),
-          ],
+        child: Text(
+          content ?? '',
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w300,
+            height: 1.4,
+            //fontWeight: FontWeight.w300,
+          ),
         ),
       ),
     );

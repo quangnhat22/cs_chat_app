@@ -22,7 +22,6 @@
   "create_your_new_account_success": "Tài khoản của bạn đã được tạo thành công!",
   "confirm_password": "Xác nhận lại mật khẩu",
   "chat": "Nhắn tin",
-  "search": "Tìm kiếm",
   "contact": "Liên hệ",
   "setting": "Cài đặt",
   "theme": "Chủ đề",
@@ -90,5 +89,13 @@
   "search_friends": "Tìm kiếm bạn bè",
   "selected_text": "đã chọn",
   "user_status_online": "Đang hoạt động",
-  "back_to_login": "Quay trở lại Đăng nhập"
+  "back_to_login": "Quay trở lại Đăng nhập",
+  "something_wrong_try_again": "Đã có lỗi xảy ra! Vui lòng thử lại.",
+  "camera": "Camera",
+  "gallery": "Thư viện ảnh",
+  "video": "Video",
+  "voice": "Ghi âm",
+  "sticker": "Sticker",
+  "location": "Vị trí",
+  "change_profile_picture_or_your_name": "Đổi ảnh đại diện hoặc tên"
 }

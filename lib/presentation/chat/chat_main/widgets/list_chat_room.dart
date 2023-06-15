@@ -21,7 +21,7 @@ class ListChatRoom extends StatelessWidget {
               (BuildContext context, int index) {
                 return ListChatRoomItem(
                   name: "Nguyễn Văn A",
-                  lastestMessage: "Hello",
+                  lastestMessage: "NguyenVanA: Hello",
                   time: AppDateTimeFormat.formatDDMMYYYY(DateTime.now()),
                 );
               },

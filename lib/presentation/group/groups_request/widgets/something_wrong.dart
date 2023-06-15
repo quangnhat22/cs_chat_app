@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of groups_request;
 
 class SomeThingWrong extends StatelessWidget {
   const SomeThingWrong({

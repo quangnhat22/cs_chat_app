@@ -5,9 +5,9 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../domain/entities/group_entity.dart';
 
+part 'list_group_bloc.freezed.dart';
 part 'list_group_event.dart';
 part 'list_group_state.dart';
-part 'list_group_bloc.freezed.dart';
 
 @Injectable()
 class ListGroupBloc extends Bloc<ListGroupEvent, ListGroupState> {
@@ -26,6 +26,7 @@ class ListGroupBloc extends Bloc<ListGroupEvent, ListGroupState> {
 
   Future<void> _started(_Started event, Emitter<ListGroupState> emit) async {
     try {
+      emit(const GetListGroupInProgress());
       final listGroup = await _groupUC.getListGroup();
       emit(GetListGroupInSuccess(listGroup: listGroup));
     } catch (e) {
@@ -33,5 +34,13 @@ class ListGroupBloc extends Bloc<ListGroupEvent, ListGroupState> {
     }
   }
 
-  _refresh(ListGroupRefreshed event, Emitter<ListGroupState> emit) {}
+  Future<void> _refresh(
+      ListGroupRefreshed event, Emitter<ListGroupState> emit) async {
+    try {
+      final listGroup = await _groupUC.getListGroup();
+      emit(GetListGroupInSuccess(listGroup: listGroup));
+    } catch (e) {
+      emit(GetListGroupInFailed(message: e.toString()));
+    }
+  }
 }

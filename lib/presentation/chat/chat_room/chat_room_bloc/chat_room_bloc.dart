@@ -25,6 +25,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       await event.map(
           started: (event) async => _started(event, emit),
           refreshed: (event) async => _refreshed(event, emit),
+          addMessageTemp: (event) async => _addMessageTemp(event, emit),
           newMessageNotified: (event) async => _newMessageNotified(event, emit),
           newMessageTopLoaded: (event) async =>
               _newMessageTopLoaded(event, emit));
@@ -57,15 +58,48 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
   Future<void> _refreshed(
       ChatRoomRefreshed event, Emitter<ChatRoomState> emit) async {}
 
+  void _addMessageTemp(
+      ChatRoomAddMessageTemp event, Emitter<ChatRoomState> emit) {
+    try {
+      if (state is ChatRoomInfoSuccess) {
+        List<MessageEntity> listMessageCurrent =
+            (state as ChatRoomInfoSuccess).messages;
+
+        listMessageCurrent = [event.newMessage, ...listMessageCurrent];
+
+        emit((state as ChatRoomInfoSuccess)
+            .copyWith(messages: listMessageCurrent));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<void> _newMessageNotified(
       ChatRoomNewMessageNotified event, Emitter<ChatRoomState> emit) async {
-    if (state is ChatRoomInfoSuccess) {
-      List<MessageEntity> listMessageCurrent =
-          (state as ChatRoomInfoSuccess).messages;
+    try {
+      if (state is ChatRoomInfoSuccess) {
+        List<MessageEntity> listMessageCurrent =
+            (state as ChatRoomInfoSuccess).messages;
 
-      listMessageCurrent = [event.newMessage, ...listMessageCurrent];
-      emit((state as ChatRoomInfoSuccess)
-          .copyWith(messages: listMessageCurrent));
+        //remove message temp
+        if (event.newMessage.optional != null) {
+          final indexAvailable = listMessageCurrent
+              .indexWhere((message) => message.id == event.newMessage.optional);
+          if (indexAvailable != -1) {
+            List<MessageEntity> newMessage = List.from(listMessageCurrent);
+            newMessage = newMessage..removeAt(indexAvailable);
+            listMessageCurrent = [...newMessage];
+          }
+        }
+
+        listMessageCurrent = [event.newMessage, ...listMessageCurrent];
+
+        emit((state as ChatRoomInfoSuccess)
+            .copyWith(messages: listMessageCurrent));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 

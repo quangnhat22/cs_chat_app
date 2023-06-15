@@ -56,12 +56,23 @@ enum AppFriendRelation {
 }
 
 //Media Resource
-
 enum AppMediaResource {
   gallery("gallery"),
-  camera("camera");
+  camera("camera"),
+  video("video");
 
   const AppMediaResource(this.value);
+
+  final String value;
+}
+
+//Media Resource
+enum AppSendMessageStatus {
+  sending("sending"),
+  fail("fail"),
+  success("success");
+
+  const AppSendMessageStatus(this.value);
 
   final String value;
 }
