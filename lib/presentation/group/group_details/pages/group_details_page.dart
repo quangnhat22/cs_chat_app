@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../common/widgets/stateless/button/custom_text_button.dart';
+import '../widgets/group_details_page__app_bar.dart';
 
 class GroupDetailPage extends StatelessWidget {
   const GroupDetailPage({super.key});
@@ -21,23 +22,14 @@ class GroupDetailPage extends StatelessWidget {
           children: [
             Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: 60,
-                  padding: const EdgeInsetsDirectional.fromSTEB(20, 30, 0, 0),
-                  child: Row(
-                    children: [
-                      FloatBackButton(
-                        Theme.of(context).colorScheme.primary,
-                        Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    ],
+                const MGroupDetailPageAppBar(title: ""),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                    height: 130,
+                    width: double.infinity,
+                    child: CustomAvatarImage(),
                   ),
-                ),
-                const SizedBox(
-                  height: 150,
-                  width: double.infinity,
-                  child: CustomAvatarImage(),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 20),
