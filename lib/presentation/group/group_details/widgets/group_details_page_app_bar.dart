@@ -18,7 +18,7 @@ class MGroupDetailPageAppBar extends StatelessWidget implements PreferredSizeWid
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.only(left: 14.0),

@@ -1,12 +1,12 @@
-import 'package:chatapp/common/widgets/stateless/button/float_back_button.dart';
 import 'package:chatapp/common/widgets/stateless/circle_avatar/custom_avatar_image.dart';
-import 'package:chatapp/presentation/auth/fogot_password/forgot_password.dart';
-import 'package:chatapp/presentation/group/group_details/widgets/group_details_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common/widgets/stateless/button/custom_text_button.dart';
-import '../widgets/group_details_page__app_bar.dart';
+import '../widgets/group_details_page_app_bar.dart';
+import '../widgets/group_details_small_card_bottom.dart';
+import '../widgets/group_details_small_card_top.dart';
 
 class GroupDetailPage extends StatelessWidget {
   const GroupDetailPage({super.key});
@@ -15,14 +15,13 @@ class GroupDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Stack(
-          fit: StackFit.expand,
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            Column(
+      appBar: const MGroupDetailPageAppBar(title: "Details"),
+      body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const MGroupDetailPageAppBar(title: ""),
                 const Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: SizedBox(
@@ -49,14 +48,15 @@ class GroupDetailPage extends StatelessWidget {
                       () {},
                       Theme.of(context).colorScheme.primary),
                 ),
+                const GroupDetailsSmallCardTop(),
+                SizedBox(
+                    height: 4.h,
+                ),
+                const GroupDetailsSmallCardBottom(),
               ],
             ),
-            ShortFormCard(
-              childWidget: GroupDetailsInfo(),
-            ),
-          ],
+          ),
         ),
-      ),
-    );
-  }
+      );
+    }
 }

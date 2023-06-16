@@ -97,5 +97,12 @@
   "voice": "Ghi âm",
   "sticker": "Sticker",
   "location": "Vị trí",
-  "change_profile_picture_or_your_name": "Đổi ảnh đại diện hoặc tên"
+  "change_profile_picture_or_your_name": "Đổi ảnh đại diện hoặc tên",
+  "turn_on_notification": "Bật thông báo",
+  "turn_off_notification" : "Tắt thông báo",
+  "view_photos_and_media_files": "Xem ảnh và phương tiện khác",
+  "exit_group": "Rời khỏi nhóm",
+  "delete_group": "Xóa nhóm",
+  "view_members": "Xem thành viên",
+  "delete_friend": "Xóa bạn bè"
 }
