@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
 import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:chatapp/domain/modules/user/user_usecase.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../domain/entities/group_entity.dart';
 import '../../../../domain/entities/message_entity.dart';
 
 part 'chat_room_bloc.freezed.dart';
@@ -39,38 +37,38 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
   final FriendUseCase _friendUseCase;
   final UserUseCase _userUseCase;
   final GroupUseCase _groupUseCase;
-  final bool isGroup = false;
+  bool isGroup = false;
 
   Future<void> _started(Started event, Emitter<ChatRoomState> emit) async {
     try {
       emit(const ChatRoomInfoInProgress());
 
-      if (event.type == "friend") {
-        final friendInfo = await _userUseCase.getUserById(event.id);
+      isGroup = (event.type == "friend") ? false : true;
 
-        final listMessage =
-            await _friendUseCase.getListChatWithFriends(userId: event.id);
+      String? chatRoomName = "";
+      String? chatRoomAvatar = "";
+      List<MessageEntity> listMessage;
 
-        if (friendInfo != null) {
-          emit(ChatRoomInfoSuccess(messages: listMessage, user: friendInfo));
-        } else {
-          emit(const ChatRoomInfoFailure(
-              message: "Can't not get data! Try again"));
-        }
-      } else {
+      if (isGroup) {
         //final groupInfo = await _groupUseCase.getListChatWithGroup(groupId: event.id);
-
-        final listMessage =
+        //TODO: gán groupInfo
+        listMessage =
             await _groupUseCase.getListChatWithGroup(groupId: event.id);
-
-        //if (groupInfo != null) {
-        emit(GroupChatRoomInfoSuccess(
-            groupInfo: GroupEntity.groupEntityEmpty, messages: listMessage));
-        // } else {
-        //   emit(const ChatRoomInfoFailure(
-        //       message: "Can't not get data! Try again"));
-        // }
+      } else {
+        final friendInfo = await _userUseCase.getUserById(event.id);
+        chatRoomName = friendInfo?.name;
+        chatRoomAvatar = friendInfo?.avatar;
+        listMessage =
+            await _friendUseCase.getListChatWithFriends(userId: event.id);
       }
+
+      emit(ChatRoomInfoSuccess(
+        messages: listMessage,
+        chatRoomId: event.id,
+        isGroupChatRoom: isGroup,
+        chatRoomName: chatRoomName,
+        chatRoomAvatar: chatRoomAvatar,
+      ));
     } catch (e) {
       emit(ChatRoomInfoFailure(message: e.toString()));
       throw Exception(e.toString());
@@ -100,46 +98,24 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
   Future<void> _newMessageNotified(
       ChatRoomNewMessageNotified event, Emitter<ChatRoomState> emit) async {
     try {
-      if (state is ChatRoomInfoSuccess) {
-        List<MessageEntity> listMessageCurrent =
-            (state as ChatRoomInfoSuccess).messages;
+      List<MessageEntity> listMessageCurrent =
+          (state as ChatRoomInfoSuccess).messages;
 
-        //remove message temp
-        if (event.newMessage.optional != null) {
-          final indexAvailable = listMessageCurrent
-              .indexWhere((message) => message.id == event.newMessage.optional);
-          if (indexAvailable != -1) {
-            List<MessageEntity> newMessage = List.from(listMessageCurrent);
-            newMessage = newMessage..removeAt(indexAvailable);
-            listMessageCurrent = [...newMessage];
-          }
+      //remove message temp
+      if (event.newMessage.optional != null) {
+        final indexAvailable = listMessageCurrent
+            .indexWhere((message) => message.id == event.newMessage.optional);
+        if (indexAvailable != -1) {
+          List<MessageEntity> newMessage = List.from(listMessageCurrent);
+          newMessage = newMessage..removeAt(indexAvailable);
+          listMessageCurrent = [...newMessage];
         }
-
-        listMessageCurrent = [event.newMessage, ...listMessageCurrent];
-
-        emit((state as ChatRoomInfoSuccess)
-            .copyWith(messages: listMessageCurrent));
       }
-      if (state is GroupChatRoomInfoSuccess) {
-        List<MessageEntity> listMessageCurrent =
-            (state as GroupChatRoomInfoSuccess).messages;
 
-        //remove message temp
-        if (event.newMessage.optional != null) {
-          final indexAvailable = listMessageCurrent
-              .indexWhere((message) => message.id == event.newMessage.optional);
-          if (indexAvailable != -1) {
-            List<MessageEntity> newMessage = List.from(listMessageCurrent);
-            newMessage = newMessage..removeAt(indexAvailable);
-            listMessageCurrent = [...newMessage];
-          }
-        }
+      listMessageCurrent = [event.newMessage, ...listMessageCurrent];
 
-        listMessageCurrent = [event.newMessage, ...listMessageCurrent];
-
-        emit((state as GroupChatRoomInfoSuccess)
-            .copyWith(messages: listMessageCurrent));
-      }
+      emit((state as ChatRoomInfoSuccess)
+          .copyWith(messages: listMessageCurrent));
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -149,11 +125,11 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       ChatRoomNewMessageTopLoaded event, Emitter<ChatRoomState> emit) async {
     try {
       if (state is ChatRoomInfoSuccess) {
-        final userId = (state as ChatRoomInfoSuccess).user.id;
+        final chatRoomId = (state as ChatRoomInfoSuccess).chatRoomId;
         final listMessageCurrent = (state as ChatRoomInfoSuccess).messages;
 
         final loadedMessages = await _friendUseCase.getListChatWithFriends(
-            userId: userId, latestMessageId: listMessageCurrent.last.id);
+            userId: chatRoomId, latestMessageId: listMessageCurrent.last.id);
 
         bool isLatest = false;
 
@@ -164,26 +140,6 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
         final List<MessageEntity> newListMessage = List.from(listMessageCurrent)
           ..addAll(loadedMessages);
         emit((state as ChatRoomInfoSuccess).copyWith(
-          messages: newListMessage,
-          isLatest: isLatest,
-        ));
-      } else if (state is GroupChatRoomInfoSuccess) {
-        //final groupId = (state as GroupChatRoomInfoSuccess).groupInfo.id;
-        final groupId = "648e6a2ad3f1d82db85072f2";
-        final listMessageCurrent = (state as GroupChatRoomInfoSuccess).messages;
-
-        final loadedMessages = await _groupUseCase.getListChatWithGroup(
-            groupId: groupId, latestMessageId: listMessageCurrent.last.id);
-
-        bool isLatest = false;
-
-        if (loadedMessages.isEmpty) {
-          isLatest = true;
-        }
-
-        final List<MessageEntity> newListMessage = List.from(listMessageCurrent)
-          ..addAll(loadedMessages);
-        emit((state as GroupChatRoomInfoSuccess).copyWith(
           messages: newListMessage,
           isLatest: isLatest,
         ));

@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:chatapp/common/widgets/stateless/button/float_action_stadium_button.dart';
-import 'package:chatapp/presentation/chat/chat_room/widgets/list_message_group.dart';
 import 'package:flutter/material.dart';
 
 import 'list_message.dart';
@@ -29,18 +28,6 @@ class _ListMessageContainerState extends State<ListMessageContainer> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
-  }
-
-  Widget _buildListMessageByType() {
-    if (widget.type == "friend") {
-      return const ListMessage();
-    } else if (widget.type == "group") {
-      return const ListMessageGroup();
-    } else {
-      return SliverToBoxAdapter(
-        child: Container(),
-      );
-    }
   }
 
   @override
@@ -84,7 +71,7 @@ class _ListMessageContainerState extends State<ListMessageContainer> {
         CustomScrollView(
           reverse: true,
           controller: _scrollController,
-          slivers: <Widget>[_buildListMessageByType()],
+          slivers: const <Widget>[ListMessage()],
         ),
         if (_isShowMoveToBottom)
           Positioned(

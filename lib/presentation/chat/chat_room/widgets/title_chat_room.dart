@@ -13,11 +13,12 @@ class TitleChatRoom extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return state.maybeWhen(
-            getChatRoomInfoSuccess: (_, user, __) {
+            getChatRoomInfoSuccess:
+                (_, __, ___, chatRoomName, chatRoomAvatar, ____) {
               return Row(
                 children: <Widget>[
                   CustomAvatarImage(
-                    urlImage: user.avatar,
+                    urlImage: chatRoomAvatar,
                     widthImage: 40,
                     heightImage: 40,
                   ),
@@ -29,7 +30,7 @@ class TitleChatRoom extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          user.name ?? "",
+                          chatRoomName ?? "",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
