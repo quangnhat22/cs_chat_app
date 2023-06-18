@@ -126,10 +126,16 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     try {
       if (state is ChatRoomInfoSuccess) {
         final chatRoomId = (state as ChatRoomInfoSuccess).chatRoomId;
+        final isGroup = (state as ChatRoomInfoSuccess).isGroupChatRoom;
         final listMessageCurrent = (state as ChatRoomInfoSuccess).messages;
 
-        final loadedMessages = await _friendUseCase.getListChatWithFriends(
-            userId: chatRoomId, latestMessageId: listMessageCurrent.last.id);
+        final loadedMessages = isGroup
+            ? await _groupUseCase.getListChatWithGroup(
+                groupId: chatRoomId,
+                latestMessageId: listMessageCurrent.last.id)
+            : await _friendUseCase.getListChatWithFriends(
+                userId: chatRoomId,
+                latestMessageId: listMessageCurrent.last.id);
 
         bool isLatest = false;
 

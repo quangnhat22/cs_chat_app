@@ -76,6 +76,7 @@ class GroupUseCaseImpl extends GroupUseCase {
   @override
   Future<List<MessageEntity>> getListChatWithGroup(
       {required String groupId, String? latestMessageId, int? limit}) {
-    return _repo.getListChatWithGroup(groupId: groupId);
+    return _repo.getListChatWithGroup(
+        groupId: groupId, latestMessageId: latestMessageId, limit: limit);
   }
 }
