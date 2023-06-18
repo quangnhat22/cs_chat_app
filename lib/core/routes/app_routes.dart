@@ -85,7 +85,16 @@ class AppRoutes {
         return _buildRoute(
           settings,
           ChatRoomPage(
-            userId: settings.arguments as String,
+            id: settings.arguments as String,
+            type: "friend",
+          ),
+        );
+      case RouteName.groupChatRoom:
+        return _buildRoute(
+          settings,
+          ChatRoomPage(
+            id: settings.arguments as String,
+            type: "group",
           ),
         );
       case RouteName.deviceAdministration:

@@ -11,9 +11,9 @@ class MessageRepositoryImpl extends MessageRepository {
       : _socket = chatWebSocket;
 
   @override
-  Future<void> connectSocket() async {
+  Future<void> connectSocket(String id, String type) async {
     try {
-      _socket.connect();
+      _socket.connect(id, type);
     } catch (e) {
       throw Exception(e);
     }
@@ -39,10 +39,9 @@ class MessageRepositoryImpl extends MessageRepository {
   }
 
   @override
-  Future<void> sendMessage(String type, String message, String receiverUserId,
-      String? option) async {
+  Future<void> sendMessage(String type, String message, String? option) async {
     try {
-      _socket.sendMessage(type, message, receiverUserId, option);
+      _socket.sendMessage(type, message, option);
     } catch (e) {
       throw Exception(e);
     }

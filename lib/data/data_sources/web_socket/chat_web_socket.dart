@@ -16,7 +16,7 @@ class ChatWebSocket {
   final FileStorageFirebase storageFirebase;
   late final IOWebSocketChannel _channel;
 
-  final String url = "${AppConfig.baseUrl}/ws/chat";
+  final String url = AppConfig.baseUrl;
 
   late final StreamController _streamController;
 
@@ -24,10 +24,12 @@ class ChatWebSocket {
     _streamController = StreamController();
   }
 
-  Future<void> connect() async {
+  Future<void> connect(String id, String type) async {
     try {
+      final urlSocket = "$url/$type";
       final accessToken = await localDataSrc.getAccessToken();
-      _channel = IOWebSocketChannel.connect(Uri.parse("ws://$url"),
+      _channel = IOWebSocketChannel.connect(
+          Uri.parse("ws://$urlSocket/$id/chat/ws"),
           headers: {"Authorization": "Bearer $accessToken"}
           // headers: {'Connection': 'upgrade', 'Upgrade': 'websocket'},
           );
@@ -49,8 +51,7 @@ class ChatWebSocket {
     }
   }
 
-  Future<void> sendMessage(String type, String message, String receiverUserId,
-      String? option) async {
+  Future<void> sendMessage(String type, String message, String? option) async {
     String? messageContent = message;
     try {
       if (type == "image" ||
@@ -60,12 +61,8 @@ class ChatWebSocket {
         messageContent = await storageFirebase.uploadFile(message);
         if (messageContent == null) return;
       }
-      _channel.sink.add(jsonEncode({
-        "type": type,
-        "receiver_id": receiverUserId,
-        "message": messageContent,
-        "optional": option
-      }));
+      _channel.sink.add(jsonEncode(
+          {"type": type, "message": messageContent, "optional": option}));
     } catch (e) {
       throw Exception(e.toString());
     }

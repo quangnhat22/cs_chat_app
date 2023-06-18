@@ -8,6 +8,11 @@ class ListGroupItem extends StatelessWidget {
 
   final GroupEntity groupItem;
 
+  void _onTapGroupMessage() {
+    NavigationUtil.pushNamed(
+        route: RouteName.groupChatRoom, args: groupItem.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -29,7 +34,7 @@ class ListGroupItem extends StatelessWidget {
           ),
           trailing: IconButton(
             color: Theme.of(context).colorScheme.primary,
-            onPressed: () {},
+            onPressed: _onTapGroupMessage,
             icon: const Icon(Icons.message_outlined),
           ),
         ),

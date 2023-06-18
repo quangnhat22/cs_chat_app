@@ -13,6 +13,12 @@ class ChatRoomState with _$ChatRoomState {
     @Default(false) bool isLatest,
   }) = ChatRoomInfoSuccess;
 
+  const factory ChatRoomState.getGroupChatRoomInfoSuccess({
+    required List<MessageEntity> messages,
+    required GroupEntity groupInfo,
+    @Default(false) bool isLatest,
+  }) = GroupChatRoomInfoSuccess;
+
   const factory ChatRoomState.getChatRoomInfoFailure({
     required String message,
   }) = ChatRoomInfoFailure;

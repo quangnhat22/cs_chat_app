@@ -24,11 +24,9 @@ class RowMediaButton extends StatelessWidget {
       }
 
       if (filePath != null && ctx.mounted) {
-        ctx.read<MessageStreamCubit>().sendMessage(
-              type: "image",
-              message: filePath,
-              receiverUserId: stateChatRoom.user.id,
-            );
+        ctx
+            .read<MessageStreamCubit>()
+            .sendMessage(type: "image", message: filePath);
       }
     }
   }
@@ -39,11 +37,9 @@ class RowMediaButton extends StatelessWidget {
       final filePath = await AppAssetsPicker.pickVideo(ctx);
 
       if (filePath != null && ctx.mounted) {
-        ctx.read<MessageStreamCubit>().sendMessage(
-              type: "video",
-              message: filePath,
-              receiverUserId: stateChatRoom.user.id,
-            );
+        ctx
+            .read<MessageStreamCubit>()
+            .sendMessage(type: "video", message: filePath);
       }
     }
   }
@@ -61,11 +57,9 @@ class RowMediaButton extends StatelessWidget {
         }),
       ).then((value) {
         if (value != null) {
-          ctx.read<MessageStreamCubit>().sendMessage(
-                type: "audio",
-                message: value,
-                receiverUserId: stateChatRoom.user.id,
-              );
+          ctx
+              .read<MessageStreamCubit>()
+              .sendMessage(type: "audio", message: value);
         }
       });
     }
@@ -77,11 +71,9 @@ class RowMediaButton extends StatelessWidget {
       String? filePath = await AppAssetsPicker.pickFile(ctx);
 
       if (filePath != null && ctx.mounted) {
-        ctx.read<MessageStreamCubit>().sendMessage(
-              type: "file",
-              message: filePath,
-              receiverUserId: stateChatRoom.user.id,
-            );
+        ctx
+            .read<MessageStreamCubit>()
+            .sendMessage(type: "file", message: filePath);
       }
     }
   }

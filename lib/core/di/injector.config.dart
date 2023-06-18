@@ -187,6 +187,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i45.ChatRoomBloc>(() => _i45.ChatRoomBloc(
           userUC: gh<_i41.UserUseCase>(),
           friendUC: gh<_i30.FriendUseCase>(),
+          groupUC: gh<_i34.GroupUseCase>(),
         ));
     gh.factory<_i46.CubitSubmitNewGroupCubit>(
         () => _i46.CubitSubmitNewGroupCubit(groupUC: gh<_i34.GroupUseCase>()));
