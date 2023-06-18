@@ -98,5 +98,11 @@
   "sticker": "Sticker",
   "location": "Location",
   "change_profile_picture_or_your_name": "Change profile picture or your name",
-  "files": "Files"
+  "files": "Files",
+  "turn_on_notification": "Turn on notifications",
+  "view_photos_and_media_files": "View photos, files and others",
+  "exit_group": "Exit group",
+  "delete_group": "Delete group",
+  "view_members": "View members",
+  "delete_friend": "Delete friend"
 }

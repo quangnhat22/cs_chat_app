@@ -4,12 +4,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common/widgets/stateless/button/custom_text_button.dart';
-import '../widgets/group_details_page_app_bar.dart';
-import '../widgets/group_details_small_card_bottom.dart';
-import '../widgets/group_details_small_card_top.dart';
+import '../../../group/group_details/widgets/group_details_page_app_bar.dart';
+import '../widgets/friend_details_small_card_bottom.dart';
+import '../widgets/friend_details_small_card_top.dart';
 
-class GroupDetailPage extends StatelessWidget {
-  const GroupDetailPage({super.key});
+class FriendDetailPage extends StatelessWidget {
+  const FriendDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class GroupDetailPage extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: Text(
-                    "UIT is the best (K15)",
+                    "Do Huynh Thao Vy",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -48,11 +48,11 @@ class GroupDetailPage extends StatelessWidget {
                       () {},
                       Theme.of(context).colorScheme.primary),
                 ),
-                const GroupDetailsSmallCardTop(),
+                const FriendDetailsSmallCardTop(),
                 SizedBox(
                     height: 4.h,
                 ),
-                const GroupDetailsSmallCardBottom(),
+                const FriendDetailsSmallCardBottom(),
               ],
             ),
           ),
