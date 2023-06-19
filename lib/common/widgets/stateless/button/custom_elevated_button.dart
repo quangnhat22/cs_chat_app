@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomElevatedButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback? onPressed;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   const CustomElevatedButton(
       this.buttonText, this.onPressed, this.backgroundColor,
@@ -17,7 +17,8 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          backgroundColor:
+              MaterialStateProperty.all(backgroundColor ?? Colors.grey[400]),
           padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
           ),
