@@ -196,11 +196,12 @@ extension GetItInjectableX on _i1.GetIt {
           userRepo: gh<_i44.UserRepository>(),
           authLocalDataSrc: gh<_i4.AuthLocalDataSrc>(),
         ));
-    gh.factory<_i44.AuthUseCase>(
-        () => _i44.AuthUseCaeImpl(repo: gh<_i42.AuthRepository>()));
-    gh.factory<_i45.ChatRoomBloc>(() => _i45.ChatRoomBloc(
-          userUC: gh<_i41.UserUseCase>(),
-          friendUC: gh<_i30.FriendUseCase>(),
+    gh.factory<_i49.AuthUseCase>(
+        () => _i49.AuthUseCaeImpl(repo: gh<_i47.AuthRepository>()));
+    gh.factory<_i50.ChatRoomBloc>(() => _i50.ChatRoomBloc(
+          userUC: gh<_i46.UserUseCase>(),
+          friendUC: gh<_i34.FriendUseCase>(),
+          groupUC: gh<_i38.GroupUseCase>(),
         ));
     gh.factory<_i51.CubitSubmitNewGroupCubit>(
         () => _i51.CubitSubmitNewGroupCubit(groupUC: gh<_i38.GroupUseCase>()));
