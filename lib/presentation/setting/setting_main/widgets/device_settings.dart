@@ -60,7 +60,10 @@ class DeviceSettings extends StatelessWidget {
                     title: AppLocalizations.of(context)!.devices,
                     leading: const Icon(Icons.devices_outlined),
                     trailing: const Icon(Icons.chevron_right),
-                    onTap: () {},
+                    onTap: () => {
+                      NavigationUtil.pushNamed(
+                          route: RouteName.deviceAdministration)
+                    },
                     hasTopBorderRadius: false,
                     hasBottomBorderRadius: true,
                   ),
