@@ -103,5 +103,6 @@
   "exit_group": "Exit group",
   "delete_group": "Delete group",
   "view_members": "View members",
-  "delete_friend": "Delete friend"
+  "delete_friend": "Delete friend",
+  "group_change_infomation": "Change info"
 }
