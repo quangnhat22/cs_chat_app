@@ -12,9 +12,10 @@ class ButtonSignIn extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return CustomElevatedButton(
-          AppLocalizations.of(context)!.sign_in,
-          state.isValid ? () => _handleLogin(context) : null,
-          state.isValid ? Theme.of(context).colorScheme.primary : Colors.grey,
+          buttonText: AppLocalizations.of(context)!.sign_in,
+          onPressed: state.isValid ? () => _handleLogin(context) : null,
+          backgroundColor:
+              state.isValid ? Theme.of(context).colorScheme.primary : null,
         );
       },
     );

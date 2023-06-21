@@ -10,15 +10,26 @@ class ButtonFindFriend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FindFriendFormCubit, FindFriendFormState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CustomElevatedButton(
-            AppLocalizations.of(context)!.find_friend,
-            () => _handleSubmitFindBtn(context, state.email?.value),
-            Theme.of(context).colorScheme.primary,
-          ),
+    return BlocBuilder<FindFriendBloc, FindFriendState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, FindFriendState findFriendState) {
+        return BlocBuilder<FindFriendFormCubit, FindFriendFormState>(
+          builder: (context, state) {
+            return findFriendState.maybeWhen(
+              inProgress: () => const CircularProgressIndicator(),
+              orElse: () {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomElevatedButton(
+                    buttonText: AppLocalizations.of(context)!.find_friend,
+                    onPressed: () =>
+                        _handleSubmitFindBtn(context, state.email?.value),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ),
+                );
+              },
+            );
+          },
         );
       },
     );

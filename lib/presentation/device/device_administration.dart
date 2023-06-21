@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/widgets/stateless/app_bar/m_page_app_bar.dart';
-import '../../common/widgets/stateless/divider/divider_space_left.dart';
 import '../../core/config/app_text_style.dart';
 import '../../core/di/injector.dart';
 import 'bloc/list_device_bloc.dart';

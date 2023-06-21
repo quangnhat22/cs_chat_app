@@ -34,12 +34,7 @@ class AppRoutes {
           const RegisterPage(),
         );
       case RouteName.forgotPassword:
-        return _buildRoute(
-          settings,
-          ForgotPasswordPage(
-            urlCode: settings.arguments as String?,
-          ),
-        );
+        return _buildRoute(settings, const ForgotPasswordPage());
       default:
         return _errorRoute();
     }

@@ -84,7 +84,13 @@ class RowMediaButton extends StatelessWidget {
       builder: (context) {
         return const MapPage();
       },
-    );
+    ).then((result) {
+      if (result != null && result["currentLocation"] != null) {
+        ctx
+            .read<MessageStreamCubit>()
+            .sendMessage(type: "map", message: result["currentLocation"]);
+      }
+    });
     //NavigationUtil.pushNamed(route: RouteName.googleMap);
   }
 

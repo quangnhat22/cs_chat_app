@@ -36,16 +36,16 @@ class ChatWebSocket {
 
       await _channel.ready;
 
-      _streamController.addStream(_channel.stream);
+      await _streamController.addStream(_channel.stream);
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  void disconnect() {
+  void disconnect() async {
     try {
-      _channel.sink.close();
-      _streamController.close();
+      await _channel.sink.close();
+      await _streamController.close();
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -73,7 +73,7 @@ class ChatWebSocket {
       //return _channel.stream.map((event) );
       return _streamController.stream.map((event) {
         final json = jsonDecode(event) as Map<String, dynamic>;
-        log(json.toString());
+        log(json.toString(), name: "stream-error");
 
         return MessageModel.fromJson(json);
       });

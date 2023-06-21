@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:chatapp/core/routes/app_navigation.dart';
 import 'package:chatapp/core/utils/permission_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -36,6 +39,11 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  void _sendMyLocation() {
+    Navigator.pop(
+        context, {"currentLocation": jsonEncode(markers.first.position)});
   }
 
   @override
@@ -107,7 +115,8 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
         ),
         Column(
           children: [
-            TextButton(onPressed: () {}, child: Text("Send my location")),
+            TextButton(
+                onPressed: _sendMyLocation, child: Text("Send my location")),
           ],
         )
       ],

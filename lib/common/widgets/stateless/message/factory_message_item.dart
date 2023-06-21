@@ -58,6 +58,13 @@ class FactoryMessageItem {
             isMe: isMe ?? false,
           );
         }
+      case "map":
+        {
+          return TextMessageItem(
+            content: content!,
+            isMe: isMe ?? false,
+          );
+        }
       default:
         {
           return TextMessageItem(

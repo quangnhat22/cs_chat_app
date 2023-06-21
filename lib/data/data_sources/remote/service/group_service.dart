@@ -118,6 +118,10 @@ class GroupService {
           "${BaseService.groupPath}/$groupId/chat",
         );
       } else {
+        if (latestMessageId.contains("-")) {
+          throw Exception("id not valid");
+        }
+
         return await _service.dio.get(
           "${BaseService.groupPath}/$groupId/chat?last_id=$latestMessageId",
         );

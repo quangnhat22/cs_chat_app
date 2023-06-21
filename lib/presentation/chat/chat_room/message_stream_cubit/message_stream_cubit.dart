@@ -60,9 +60,9 @@ class MessageStreamCubit extends Cubit<MessageStreamState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
+    await _messageUseCase.disconnectSocket();
     _subNewMessageStream.cancel();
-    _messageUseCase.disconnectSocket();
     return super.close();
   }
 }

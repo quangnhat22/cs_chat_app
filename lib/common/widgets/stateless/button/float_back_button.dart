@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FloatBackButton extends StatelessWidget {
-  final Color backgroundColor;
-  final Color iconColor;
+  final Color? backgroundColor;
+  final Color? iconColor;
 
-  const FloatBackButton(this.backgroundColor, this.iconColor, {super.key});
+  const FloatBackButton({this.backgroundColor, this.iconColor, super.key});
 
   @override
   Widget build(BuildContext context) {

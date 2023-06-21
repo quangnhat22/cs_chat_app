@@ -53,8 +53,6 @@ class FindNewFriendView extends StatelessWidget {
                   const InputFindFriend(),
                   const ButtonFindFriend(),
                   if (state is FindFriendNotFound) const NotFoundResult(),
-                  if (state is FindFriendInProgress)
-                    const CircularProgressIndicator(),
                 ],
               ),
             ),

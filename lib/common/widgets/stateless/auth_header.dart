@@ -28,7 +28,8 @@ class AuthHeader extends StatelessWidget {
         children: [
           isShowBackButton
               ? FloatBackButton(
-                  Theme.of(context).colorScheme.onPrimary, mainColor)
+                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                  iconColor: mainColor)
               : SizedBox(
                   height: 16.h,
                 ),
