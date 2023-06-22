@@ -5,12 +5,14 @@ class CustomElevatedButton extends StatelessWidget {
   final String? buttonText;
   final VoidCallback? onPressed;
   final Color? backgroundColor;
+  final bool isEnable;
 
   const CustomElevatedButton({
     super.key,
     this.buttonText,
     this.onPressed,
     this.backgroundColor,
+    this.isEnable = true,
   });
 
   @override
@@ -20,8 +22,8 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all(backgroundColor ?? Colors.grey[400]),
+          backgroundColor: MaterialStateProperty.all(
+              isEnable ? backgroundColor : Colors.grey[400]),
           padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
           ),

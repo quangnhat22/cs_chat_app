@@ -6,18 +6,21 @@ class SendFormButton extends StatelessWidget {
   }) : super(key: key);
 
   void _tappedBtnSendEmail(BuildContext ctx) {
-    showModalBottomSheet(
+    showDialog(
       context: ctx,
       builder: (context) {
-        return const SucessConfirmView();
+        return const SuccessConfirmView();
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return CustomElevatedButton(
-      buttonText: "Send Email",
+    // return CustomElevatedButton(
+    //   buttonText: "Send Email",
+    //   onPressed: () => _tappedBtnSendEmail(context),
+    // );
+    return CountdownButtonSend(
       onPressed: () => _tappedBtnSendEmail(context),
     );
   }

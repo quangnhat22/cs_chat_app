@@ -99,4 +99,8 @@ class AuthService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> forgotPassword(String email) async {
+    throw Exception();
+  }
 }

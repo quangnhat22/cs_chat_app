@@ -1,75 +1,91 @@
 part of forgot_password;
 
-class SucessConfirmView extends StatelessWidget {
-  const SucessConfirmView({super.key});
+class SuccessConfirmView extends StatelessWidget {
+  const SuccessConfirmView({super.key, this.changePage});
+
+  final Function? changePage;
+
+  void _returnStepOne() {
+    changePage!(0);
+  }
+
+  void _openGmailApp() async {
+    await LaunchApp.openApp(
+      androidPackageName: 'com.google.android.gm',
+      iosUrlScheme: 'googlegmail://',
+      // appStoreLink:
+      // 'itms-apps://itunes.apple.com/app/pulse-secure/id945832041',
+      openStore: true,
+      // https://apps.apple.com/us/app/gmail-email-by-google/id422689480
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
-          // fit: StackFit.expand,
-          // alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            Container(
-              padding:
-                  EdgeInsets.only(top: AppScreenUtils.isLandscape() ? 40 : 117),
-              decoration:
-                  BoxDecoration(color: AppColors.lightColorScheme.tertiary),
-              child: Center(
-                child: Column(children: [
-                  AppAssets.checkIcon,
-                  Container(
-                    width: 150,
-                    height: 50,
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(top: 33),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightColorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      "Awesome !",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: AppColors.lightColorScheme.tertiary,
-                      ),
-                    ),
-                  ),
-                ]),
-              ),
-            ),
-            ShortFormCard(
-              childWidget: Column(
+    return BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
+      buildWhen: (prev, current) => prev != current,
+      builder: (context, state) {
+        return Scaffold(
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: GoBackTextButton(),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                      top: 100,
-                    ),
-                    child: Text(
-                      "Your password resets successfully !!!",
-                      style: TextStyle(
-                        color: AppColors.lightColorScheme.tertiary,
-                        fontSize: 25,
-                      ),
-                      textAlign: TextAlign.center,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AppAssets.sendEmailSuccessJpg,
+                        Text(
+                          AppLocalizations.of(context)!.send_email_success,
+                          style: AppTextStyles.headlineTextStyle,
+                        ),
+                        SizedBox(
+                          height: 24.h,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!
+                              .check_email_forgot_password(state.email.value),
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.captionTextStyle.copyWith(
+                            height: 1.5,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 48.h,
+                        ),
+                        CustomElevatedButton(
+                          onPressed: _openGmailApp,
+                          buttonText:
+                              AppLocalizations.of(context)!.open_gmail_app,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        CustomTextButton(
+                          buttonText:
+                              AppLocalizations.of(context)!.change_email,
+                          onPressed: _returnStepOne,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        )
+                      ],
                     ),
                   ),
-                  // const Padding(
-                  //   padding: EdgeInsets.only(top: 80, bottom: 90),
-                  //   child: Center(
-                  //     child: SendButton(
-                  //       applyText: "Back to login",
-                  //     ),
-                  //   ),
-                  // )
                 ],
               ),
-            )
-          ],
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

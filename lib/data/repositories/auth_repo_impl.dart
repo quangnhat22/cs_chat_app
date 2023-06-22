@@ -131,7 +131,22 @@ class AuthRepositoryImpl extends AuthRepository {
       }
       return false;
     } catch (e) {
-      throw Exception(e..toString());
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> forgotPassword(String email) async {
+    try {
+      final res = await _authService.forgotPassword(email);
+
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 

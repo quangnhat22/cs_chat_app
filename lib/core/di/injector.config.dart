@@ -56,11 +56,13 @@ import 'package:chatapp/domain/modules/user/user_repository.dart' as _i44;
 import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i46;
 import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.dart'
     as _i27;
-import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i61;
+import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i62;
+import 'package:chatapp/presentation/auth/fogot_password/cubit_forgot_pasword/forgot_password_cubit.dart'
+    as _i55;
 import 'package:chatapp/presentation/auth/login/cubit_login/login_cubit.dart'
-    as _i58;
+    as _i59;
 import 'package:chatapp/presentation/auth/register/cubit_sign_up/sign_up_cubit.dart'
-    as _i60;
+    as _i61;
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart'
     as _i50;
 import 'package:chatapp/presentation/chat/chat_room/input_message_cubit/input_message_cubit.dart'
@@ -73,13 +75,13 @@ import 'package:chatapp/presentation/friends/find_new_friend/bloc/find_friend_bl
 import 'package:chatapp/presentation/friends/find_new_friend/cubit/find_friend_form_cubit.dart'
     as _i8;
 import 'package:chatapp/presentation/friends/friends_contact/bloc/friends_contact_bloc.dart'
-    as _i56;
+    as _i57;
 import 'package:chatapp/presentation/friends/friends_infor/friend_action_cubit/friends_action_cubit.dart'
     as _i35;
 import 'package:chatapp/presentation/friends/friends_infor/friend_info_cubit/friend_info_cubit.dart'
     as _i9;
 import 'package:chatapp/presentation/friends/friends_request/friend_request_action_cubit/friend_request_action_cubit.dart'
-    as _i55;
+    as _i56;
 import 'package:chatapp/presentation/friends/friends_request/list_friend_request_bloc/list_friend_request_bloc.dart'
     as _i40;
 import 'package:chatapp/presentation/group/create_group/cubit_create_group_form/create_group_cubit.dart'
@@ -89,7 +91,7 @@ import 'package:chatapp/presentation/group/create_group/cubit_group/cubit_submit
 import 'package:chatapp/presentation/group/groups_request/bloc/list_group_request_bloc.dart'
     as _i42;
 import 'package:chatapp/presentation/group/groups_request/cubit/group_request_action_cubit.dart'
-    as _i57;
+    as _i58;
 import 'package:chatapp/presentation/group/your_groups/bloc/list_group_bloc.dart'
     as _i41;
 import 'package:chatapp/presentation/setting/edit_profile/bloc/edit_form_submit_bloc.dart'
@@ -99,7 +101,7 @@ import 'package:chatapp/presentation/setting/edit_profile/edit_profile_form_cubi
 import 'package:chatapp/presentation/setting/setting_language/cubit/setting_language_cubit.dart'
     as _i24;
 import 'package:chatapp/presentation/setting/setting_main/cubit/setting_main_cubit.dart'
-    as _i59;
+    as _i60;
 import 'package:chatapp/presentation/setting/setting_theme/cubit/setting_theme_cubit.dart'
     as _i25;
 import 'package:get_it/get_it.dart' as _i1;
@@ -211,25 +213,27 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i53.EditProfileFormCubit(userUseCase: gh<_i46.UserUseCase>()));
     gh.factory<_i54.FindFriendBloc>(
         () => _i54.FindFriendBloc(userRepo: gh<_i44.UserRepository>()));
-    gh.factory<_i55.FriendRequestActionCubit>(() =>
-        _i55.FriendRequestActionCubit(friendUseCase: gh<_i34.FriendUseCase>()));
-    gh.factory<_i56.FriendsContactBloc>(() => _i56.FriendsContactBloc(
+    gh.factory<_i55.ForgotPasswordCubit>(
+        () => _i55.ForgotPasswordCubit(gh<_i49.AuthUseCase>()));
+    gh.factory<_i56.FriendRequestActionCubit>(() =>
+        _i56.FriendRequestActionCubit(friendUseCase: gh<_i34.FriendUseCase>()));
+    gh.factory<_i57.FriendsContactBloc>(() => _i57.FriendsContactBloc(
           useCase: gh<_i34.FriendUseCase>(),
           userUseCase: gh<_i46.UserUseCase>(),
         ));
-    gh.factory<_i57.GroupRequestActionCubit>(
-        () => _i57.GroupRequestActionCubit(groupUC: gh<_i38.GroupUseCase>()));
-    gh.factory<_i58.LoginCubit>(
-        () => _i58.LoginCubit(authUC: gh<_i49.AuthUseCase>()));
-    gh.factory<_i59.SettingMainCubit>(() => _i59.SettingMainCubit(
+    gh.factory<_i58.GroupRequestActionCubit>(
+        () => _i58.GroupRequestActionCubit(groupUC: gh<_i38.GroupUseCase>()));
+    gh.factory<_i59.LoginCubit>(
+        () => _i59.LoginCubit(authUC: gh<_i49.AuthUseCase>()));
+    gh.factory<_i60.SettingMainCubit>(() => _i60.SettingMainCubit(
           authUseCase: gh<_i49.AuthUseCase>(),
           userUseCase: gh<_i46.UserUseCase>(),
           appSettingsUseCase: gh<_i15.AppSettingsUseCase>(),
         ));
-    gh.factory<_i60.SignUpCubit>(
-        () => _i60.SignUpCubit(authUC: gh<_i49.AuthUseCase>()));
-    gh.lazySingleton<_i61.AppBloc>(
-        () => _i61.AppBloc(authUseCase: gh<_i49.AuthUseCase>()));
+    gh.factory<_i61.SignUpCubit>(
+        () => _i61.SignUpCubit(authUC: gh<_i49.AuthUseCase>()));
+    gh.lazySingleton<_i62.AppBloc>(
+        () => _i62.AppBloc(authUseCase: gh<_i49.AuthUseCase>()));
     return this;
   }
 }

@@ -49,4 +49,9 @@ class AppAssets {
     'assets/images/not_found.svg',
     semanticsLabel: 'A red up arrow',
   );
+
+  static final sendEmailSuccessJpg = Image.asset(
+    'assets/images/send_email_success.jpg',
+    fit: BoxFit.cover,
+  );
 }

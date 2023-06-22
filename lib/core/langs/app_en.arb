@@ -89,7 +89,6 @@
   "search_friends": "Search friends",
   "selected_text": "selected",
   "user_status_online": "Online",
-  "back_to_login": "Back to Login",
   "something_wrong_try_again": "Some things wrong! Try again.",
   "camera": "Camera",
   "gallery": "Gallery",
@@ -100,9 +99,26 @@
   "change_profile_picture_or_your_name": "Change profile picture or your name",
   "files": "Files",
   "turn_on_notification": "Turn on notifications",
+  "turn_off_notification": "Turn off notifications",
   "view_photos_and_media_files": "View photos, files and others",
   "exit_group": "Exit group",
   "delete_group": "Delete group",
   "view_members": "View members",
-  "delete_friend": "Delete friend"
+  "delete_friend": "Delete friend",
+  "return_login": "Return Login",
+  "click_send_email": "Click to send email",
+  "send_email_success": "Send Email Success",
+  "resend_email_after": "Resend email after",
+  "dont_worry_password": " Don’t worry! Just type in your email and we will send you a email to reset your password.",
+  "check_email_forgot_password": "We sent an email to ${email_user} with a password reset Link! Please check.",
+  "@check_email_forgot_password": {
+    "placeholders": {
+      "email_user": {
+        "type": "String",
+        "example": "Bob"
+      }
+    }
+  },
+  "open_gmail_app": "Open Gmail App",
+  "change_email": "Change email"
 }

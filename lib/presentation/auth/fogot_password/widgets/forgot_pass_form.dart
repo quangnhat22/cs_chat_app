@@ -21,36 +21,36 @@ class _ValidateEmailFormState extends State<ValidateEmailForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppAssets.csChat,
-            const Padding(
-              padding: EdgeInsets.only(top: 35),
+            Padding(
+              padding: const EdgeInsets.only(top: 35),
               child: Text(
-                "Forgot Password",
-                style: TextStyle(
+                AppLocalizations.of(context)!.forgot_password,
+                style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 35, left: 17, right: 17),
+              padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 16),
               child: Text(
-                "Don’t worry! Just type in your email and we will send you a email to reset your password",
+                AppLocalizations.of(context)!.dont_worry_password,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.darkColorScheme.outline,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 17,
+                style: AppTextStyles.captionTextStyle.copyWith(
+                  height: 1.5,
+                  fontSize: 16.sp,
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
               child: CTextFormField(
-                  icon: Icon(Icons.email_outlined), label: "Email"),
+                icon: const Icon(Icons.email_outlined),
+                label: AppLocalizations.of(context)!.email_label,
+              ),
             ),
             const Padding(
-              padding:
-                  EdgeInsets.only(top: 120, left: 20, right: 20, bottom: 54),
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 16),
               child: SendFormButton(),
             )
           ],
