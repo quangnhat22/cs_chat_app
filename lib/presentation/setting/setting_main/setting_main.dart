@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common/widgets/stateless/app_bar/m_home_app_bar.dart';
+import '../../../common/widgets/stateless/builder_dialog/app_dialog_base_builder.dart';
 import '../../../common/widgets/stateless/button/custom_outline_button.dart';
 import '../../../common/widgets/stateless/circle_avatar/custom_avatar_image.dart';
 import '../../../common/widgets/stateless/divider/divider_space_left.dart';

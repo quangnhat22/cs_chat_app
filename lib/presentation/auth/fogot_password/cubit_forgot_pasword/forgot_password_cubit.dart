@@ -35,12 +35,13 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
           await _authUseCase.forgotPassword(email: state.email.value);
       if (isSendEmailSuccess) {
         emit(state.copyWith(statusSubmit: FormzSubmissionStatus.success));
-        return;
       } else {
         emit(state.copyWith(statusSubmit: FormzSubmissionStatus.failure));
       }
+      emit(state.copyWith(statusSubmit: FormzSubmissionStatus.initial));
     } catch (_) {
       emit(state.copyWith(statusSubmit: FormzSubmissionStatus.failure));
+      emit(state.copyWith(statusSubmit: FormzSubmissionStatus.initial));
     }
   }
 }

@@ -15,7 +15,7 @@ class CountdownButtonSend extends StatefulWidget {
 
 class _CountdownButtonSendState extends State<CountdownButtonSend> {
   late CountdownTimerController controller;
-  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 5;
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 2;
   bool isAbleButton = false;
 
   @override
@@ -35,7 +35,7 @@ class _CountdownButtonSendState extends State<CountdownButtonSend> {
   }
 
   void _onPressed() {
-    widget.onPressed;
+    widget.onPressed?.call();
     setState(() {
       endTime = DateTime.now().millisecondsSinceEpoch +
           const Duration(seconds: 5).inMilliseconds;

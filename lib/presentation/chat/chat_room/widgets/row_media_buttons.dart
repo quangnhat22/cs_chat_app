@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:chatapp/common/widgets/stateless/bottom_sheet/voice_bottom_sheet.dart';
 import 'package:chatapp/common/widgets/stateless/button/custom_outline_icon_button.dart';
+import 'package:chatapp/core/config/app_config.dart';
 import 'package:chatapp/core/config/app_enum.dart';
 import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message_stream_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:giphy_get/giphy_get.dart';
 
 import '../../../../core/utils/assets_picker.dart';
 import '../../../map/pages/map_page.dart';
@@ -78,6 +82,15 @@ class RowMediaButton extends StatelessWidget {
     }
   }
 
+  void _pickStickerAndGif(BuildContext ctx) async {
+    final gif = await GiphyGet.getGif(context: ctx, apiKey: AppConfig.giphyKey);
+    if (gif != null && ctx.mounted) {
+      await ctx
+          .read<MessageStreamCubit>()
+          .sendMessage(type: "giphy", message: jsonEncode(gif));
+    }
+  }
+
   void _pickLocation(BuildContext ctx) async {
     showDialog(
       context: ctx,
@@ -140,7 +153,7 @@ class RowMediaButton extends StatelessWidget {
             icon: Icons.emoji_emotions_outlined,
             color: Colors.orange,
             title: AppLocalizations.of(context)!.sticker,
-            onPress: () {},
+            onPress: () => _pickStickerAndGif(context),
           ),
           COutlineIconButton(
             icon: Icons.location_on_outlined,

@@ -54,4 +54,27 @@ class AppAssets {
     'assets/images/send_email_success.jpg',
     fit: BoxFit.cover,
   );
+
+  static final successIcon = SvgPicture.asset(
+    'assets/icons/success.svg',
+    width: 120,
+    height: 120,
+  );
+
+  static final warningIcon = SvgPicture.asset(
+    'assets/icons/warning.svg',
+    width: 120,
+    height: 120,
+  );
+
+  static final errorIcon = SvgPicture.asset(
+    'assets/icons/error.svg',
+    width: 120,
+    height: 120,
+  );
+
+  static final noDataImg = SvgPicture.asset(
+    'assets/iamges/no_data.jpg',
+    fit: BoxFit.cover,
+  );
 }

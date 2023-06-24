@@ -1,3 +1,4 @@
+import 'package:chatapp/common/widgets/stateless/message/message_item/giphy_message_item.dart';
 import 'package:flutter/material.dart';
 
 import 'message_item.dart';
@@ -67,6 +68,14 @@ class FactoryMessageItem {
             key: ValueKey(id),
             content: content!,
             isMe: isMe ?? false,
+          );
+        }
+      case "giphy":
+        {
+          return GiphyMessageItem(
+            key: ValueKey(id),
+            isMe: isMe ?? false,
+            content: content,
           );
         }
       case "map":

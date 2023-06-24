@@ -22,7 +22,10 @@ class GoBackTextButton extends StatelessWidget {
               const Icon(
                 Icons.arrow_back_ios,
               ),
-              Text(AppLocalizations.of(context)!.return_login),
+              Text(
+                AppLocalizations.of(context)!.return_login,
+                style: AppTextStyles.menuOptionBottomModelText,
+              ),
             ],
           ),
         ),

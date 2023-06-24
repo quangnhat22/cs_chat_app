@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/routes/app_routes.dart';
 import '../../core/routes/route_name.dart';
-import '../loading/loading_page.dart';
+import '../others/loading_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

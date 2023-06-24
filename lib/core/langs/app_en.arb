@@ -108,9 +108,10 @@
   "return_login": "Return Login",
   "click_send_email": "Click to send email",
   "send_email_success": "Send Email Success",
+  "send_email_fail": "Send Email Fail",
   "resend_email_after": "Resend email after",
   "dont_worry_password": " Don’t worry! Just type in your email and we will send you a email to reset your password.",
-  "check_email_forgot_password": "We sent an email to ${email_user} with a password reset Link! Please check.",
+  "check_email_forgot_password": "We sent an email to {email_user} with a password reset Link! Please check.",
   "@check_email_forgot_password": {
     "placeholders": {
       "email_user": {

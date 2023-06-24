@@ -79,7 +79,6 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   video_thumbnail: ^0.5.3
   giphy_get: ^3.3.1
-  grouped_list: ^5.1.2
 
 dev_dependencies:
   flutter_test:

@@ -108,9 +108,10 @@
   "return_login": "Trở về trang Đăng nhập",
   "click_send_email": "Nhấn vào để gửi Email",
   "send_email_success": "Gửi Email thành công!",
+  "send_email_fail": "Gửi Email thất bại!",
   "resend_email_after": "Gửi lại Email sau",
   "dont_worry_password": " Đừng lo lắng! Hãy nhập Email bạn đã đăng ký và chúng tôi sẽ gửi một Email giúp bạn khôi phục mật khẩu.",
-  "check_email_forgot_password": "Chúng tôi đã gửi một email đến địa chỉ ${email_user} có chứa đường Link khôi phục mật khẩu! Vui lòng kiểm tra.",
+  "check_email_forgot_password": "Chúng tôi đã gửi một email đến địa chỉ {email_user} có chứa đường Link khôi phục mật khẩu! Vui lòng kiểm tra.",
   "@check_email_forgot_password": {
     "placeholders": {
       "email_user": {

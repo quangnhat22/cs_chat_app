@@ -101,6 +101,13 @@ class AuthService {
   }
 
   Future<Response> forgotPassword(String email) async {
-    throw Exception();
+    try {
+      return await _service.dio.post("${BaseService.authPath}/forget-password",
+          data: {"email": email});
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
