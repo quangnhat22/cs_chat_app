@@ -105,6 +105,7 @@
   "delete_group": "Delete group",
   "view_members": "View members",
   "delete_friend": "Delete friend",
+  "group_change_infomation": "Change info",
   "return_login": "Return Login",
   "click_send_email": "Click to send email",
   "send_email_success": "Send Email Success",
