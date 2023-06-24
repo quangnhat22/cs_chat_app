@@ -5,7 +5,7 @@ class FriendsContactState with _$FriendsContactState {
   const factory FriendsContactState.initial() = _Initial;
   const factory FriendsContactState.loading() = FriendsContactLoading;
   const factory FriendsContactState.success(
-      {required List<UserEntity> friends}) = FriendsContactSuccess;
+      {required List<ChatRoomEntity> friends}) = FriendsContactSuccess;
   const factory FriendsContactState.failure({
     required String message,
   }) = FriendsContactFailure;

@@ -29,7 +29,8 @@ class ChatRoomPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => getIt<ChatRoomBloc>()
-            ..add(ChatRoomEvent.started(id: id, type: type)),
+            ..add(ChatRoomEvent.started(
+                id: id, chatRoomId: chatRoomId, type: type)),
         ),
         BlocProvider(
           create: (_) => getIt<MessageStreamCubit>()..started(chatRoomId),

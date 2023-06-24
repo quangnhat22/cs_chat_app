@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chatapp/domain/modules/chat_room/chat_room_use_case.dart';
 import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
 import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:chatapp/domain/modules/user/user_usecase.dart';
@@ -15,11 +16,10 @@ part 'chat_room_state.dart';
 
 @Injectable()
 class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
-  final FriendUseCase _friendUseCase;
   final UserUseCase _userUseCase;
-  final GroupUseCase _groupUseCase;
+  final ChatRoomUseCase _chatRoomUseCase;
 
-  ChatRoomBloc(this._userUseCase, this._friendUseCase, this._groupUseCase)
+  ChatRoomBloc(this._userUseCase, this._chatRoomUseCase)
       : super(const ChatRoomState.initial()) {
     on<ChatRoomEvent>((event, emit) async {
       await event.map(
@@ -47,19 +47,21 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       if (isGroup) {
         //final groupInfo = await _groupUseCase.getListChatWithGroup(groupId: event.id);
         //TODO: gán groupInfo
-        listMessage =
-            await _groupUseCase.getListChatWithGroup(groupId: event.id);
       } else {
         final friendInfo = await _userUseCase.getUserById(event.id);
         chatRoomName = friendInfo?.name;
         chatRoomAvatar = friendInfo?.avatar;
-        listMessage =
-            await _friendUseCase.getListChatWithFriends(userId: event.id);
       }
+
+      listMessage = await _chatRoomUseCase.getListMessage(
+        chatRoomId: event.chatRoomId,
+        lastId: event.latestMessageId,
+      );
 
       emit(ChatRoomInfoSuccess(
         messages: listMessage,
-        chatRoomId: event.id,
+        chatRoomId: event.chatRoomId,
+        id: event.id,
         isGroupChatRoom: isGroup,
         chatRoomName: chatRoomName,
         chatRoomAvatar: chatRoomAvatar,
@@ -121,16 +123,13 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     try {
       if (state is ChatRoomInfoSuccess) {
         final chatRoomId = (state as ChatRoomInfoSuccess).chatRoomId;
-        final isGroup = (state as ChatRoomInfoSuccess).isGroupChatRoom;
+
         final listMessageCurrent = (state as ChatRoomInfoSuccess).messages;
 
-        final loadedMessages = isGroup
-            ? await _groupUseCase.getListChatWithGroup(
-                groupId: chatRoomId,
-                latestMessageId: listMessageCurrent.last.id)
-            : await _friendUseCase.getListChatWithFriends(
-                userId: chatRoomId,
-                latestMessageId: listMessageCurrent.last.id);
+        final loadedMessages = await _chatRoomUseCase.getListMessage(
+          chatRoomId: chatRoomId,
+          lastId: listMessageCurrent.last.id,
+        );
 
         bool isLatest = false;
 
