@@ -1,9 +1,10 @@
 import 'package:chatapp/data/models/group_model.dart';
+import 'package:chatapp/domain/entities/user_entity.dart';
 
 class GroupEntity {
   final String id;
   final String? name;
-  final List<String>? members;
+  final List<UserEntity>? members;
   final String? imageUrl;
 
   GroupEntity({
@@ -22,7 +23,9 @@ class GroupEntity {
     return GroupEntity(
       id: groupModel.id,
       name: groupModel.name,
-      members: groupModel.members,
+      members: groupModel.members
+          ?.map((user) => UserEntity.convertToUserEntity(userModel: user))
+          .toList(),
       imageUrl: groupModel.imageUrl,
     );
   }

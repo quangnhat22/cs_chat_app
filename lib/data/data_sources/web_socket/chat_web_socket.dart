@@ -6,6 +6,8 @@ import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:chatapp/data/models/message_model.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:web_socket_channel/io.dart';
 
 import '../../../core/config/app_config.dart';
@@ -54,10 +56,27 @@ class ChatWebSocket {
   Future<void> sendMessage(String type, String message, String? option) async {
     String? messageContent = message;
     try {
-      if (type == "image" ||
-          type == "video" ||
-          type == "audio" ||
-          type == "file") {
+      if (type == "video") {
+        String? thumbnailUrl = await VideoThumbnail.thumbnailFile(
+          thumbnailPath: (await getTemporaryDirectory()).path,
+          video: messageContent,
+          quality: 1,
+        );
+        if (thumbnailUrl == null) return;
+        messageContent = await storageFirebase.uploadFile(thumbnailUrl);
+        final videoUrl = await storageFirebase.uploadFile(message);
+
+        _channel.sink.add(jsonEncode({
+          "type": "video",
+          "message": messageContent,
+          "video_url": videoUrl,
+          "optional": option
+        }));
+
+        return;
+      }
+
+      if (type == "image" || type == "audio" || type == "file") {
         messageContent = await storageFirebase.uploadFile(message);
         if (messageContent == null) return;
       }

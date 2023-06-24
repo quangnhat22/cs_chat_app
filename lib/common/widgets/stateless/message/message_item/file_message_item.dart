@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:isolate';
 
@@ -27,6 +28,7 @@ class FileMessageItem extends IMessageItem {
   @override
   Widget build(BuildContext context) {
     return FileItem(
+      key: key,
       isMe: isMe,
       url: content,
       createAt: createdAt,
@@ -56,27 +58,33 @@ class _FileItemState extends State<FileItem> {
   String _fileName = "";
   int _fileSize = 0;
 
-  Future<void> _getFileInfo() async {
+  Future<void> _getFileInfo(BuildContext context) async {
     try {
-      if (widget.url == null) return;
+      if (widget.url == null || !context.mounted) return;
       final ref = FirebaseStorage.instance.refFromURL(widget.url!);
       _fileName = ref.name;
-      // ref.getMetadata().asStream().listen((metaData) {
-      //   setState(() {
-      //     _fileSize = metaData.size ?? 0;
-      //   });
-      // });
+      if (_fileSize == 0) {
+        ref.getMetadata().then((metaData) {
+          if (context.mounted) {
+            setState(() {
+              _fileSize = metaData.size ?? 0;
+            });
+          }
+        });
+      }
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  Future<void> _checkFileExistInStorage() async {
+  Future<void> _checkFileExistInStorage(BuildContext context) async {
     String savePath = '/storage/emulated/0/Download/$_fileName';
     final isExist = await File(savePath).exists();
-    setState(() {
-      _isExist = isExist;
-    });
+    if (context.mounted) {
+      setState(() {
+        _isExist = isExist;
+      });
+    }
   }
 
   Future<String?> _getSavedDir() async {
@@ -86,7 +94,7 @@ class _FileItemState extends State<FileItem> {
       try {
         externalStorageDirPath = await AndroidPathProvider.downloadsPath;
       } catch (err, st) {
-        print('failed to get downloads path: $err, $st');
+        log('failed to get downloads path: $err, $st');
 
         final directory = await getExternalStorageDirectory();
         externalStorageDirPath = directory?.path;
@@ -125,12 +133,17 @@ class _FileItemState extends State<FileItem> {
     super.initState();
 
     (() async {
-      await _getFileInfo();
-      await _checkFileExistInStorage();
+      if (mounted) {
+        await _getFileInfo(context);
+        if (mounted) {
+          await _checkFileExistInStorage(context);
+        }
+      }
     })();
 
     AssetsUtils.registerPort(_port.sendPort);
-    _port.listen((dynamic data) {
+
+    _port.listen((dynamic data) async {
       setState(() {});
     });
 

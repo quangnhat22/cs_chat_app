@@ -37,9 +37,11 @@ class _MessgeItemState extends State<MessgeItem> {
             });
           },
           child: FactoryMessageItem.buildMessageItem(
+            widget.message.id,
             widget.message.type,
             widget.isMe,
             widget.message.message,
+            widget.message.videoUrl,
             widget.message.sender?.name ?? "",
             widget.message.createdAt,
           ),

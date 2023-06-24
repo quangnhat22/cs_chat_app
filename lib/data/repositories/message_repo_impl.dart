@@ -41,7 +41,7 @@ class MessageRepositoryImpl extends MessageRepository {
   @override
   Future<void> sendMessage(String type, String message, String? option) async {
     try {
-      _socket.sendMessage(type, message, option);
+      await _socket.sendMessage(type, message, option);
     } catch (e) {
       throw Exception(e);
     }

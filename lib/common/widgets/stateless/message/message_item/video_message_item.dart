@@ -1,21 +1,22 @@
 import 'package:chatapp/common/widgets/stateless/app_bar/m_page_app_bar.dart';
 import 'package:chatapp/common/widgets/stateless/message/message_item.dart';
+import 'package:chatapp/common/widgets/stateless/message/message_item/image_message_item.dart';
 import 'package:chatapp/core/utils/media_duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../skeleton/skeleton.dart';
-
 class VideoMessageItem extends IMessageItem {
   const VideoMessageItem({
     super.key,
     this.content,
+    this.videoUrl,
     this.isMe = false,
   });
 
   final String? content;
+  final String? videoUrl;
   final bool isMe;
 
   @override
@@ -31,55 +32,39 @@ class VideoMessageItem extends IMessageItem {
               : Colors.white,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: content != null ? VideoPlayerView(url: content!) : Container(),
+        child: content != null
+            ? VideoPlayerView(
+                thumbnailUrl: content!,
+                videoUrl: videoUrl,
+                isMe: isMe,
+              )
+            : Container(),
       ),
     );
   }
 }
 
-class VideoPlayerView extends StatefulWidget {
+class VideoPlayerView extends StatelessWidget {
+  final bool isMe;
+  final String? videoUrl;
+  final String? thumbnailUrl;
+
   const VideoPlayerView({
     super.key,
-    required this.url,
+    required this.isMe,
+    this.videoUrl,
+    this.thumbnailUrl,
   });
-  final String url;
-
-  @override
-  State<VideoPlayerView> createState() => _VideoPlayerViewState();
-}
-
-class _VideoPlayerViewState extends State<VideoPlayerView> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.network(widget.url)
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          child: _controller.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: VideoPlayer(_controller),
-                  ),
-                )
-              : Skeleton.rectangular(
-                  width: 200.w,
-                  height: 280.h,
-                ),
+        ImageMessageItem(
+          content: thumbnailUrl,
+          isMe: isMe,
         ),
-        if (_controller.value.isInitialized)
+        if (videoUrl != null)
           Positioned(
             bottom: 0,
             right: 0,
@@ -95,25 +80,17 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (BuildContext context) => VideoPlayPage(
-                        url: widget.url,
+                        url: videoUrl!,
                       ),
                     ),
                   );
                 },
-                child: Icon(
-                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                ),
+                child: const Icon(Icons.play_arrow),
               ),
             ),
           ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
 

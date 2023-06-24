@@ -1,3 +1,4 @@
+import 'package:chatapp/data/models/group_model.dart';
 import 'package:chatapp/data/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,8 +13,11 @@ class MessageModel with _$MessageModel {
     required String id,
     String? type,
     UserModel? sender,
+    GroupModel? group,
     UserModel? receiver,
     String? message,
+    @JsonKey(name: "video_url") String? videoUrl,
+    @JsonKey(name: "record_url") String? recordUrl,
     String? optional,
     @JsonKey(name: "created_at") DateTime? createdAt,
     @JsonKey(name: "is_me") bool? isMe,

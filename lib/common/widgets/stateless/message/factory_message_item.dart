@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'message_item.dart';
 import 'message_item/audio_message_item.dart';
 import 'message_item/file_message_item.dart';
@@ -6,8 +8,15 @@ import 'message_item/text_message_item.dart';
 import 'message_item/video_message_item.dart';
 
 class FactoryMessageItem {
-  static IMessageItem buildMessageItem(String? type, bool? isMe,
-      String? content, String? nameActor, DateTime? createdAt) {
+  static IMessageItem buildMessageItem(
+    String id,
+    String? type,
+    bool? isMe,
+    String? content,
+    String? videoUrl,
+    String? nameActor,
+    DateTime? createdAt,
+  ) {
     switch (type) {
       case "text":
         {
@@ -42,6 +51,7 @@ class FactoryMessageItem {
           return VideoMessageItem(
             isMe: isMe ?? false,
             content: content,
+            videoUrl: videoUrl,
           );
         }
       case "audio":
@@ -54,6 +64,7 @@ class FactoryMessageItem {
       case "file":
         {
           return FileMessageItem(
+            key: ValueKey(id),
             content: content!,
             isMe: isMe ?? false,
           );

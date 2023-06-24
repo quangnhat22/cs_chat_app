@@ -1,5 +1,6 @@
 import 'package:chatapp/data/data_sources/firebase/auth_firebase.dart';
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
+import 'package:chatapp/data/data_sources/local/local_data_src.dart';
 import 'package:chatapp/data/data_sources/remote/service/auth_service.dart';
 import 'package:chatapp/domain/modules/auth/auth_repository.dart';
 import 'package:chatapp/domain/modules/user/user_repository.dart';
@@ -13,17 +14,10 @@ class AuthRepositoryImpl extends AuthRepository {
   final AuthService _authService;
   final UserRepository _userRepo;
   final AuthLocalDataSrc _authLocalDataSrc;
+  final LocalDataSrc _localDataSrc;
 
-  AuthRepositoryImpl({
-    required AuthFirebase authFirebase,
-    required AuthService authService,
-    required UserRepository userRepo,
-    required AuthLocalDataSrc authLocalDataSrc,
-  })
-      : _authFirebase = authFirebase,
-        _authService = authService,
-        _authLocalDataSrc = authLocalDataSrc,
-        _userRepo = userRepo;
+  AuthRepositoryImpl(this._authFirebase, this._authService, this._userRepo,
+      this._authLocalDataSrc, this._localDataSrc);
 
   @override
   Stream<String?> checkAccessTokenStream() {
@@ -153,11 +147,10 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<void> logOut() async {
     try {
-      await _authLocalDataSrc.deleteBoxAuth();
-      await _authFirebase.logOut();
       await _authService.logOut();
+      await _authFirebase.logOut();
     } finally {
-      await _userRepo.clearBox();
+      await _localDataSrc.deleteAll();
     }
   }
 }

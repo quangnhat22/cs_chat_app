@@ -1,3 +1,4 @@
+import 'package:chatapp/data/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'group_model.freezed.dart';
@@ -10,9 +11,11 @@ class GroupModel with _$GroupModel {
   factory GroupModel({
     required String id,
     String? name,
-    List<String>? members,
+    List<UserModel>? members,
     // ignore: invalid_annotation_target
     @JsonKey(name: "image_url") String? imageUrl,
+    String? type,
+    bool? active,
   }) = _GroupModel;
 
   factory GroupModel.fromJson(Map<String, dynamic> json) =>
