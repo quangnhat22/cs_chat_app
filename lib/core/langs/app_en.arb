@@ -59,7 +59,7 @@
   "requests_receive_text_button_segment": "Receive",
   "reject_request": "Reject",
   "accept_request": "Accept",
-  "requests_recall_text_button": "Recall",
+  "requests_recall_text_button": "Undo",
   "gender": "Gender",
   "friend_block": "Block",
   "friend_mutual_friends": "Mutual friends",
@@ -121,5 +121,9 @@
     }
   },
   "open_gmail_app": "Open Gmail App",
-  "change_email": "Change email"
+  "change_email": "Change email",
+  "do_you_want_revoke_friend": "Do you want to undo a friend request?",
+  "do_you_want_reject_friend": "Do you want to reject a friend request?",
+  "do_you_want_revoke_group": "Do you want to undo a group request?",
+  "do_you_want_reject_group": "Do you want to reject a group request?"
 }

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../core/config/app_assets.dart';
 
-class LoadingPage extends StatelessWidget {
-  const LoadingPage({super.key});
+class EmptyView extends StatelessWidget {
+  const EmptyView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: AppAssets.noDataImg,
-      ),
+    return Column(
+      children: [
+        AppAssets.noDataImg,
+      ],
     );
   }
 }

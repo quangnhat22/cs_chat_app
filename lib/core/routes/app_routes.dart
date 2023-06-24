@@ -77,21 +77,21 @@ class AppRoutes {
           const FindNewFriendPage(),
         );
       case RouteName.chatRoom:
-        return _buildRoute(
-          settings,
-          ChatRoomPage(
-            id: settings.arguments as String,
-            type: "friend",
-          ),
-        );
-      case RouteName.groupChatRoom:
-        return _buildRoute(
-          settings,
-          ChatRoomPage(
-            id: settings.arguments as String,
-            type: "group",
-          ),
-        );
+        {
+          final args = settings.arguments as Map<String, dynamic>;
+          final id = args["id"] as String;
+          final chatRoomId = args["chatRoomId"] as String;
+          final type = (id == chatRoomId) ? "group" : "friend";
+          return _buildRoute(
+            settings,
+            ChatRoomPage(
+              id: id,
+              type: type,
+              chatRoomId: chatRoomId,
+            ),
+          );
+        }
+
       case RouteName.deviceAdministration:
         return _buildRoute(settings, const DeviceMainPage());
       case RouteName.createGroup:

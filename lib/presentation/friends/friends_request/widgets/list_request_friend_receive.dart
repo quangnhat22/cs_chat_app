@@ -6,8 +6,19 @@ class ListRequestFriendReceive extends StatelessWidget {
   final List<FriendRequestEntity> listReceiveRequest;
 
   void _onRejectRequest(BuildContext ctx, String? recevierId) {
-    if (recevierId == null) return;
-    ctx.read<FriendRequestActionCubit>().rejectRequest(recevierId);
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(AppLocalizations.of(ctx)!.confirm)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_reject_friend)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .setOnPositive(() {
+          if (recevierId == null) return;
+          ctx.read<FriendRequestActionCubit>().rejectRequest(recevierId);
+          Navigator.of(ctx).pop();
+        })
+        .buildDialog(ctx)
+        .show(ctx);
   }
 
   void _onAcceptRequest(BuildContext ctx, String? recevierId) {
@@ -18,10 +29,7 @@ class ListRequestFriendReceive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (listReceiveRequest.isEmpty)
-        ? const Padding(
-            padding: EdgeInsets.all(32.0),
-            child: Text("No request now !"),
-          )
+        ? const EmptyView()
         : ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

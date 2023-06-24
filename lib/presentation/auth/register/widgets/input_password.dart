@@ -10,7 +10,7 @@ class InputPassword extends StatelessWidget {
       builder: (context, state) {
         return CPasswordTextField(
           key: const Key('signUpForm_passwordInput_textField'),
-          label: AppLocalizations.of(context)!.confirm_password,
+          label: AppLocalizations.of(context)!.password,
           onChange: (password) =>
               context.read<SignUpCubit>().passwordChanged(password),
           errorText: state.password.displayError != null

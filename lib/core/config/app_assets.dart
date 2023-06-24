@@ -73,8 +73,8 @@ class AppAssets {
     height: 120,
   );
 
-  static final noDataImg = SvgPicture.asset(
-    'assets/iamges/no_data.jpg',
+  static final noDataImg = Image.asset(
+    'assets/images/no_data.jpg',
     fit: BoxFit.cover,
   );
 }

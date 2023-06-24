@@ -11,9 +11,9 @@ class MessageRepositoryImpl extends MessageRepository {
       : _socket = chatWebSocket;
 
   @override
-  Future<void> connectSocket(String id, String type) async {
+  Future<void> connectSocket(String id) async {
     try {
-      _socket.connect(id, type);
+      _socket.connect(id);
     } catch (e) {
       throw Exception(e);
     }

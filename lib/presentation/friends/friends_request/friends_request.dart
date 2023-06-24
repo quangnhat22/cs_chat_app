@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../common/widgets/stateless/builder_dialog/app_dialog_base_builder.dart';
+import '../../others/empty_page.dart';
+
 part 'pages/friends_request_page.dart';
 part 'widgets/segment_button_friend_request.dart';
 part 'widgets/list_request_friend_receive.dart';

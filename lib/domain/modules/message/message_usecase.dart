@@ -3,7 +3,7 @@ import 'package:chatapp/domain/modules/message/message_repository.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class MessageUseCase {
-  Future<void> connectSocket(String id, String type);
+  Future<void> connectSocket(String id);
 
   Future<void> disconnectSocket();
 
@@ -20,8 +20,8 @@ class MessageUseCaseImpl extends MessageUseCase {
   MessageUseCaseImpl({required this.repo});
 
   @override
-  Future<void> connectSocket(String id, String type) async {
-    return repo.connectSocket(id, type);
+  Future<void> connectSocket(String id) async {
+    return repo.connectSocket(id);
   }
 
   @override

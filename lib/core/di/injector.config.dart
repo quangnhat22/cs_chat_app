@@ -210,9 +210,9 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i50.AuthUseCase>(
         () => _i50.AuthUseCaeImpl(repo: gh<_i48.AuthRepository>()));
     gh.factory<_i51.ChatRoomBloc>(() => _i51.ChatRoomBloc(
-          userUC: gh<_i47.UserUseCase>(),
-          friendUC: gh<_i36.FriendUseCase>(),
-          groupUC: gh<_i40.GroupUseCase>(),
+          gh<_i47.UserUseCase>(),
+          gh<_i36.FriendUseCase>(),
+          gh<_i40.GroupUseCase>(),
         ));
     gh.factory<_i52.CubitSubmitNewGroupCubit>(
         () => _i52.CubitSubmitNewGroupCubit(groupUC: gh<_i40.GroupUseCase>()));

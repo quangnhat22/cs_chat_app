@@ -15,14 +15,12 @@ part 'chat_room_state.dart';
 
 @Injectable()
 class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
-  ChatRoomBloc({
-    required UserUseCase userUC,
-    required FriendUseCase friendUC,
-    required GroupUseCase groupUC,
-  })  : _userUseCase = userUC,
-        _friendUseCase = friendUC,
-        _groupUseCase = groupUC,
-        super(const ChatRoomState.initial()) {
+  final FriendUseCase _friendUseCase;
+  final UserUseCase _userUseCase;
+  final GroupUseCase _groupUseCase;
+
+  ChatRoomBloc(this._userUseCase, this._friendUseCase, this._groupUseCase)
+      : super(const ChatRoomState.initial()) {
     on<ChatRoomEvent>((event, emit) async {
       await event.map(
           started: (event) async => _started(event, emit),
@@ -34,9 +32,6 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     });
   }
 
-  final FriendUseCase _friendUseCase;
-  final UserUseCase _userUseCase;
-  final GroupUseCase _groupUseCase;
   bool isGroup = false;
 
   Future<void> _started(Started event, Emitter<ChatRoomState> emit) async {
