@@ -5,7 +5,7 @@ class ListGroupState with _$ListGroupState {
   const factory ListGroupState.initial() = _Initial;
   const factory ListGroupState.inProgress() = GetListGroupInProgress;
   const factory ListGroupState.inSuccess({
-    required List<GroupEntity> listGroup,
+    required List<ChatRoomEntity> listGroup,
   }) = GetListGroupInSuccess;
   const factory ListGroupState.inFailed({String? message}) =
       GetListGroupInFailed;

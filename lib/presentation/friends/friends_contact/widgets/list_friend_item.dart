@@ -7,12 +7,16 @@ class ListFriendItem extends StatelessWidget {
     this.email,
     this.avatar,
     this.name,
+    this.type,
+    this.chatRoomId,
   });
 
   final String id;
   final String? name;
   final String? email;
   final String? avatar;
+  final String? type;
+  final String? chatRoomId;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,11 @@ class ListFriendItem extends StatelessWidget {
         ),
         trailing: IconButton(
             onPressed: () {
-              NavigationUtil.pushNamed(route: RouteName.chatRoom, args: id);
+              NavigationUtil.pushNamed(route: RouteName.chatRoom, args: {
+                "id": id,
+                "chatRoomId": chatRoomId,
+                "type": type,
+              });
             },
             icon: Icon(
               Icons.comment_outlined,

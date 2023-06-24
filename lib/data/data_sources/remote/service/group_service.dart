@@ -107,25 +107,25 @@ class GroupService {
     }
   }
 
-  Future<Response> getListGroupChat({
-    required String groupId,
+  Future<Response> getListMessage({
+    required String id,
+    required int limit,
+    required String order,
+    String? type,
     String? latestMessageId,
-    int? limit = 20,
   }) async {
     try {
-      if (latestMessageId == null) {
-        return await _service.dio.get(
-          "${BaseService.groupPath}/$groupId/chat",
-        );
-      } else {
-        if (latestMessageId.contains("-")) {
-          throw Exception("id not valid");
-        }
+      String endPointApi =
+          "${BaseService.groupPath}/$id/chat?limit=$limit&order=$order";
 
-        return await _service.dio.get(
-          "${BaseService.groupPath}/$groupId/chat?last_id=$latestMessageId",
-        );
+      if (latestMessageId != null && !latestMessageId.contains("-")) {
+        endPointApi += "&last_id=$latestMessageId";
       }
+      if (type != null) {
+        endPointApi += "&type=$type";
+      }
+
+      return await _service.dio.get(endPointApi);
     } on DioError catch (e) {
       throw Exception(e.message);
     } catch (e) {

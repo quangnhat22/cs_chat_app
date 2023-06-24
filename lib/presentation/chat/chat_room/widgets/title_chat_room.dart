@@ -14,7 +14,7 @@ class TitleChatRoom extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
             getChatRoomInfoSuccess:
-                (_, __, ___, chatRoomName, chatRoomAvatar, ____) {
+                (_, __, ___, ____, chatRoomName, chatRoomAvatar, _____) {
               return Row(
                 children: <Widget>[
                   CustomAvatarImage(

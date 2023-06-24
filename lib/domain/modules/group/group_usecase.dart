@@ -8,7 +8,7 @@ import '../../entities/message_entity.dart';
 abstract class GroupUseCase {
   Future<bool> createGroup(String name, String? imageUrl, List<String> members);
 
-  Future<List<GroupEntity>> getListGroup();
+  //Future<List<GroupEntity>> getListGroup();
 
   Future<List<GroupRequestEntity>> getSentRequest();
 
@@ -43,10 +43,10 @@ class GroupUseCaseImpl extends GroupUseCase {
     return _repo.createGroup(name, imageUrl, members);
   }
 
-  @override
-  Future<List<GroupEntity>> getListGroup() {
-    return _repo.getListGroup();
-  }
+  // @override
+  // Future<List<GroupEntity>> getListGroup() {
+  //   return _repo.getListGroup();
+  // }
 
   @override
   Future<List<GroupRequestEntity>> getReceiveRequest() {

@@ -6,11 +6,14 @@ class ListGroupItem extends StatelessWidget {
     required this.groupItem,
   });
 
-  final GroupEntity groupItem;
+  final ChatRoomEntity groupItem;
 
   void _onTapGroupMessage() {
-    NavigationUtil.pushNamed(
-        route: RouteName.groupChatRoom, args: groupItem.id);
+    NavigationUtil.pushNamed(route: RouteName.chatRoom, args: {
+      "id": groupItem.id,
+      "chatRoomId": groupItem.id,
+      "type": groupItem.type,
+    });
   }
 
   @override
@@ -28,7 +31,7 @@ class ListGroupItem extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.w500),
           ),
           leading: CustomAvatarImage(
-            urlImage: groupItem.imageUrl,
+            urlImage: groupItem.avatar,
             widthImage: 48,
             heightImage: 48,
           ),

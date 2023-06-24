@@ -81,7 +81,7 @@ class AppRoutes {
           final args = settings.arguments as Map<String, dynamic>;
           final id = args["id"] as String;
           final chatRoomId = args["chatRoomId"] as String;
-          final type = (id == chatRoomId) ? "group" : "friend";
+          final type = args["type"] as String;
           return _buildRoute(
             settings,
             ChatRoomPage(

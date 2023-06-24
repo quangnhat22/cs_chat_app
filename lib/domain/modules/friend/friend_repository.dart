@@ -1,5 +1,5 @@
+import 'package:chatapp/domain/entities/chat_room_entity.dart';
 import 'package:chatapp/domain/entities/friend_request_entity.dart';
-import 'package:chatapp/domain/entities/user_entity.dart';
 
 import '../../entities/message_entity.dart';
 
@@ -12,7 +12,7 @@ abstract class FriendRepository {
     int? limit,
   });
 
-  Future<List<UserEntity>> getListFriend();
+  //Future<List<ChatRoomEntity>> getListFriend();
 
   Future<bool> deleteFriend(String id);
 

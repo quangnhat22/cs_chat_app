@@ -33,76 +33,81 @@ import 'package:chatapp/data/data_sources/remote/service/user_service.dart'
 import 'package:chatapp/data/data_sources/web_socket/chat_web_socket.dart'
     as _i15;
 import 'package:chatapp/data/repositories/app_settings_repo_impl.dart' as _i13;
-import 'package:chatapp/data/repositories/auth_repo_impl.dart' as _i49;
-import 'package:chatapp/data/repositories/device_repo_impl.dart' as _i32;
-import 'package:chatapp/data/repositories/friend_repo_impl.dart' as _i35;
-import 'package:chatapp/data/repositories/group_repo_impl.dart' as _i39;
+import 'package:chatapp/data/repositories/auth_repo_impl.dart' as _i52;
+import 'package:chatapp/data/repositories/chat_room_repo_impl.dart' as _i32;
+import 'package:chatapp/data/repositories/device_repo_impl.dart' as _i35;
+import 'package:chatapp/data/repositories/friend_repo_impl.dart' as _i38;
+import 'package:chatapp/data/repositories/group_repo_impl.dart' as _i42;
 import 'package:chatapp/data/repositories/message_repo_impl.dart' as _i18;
-import 'package:chatapp/data/repositories/user_repo_impl.dart' as _i46;
+import 'package:chatapp/data/repositories/user_repo_impl.dart' as _i49;
 import 'package:chatapp/domain/modules/app_settings/app_settings_repository.dart'
     as _i12;
 import 'package:chatapp/domain/modules/app_settings/app_settings_usecase.dart'
     as _i14;
-import 'package:chatapp/domain/modules/auth/auth_repository.dart' as _i48;
-import 'package:chatapp/domain/modules/auth/auth_usecase.dart' as _i50;
-import 'package:chatapp/domain/modules/device/device_repository.dart' as _i31;
-import 'package:chatapp/domain/modules/device/device_usecase.dart' as _i33;
-import 'package:chatapp/domain/modules/friend/friend_repository.dart' as _i34;
-import 'package:chatapp/domain/modules/friend/friend_usecase.dart' as _i36;
-import 'package:chatapp/domain/modules/group/group_repository.dart' as _i38;
-import 'package:chatapp/domain/modules/group/group_usecase.dart' as _i40;
+import 'package:chatapp/domain/modules/auth/auth_repository.dart' as _i51;
+import 'package:chatapp/domain/modules/auth/auth_usecase.dart' as _i53;
+import 'package:chatapp/domain/modules/chat_room/chat_room_repository.dart'
+    as _i31;
+import 'package:chatapp/domain/modules/chat_room/chat_room_use_case.dart'
+    as _i33;
+import 'package:chatapp/domain/modules/device/device_repository.dart' as _i34;
+import 'package:chatapp/domain/modules/device/device_usecase.dart' as _i36;
+import 'package:chatapp/domain/modules/friend/friend_repository.dart' as _i37;
+import 'package:chatapp/domain/modules/friend/friend_usecase.dart' as _i39;
+import 'package:chatapp/domain/modules/group/group_repository.dart' as _i41;
+import 'package:chatapp/domain/modules/group/group_usecase.dart' as _i43;
 import 'package:chatapp/domain/modules/message/message_repository.dart' as _i17;
 import 'package:chatapp/domain/modules/message/message_usecase.dart' as _i19;
-import 'package:chatapp/domain/modules/user/user_repository.dart' as _i45;
-import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i47;
+import 'package:chatapp/domain/modules/user/user_repository.dart' as _i48;
+import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i50;
 import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.dart'
     as _i22;
-import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i63;
+import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i66;
 import 'package:chatapp/presentation/auth/fogot_password/cubit_forgot_pasword/forgot_password_cubit.dart'
-    as _i56;
+    as _i59;
 import 'package:chatapp/presentation/auth/login/cubit_login/login_cubit.dart'
-    as _i60;
+    as _i63;
 import 'package:chatapp/presentation/auth/register/cubit_sign_up/sign_up_cubit.dart'
-    as _i62;
+    as _i65;
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart'
-    as _i51;
+    as _i54;
 import 'package:chatapp/presentation/chat/chat_room/input_message_cubit/input_message_cubit.dart'
     as _i9;
 import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message_stream_cubit.dart'
     as _i24;
-import 'package:chatapp/presentation/device/bloc/list_device_bloc.dart' as _i41;
+import 'package:chatapp/presentation/device/bloc/list_device_bloc.dart' as _i44;
 import 'package:chatapp/presentation/friends/find_new_friend/bloc/find_friend_bloc.dart'
-    as _i55;
+    as _i58;
 import 'package:chatapp/presentation/friends/find_new_friend/cubit/find_friend_form_cubit.dart'
     as _i7;
 import 'package:chatapp/presentation/friends/friends_contact/bloc/friends_contact_bloc.dart'
-    as _i58;
+    as _i61;
 import 'package:chatapp/presentation/friends/friends_infor/friend_action_cubit/friends_action_cubit.dart'
-    as _i37;
+    as _i40;
 import 'package:chatapp/presentation/friends/friends_infor/friend_info_cubit/friend_info_cubit.dart'
     as _i8;
 import 'package:chatapp/presentation/friends/friends_request/friend_request_action_cubit/friend_request_action_cubit.dart'
-    as _i57;
+    as _i60;
 import 'package:chatapp/presentation/friends/friends_request/list_friend_request_bloc/list_friend_request_bloc.dart'
-    as _i42;
+    as _i45;
 import 'package:chatapp/presentation/group/create_group/cubit_create_group_form/create_group_cubit.dart'
     as _i5;
 import 'package:chatapp/presentation/group/create_group/cubit_group/cubit_submit_new_group_cubit.dart'
-    as _i52;
+    as _i55;
 import 'package:chatapp/presentation/group/groups_request/bloc/list_group_request_bloc.dart'
-    as _i44;
+    as _i47;
 import 'package:chatapp/presentation/group/groups_request/cubit/group_request_action_cubit.dart'
-    as _i59;
+    as _i62;
 import 'package:chatapp/presentation/group/your_groups/bloc/list_group_bloc.dart'
-    as _i43;
+    as _i46;
 import 'package:chatapp/presentation/setting/edit_profile/bloc/edit_form_submit_bloc.dart'
-    as _i53;
+    as _i56;
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile_form_cubit/edit_profile_form_cubit.dart'
-    as _i54;
+    as _i57;
 import 'package:chatapp/presentation/setting/setting_language/cubit/setting_language_cubit.dart'
     as _i20;
 import 'package:chatapp/presentation/setting/setting_main/cubit/setting_main_cubit.dart'
-    as _i61;
+    as _i64;
 import 'package:chatapp/presentation/setting/setting_theme/cubit/setting_theme_cubit.dart'
     as _i21;
 import 'package:get_it/get_it.dart' as _i1;
@@ -169,80 +174,85 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i29.UserService(service: gh<_i25.BaseService>()));
     gh.lazySingleton<_i30.AuthService>(
         () => _i30.AuthService(service: gh<_i25.BaseService>()));
-    gh.factory<_i31.DeviceRepository>(
-        () => _i32.DeviceRepoImpl(deviceService: gh<_i26.DeviceService>()));
-    gh.factory<_i33.DeviceUseCase>(
-        () => _i33.DeviceUseCaseImpl(deviceRepo: gh<_i31.DeviceRepository>()));
-    gh.factory<_i34.FriendRepository>(
-        () => _i35.FriendRepositoryImpl(service: gh<_i27.FriendService>()));
-    gh.factory<_i36.FriendUseCase>(
-        () => _i36.FriendUseCaseImpl(repo: gh<_i34.FriendRepository>()));
-    gh.factory<_i37.FriendsActionCubit>(
-        () => _i37.FriendsActionCubit(friendUC: gh<_i36.FriendUseCase>()));
-    gh.factory<_i38.GroupRepository>(() => _i39.GroupRepoImpl(
+    gh.factory<_i31.ChatRoomRepository>(() => _i32.ChatRoomRepoImpl(
+          gh<_i28.GroupService>(),
+          gh<_i27.FriendService>(),
+        ));
+    gh.factory<_i33.ChatRoomUseCase>(
+        () => _i33.ChatRoomUseCaseImpl(gh<_i31.ChatRoomRepository>()));
+    gh.factory<_i34.DeviceRepository>(
+        () => _i35.DeviceRepoImpl(deviceService: gh<_i26.DeviceService>()));
+    gh.factory<_i36.DeviceUseCase>(
+        () => _i36.DeviceUseCaseImpl(deviceRepo: gh<_i34.DeviceRepository>()));
+    gh.factory<_i37.FriendRepository>(
+        () => _i38.FriendRepositoryImpl(service: gh<_i27.FriendService>()));
+    gh.factory<_i39.FriendUseCase>(
+        () => _i39.FriendUseCaseImpl(repo: gh<_i37.FriendRepository>()));
+    gh.factory<_i40.FriendsActionCubit>(
+        () => _i40.FriendsActionCubit(friendUC: gh<_i39.FriendUseCase>()));
+    gh.factory<_i41.GroupRepository>(() => _i42.GroupRepoImpl(
           groupService: gh<_i28.GroupService>(),
           storageFirebase: gh<_i6.FileStorageFirebase>(),
         ));
-    gh.factory<_i40.GroupUseCase>(
-        () => _i40.GroupUseCaseImpl(groupRepo: gh<_i38.GroupRepository>()));
-    gh.factory<_i41.ListDeviceBloc>(
-        () => _i41.ListDeviceBloc(deviceUC: gh<_i33.DeviceUseCase>()));
-    gh.factory<_i42.ListFriendRequestBloc>(() =>
-        _i42.ListFriendRequestBloc(friendUseCase: gh<_i36.FriendUseCase>()));
-    gh.factory<_i43.ListGroupBloc>(
-        () => _i43.ListGroupBloc(groupUC: gh<_i40.GroupUseCase>()));
-    gh.factory<_i44.ListGroupRequestBloc>(
-        () => _i44.ListGroupRequestBloc(groupUseCase: gh<_i40.GroupUseCase>()));
-    gh.factory<_i45.UserRepository>(() => _i46.UserRepositoryImpl(
+    gh.factory<_i43.GroupUseCase>(
+        () => _i43.GroupUseCaseImpl(groupRepo: gh<_i41.GroupRepository>()));
+    gh.factory<_i44.ListDeviceBloc>(
+        () => _i44.ListDeviceBloc(deviceUC: gh<_i36.DeviceUseCase>()));
+    gh.factory<_i45.ListFriendRequestBloc>(() =>
+        _i45.ListFriendRequestBloc(friendUseCase: gh<_i39.FriendUseCase>()));
+    gh.factory<_i46.ListGroupBloc>(
+        () => _i46.ListGroupBloc(gh<_i33.ChatRoomUseCase>()));
+    gh.factory<_i47.ListGroupRequestBloc>(
+        () => _i47.ListGroupRequestBloc(groupUseCase: gh<_i43.GroupUseCase>()));
+    gh.factory<_i48.UserRepository>(() => _i49.UserRepositoryImpl(
           service: gh<_i29.UserService>(),
           local: gh<_i11.UserLocalDataSrc>(),
           storageFirebase: gh<_i6.FileStorageFirebase>(),
         ));
-    gh.factory<_i47.UserUseCase>(
-        () => _i47.UserUseCaseImpl(repo: gh<_i45.UserRepository>()));
-    gh.factory<_i48.AuthRepository>(() => _i49.AuthRepositoryImpl(
+    gh.factory<_i50.UserUseCase>(
+        () => _i50.UserUseCaseImpl(repo: gh<_i48.UserRepository>()));
+    gh.factory<_i51.AuthRepository>(() => _i52.AuthRepositoryImpl(
           gh<_i3.AuthFirebase>(),
           gh<_i30.AuthService>(),
-          gh<_i45.UserRepository>(),
+          gh<_i48.UserRepository>(),
           gh<_i4.AuthLocalDataSrc>(),
           gh<_i16.LocalDataSrc>(),
         ));
-    gh.factory<_i50.AuthUseCase>(
-        () => _i50.AuthUseCaeImpl(repo: gh<_i48.AuthRepository>()));
-    gh.factory<_i51.ChatRoomBloc>(() => _i51.ChatRoomBloc(
-          gh<_i47.UserUseCase>(),
-          gh<_i36.FriendUseCase>(),
-          gh<_i40.GroupUseCase>(),
+    gh.factory<_i53.AuthUseCase>(
+        () => _i53.AuthUseCaeImpl(repo: gh<_i51.AuthRepository>()));
+    gh.factory<_i54.ChatRoomBloc>(() => _i54.ChatRoomBloc(
+          gh<_i50.UserUseCase>(),
+          gh<_i33.ChatRoomUseCase>(),
         ));
-    gh.factory<_i52.CubitSubmitNewGroupCubit>(
-        () => _i52.CubitSubmitNewGroupCubit(groupUC: gh<_i40.GroupUseCase>()));
-    gh.factory<_i53.EditFormSubmitBloc>(
-        () => _i53.EditFormSubmitBloc(userUseCase: gh<_i47.UserUseCase>()));
-    gh.factory<_i54.EditProfileFormCubit>(
-        () => _i54.EditProfileFormCubit(userUseCase: gh<_i47.UserUseCase>()));
-    gh.factory<_i55.FindFriendBloc>(
-        () => _i55.FindFriendBloc(userRepo: gh<_i45.UserRepository>()));
-    gh.factory<_i56.ForgotPasswordCubit>(
-        () => _i56.ForgotPasswordCubit(gh<_i50.AuthUseCase>()));
-    gh.factory<_i57.FriendRequestActionCubit>(() =>
-        _i57.FriendRequestActionCubit(friendUseCase: gh<_i36.FriendUseCase>()));
-    gh.factory<_i58.FriendsContactBloc>(() => _i58.FriendsContactBloc(
-          useCase: gh<_i36.FriendUseCase>(),
-          userUseCase: gh<_i47.UserUseCase>(),
+    gh.factory<_i55.CubitSubmitNewGroupCubit>(
+        () => _i55.CubitSubmitNewGroupCubit(groupUC: gh<_i43.GroupUseCase>()));
+    gh.factory<_i56.EditFormSubmitBloc>(
+        () => _i56.EditFormSubmitBloc(userUseCase: gh<_i50.UserUseCase>()));
+    gh.factory<_i57.EditProfileFormCubit>(
+        () => _i57.EditProfileFormCubit(userUseCase: gh<_i50.UserUseCase>()));
+    gh.factory<_i58.FindFriendBloc>(
+        () => _i58.FindFriendBloc(userRepo: gh<_i48.UserRepository>()));
+    gh.factory<_i59.ForgotPasswordCubit>(
+        () => _i59.ForgotPasswordCubit(gh<_i53.AuthUseCase>()));
+    gh.factory<_i60.FriendRequestActionCubit>(() =>
+        _i60.FriendRequestActionCubit(friendUseCase: gh<_i39.FriendUseCase>()));
+    gh.factory<_i61.FriendsContactBloc>(() => _i61.FriendsContactBloc(
+          gh<_i33.ChatRoomUseCase>(),
+          gh<_i50.UserUseCase>(),
         ));
-    gh.factory<_i59.GroupRequestActionCubit>(
-        () => _i59.GroupRequestActionCubit(groupUC: gh<_i40.GroupUseCase>()));
-    gh.factory<_i60.LoginCubit>(
-        () => _i60.LoginCubit(authUC: gh<_i50.AuthUseCase>()));
-    gh.factory<_i61.SettingMainCubit>(() => _i61.SettingMainCubit(
-          authUseCase: gh<_i50.AuthUseCase>(),
-          userUseCase: gh<_i47.UserUseCase>(),
+    gh.factory<_i62.GroupRequestActionCubit>(
+        () => _i62.GroupRequestActionCubit(groupUC: gh<_i43.GroupUseCase>()));
+    gh.factory<_i63.LoginCubit>(
+        () => _i63.LoginCubit(authUC: gh<_i53.AuthUseCase>()));
+    gh.factory<_i64.SettingMainCubit>(() => _i64.SettingMainCubit(
+          authUseCase: gh<_i53.AuthUseCase>(),
+          userUseCase: gh<_i50.UserUseCase>(),
           appSettingsUseCase: gh<_i14.AppSettingsUseCase>(),
         ));
-    gh.factory<_i62.SignUpCubit>(
-        () => _i62.SignUpCubit(authUC: gh<_i50.AuthUseCase>()));
-    gh.lazySingleton<_i63.AppBloc>(
-        () => _i63.AppBloc(authUseCase: gh<_i50.AuthUseCase>()));
+    gh.factory<_i65.SignUpCubit>(
+        () => _i65.SignUpCubit(authUC: gh<_i53.AuthUseCase>()));
+    gh.lazySingleton<_i66.AppBloc>(
+        () => _i66.AppBloc(authUseCase: gh<_i53.AuthUseCase>()));
     return this;
   }
 }
