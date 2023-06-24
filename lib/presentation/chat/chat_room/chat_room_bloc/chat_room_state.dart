@@ -9,7 +9,10 @@ class ChatRoomState with _$ChatRoomState {
 
   const factory ChatRoomState.getChatRoomInfoSuccess({
     required List<MessageEntity> messages,
-    required UserEntity user,
+    required String chatRoomId,
+    @Default(false) bool isGroupChatRoom,
+    String? chatRoomName, //case: chat with friend
+    String? chatRoomAvatar, // case: chat with group
     @Default(false) bool isLatest,
   }) = ChatRoomInfoSuccess;
 

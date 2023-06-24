@@ -31,6 +31,7 @@ class FriendService {
           "${BaseService.friendPath}/$userId/chat",
         );
       } else {
+        if (latestMessageId.contains("-")) throw Exception("id not valid");
         return await _service.dio.get(
           "${BaseService.friendPath}/$userId/chat?last_id=$latestMessageId",
         );

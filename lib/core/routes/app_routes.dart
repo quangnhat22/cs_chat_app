@@ -9,7 +9,8 @@ import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/group/create_group/create_group.dart';
 import 'package:chatapp/presentation/group/group_details/pages/group_details_page.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
-import 'package:chatapp/presentation/loading/loading_page.dart';
+import 'package:chatapp/presentation/others/loading_page.dart';
+import 'package:chatapp/presentation/map/pages/map_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -33,12 +34,7 @@ class AppRoutes {
           const RegisterPage(),
         );
       case RouteName.forgotPassword:
-        return _buildRoute(
-          settings,
-          ForgotPasswordPage(
-            urlCode: settings.arguments as String?,
-          ),
-        );
+        return _buildRoute(settings, const ForgotPasswordPage());
       default:
         return _errorRoute();
     }
@@ -84,7 +80,16 @@ class AppRoutes {
         return _buildRoute(
           settings,
           ChatRoomPage(
-            userId: settings.arguments as String,
+            id: settings.arguments as String,
+            type: "friend",
+          ),
+        );
+      case RouteName.groupChatRoom:
+        return _buildRoute(
+          settings,
+          ChatRoomPage(
+            id: settings.arguments as String,
+            type: "group",
           ),
         );
       case RouteName.deviceAdministration:
@@ -93,6 +98,9 @@ class AppRoutes {
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.groupDetails:
         return _buildRoute(settings, const GroupDetailPage());
+      case RouteName.googleMap:
+        return _buildRoute(settings, const MapPage());
+
       default:
         return _errorRoute();
     }

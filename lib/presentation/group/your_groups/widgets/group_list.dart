@@ -31,14 +31,14 @@ class GroupList extends StatelessWidget {
             );
           },
           inProgress: () {
-            return const SliverToBoxAdapter(
+            return const SliverFillRemaining(
               child: Center(
                 child: CircularProgressIndicator(),
               ),
             );
           },
           orElse: () {
-            return SliverToBoxAdapter(
+            return SliverFillRemaining(
               child: Center(
                 child: Text(
                     AppLocalizations.of(context)!.something_wrong_try_again),

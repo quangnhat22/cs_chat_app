@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../common/widgets/stateless/button/float_back_button.dart';
 import '../../../../core/config/app_text_style.dart';
 
-class MGroupDetailPageAppBar extends StatelessWidget implements PreferredSizeWidget {
+class MGroupDetailPageAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const MGroupDetailPageAppBar({
     super.key,
     required this.title,
@@ -22,7 +23,9 @@ class MGroupDetailPageAppBar extends StatelessWidget implements PreferredSizeWid
       elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.only(left: 14.0),
-        child: FloatBackButton(Theme.of(context).colorScheme.primaryContainer,Theme.of(context).colorScheme.onPrimary),
+        child: FloatBackButton(
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            iconColor: Theme.of(context).colorScheme.onPrimary),
       ),
       centerTitle: true,
       title: Text(

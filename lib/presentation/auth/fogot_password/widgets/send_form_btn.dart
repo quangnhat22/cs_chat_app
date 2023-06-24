@@ -1,20 +1,18 @@
 part of forgot_password;
 
-class SendButton extends StatelessWidget {
-  const SendButton(
-    {Key? key,
-    required this.applyText,
-    }) : super(key: key);
+class SendFormButton extends StatelessWidget {
+  const SendFormButton({
+    Key? key,
+  }) : super(key: key);
 
-  void _handleSendRequest() {}
+  void _tappedBtnSendEmail(BuildContext ctx) {
+    ctx.read<ForgotPasswordCubit>().submitSendEmail();
+  }
 
-  final String applyText;
   @override
   Widget build(BuildContext context) {
-    return CustomElevatedButton(
-      applyText,
-      _handleSendRequest,
-      Theme.of(context).colorScheme.primary,
+    return CountdownButtonSend(
+      onPressed: () => _tappedBtnSendEmail(context),
     );
   }
 }

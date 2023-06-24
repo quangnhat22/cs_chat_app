@@ -3,14 +3,11 @@ part of forgot_password;
 class GoBackTextButton extends StatelessWidget {
   const GoBackTextButton({
     Key? key,
-    required this.applyText,
   }) : super(key: key);
 
   void _handleGoBack(BuildContext ctx) {
     Navigator.pop(ctx);
   }
-
-  final String applyText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +18,13 @@ class GoBackTextButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 35, top: 32),
           child: Row(
-            children: const [
-              Icon(
+            children: <Widget>[
+              const Icon(
                 Icons.arrow_back_ios,
+              ),
+              Text(
+                AppLocalizations.of(context)!.return_login,
+                style: AppTextStyles.menuOptionBottomModelText,
               ),
             ],
           ),

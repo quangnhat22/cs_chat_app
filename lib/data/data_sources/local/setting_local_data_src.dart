@@ -51,7 +51,7 @@ class SettingLocalDataSrc {
     });
   }
 
-  Future<void> deleteBoxAuth() async {
+  Future<void> deleteBox() async {
     await Hive.box(_settingBox).clear();
   }
 }

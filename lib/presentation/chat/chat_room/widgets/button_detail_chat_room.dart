@@ -4,14 +4,18 @@ import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_blo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HeaderButtonDetailFriends extends StatelessWidget {
-  const HeaderButtonDetailFriends({super.key});
+class HeaderButtonDetail extends StatelessWidget {
+  const HeaderButtonDetail({super.key});
 
   void _handleOnPress(BuildContext ctx) {
     final chatRoomBlocState = ctx.read<ChatRoomBloc>().state;
     if (chatRoomBlocState is ChatRoomInfoSuccess) {
-      final userInfo = chatRoomBlocState.user;
-      NavigationUtil.pushNamed(route: RouteName.friendInfo, args: userInfo);
+      final userInfo = chatRoomBlocState.chatRoomId;
+      if (chatRoomBlocState.isGroupChatRoom) {
+        //
+      } else {
+        NavigationUtil.pushNamed(route: RouteName.friendInfo, args: userInfo);
+      }
     }
   }
 

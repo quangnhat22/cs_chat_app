@@ -22,6 +22,7 @@
   "create_your_new_account_success": "Tài khoản của bạn đã được tạo thành công!",
   "confirm_password": "Xác nhận lại mật khẩu",
   "chat": "Nhắn tin",
+  "search": "Tìm kiếm",
   "contact": "Liên hệ",
   "setting": "Cài đặt",
   "theme": "Chủ đề",
@@ -73,7 +74,6 @@
   "want_to_friend_with_you": " muốn kết bạn với bạn",
   "current": "Hiện tại",
   "active": "Kích hoạt",
-  "search": "Tìm kiếm",
   "your_groups": "Nhóm của bạn",
   "group_request": "Lời mời nhóm",
   "requests_received_text_button_segment": "Đã nhận",
@@ -89,7 +89,6 @@
   "search_friends": "Tìm kiếm bạn bè",
   "selected_text": "đã chọn",
   "user_status_online": "Đang hoạt động",
-  "back_to_login": "Quay trở lại Đăng nhập",
   "something_wrong_try_again": "Đã có lỗi xảy ra! Vui lòng thử lại.",
   "camera": "Camera",
   "gallery": "Thư viện ảnh",
@@ -98,12 +97,30 @@
   "sticker": "Sticker",
   "location": "Vị trí",
   "change_profile_picture_or_your_name": "Đổi ảnh đại diện hoặc tên",
+  "files": "Tệp",
   "turn_on_notification": "Bật thông báo",
-  "turn_off_notification" : "Tắt thông báo",
+  "turn_off_notification": "Tắt thông báo",
   "view_photos_and_media_files": "Xem ảnh và phương tiện khác",
   "exit_group": "Rời khỏi nhóm",
   "delete_group": "Xóa nhóm",
   "view_members": "Xem thành viên",
   "delete_friend": "Xóa bạn bè",
-  "group_change_infomation": "Thay đổi thông tin"
+  "group_change_infomation": "Thay đổi thông tin",
+  "return_login": "Trở về trang Đăng nhập",
+  "click_send_email": "Nhấn vào để gửi Email",
+  "send_email_success": "Gửi Email thành công!",
+  "send_email_fail": "Gửi Email thất bại!",
+  "resend_email_after": "Gửi lại Email sau",
+  "dont_worry_password": " Đừng lo lắng! Hãy nhập Email bạn đã đăng ký và chúng tôi sẽ gửi một Email giúp bạn khôi phục mật khẩu.",
+  "check_email_forgot_password": "Chúng tôi đã gửi một email đến địa chỉ {email_user} có chứa đường Link khôi phục mật khẩu! Vui lòng kiểm tra.",
+  "@check_email_forgot_password": {
+    "placeholders": {
+      "email_user": {
+        "type": "String",
+        "example": "Bob"
+      }
+    }
+  },
+  "open_gmail_app": "Mở ứng dụng Gmail",
+  "change_email": "Thay đổi Email khôi phục."
 }

@@ -1,4 +1,3 @@
-import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart';
 import 'package:chatapp/presentation/chat/chat_room/input_message_cubit/input_message_cubit.dart';
 import 'package:chatapp/presentation/chat/chat_room/message_stream_cubit/message_stream_cubit.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +8,12 @@ class ButtonSendMessage extends StatelessWidget {
 
   void _handleSendMessage(BuildContext ctx, String? message) {
     if (message != null && message.trim().isNotEmpty) {
-      final stateChatRoom = ctx.read<ChatRoomBloc>().state;
-
-      if (stateChatRoom is ChatRoomInfoSuccess) {
-        final receiverUserId = stateChatRoom.user.id;
-        ctx.read<MessageStreamCubit>().sendMessage(
+      ctx.read<MessageStreamCubit>().sendMessage(
             type: "text",
             message: message.trim(),
-            receiverUserId: receiverUserId);
+          );
 
-        ctx.read<InputMessageCubit>().inputMessageChanged("");
-      }
+      ctx.read<InputMessageCubit>().inputMessageChanged("");
     }
   }
 

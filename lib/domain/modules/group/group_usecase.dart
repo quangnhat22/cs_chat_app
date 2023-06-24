@@ -3,6 +3,8 @@ import 'package:chatapp/domain/entities/group_request_entity.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../entities/message_entity.dart';
+
 abstract class GroupUseCase {
   Future<bool> createGroup(String name, String? imageUrl, List<String> members);
 
@@ -19,6 +21,9 @@ abstract class GroupUseCase {
   Future<bool> recallGroupRequest(String groupId, String friendId);
 
   Future<bool> acceptRequest(String groupId);
+
+  Future<List<MessageEntity>> getListChatWithGroup(
+      {required String groupId, String? latestMessageId, int? limit});
 }
 
 @Injectable(as: GroupUseCase)
@@ -60,11 +65,18 @@ class GroupUseCaseImpl extends GroupUseCase {
 
   @override
   Future<bool> rejectRequest(String id) {
-    return rejectRequest(id);
+    return _repo.rejectRequest(id);
   }
 
   @override
   Future<bool> sendGroupRequest(String groupId, String friendId) {
-    return sendGroupRequest(groupId, friendId);
+    return _repo.sendGroupRequest(groupId, friendId);
+  }
+
+  @override
+  Future<List<MessageEntity>> getListChatWithGroup(
+      {required String groupId, String? latestMessageId, int? limit}) {
+    return _repo.getListChatWithGroup(
+        groupId: groupId, latestMessageId: latestMessageId, limit: limit);
   }
 }

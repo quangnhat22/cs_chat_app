@@ -3,6 +3,7 @@ part of 'chat_room_bloc.dart';
 @freezed
 class ChatRoomEvent with _$ChatRoomEvent {
   const factory ChatRoomEvent.started({
+    required String type,
     required String id,
   }) = Started;
 
@@ -14,6 +15,7 @@ class ChatRoomEvent with _$ChatRoomEvent {
 
   const factory ChatRoomEvent.newMessageNotified({
     required MessageEntity newMessage,
+    required String typeChatRoom,
   }) = ChatRoomNewMessageNotified;
 
   const factory ChatRoomEvent.newMessageTopLoaded() =

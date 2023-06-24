@@ -106,4 +106,30 @@ class GroupService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> getListGroupChat({
+    required String groupId,
+    String? latestMessageId,
+    int? limit = 20,
+  }) async {
+    try {
+      if (latestMessageId == null) {
+        return await _service.dio.get(
+          "${BaseService.groupPath}/$groupId/chat",
+        );
+      } else {
+        if (latestMessageId.contains("-")) {
+          throw Exception("id not valid");
+        }
+
+        return await _service.dio.get(
+          "${BaseService.groupPath}/$groupId/chat?last_id=$latestMessageId",
+        );
+      }
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

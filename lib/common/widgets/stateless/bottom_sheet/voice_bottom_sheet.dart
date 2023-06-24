@@ -2,7 +2,6 @@ import 'package:chatapp/core/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class VoiceSoundBottomSheet extends StatefulWidget {

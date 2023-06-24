@@ -2,13 +2,18 @@ import 'package:chatapp/core/config/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  final String buttonText;
+  final String? buttonText;
   final VoidCallback? onPressed;
-  final Color backgroundColor;
+  final Color? backgroundColor;
+  final bool isEnable;
 
-  const CustomElevatedButton(
-      this.buttonText, this.onPressed, this.backgroundColor,
-      {super.key});
+  const CustomElevatedButton({
+    super.key,
+    this.buttonText,
+    this.onPressed,
+    this.backgroundColor,
+    this.isEnable = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,8 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          backgroundColor: MaterialStateProperty.all(
+              isEnable ? backgroundColor : Colors.grey[400]),
           padding: MaterialStateProperty.all(
             const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
           ),
@@ -28,7 +34,7 @@ class CustomElevatedButton extends StatelessWidget {
           ),
         ),
         child: Text(
-          buttonText.toUpperCase(),
+          buttonText?.toUpperCase() ?? "",
           style: AppTextStyles.textButtonStyle,
         ),
       ),

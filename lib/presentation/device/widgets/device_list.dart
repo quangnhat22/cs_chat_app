@@ -7,28 +7,39 @@ class DeviceList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return Container(
-          margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0, top: 4.0),
-          child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                child: Icon(
-                  Icons.smartphone,
-                  color: Theme.of(context).colorScheme.primaryContainer)),
-              title: Text(devices[index]),
-              tileColor: Theme.of(context).colorScheme.surfaceVariant,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
+    return BlocBuilder<ListDeviceBloc, ListDeviceState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return state.maybeWhen(
+          inSuccess: (listDevice) {
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return DeviceListItem(
+                    deviceItem: listDevice[index],
+                  );
+                },
+                childCount: listDevice.length,
               ),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-            ),
+            );
+          },
+          inProgress: () {
+            return const SliverToBoxAdapter(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+          orElse: () {
+            return SliverToBoxAdapter(
+              child: Center(
+                child: Text(
+                    AppLocalizations.of(context)!.something_wrong_try_again),
+              ),
+            );
+          },
         );
       },
-      itemCount: devices.length,
     );
   }
 }

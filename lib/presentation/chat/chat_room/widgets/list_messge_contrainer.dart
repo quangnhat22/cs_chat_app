@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:chatapp/common/widgets/stateless/button/float_action_stadium_button.dart';
@@ -6,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'list_message.dart';
 
 class ListMessageContainer extends StatefulWidget {
-  const ListMessageContainer({super.key});
+  const ListMessageContainer({super.key, required this.type});
+
+  final String type;
 
   @override
   State<ListMessageContainer> createState() => _ListMessageContainerState();
@@ -14,13 +17,18 @@ class ListMessageContainer extends StatefulWidget {
 
 class _ListMessageContainerState extends State<ListMessageContainer> {
   final ScrollController _scrollController = ScrollController();
-
   bool _isShowMoveToBottom = false;
-
   final widthScreen = MediaQueryData.fromWindow(window).size;
-
   late Offset screenOffset =
       Offset(widthScreen.width / 2, widthScreen.height / 2);
+
+  void _onTapScrollBottom() {
+    _scrollController.animateTo(
+      0.0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   void initState() {
@@ -39,9 +47,9 @@ class _ListMessageContainerState extends State<ListMessageContainer> {
           bool isTop = _scrollController.position.pixels == 0;
 
           if (isTop) {
-            print('At the top');
+            log('At the top');
           } else {
-            print('At the bottom');
+            log('At the bottom');
           }
         }
       }
@@ -50,12 +58,10 @@ class _ListMessageContainerState extends State<ListMessageContainer> {
     super.initState();
   }
 
-  void _onTapScrollBottom() {
-    _scrollController.animateTo(
-      0.0,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -65,9 +71,7 @@ class _ListMessageContainerState extends State<ListMessageContainer> {
         CustomScrollView(
           reverse: true,
           controller: _scrollController,
-          slivers: const <Widget>[
-            ListMessage(),
-          ],
+          slivers: const <Widget>[ListMessage()],
         ),
         if (_isShowMoveToBottom)
           Positioned(

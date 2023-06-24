@@ -1,12 +1,23 @@
+import 'package:chatapp/common/widgets/stateless/message/message_item/giphy_message_item.dart';
+import 'package:flutter/material.dart';
+
 import 'message_item.dart';
 import 'message_item/audio_message_item.dart';
+import 'message_item/file_message_item.dart';
 import 'message_item/image_message_item.dart';
 import 'message_item/text_message_item.dart';
 import 'message_item/video_message_item.dart';
 
 class FactoryMessageItem {
-  static IMessageItem buildMessageItem(String? type, bool? isMe,
-      String? content, String? nameActor, DateTime? createdAt) {
+  static IMessageItem buildMessageItem(
+    String id,
+    String? type,
+    bool? isMe,
+    String? content,
+    String? videoUrl,
+    String? nameActor,
+    DateTime? createdAt,
+  ) {
     switch (type) {
       case "text":
         {
@@ -41,11 +52,35 @@ class FactoryMessageItem {
           return VideoMessageItem(
             isMe: isMe ?? false,
             content: content,
+            videoUrl: videoUrl,
           );
         }
       case "audio":
         {
           return AudioMessage(
+            content: content!,
+            isMe: isMe ?? false,
+          );
+        }
+      case "file":
+        {
+          return FileMessageItem(
+            key: ValueKey(id),
+            content: content!,
+            isMe: isMe ?? false,
+          );
+        }
+      case "giphy":
+        {
+          return GiphyMessageItem(
+            key: ValueKey(id),
+            isMe: isMe ?? false,
+            content: content,
+          );
+        }
+      case "map":
+        {
+          return TextMessageItem(
             content: content!,
             isMe: isMe ?? false,
           );

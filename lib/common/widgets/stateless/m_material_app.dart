@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:giphy_get/l10n.dart';
 
 import '../../../core/config/app_theme.dart';
 import '../../../core/routes/app_routes.dart';
@@ -37,7 +38,10 @@ class MMaterialApp extends StatelessWidget {
           key: ValueKey(keyMaterialApp),
           debugShowCheckedModeBanner: false,
           locale: locale,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: [
+            ...AppLocalizations.localizationsDelegates,
+            GiphyGetUILocalizations.delegate
+          ],
           supportedLocales: AppLocalizations.supportedLocales,
           themeMode: themeMode,
           theme: AppTheme.lightTheme,

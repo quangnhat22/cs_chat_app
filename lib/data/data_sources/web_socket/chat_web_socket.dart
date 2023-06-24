@@ -6,6 +6,8 @@ import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:chatapp/data/models/message_model.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:web_socket_channel/io.dart';
 
 import '../../../core/config/app_config.dart';
@@ -16,7 +18,7 @@ class ChatWebSocket {
   final FileStorageFirebase storageFirebase;
   late final IOWebSocketChannel _channel;
 
-  final String url = "${AppConfig.baseUrl}/ws/chat";
+  final String url = AppConfig.baseUrl;
 
   late final StreamController _streamController;
 
@@ -24,45 +26,62 @@ class ChatWebSocket {
     _streamController = StreamController();
   }
 
-  Future<void> connect() async {
+  Future<void> connect(String id, String type) async {
     try {
+      final urlSocket = "$url/$type";
       final accessToken = await localDataSrc.getAccessToken();
-      _channel = IOWebSocketChannel.connect(Uri.parse("ws://$url"),
+      _channel = IOWebSocketChannel.connect(
+          Uri.parse("ws://$urlSocket/$id/chat/ws"),
           headers: {"Authorization": "Bearer $accessToken"}
           // headers: {'Connection': 'upgrade', 'Upgrade': 'websocket'},
           );
 
       await _channel.ready;
 
-      _streamController.addStream(_channel.stream);
+      await _streamController.addStream(_channel.stream);
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  void disconnect() {
+  void disconnect() async {
     try {
-      _channel.sink.close();
-      _streamController.close();
+      await _channel.sink.close();
+      await _streamController.close();
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  Future<void> sendMessage(String type, String message, String receiverUserId,
-      String? option) async {
+  Future<void> sendMessage(String type, String message, String? option) async {
     String? messageContent = message;
     try {
-      if (type == "image" || type == "video" || type == "audio") {
+      if (type == "video") {
+        String? thumbnailUrl = await VideoThumbnail.thumbnailFile(
+          thumbnailPath: (await getTemporaryDirectory()).path,
+          video: messageContent,
+          quality: 1,
+        );
+        if (thumbnailUrl == null) return;
+        messageContent = await storageFirebase.uploadFile(thumbnailUrl);
+        final videoUrl = await storageFirebase.uploadFile(message);
+
+        _channel.sink.add(jsonEncode({
+          "type": "video",
+          "message": messageContent,
+          "video_url": videoUrl,
+          "optional": option
+        }));
+
+        return;
+      }
+
+      if (type == "image" || type == "audio" || type == "file") {
         messageContent = await storageFirebase.uploadFile(message);
         if (messageContent == null) return;
       }
-      _channel.sink.add(jsonEncode({
-        "type": type,
-        "receiver_id": receiverUserId,
-        "message": messageContent,
-        "optional": option
-      }));
+      _channel.sink.add(jsonEncode(
+          {"type": type, "message": messageContent, "optional": option}));
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -73,7 +92,7 @@ class ChatWebSocket {
       //return _channel.stream.map((event) );
       return _streamController.stream.map((event) {
         final json = jsonDecode(event) as Map<String, dynamic>;
-        log(json.toString());
+        log(json.toString(), name: "stream-error");
 
         return MessageModel.fromJson(json);
       });

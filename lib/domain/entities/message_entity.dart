@@ -1,13 +1,17 @@
 import 'package:chatapp/core/config/app_enum.dart';
 import 'package:chatapp/data/models/message_model.dart';
+import 'package:chatapp/domain/entities/group_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 
 class MessageEntity {
   final String id;
   final String? type;
   final UserEntity? sender;
+  final GroupEntity? groupEntity;
   final UserEntity? receiver;
   final String? message;
+  final String? videoUrl;
+  final String? recordUrl;
   final DateTime? createdAt;
   final bool? isMe;
   final String? optional;
@@ -18,8 +22,11 @@ class MessageEntity {
     required this.id,
     this.type,
     this.sender,
+    this.groupEntity,
     this.receiver,
     this.message,
+    this.videoUrl,
+    this.recordUrl,
     this.createdAt,
     this.isMe,
     this.optional,
@@ -36,8 +43,15 @@ class MessageEntity {
       id: model.id,
       type: model.type,
       sender: UserEntity.convertToUserEntity(userModel: model.sender),
-      receiver: UserEntity.convertToUserEntity(userModel: model.receiver),
+      groupEntity: model.group == null
+          ? null
+          : GroupEntity.convertToGroupEntity(groupModel: model.group),
+      receiver: model.receiver == null
+          ? null
+          : UserEntity.convertToUserEntity(userModel: model.receiver),
       message: model.message,
+      videoUrl: model.videoUrl,
+      recordUrl: model.recordUrl,
       createdAt: model.createdAt,
       isMe: model.isMe,
       isSameDate: isSameDate,
