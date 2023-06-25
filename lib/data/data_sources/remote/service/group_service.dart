@@ -23,11 +23,13 @@ class GroupService {
     }
   }
 
-  Future<Response> getListGroup() async {
+  Future<Response> getListGroup(String? query) async {
     try {
-      return await _service.dio.get(
-        BaseService.groupPath,
-      );
+      String endPoint = BaseService.groupPath;
+      if (query != null) {
+        endPoint += "?type=$query";
+      }
+      return await _service.dio.get(endPoint);
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {

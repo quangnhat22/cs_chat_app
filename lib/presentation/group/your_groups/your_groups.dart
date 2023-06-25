@@ -11,7 +11,6 @@ import '../../../core/di/injector.dart';
 import '../../../core/routes/app_navigation.dart';
 import '../../../core/routes/route_name.dart';
 import '../../../domain/entities/chat_room_entity.dart';
-import '../../../domain/entities/group_entity.dart';
 import 'bloc/list_group_bloc.dart';
 
 part 'pages/your_groups_page.dart';

@@ -1,10 +1,10 @@
 import 'package:chatapp/data/data_sources/remote/service/friend_service.dart';
-import 'package:chatapp/data/models/chat_room_model.dart';
 import 'package:chatapp/data/models/friend_request_model.dart';
 import 'package:chatapp/data/models/message_model.dart';
-import 'package:chatapp/domain/entities/chat_room_entity.dart';
+import 'package:chatapp/data/models/user_model.dart';
 import 'package:chatapp/domain/entities/friend_request_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
+import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
@@ -95,31 +95,31 @@ class FriendRepositoryImpl extends FriendRepository {
     }
   }
 
-  // @override
-  // Future<List<ChatRoomEntity>> getListFriend() async {
-  //   try {
-  //     final res = await _service.findFriend();
-  //     if (res.statusCode == 200) {
-  //       final listFriendJson = res.data["data"] as List<dynamic>?;
+  @override
+  Future<List<UserEntity>> getListFriend() async {
+    try {
+      final res = await _service.findFriend();
+      if (res.statusCode == 200) {
+        final listFriendJson = res.data["data"] as List<dynamic>?;
 
-  //       if (listFriendJson != null) {
-  //         final friendModels = listFriendJson
-  //             .map((friendJson) => ChatRoomModel.fromJson(friendJson))
-  //             .toList();
+        if (listFriendJson != null) {
+          final friendModels = listFriendJson
+              .map((friendJson) => UserModel.fromJson(friendJson))
+              .toList();
 
-  //         final friendEntities = friendModels
-  //             .map((friendModel) => ChatRoomEntity.convertToChatRoomEntity(
-  //                 chatRoomModel: friendModel))
-  //             .toList();
+          final friendEntities = friendModels
+              .map((friendModel) =>
+                  UserEntity.convertToUserEntity(userModel: friendModel))
+              .toList();
 
-  //         return friendEntities;
-  //       }
-  //     }
-  //     return List<ChatRoomEntity>.empty();
-  //   } catch (e) {
-  //     throw Exception(e..toString());
-  //   }
-  // }
+          return friendEntities;
+        }
+      }
+      return List<UserEntity>.empty();
+    } catch (e) {
+      throw Exception(e..toString());
+    }
+  }
 
   @override
   Future<List<FriendRequestEntity>> getReceiveRequest() async {

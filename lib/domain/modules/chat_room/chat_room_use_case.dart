@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 
 abstract class ChatRoomUseCase {
   //query: personal, group, all
-  Future<List<ChatRoomEntity>> getListChatRoom(String query);
+  Future<List<ChatRoomEntity>> getListChatRoom(String? query);
 
   Future<List<MessageEntity>> getListMessage({
     required String chatRoomId,
@@ -39,7 +39,7 @@ class ChatRoomUseCaseImpl extends ChatRoomUseCase {
   }
 
   @override
-  Future<List<ChatRoomEntity>> getListChatRoom(String query) {
+  Future<List<ChatRoomEntity>> getListChatRoom(String? query) {
     return _repo.getListChatRoom(query);
   }
 }

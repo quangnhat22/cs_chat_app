@@ -1,4 +1,5 @@
 import 'package:chatapp/data/models/chat_room_model.dart';
+import 'package:chatapp/domain/entities/latest_message_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 
 class ChatRoomEntity {
@@ -8,6 +9,7 @@ class ChatRoomEntity {
   final List<UserEntity>? members;
   final String? chatRoomId;
   final String? type;
+  final LatestMessageEntity? latestMessageEntity;
 
   ChatRoomEntity({
     required this.id,
@@ -16,6 +18,7 @@ class ChatRoomEntity {
     this.members,
     this.chatRoomId,
     this.type,
+    this.latestMessageEntity,
   });
 
   static final chatRoomEntityEmpty = ChatRoomEntity(id: "-1");
@@ -31,10 +34,9 @@ class ChatRoomEntity {
           ?.map((user) => UserEntity.convertToUserEntity(userModel: user))
           .toList(),
       avatar: chatRoomModel.imageUrl ?? chatRoomModel.avatar,
-      chatRoomId: chatRoomModel.type == "group"
-          ? chatRoomModel.id
-          : chatRoomModel.group,
-      type: chatRoomModel.type == "group" ? "group" : "friend",
+      type: chatRoomModel.type,
+      latestMessageEntity: LatestMessageEntity.convertToGroupRequestEntity(
+          model: chatRoomModel.latestMessage),
     );
   }
 }

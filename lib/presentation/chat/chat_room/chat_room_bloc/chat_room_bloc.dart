@@ -38,20 +38,20 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     try {
       emit(const ChatRoomInfoInProgress());
 
-      isGroup = (event.type == "friend") ? false : true;
+      isGroup = (event.type == "personal") ? false : true;
 
       String? chatRoomName = "";
       String? chatRoomAvatar = "";
       List<MessageEntity> listMessage;
 
-      if (isGroup) {
-        //final groupInfo = await _groupUseCase.getListChatWithGroup(groupId: event.id);
-        //TODO: gán groupInfo
-      } else {
-        final friendInfo = await _userUseCase.getUserById(event.id);
-        chatRoomName = friendInfo?.name;
-        chatRoomAvatar = friendInfo?.avatar;
-      }
+      // if (isGroup) {
+      //   //final groupInfo = await _groupUseCase.getListChatWithGroup(groupId: event.id);
+      //   //TODO: gán groupInfo
+      // } else {
+      //   final friendInfo = await _userUseCase.getUserById(event.id);
+      //   chatRoomName = friendInfo?.name;
+      //   chatRoomAvatar = friendInfo?.avatar;
+      // }
 
       listMessage = await _chatRoomUseCase.getListMessage(
         chatRoomId: event.chatRoomId,

@@ -23,8 +23,8 @@ class ListFriend extends StatelessWidget {
                         id: friends[index].id,
                         name: friends[index].name,
                         avatar: friends[index].avatar,
-                        type: friends[index].type,
-                        chatRoomId: friends[index].chatRoomId,
+                        type: "personal",
+                        // chatRoomId: friends[index].chatRoomId,
                       );
                     },
                     itemCount: friends.length,

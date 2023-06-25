@@ -1,5 +1,5 @@
-import 'package:chatapp/domain/entities/chat_room_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
+import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,7 +14,7 @@ abstract class FriendUseCase {
     int? limit,
   });
 
-  // Future<List<ChatRoomEntity>> getListFriend();
+  Future<List<UserEntity>> getListFriend();
 
   Future<bool> deleteFriend(String id);
 
@@ -64,10 +64,10 @@ class FriendUseCaseImpl extends FriendUseCase {
         userId: userId, latestMessageId: latestMessageId, limit: limit);
   }
 
-  // @override
-  // Future<List<ChatRoomEntity>> getListFriend() async {
-  //   return await repo.getListFriend();
-  // }
+  @override
+  Future<List<UserEntity>> getListFriend() async {
+    return await repo.getListFriend();
+  }
 
   @override
   Future<List<FriendRequestEntity>> getReceiveRequest() async {

@@ -18,47 +18,14 @@ class ChatRoomRepoImpl extends ChatRoomRepository {
 
   ChatRoomRepoImpl(this._groupService, this._personalService);
 
-  List<ChatRoomEntity> _convertJsonToChatRoomModel(Response<dynamic> res) {
-    try {
-      if (res.statusCode == 200) {
-        final listChatRoomJson = res.data["data"] as List<dynamic>?;
-        if (listChatRoomJson == null) return [];
-
-        final listChatRoomModel = listChatRoomJson
-            .map((friendJson) => ChatRoomModel.fromJson(friendJson))
-            .toList();
-
-        final listChatRoomEntity = listChatRoomModel
-            .map((chatRooModel) => ChatRoomEntity.convertToChatRoomEntity(
-                chatRoomModel: chatRooModel))
-            .toList();
-
-        return listChatRoomEntity;
-      } else {
-        return [];
-      }
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-
   @override
-  Future<List<ChatRoomEntity>> getListChatRoom(String query) async {
+  Future<List<ChatRoomEntity>> getListChatRoom(String? query) async {
     try {
-      List<ChatRoomEntity> listChatRoom = [];
-      if (query == "all" || query == "personal") {
-        final res = await _personalService.findFriend();
-        final listPersonalChatRoom = _convertJsonToChatRoomModel(res);
-        listChatRoom = [...listChatRoom, ...listPersonalChatRoom];
-      }
-      if (query == "all" || query == "group") {
-        final res = await _groupService.getListGroup();
-        final listGroupChatRoom = _convertJsonToChatRoomModel(res);
-        listChatRoom = [...listChatRoom, ...listGroupChatRoom];
-      }
+      final res = await _groupService.getListGroup(query);
+      final listGroupChatRoom = _convertJsonToChatRoomModel(res);
 
       // listChatRoom.sort((i1, i2) => i1.la)
-      return listChatRoom;
+      return listGroupChatRoom;
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -113,6 +80,30 @@ class ChatRoomRepoImpl extends ChatRoomRepository {
       return List<MessageEntity>.empty();
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  List<ChatRoomEntity> _convertJsonToChatRoomModel(Response<dynamic> res) {
+    try {
+      if (res.statusCode == 200) {
+        final listChatRoomJson = res.data["data"] as List<dynamic>?;
+        if (listChatRoomJson == null) return [];
+
+        final listChatRoomModel = listChatRoomJson
+            .map((friendJson) => ChatRoomModel.fromJson(friendJson))
+            .toList();
+
+        final listChatRoomEntity = listChatRoomModel
+            .map((chatRooModel) => ChatRoomEntity.convertToChatRoomEntity(
+                chatRoomModel: chatRooModel))
+            .toList();
+
+        return listChatRoomEntity;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }
