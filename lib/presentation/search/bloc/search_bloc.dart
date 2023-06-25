@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:chatapp/domain/modules/search/search_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -14,7 +15,9 @@ part 'search_bloc.freezed.dart';
 
 @Injectable()
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  SearchBloc() : super(const _Initial()) {
+  final SearchUseCase _searchUseCase;
+
+  SearchBloc(this._searchUseCase) : super(const _Initial()) {
     on<SearchEvent>((event, emit) async {
       await event.map(
         started: (event) => _started(event, emit),
@@ -25,7 +28,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   _started(_Started event, Emitter<SearchState> emit) {}
 
-  _listRequestRefreshed(SearchInputChanged event, Emitter<SearchState> emit) {
+  _listRequestRefreshed(
+      SearchInputChanged event, Emitter<SearchState> emit) async {
     log(event.query.toString());
   }
 
