@@ -5,6 +5,7 @@ import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.d
 import 'package:chatapp/presentation/app/bloc/app_bloc.dart';
 import 'package:chatapp/presentation/auth/login/login.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
+import 'package:chatapp/presentation/search/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +26,9 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<AppSettingsCubit>(),
         ),
+        BlocProvider(
+          create: (_) => getIt<SearchBloc>(),
+        )
       ],
       child: BlocBuilder<AppBloc, AppState>(
         buildWhen: (previous, current) => previous != current,

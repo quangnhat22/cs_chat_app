@@ -1,7 +1,18 @@
+import 'dart:developer';
+
 import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PermissionUtils {
   const PermissionUtils._();
+
+  static Future<void> checkPermissions() async {
+    final status = await Permission.notification.request();
+
+    if (status.isPermanentlyDenied) {
+      log('Notification Permission disabled');
+    }
+  }
 
   static Future<bool> _checkServiceEnable() async {
     return await Geolocator.isLocationServiceEnabled();

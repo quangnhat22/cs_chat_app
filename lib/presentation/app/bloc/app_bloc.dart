@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:app_links/app_links.dart';
 import 'package:chatapp/core/routes/app_navigation.dart';
@@ -9,12 +8,18 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../core/di/injector.dart';
+import '../../../service/notification_controller.dart';
+
 part 'app_event.dart';
 part 'app_state.dart';
 
 @LazySingleton()
 class AppBloc extends Bloc<AppEvent, AppState> {
+  final AuthUseCase authUseCase;
+
   AppBloc({required this.authUseCase}) : super(AppLoading()) {
+    on<AppStarted>(_onAppStarted);
     on<AppUserChanged>(_onAppUserChanged);
 
     _appLinkSubscription = AppLinks().uriLinkStream.listen((uri) {
@@ -38,11 +43,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     add(AppUserChanged());
   }
 
-  final AuthUseCase authUseCase;
-
   late final StreamSubscription<String?> _accessTokenSubscription;
   late final StreamSubscription<String?> _refreshTokenSubscription;
   late final StreamSubscription<Uri> _appLinkSubscription;
+
+  void _onAppStarted(AppStarted event, Emitter<AppState> emit) {
+    getIt<NotificationController>().initializeNotificationsEventListeners();
+  }
 
   Future<void> _onAppUserChanged(
       AppUserChanged event, Emitter<AppState> emit) async {
