@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:chatapp/domain/modules/chat_room/chat_room_use_case.dart';
-import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
-import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:chatapp/domain/modules/user/user_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -23,12 +21,13 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       : super(const ChatRoomState.initial()) {
     on<ChatRoomEvent>((event, emit) async {
       await event.map(
-          started: (event) async => _started(event, emit),
-          refreshed: (event) async => _refreshed(event, emit),
+          started: (event) async => await _started(event, emit),
+          refreshed: (event) async => await _refreshed(event, emit),
           addMessageTemp: (event) async => _addMessageTemp(event, emit),
-          newMessageNotified: (event) async => _newMessageNotified(event, emit),
+          newMessageNotified: (event) async =>
+              await _newMessageNotified(event, emit),
           newMessageTopLoaded: (event) async =>
-              _newMessageTopLoaded(event, emit));
+              await _newMessageTopLoaded(event, emit));
     });
   }
 
@@ -125,6 +124,8 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
         final chatRoomId = (state as ChatRoomInfoSuccess).chatRoomId;
 
         final listMessageCurrent = (state as ChatRoomInfoSuccess).messages;
+
+        if (listMessageCurrent.length < 10) return;
 
         final loadedMessages = await _chatRoomUseCase.getListMessage(
           chatRoomId: chatRoomId,

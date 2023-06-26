@@ -51,6 +51,8 @@ class _ListMessageState extends State<ListMessage> {
                 noItemsFoundIndicatorBuilder: (context) {
                   return Container();
                 },
+                newPageProgressIndicatorBuilder: (context) => Container(),
+                firstPageProgressIndicatorBuilder: (context) => Container(),
                 itemBuilder: (context, item, index) {
                   final isMe = item.isMe ?? false;
                   return Padding(

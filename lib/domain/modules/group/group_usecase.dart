@@ -1,4 +1,3 @@
-import 'package:chatapp/domain/entities/group_entity.dart';
 import 'package:chatapp/domain/entities/group_request_entity.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';

@@ -39,8 +39,8 @@ class GroupRepoImpl extends GroupRepository {
       String name, String? imageUrl, List<String> members) async {
     try {
       String? avatarUrl = "";
-      if (imageUrl != null) {
-        avatarUrl = await _storageFirebase.uploadFile(imageUrl);
+      if (imageUrl != null || imageUrl != "") {
+        avatarUrl = await _storageFirebase.uploadFile(imageUrl!);
       }
       final res =
           await _groupService.createGroup(name, avatarUrl ?? "", members);

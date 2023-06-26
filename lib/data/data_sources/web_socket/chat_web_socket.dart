@@ -44,7 +44,7 @@ class ChatWebSocket {
     }
   }
 
-  void disconnect() async {
+  Future<void> disconnect() async {
     try {
       await _channel.sink.close();
       await _streamController.close();

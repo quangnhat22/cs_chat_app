@@ -6,14 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ButtonSendMessage extends StatelessWidget {
   const ButtonSendMessage({Key? key}) : super(key: key);
 
-  void _handleSendMessage(BuildContext ctx, String? message) {
+  void _handleSendMessage(BuildContext ctx, String? message) async {
     if (message != null && message.trim().isNotEmpty) {
-      ctx.read<MessageStreamCubit>().sendMessage(
+      await ctx.read<MessageStreamCubit>().sendMessage(
             type: "text",
             message: message.trim(),
           );
 
-      ctx.read<InputMessageCubit>().inputMessageChanged("");
+      if (ctx.mounted) {
+        ctx.read<InputMessageCubit>().inputMessageChanged("");
+      }
     }
   }
 

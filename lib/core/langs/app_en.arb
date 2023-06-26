@@ -126,5 +126,7 @@
   "do_you_want_revoke_friend": "Do you want to undo a friend request?",
   "do_you_want_reject_friend": "Do you want to reject a friend request?",
   "do_you_want_revoke_group": "Do you want to undo a group request?",
-  "do_you_want_reject_group": "Do you want to reject a group request?"
+  "do_you_want_reject_group": "Do you want to reject a group request?",
+  "see_profile": "See profile",
+  "images": "Images"
 }

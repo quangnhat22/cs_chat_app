@@ -14,8 +14,9 @@ class ChatMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          getIt<ListChatRoomBloc>()..add(const ListChatRoomEvent.started()),
+      create: (_) => getIt<ListChatRoomBloc>()
+        ..add(const ListChatRoomEvent.inited())
+        ..add(const ListChatRoomEvent.started()),
       child: const ChatMainView(),
     );
   }
@@ -39,7 +40,8 @@ class ChatMainView extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async => _refreshedList(context),
         child: const CustomScrollView(
-          shrinkWrap: false,
+          physics: BouncingScrollPhysics(),
+          shrinkWrap: true,
           slivers: <Widget>[ListChatRoom()],
         ),
       ),

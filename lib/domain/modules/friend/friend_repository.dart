@@ -1,16 +1,14 @@
 import 'package:chatapp/domain/entities/friend_request_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 
-import '../../entities/message_entity.dart';
-
 abstract class FriendRepository {
   Future<bool> sendRequest(String id);
 
-  Future<List<MessageEntity>> getListChatWithFriends({
-    required String userId,
-    String? latestMessageId,
-    int? limit,
-  });
+  // Future<List<MessageEntity>> getListChatWithFriends({
+  //   required String userId,
+  //   String? latestMessageId,
+  //   int? limit,
+  // });
 
   Future<List<UserEntity>> getListFriend();
 

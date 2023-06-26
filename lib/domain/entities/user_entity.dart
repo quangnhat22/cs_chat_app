@@ -13,6 +13,7 @@ class UserEntity {
   final bool? isFriend;
   final DateTime? lastSeenAt;
   final String relation;
+  final String? chatRoomId;
 
   UserEntity({
     required this.id,
@@ -27,6 +28,7 @@ class UserEntity {
     this.isFriend,
     this.lastSeenAt,
     this.relation = "non",
+    this.chatRoomId,
   });
 
   static final userEntityEmpty = UserEntity(id: "-1");
@@ -48,6 +50,7 @@ class UserEntity {
       isFriend: userModel.isFriend,
       lastSeenAt: userModel.lastSeenAt,
       relation: userModel.relation ?? "non",
+      chatRoomId: userModel.chatRoomId,
     );
   }
 }

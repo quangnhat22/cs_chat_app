@@ -13,11 +13,15 @@ class ImageMessageItem extends IMessageItem {
     this.content,
     this.isMe = false,
     this.createdAt,
+    this.isBorder = true,
+    this.onTap,
   });
 
   final String? content;
   final bool isMe;
   final DateTime? createdAt;
+  final bool isBorder;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +37,14 @@ class ImageMessageItem extends IMessageItem {
       imageUrl: content!,
       imageBuilder: (context, imageProvider) {
         return GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FullScreenImage(imageUrl: content!)));
-          },
+          onTap: onTap ??
+              () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            FullScreenImage(imageUrl: content!)));
+              },
           child: Stack(
             children: [
               Container(
@@ -47,7 +53,9 @@ class ImageMessageItem extends IMessageItem {
                     image: imageProvider,
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: isBorder
+                      ? BorderRadius.circular(16)
+                      : BorderRadius.circular(0),
                 ),
               ),
               Positioned(

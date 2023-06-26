@@ -34,6 +34,8 @@ class ListChatRoom extends StatelessWidget {
               ),
             );
           },
+          getListChatRoomInFailure: (message) =>
+              SliverToBoxAdapter(child: Text(message ?? "")),
           orElse: () => const SliverToBoxAdapter(child: ListSkeleton()),
         );
       },

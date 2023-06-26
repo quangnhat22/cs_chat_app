@@ -24,6 +24,7 @@ class ListFriend extends StatelessWidget {
                         name: friends[index].name,
                         avatar: friends[index].avatar,
                         type: "personal",
+                        chatRoomId: friends[index].chatRoomId,
                         // chatRoomId: friends[index].chatRoomId,
                       );
                     },

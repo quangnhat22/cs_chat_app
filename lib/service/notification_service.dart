@@ -20,6 +20,14 @@ class NotificationService {
           playSound: true,
           importance: NotificationImportance.High,
           defaultPrivacy: NotificationPrivacy.Private,
+        ),
+        NotificationChannel(
+          channelKey: 'local_chatroom_new_message_channel',
+          channelName: 'New Message',
+          channelDescription: 'new message',
+          playSound: true,
+          importance: NotificationImportance.High,
+          defaultPrivacy: NotificationPrivacy.Private,
         )
       ],
       debug: debug,

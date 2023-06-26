@@ -1,5 +1,5 @@
-import 'package:chatapp/data/data_sources/remote/service/friend_service.dart';
 import 'package:chatapp/data/data_sources/remote/service/group_service.dart';
+import 'package:chatapp/data/data_sources/web_socket/new_message_socket.dart';
 import 'package:chatapp/data/models/chat_room_model.dart';
 import 'package:chatapp/domain/entities/chat_room_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
@@ -14,9 +14,9 @@ import '../models/message_model.dart';
 @Injectable(as: ChatRoomRepository)
 class ChatRoomRepoImpl extends ChatRoomRepository {
   final GroupService _groupService;
-  final FriendService _personalService;
+  final NewMessageSocket _newMessageSocket;
 
-  ChatRoomRepoImpl(this._groupService, this._personalService);
+  ChatRoomRepoImpl(this._groupService, this._newMessageSocket);
 
   @override
   Future<List<ChatRoomEntity>> getListChatRoom(String? query) async {
@@ -78,6 +78,50 @@ class ChatRoomRepoImpl extends ChatRoomRepository {
         }
       }
       return List<MessageEntity>.empty();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<ChatRoomEntity> getChatRoomDetailById(String id) async {
+    try {
+      final res = await _groupService.getGroupDetailById(id);
+
+      // save to local
+      if (res.statusCode == 200) {
+        final model = ChatRoomModel.fromJson(res.data["data"]["group_details"]);
+        return ChatRoomEntity.convertToChatRoomEntity(chatRoomModel: model);
+      }
+      return ChatRoomEntity.chatRoomEntityEmpty;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Stream<MessageEntity> getChatRoomUpdated() {
+    try {
+      return _newMessageSocket.getStream().map(
+          (message) => MessageEntity.convertToMessageEntity(model: message));
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<void> connectSocket() async {
+    try {
+      await _newMessageSocket.connect();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<void> disconnectSocket() async {
+    try {
+      await _newMessageSocket.disconnect();
     } catch (e) {
       throw Exception(e);
     }

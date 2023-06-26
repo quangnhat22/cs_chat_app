@@ -134,4 +134,14 @@ class GroupService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> getGroupDetailById(String groupId) async {
+    try {
+      return await _service.dio.get("${BaseService.groupPath}/$groupId");
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
