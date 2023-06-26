@@ -1,4 +1,5 @@
 import 'package:chatapp/data/models/group_model.dart';
+import 'package:chatapp/data/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'group_request_model.freezed.dart';
@@ -9,8 +10,9 @@ class GroupRequestModel with _$GroupRequestModel {
   GroupRequestModel._();
 
   factory GroupRequestModel({
-    GroupModel? sender,
-    GroupModel? receiver,
+    UserModel? sender,
+    UserModel? receiver,
+    GroupModel? group,
     // ignore: invalid_annotation_target
     @JsonKey(name: "created_at") DateTime? createdAt,
   }) = _GroupRequestModel;

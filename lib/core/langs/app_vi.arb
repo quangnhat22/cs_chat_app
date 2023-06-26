@@ -128,5 +128,8 @@
   "do_you_want_revoke_group": "Bạn có muốn thu hồi lời mời tham gia nhóm?",
   "do_you_want_reject_group": "Bạn có muốn từ chối lời mời tham gia nhóm?",
   "see_profile": "Xem thông tin chi tiết",
-  "images": "Hình ảnh"
+  "images": "Hình ảnh",
+  "unknown_name": "Tên không xác định",
+  "unknown_group": "Nhóm không xác định",
+  "no_friends_found": "Không tìm thấy bạn bè"
 }

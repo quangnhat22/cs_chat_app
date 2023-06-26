@@ -1,3 +1,5 @@
+import 'package:chatapp/domain/entities/user_entity.dart';
+import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
 import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -8,20 +10,20 @@ part 'cubit_submit_new_group_state.dart';
 
 @Injectable()
 class CubitSubmitNewGroupCubit extends Cubit<CubitSubmitNewGroupState> {
-  CubitSubmitNewGroupCubit({required GroupUseCase groupUC})
-      : _groupUC = groupUC,
-        super(const CubitSubmitNewGroupState.initial());
+  CubitSubmitNewGroupCubit(this._groupUC)
+      : super(const CubitSubmitNewGroupState.initial());
 
   final GroupUseCase _groupUC;
 
   Future<void> createGroup(
       {required String groupName,
       String? groupAvatar,
-      List<String>? members}) async {
+      List<UserEntity?>? members}) async {
     try {
       emit(const CreateGroupInProgress());
-      final isSuccess =
-          await _groupUC.createGroup(groupName, groupAvatar, members ?? []);
+      final listNewMemberId = members?.map((member) => member!.id).toList();
+      final isSuccess = await _groupUC.createGroup(
+          groupName, groupAvatar, listNewMemberId ?? []);
       if (isSuccess) {
         emit(const CreateGroupSuccess());
       } else {

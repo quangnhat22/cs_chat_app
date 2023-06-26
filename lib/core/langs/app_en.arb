@@ -128,5 +128,8 @@
   "do_you_want_revoke_group": "Do you want to undo a group request?",
   "do_you_want_reject_group": "Do you want to reject a group request?",
   "see_profile": "See profile",
-  "images": "Images"
+  "images": "Images",
+  "unknown_name": "Unknown name",
+  "unknown_group": "Unknown group",
+  "no_friends_found": "No friends found"
 }

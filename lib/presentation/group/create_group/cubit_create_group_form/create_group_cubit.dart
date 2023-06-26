@@ -19,9 +19,8 @@ class CreateGroupCubit extends Cubit<CreateGroupState> {
   }
 
   void groupMembersChanged(UserEntity member) {
-    final existingMember = state.members.firstWhere(
-      (item) => item?.id == member.id,
-    );
+    final existingMember = state.members
+        .firstWhere((item) => item?.id == member.id, orElse: () => null);
 
     final updatedMembers = [...state.members];
 

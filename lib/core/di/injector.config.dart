@@ -256,7 +256,7 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i37.ChatRoomUseCase>(),
         ));
     gh.factory<_i64.CubitSubmitNewGroupCubit>(
-        () => _i64.CubitSubmitNewGroupCubit(groupUC: gh<_i47.GroupUseCase>()));
+        () => _i64.CubitSubmitNewGroupCubit(gh<_i47.GroupUseCase>()));
     gh.factory<_i65.EditFormSubmitBloc>(
         () => _i65.EditFormSubmitBloc(userUseCase: gh<_i59.UserUseCase>()));
     gh.factory<_i66.EditProfileFormCubit>(

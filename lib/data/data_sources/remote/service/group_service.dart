@@ -14,7 +14,7 @@ class GroupService {
       return await _service.dio.post(BaseService.groupPath, data: {
         "name": name,
         "image_url": imageUrl,
-        'members': members,
+        "invited_users": members,
       });
     } on DioError catch (e) {
       throw Exception(e.message.toString());
