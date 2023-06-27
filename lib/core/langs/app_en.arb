@@ -122,5 +122,6 @@
     }
   },
   "open_gmail_app": "Open Gmail App",
-  "change_email": "Change email"
+  "change_email": "Change email",
+  "new_password": "New password"
 }
