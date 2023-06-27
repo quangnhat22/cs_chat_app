@@ -144,4 +144,41 @@ class GroupService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> updateGroup(
+      {required String groupId, String? name, String? avatar}) async {
+    try {
+      return await _service.dio.put('${BaseService.groupPath}/$groupId', data: {
+        "name": name,
+        "image_url": avatar,
+      });
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> inviteNewMember(
+      {required String groupId, List<String>? memberId}) async {
+    try {
+      return await _service.dio
+          .put('${BaseService.groupPath}/$groupId', data: {});
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> leaveGroup({required String groupId}) async {
+    try {
+      return await _service.dio
+          .put('${BaseService.groupPath}/$groupId', data: {});
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

@@ -21,8 +21,16 @@ abstract class GroupUseCase {
 
   Future<bool> acceptRequest(String groupId);
 
+  Future<bool> leaveGroup(String grouId);
+
   Future<List<MessageEntity>> getListChatWithGroup(
       {required String groupId, String? latestMessageId, int? limit});
+
+  Future<bool> inviteNewMember(
+      {required String groupId, List<String>? membersId});
+
+  Future<bool> updateGroup(
+      {required String groupId, String? groupName, String? groupAvatar});
 }
 
 @Injectable(as: GroupUseCase)
@@ -77,5 +85,23 @@ class GroupUseCaseImpl extends GroupUseCase {
       {required String groupId, String? latestMessageId, int? limit}) {
     return _repo.getListChatWithGroup(
         groupId: groupId, latestMessageId: latestMessageId, limit: limit);
+  }
+
+  @override
+  Future<bool> leaveGroup(String grouId) {
+    return _repo.leaveGroup(grouId);
+  }
+
+  @override
+  Future<bool> inviteNewMember(
+      {required String groupId, List<String>? membersId}) {
+    return _repo.inviteNewMember(groupId: groupId, membersId: membersId);
+  }
+
+  @override
+  Future<bool> updateGroup(
+      {required String groupId, String? groupName, String? groupAvatar}) {
+    return _repo.updateGroup(
+        groupId: groupId, groupAvatar: groupAvatar, groupName: groupName);
   }
 }

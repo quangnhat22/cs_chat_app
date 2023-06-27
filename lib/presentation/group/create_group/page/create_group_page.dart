@@ -33,6 +33,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
     return BlocListener<CubitSubmitNewGroupCubit, CubitSubmitNewGroupState>(
       listener: (context, state) {
         state.whenOrNull(submitSuccess: () {
+          //TODO: support lang
           SnackBarApp.showSnackBar(
               context, "Create group success", TypesSnackBar.success);
           NavigationUtil.pop(result: true);

@@ -21,7 +21,8 @@ class ListGroupItem extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () {
-        NavigationUtil.pushNamed(route: RouteName.groupDetails);
+        NavigationUtil.pushNamed(
+            route: RouteName.groupChatRoom, args: groupItem.id);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 6.0),

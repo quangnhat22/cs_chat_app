@@ -19,6 +19,14 @@ abstract class GroupRepository {
 
   Future<bool> acceptRequestt(String groupId);
 
+  Future<bool> leaveGroup(String grouId);
+
   Future<List<MessageEntity>> getListChatWithGroup(
       {required String groupId, String? latestMessageId, int? limit});
+
+  Future<bool> inviteNewMember(
+      {required String groupId, List<String>? membersId});
+
+  Future<bool> updateGroup(
+      {required String groupId, String? groupName, String? groupAvatar});
 }

@@ -1,13 +1,10 @@
 import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/remote/service/group_service.dart';
-import 'package:chatapp/data/models/group_model.dart';
 import 'package:chatapp/data/models/group_request_model.dart';
 import 'package:chatapp/domain/entities/group_request_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/modules/group/group_repository.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../domain/entities/group_entity.dart';
 
 @Injectable(as: GroupRepository)
 class GroupRepoImpl extends GroupRepository {
@@ -53,33 +50,6 @@ class GroupRepoImpl extends GroupRepository {
       throw Exception(e.toString());
     }
   }
-
-  // @override
-  // Future<List<GroupEntity>> getListGroup() async {
-  //   try {
-  //     final res = await _groupService.getListGroup();
-  //     if (res.statusCode == 200) {
-  //       final listGroupJson = res.data["data"] as List<dynamic>?;
-  //       if (listGroupJson != null) {
-  //         final listGroupModel = listGroupJson
-  //             .map((groupJson) => GroupModel.fromJson(groupJson))
-  //             .toList();
-
-  //         final listGroupEntity = listGroupModel
-  //             .map((groupModel) =>
-  //                 GroupEntity.convertToGroupEntity(groupModel: groupModel))
-  //             .toList();
-
-  //         return listGroupEntity;
-  //       }
-  //     }
-
-  //     // return [];
-  //     return List<GroupEntity>.empty();
-  //   } catch (e) {
-  //     throw Exception(e.toString());
-  //   }
-  // }
 
   @override
   Future<List<GroupRequestEntity>> getReceiveRequest() async {
@@ -181,36 +151,53 @@ class GroupRepoImpl extends GroupRepository {
   @override
   Future<List<MessageEntity>> getListChatWithGroup(
       {required String groupId, String? latestMessageId, int? limit}) async {
-    // try {
-    //   final res = await _groupService.getListGroupChat(
-    //     groupId: groupId,
-    //     latestMessageId: latestMessageId,
-    //     limit: limit,
-    //   );
-    //   if (res.statusCode == 200) {
-    //     final listMessageJson = res.data["data"] as List<dynamic>?;
-    //     if (listMessageJson != null) {
-    //       final listMessageModel = listMessageJson
-    //           .map((messageJson) => MessageModel.fromJson(messageJson))
-    //           .toList();
-
-    //       DateTime? dateTimePrev;
-    //       final listMessageEntity =
-    //           listMessageModel.mapIndexed((index, messageModel) {
-    //         if (index == 0) dateTimePrev = messageModel.createdAt;
-
-    //         return MessageEntity.convertToMessageEntity(
-    //             model: messageModel,
-    //             isSameDate: messageModel.createdAt == dateTimePrev);
-    //       }).toList();
-
-    //       return listMessageEntity;
-    //     }
-    //   }
-    //   return List<MessageEntity>.empty();
-    // } catch (e) {
-    //   throw Exception(e);
-    // }
     throw Exception("Not support");
+  }
+
+  @override
+  Future<bool> leaveGroup(String grouId) {
+    // TODO: implement leaveGroup
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> inviteNewMember(
+      {required String groupId, List<String>? membersId}) async {
+    try {
+      final res = await _groupService.inviteNewMember(
+          groupId: groupId, memberId: membersId);
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> updateGroup(
+      {required String groupId, String? groupName, String? groupAvatar}) async {
+    try {
+      String? groupImage = groupAvatar;
+      if (groupAvatar != null &&
+          groupAvatar != "" &&
+          !groupAvatar.contains('firebase')) {
+        groupImage = await _storageFirebase.uploadFile(groupAvatar);
+      }
+      final res = await _groupService.updateGroup(
+        groupId: groupId,
+        name: groupName,
+        avatar: groupImage,
+      );
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
