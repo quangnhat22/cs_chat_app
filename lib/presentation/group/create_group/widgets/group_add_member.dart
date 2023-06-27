@@ -1,43 +1,29 @@
 part of create_group;
 
-class GroupAddMembers extends StatelessWidget {
-  GroupAddMembers({Key? key}) : super(key: key);
+class GroupAddMembers extends StatefulWidget {
+  const GroupAddMembers({super.key});
 
-  final List<String> allFriends = [
-    'Nguyễn Đình Nhật Quang',
-    'Trần Đình Lộc',
-    'Lê Hà Gia Bảo',
-    'Lê Đức Hậu',
-  ];
+  @override
+  State<GroupAddMembers> createState() => _GroupAddMembersState();
+}
 
-  final List<String> selectedFriends = [];
-  late List<String> friendResults = [];
+class _GroupAddMembersState extends State<GroupAddMembers> {
+  final List<UserEntity?> selectedFriends = [];
 
-  void handleSelectMembers(String member) {
-    if (!selectedFriends.contains(member)) {
-      // setState(() {
-      //   selectedFriends.add(member);
-      // });
-    } else {
-      // setState(() {
-      //   selectedFriends.remove(member);
-      // });
-    }
-  }
+  void handleSelectMembers(BuildContext ctx, UserEntity member) {
+    ctx.read<CreateGroupCubit>().groupMembersChanged(member);
 
-  void handleTextChange(String value) {
-    // if (value == '') {
-    //   setState(() {
-    //     friendResults = [...allFriends];
-    //   });
-    // } else {
-    //   setState(() {
-    //     friendResults = allFriends
-    //         .where(
-    //             (friend) => friend.toLowerCase().contains(value.toLowerCase()))
-    //         .toList();
-    //   });
-    // }
+    final existingMember = selectedFriends.firstWhere(
+      (element) => element?.id == member.id,
+      orElse: () => null,
+    );
+    setState(() {
+      if (existingMember == null) {
+        selectedFriends.add(member);
+      } else {
+        selectedFriends.removeWhere((element) => element?.id == member.id);
+      }
+    });
   }
 
   @override
@@ -57,17 +43,16 @@ class GroupAddMembers extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
           child: TextField(
             decoration: InputDecoration(
-              suffixIcon: const Icon(Icons.search),
-              filled: true,
-              fillColor: Theme.of(context).colorScheme.onInverseSurface,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-              hintText: AppLocalizations.of(context)!.search_friends,
-            ),
-            onChanged: (value) {
-              //onTextChange(value);
-            },
+                suffixIcon: const Icon(Icons.search),
+                filled: true,
+                fillColor: Theme.of(context).colorScheme.onInverseSurface,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                hintText: AppLocalizations.of(context)!.search_friends),
+            // onChanged: (value) {
+            //   widget.onTextChange(value);
+            // },
           ),
         ),
         Padding(
@@ -78,6 +63,55 @@ class GroupAddMembers extends StatelessWidget {
             style: AppTextStyles.mediumTitleTextStyle,
           ),
         ),
+        BlocBuilder<FriendsContactBloc, FriendsContactState>(
+          buildWhen: (previous, current) => previous != current,
+          builder: (context, state) {
+            return state.maybeWhen(
+              success: (friends) {
+                return friends.isEmpty
+                    ? Center(
+                        child: Text(
+                            AppLocalizations.of(context)!.no_friends_found),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return CheckboxListTile(
+                            title: Text(friends[index].name!.isEmpty
+                                ? AppLocalizations.of(context)!.unknown_name
+                                : friends[index].name!),
+                            subtitle: Text(
+                              AppLocalizations.of(context)!.user_status_online,
+                              style: const TextStyle(color: Colors.green),
+                            ),
+                            secondary: CustomAvatarImage(
+                              urlImage: friends[index].avatar,
+                              widthImage: 24,
+                            ),
+                            value: selectedFriends.firstWhere(
+                                  (element) => element?.id == friends[index].id,
+                                  orElse: () => null,
+                                ) !=
+                                null,
+                            onChanged: (bool? value) =>
+                                {handleSelectMembers(context, friends[index])},
+                          );
+                        },
+                        itemCount: friends.length,
+                      );
+              },
+              failure: (message) {
+                return Center(
+                  child: Text(message),
+                );
+              },
+              orElse: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+        )
       ],
     );
   }

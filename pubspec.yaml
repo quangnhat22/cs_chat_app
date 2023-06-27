@@ -79,6 +79,10 @@ dependencies:
   flutter_countdown_timer: ^4.1.0
   video_thumbnail: ^0.5.3
   giphy_get: ^3.3.1
+  awesome_notifications: ^0.7.4+1
+  awesome_notifications_fcm: ^0.7.4+1
+  stream_transform: ^2.1.0
+  extended_image: ^7.0.2
 
 dev_dependencies:
   flutter_test:
@@ -126,27 +130,27 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto-ThinItalic.ttf
-          style: italic
-        - asset: assets/fonts/Roboto-Thin.ttf
-        - asset: assets/fonts/Roboto-MediumItalic.ttf
-          style: italic
-        - asset: assets/fonts/Roboto-Medium.ttf
-        - asset: assets/fonts/Roboto-LightItalic.ttf
-          style: italic
-        - asset: assets/fonts/Roboto-Light.ttf
-        - asset: assets/fonts/Roboto-Italic.ttf
-          style: italic
-        - asset: assets/fonts/Roboto-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Roboto-BoldItalic.ttf
-          style: italic
-        - asset: assets/fonts/Roboto-Black.ttf
-          weight: 900
-        - asset: assets/fonts/Roboto-BlackItalic.ttf
-          style: italic
+  # fonts:
+  #   - family: Roboto
+  #     fonts:
+  #       - asset: assets/fonts/Roboto-ThinItalic.ttf
+  #         style: italic
+  #       - asset: assets/fonts/Roboto-Thin.ttf
+  #       - asset: assets/fonts/Roboto-MediumItalic.ttf
+  #         style: italic
+  #       - asset: assets/fonts/Roboto-Medium.ttf
+  #       - asset: assets/fonts/Roboto-LightItalic.ttf
+  #         style: italic
+  #       - asset: assets/fonts/Roboto-Light.ttf
+  #       - asset: assets/fonts/Roboto-Italic.ttf
+  #         style: italic
+  #       - asset: assets/fonts/Roboto-Bold.ttf
+  #         weight: 700
+  #       - asset: assets/fonts/Roboto-BoldItalic.ttf
+  #         style: italic
+  #       - asset: assets/fonts/Roboto-Black.ttf
+  #         weight: 900
+  #       - asset: assets/fonts/Roboto-BlackItalic.ttf
+  #         style: italic
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

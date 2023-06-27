@@ -13,11 +13,13 @@ class VideoMessageItem extends IMessageItem {
     this.content,
     this.videoUrl,
     this.isMe = false,
+    this.isBorder = true,
   });
 
   final String? content;
   final String? videoUrl;
   final bool isMe;
+  final bool isBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class VideoMessageItem extends IMessageItem {
                 thumbnailUrl: content!,
                 videoUrl: videoUrl,
                 isMe: isMe,
+                isBorder: isBorder,
               )
             : Container(),
       ),
@@ -48,12 +51,14 @@ class VideoPlayerView extends StatelessWidget {
   final bool isMe;
   final String? videoUrl;
   final String? thumbnailUrl;
+  final bool isBorder;
 
   const VideoPlayerView({
     super.key,
     required this.isMe,
     this.videoUrl,
     this.thumbnailUrl,
+    this.isBorder = true,
   });
 
   @override
@@ -63,6 +68,8 @@ class VideoPlayerView extends StatelessWidget {
         ImageMessageItem(
           content: thumbnailUrl,
           isMe: isMe,
+          isBorder: isBorder,
+          onTap: () {},
         ),
         if (videoUrl != null)
           Positioned(

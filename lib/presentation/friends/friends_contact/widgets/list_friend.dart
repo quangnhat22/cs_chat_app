@@ -13,9 +13,7 @@ class ListFriend extends StatelessWidget {
         return state.maybeWhen(
           success: (friends) {
             return friends.isEmpty
-                ? const Center(
-                    child: Text("No friends now!"),
-                  )
+                ? const EmptyView()
                 : ListView.separated(
                     shrinkWrap: true,
                     separatorBuilder: (context, index) =>
@@ -25,7 +23,9 @@ class ListFriend extends StatelessWidget {
                         id: friends[index].id,
                         name: friends[index].name,
                         avatar: friends[index].avatar,
-                        email: friends[index].email,
+                        type: "personal",
+                        chatRoomId: friends[index].chatRoomId,
+                        // chatRoomId: friends[index].chatRoomId,
                       );
                     },
                     itemCount: friends.length,

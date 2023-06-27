@@ -5,7 +5,7 @@ class ListRequestGroupSend extends StatelessWidget {
 
   final List<GroupRequestEntity> listSendRequest;
 
-  void _onTapRecallButton(BuildContext ctx, String? groupId, String? friendId) {
+  void _onTapRecallButton(BuildContext ctx, String? friendId, String? groupId) {
     if (groupId == null) return;
     ctx.read<GroupRequestActionCubit>().recallRequest(groupId, friendId ?? "");
   }
@@ -30,7 +30,7 @@ class ListRequestGroupSend extends StatelessWidget {
                       : "",
                 ),
                 leading: CustomAvatarImage(
-                  urlImage: listSendRequest[index].receiver?.imageUrl,
+                  urlImage: listSendRequest[index].receiver?.avatar,
                   maxRadiusEmptyImg: 20,
                   widthImage: 48,
                   heightImage: 48,
@@ -46,7 +46,7 @@ class ListRequestGroupSend extends StatelessWidget {
                     onPressed: () => _onTapRecallButton(
                       context,
                       listSendRequest[index].receiver?.id,
-                      listSendRequest[index].receiver?.members as String?,
+                      listSendRequest[index].group?.id,
                     ),
                     child: Text(AppLocalizations.of(context)!
                         .requests_recall_text_button),

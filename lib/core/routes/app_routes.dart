@@ -5,10 +5,13 @@ import 'package:chatapp/presentation/auth/register/register.dart';
 import 'package:chatapp/presentation/chat/chat_room/pages/chat_room_page.dart';
 import 'package:chatapp/presentation/device/device_administration.dart';
 import 'package:chatapp/presentation/friends/find_new_friend/find_new_friend.dart';
+import 'package:chatapp/presentation/friends/friends_detail/pages/friends_detail_page.dart';
 import 'package:chatapp/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:chatapp/presentation/group/create_group/create_group.dart';
+import 'package:chatapp/presentation/group/edit_group/pages/edit_group_page.dart';
 import 'package:chatapp/presentation/group/group_details/pages/group_details_page.dart';
 import 'package:chatapp/presentation/home/pages/home_page.dart';
+import 'package:chatapp/presentation/media/pages/media_page.dart';
 import 'package:chatapp/presentation/others/loading_page.dart';
 import 'package:chatapp/presentation/map/pages/map_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
@@ -77,30 +80,67 @@ class AppRoutes {
           const FindNewFriendPage(),
         );
       case RouteName.chatRoom:
-        return _buildRoute(
-          settings,
-          ChatRoomPage(
-            id: settings.arguments as String,
-            type: "friend",
-          ),
-        );
+        {
+          final args = settings.arguments as Map<String, dynamic>;
+          final id = args["id"] as String;
+          final chatRoomId = args["chatRoomId"] as String;
+          final type = args["type"] as String;
+          return _buildRoute(
+            settings,
+            ChatRoomPage(
+              id: id,
+              type: type,
+              chatRoomId: chatRoomId,
+            ),
+          );
+        }
+      case RouteName.personalChatRoom:
+        {
+          final args = settings.arguments as Map<String, dynamic>;
+          final chatRoomId = args["chatRoomId"] as String;
+          final friendId = args["friendId"] as String;
+          return _buildRoute(
+              settings,
+              FriendDetailPage(
+                chatRoomId: chatRoomId,
+                friendId: friendId,
+              ));
+        }
       case RouteName.groupChatRoom:
-        return _buildRoute(
-          settings,
-          ChatRoomPage(
-            id: settings.arguments as String,
-            type: "group",
-          ),
-        );
+        {
+          return _buildRoute(
+              settings, GroupDetailPage(groupId: settings.arguments as String));
+        }
+
       case RouteName.deviceAdministration:
         return _buildRoute(settings, const DeviceMainPage());
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
-      case RouteName.groupDetails:
-        return _buildRoute(settings, const GroupDetailPage());
+      case RouteName.editGroup:
+        {
+          final args = settings.arguments as Map<String, dynamic>;
+          final groupId = args["groupId"] as String;
+          final groupName = args["groupName"] as String;
+          final groupAvatar = args["groupAvatar"] as String;
+          return _buildRoute(
+            settings,
+            EditGroupPage(
+              groupId: groupId,
+              groupAvatar: groupAvatar,
+              groupName: groupName,
+            ),
+          );
+        }
+
       case RouteName.googleMap:
         return _buildRoute(settings, const MapPage());
-
+      case RouteName.medias:
+        {
+          return _buildRoute(
+            settings,
+            MediaPage(chatRoomId: settings.arguments as String),
+          );
+        }
       default:
         return _errorRoute();
     }

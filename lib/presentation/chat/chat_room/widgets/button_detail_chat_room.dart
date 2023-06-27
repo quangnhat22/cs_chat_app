@@ -10,11 +10,17 @@ class HeaderButtonDetail extends StatelessWidget {
   void _handleOnPress(BuildContext ctx) {
     final chatRoomBlocState = ctx.read<ChatRoomBloc>().state;
     if (chatRoomBlocState is ChatRoomInfoSuccess) {
-      final userInfo = chatRoomBlocState.chatRoomId;
+      final chatRoomId = chatRoomBlocState.chatRoomId;
+      final id = chatRoomBlocState.id;
       if (chatRoomBlocState.isGroupChatRoom) {
-        //
+        NavigationUtil.pushNamed(
+          route: RouteName.groupChatRoom,
+          args: chatRoomBlocState.chatRoomId,
+        );
       } else {
-        NavigationUtil.pushNamed(route: RouteName.friendInfo, args: userInfo);
+        NavigationUtil.pushNamed(
+            route: RouteName.personalChatRoom,
+            args: {"chatRoomId": chatRoomId, "friendId": id});
       }
     }
   }

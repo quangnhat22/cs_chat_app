@@ -6,12 +6,14 @@ class GroupEntity {
   final String? name;
   final List<UserEntity>? members;
   final String? imageUrl;
+  String? type;
 
   GroupEntity({
     required this.id,
     this.name,
     this.members,
     this.imageUrl,
+    this.type,
   });
 
   static final groupEntityEmpty = GroupEntity(id: "-1");
@@ -27,6 +29,7 @@ class GroupEntity {
           ?.map((user) => UserEntity.convertToUserEntity(userModel: user))
           .toList(),
       imageUrl: groupModel.imageUrl,
+      type: groupModel.type,
     );
   }
 }

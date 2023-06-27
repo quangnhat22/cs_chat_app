@@ -14,7 +14,7 @@ class GroupService {
       return await _service.dio.post(BaseService.groupPath, data: {
         "name": name,
         "image_url": imageUrl,
-        'members': members,
+        "invited_users": members,
       });
     } on DioError catch (e) {
       throw Exception(e.message.toString());
@@ -23,11 +23,13 @@ class GroupService {
     }
   }
 
-  Future<Response> getListGroup() async {
+  Future<Response> getListGroup(String? query) async {
     try {
-      return await _service.dio.get(
-        BaseService.groupPath,
-      );
+      String endPoint = BaseService.groupPath;
+      if (query != null) {
+        endPoint += "?type=$query";
+      }
+      return await _service.dio.get(endPoint);
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
@@ -107,27 +109,74 @@ class GroupService {
     }
   }
 
-  Future<Response> getListGroupChat({
-    required String groupId,
+  Future<Response> getListMessage({
+    required String id,
+    required int limit,
+    required String order,
+    String? type,
     String? latestMessageId,
-    int? limit = 20,
   }) async {
     try {
-      if (latestMessageId == null) {
-        return await _service.dio.get(
-          "${BaseService.groupPath}/$groupId/chat",
-        );
-      } else {
-        if (latestMessageId.contains("-")) {
-          throw Exception("id not valid");
-        }
+      String endPointApi =
+          "${BaseService.groupPath}/$id/chat?limit=$limit&order=$order";
 
-        return await _service.dio.get(
-          "${BaseService.groupPath}/$groupId/chat?last_id=$latestMessageId",
-        );
+      if (latestMessageId != null && !latestMessageId.contains("-")) {
+        endPointApi += "&last_id=$latestMessageId";
       }
+      if (type != null) {
+        endPointApi += "&type=$type";
+      }
+
+      return await _service.dio.get(endPointApi);
     } on DioError catch (e) {
       throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> getGroupDetailById(String groupId) async {
+    try {
+      return await _service.dio.get("${BaseService.groupPath}/$groupId");
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> updateGroup(
+      {required String groupId, String? name, String? avatar}) async {
+    try {
+      return await _service.dio.put('${BaseService.groupPath}/$groupId', data: {
+        "name": name,
+        "image_url": avatar,
+      });
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> inviteNewMember(
+      {required String groupId, List<String>? memberId}) async {
+    try {
+      return await _service.dio
+          .put('${BaseService.groupPath}/$groupId', data: {});
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> leaveGroup({required String groupId}) async {
+    try {
+      return await _service.dio
+          .put('${BaseService.groupPath}/$groupId', data: {});
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }

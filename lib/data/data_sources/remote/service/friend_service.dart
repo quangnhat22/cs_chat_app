@@ -20,31 +20,31 @@ class FriendService {
     }
   }
 
-  Future<Response> getListChat({
-    required String userId,
-    String? latestMessageId,
-    int? limit = 20,
-  }) async {
-    try {
-      if (latestMessageId == null) {
-        return await _service.dio.get(
-          "${BaseService.friendPath}/$userId/chat",
-        );
-      } else {
-        if (latestMessageId.contains("-")) throw Exception("id not valid");
-        return await _service.dio.get(
-          "${BaseService.friendPath}/$userId/chat?last_id=$latestMessageId",
-        );
-      }
-    } on DioError catch (e) {
-      throw Exception(e.message);
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
+  // Future<Response> getListChat({
+  //   required String userId,
+  //   String? latestMessageId,
+  //   int? limit = 20,
+  // }) async {
+  //   try {
+  //     if (latestMessageId == null) {
+  //       return await _service.dio.get(
+  //         "${BaseService.friendPath}/$userId/chat",
+  //       );
+  //     } else {
+  //       if (latestMessageId.contains("-")) throw Exception("id not valid");
+  //       return await _service.dio.get(
+  //         "${BaseService.friendPath}/$userId/chat?last_id=$latestMessageId",
+  //       );
+  //     }
+  //   } on DioError catch (e) {
+  //     throw Exception(e.message);
+  //   } catch (e) {
+  //     throw Exception(e.toString());
+  //   }
+  // }
 
   //get list friend
-  Future<Response> findFriend() async {
+  Future<Response> getListFriend() async {
     try {
       return await _service.dio.get(
         "${BaseService.friendPath}/",

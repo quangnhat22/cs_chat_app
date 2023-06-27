@@ -11,6 +11,10 @@ class CreateGroupPage extends StatelessWidget {
       ),
       BlocProvider(
         create: (_) => getIt<CubitSubmitNewGroupCubit>(),
+      ),
+      BlocProvider(
+        create: (_) => getIt<FriendsContactBloc>()
+          ..add(const FriendsContactEvent.started()),
       )
     ], child: const CreateGroupView());
   }
@@ -29,6 +33,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
     return BlocListener<CubitSubmitNewGroupCubit, CubitSubmitNewGroupState>(
       listener: (context, state) {
         state.whenOrNull(submitSuccess: () {
+          //TODO: support lang
           SnackBarApp.showSnackBar(
               context, "Create group success", TypesSnackBar.success);
           NavigationUtil.pop(result: true);
@@ -55,9 +60,9 @@ class _CreateGroupViewState extends State<CreateGroupView> {
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const GroupSetPhoto(),
-              const InputGroupName(),
+            children: const <Widget>[
+              GroupSetPhoto(),
+              InputGroupName(),
               GroupAddMembers(),
             ],
           ),

@@ -30,21 +30,29 @@ class YourGroupsView extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionStadiumButton(
-        onPressed: () {
-          NavigationUtil.pushNamed(route: RouteName.createGroup).then((value) {
-            if (value == true) {
-              context.read<ListGroupBloc>().add(const ListGroupEvent.started());
-            }
-          }).then((value) {
-            if (value == true) {
-              context
-                  .read<ListGroupBloc>()
-                  .add(const ListGroupEvent.refreshed());
-            }
-          });
-        },
-        heroTag: null,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(
+          bottom: 40,
+        ),
+        child: FloatingActionStadiumButton(
+          onPressed: () {
+            NavigationUtil.pushNamed(route: RouteName.createGroup)
+                .then((value) {
+              if (value == true) {
+                context
+                    .read<ListGroupBloc>()
+                    .add(const ListGroupEvent.started());
+              }
+            }).then((value) {
+              if (value == true) {
+                context
+                    .read<ListGroupBloc>()
+                    .add(const ListGroupEvent.refreshed());
+              }
+            });
+          },
+          heroTag: null,
+        ),
       ),
     );
   }

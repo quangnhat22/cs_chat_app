@@ -1,76 +1,44 @@
+import 'package:chatapp/presentation/search/bloc/search_bloc.dart';
+import 'package:chatapp/presentation/search/pages/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    'Lê Đức Hậu',
-    'Lê Hà Gia Bảo',
-    'Người bất ổn',
-  ];
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        onPressed: () {
-          query = '';
-        },
-        icon: const Icon(Icons.clear))
+          onPressed: () {
+            query = '';
+          },
+          icon: const Icon(Icons.clear))
     ];
   }
 
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      onPressed: () {
-        close(context, null);
-      },
-      icon: const Icon(Icons.arrow_back));
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back));
   }
+
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var element in searchTerms) {
-      if(element.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(element);
-      }
+    if (query != "") {
+      context.read<SearchBloc>().add(SearchInputChanged(query: query));
     }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            child: Icon(
-              Icons.person,
-              color: Theme.of(context).colorScheme.primaryContainer)),
-          title: Text(result),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        );
-      });
+
+    return const SearchPage();
   }
+
   @override
-  Widget buildSuggestions(BuildContext context){
-    List<String> matchQuery = [];
-    for (var element in searchTerms) {
-      if(element.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(element);
-      }
+  Widget buildSuggestions(BuildContext context) {
+    if (query != "") {
+      context.read<SearchBloc>().add(SearchInputChanged(query: query));
     }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            child: Icon(
-              Icons.person,
-              color: Theme.of(context).colorScheme.primaryContainer)),
-          title: Text(result),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        );
-      });
+
+    return const SearchPage();
   }
 }

@@ -13,19 +13,19 @@ class GroupList extends StatelessWidget {
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  if (index.isEven) {
-                    return ListGroupItem(
-                      groupItem: listGroup[index],
-                    );
-                  }
-                  return const DividerSpaceLeft();
+                  //if (index.isEven) {
+                  return ListGroupItem(
+                    groupItem: listGroup[index],
+                  );
+                  //}
+                  //return const DividerSpaceLeft();
                 },
-                semanticIndexCallback: (Widget widget, int localIndex) {
-                  if (localIndex.isEven) {
-                    return localIndex ~/ 2;
-                  }
-                  return null;
-                },
+                // semanticIndexCallback: (Widget widget, int localIndex) {
+                //   if (localIndex.isEven) {
+                //     return localIndex ~/ 2;
+                //   }
+                //   return null;
+                // },
                 childCount: listGroup.length,
               ),
             );

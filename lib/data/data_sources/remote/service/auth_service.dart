@@ -10,16 +10,19 @@ class AuthService {
   AuthService({required BaseService service}) : _service = service;
 
   Future<Response> register(
-    String email,
-    String password,
-    String deviceName,
-  ) async {
+      {required String email,
+      required String password,
+      String? deviceName,
+      String? fcmToken}) async {
     try {
       return await _service.dio.post(
         "${BaseService.authPath}/register",
         data: {
           "data": {"email": email, "password": password},
-          "device": {"name": deviceName},
+          "device": {
+            "name": deviceName,
+            "push_notification_token": fcmToken,
+          },
         },
       );
     } on DioError catch (e) {
@@ -30,9 +33,7 @@ class AuthService {
   }
 
   Future<Response> loginWithFirebase(
-    String idToken,
-    String deviceName,
-  ) async {
+      {required String idToken, String? deviceName, String? fcmToken}) async {
     try {
       return await _service.dio.post(
         "${BaseService.authPath}/login-with-firebase",
@@ -40,6 +41,7 @@ class AuthService {
           "id_token": idToken,
           "device": {
             "name": deviceName,
+            "push_notification_token": fcmToken,
           }
         },
       );
@@ -49,16 +51,19 @@ class AuthService {
   }
 
   Future<Response> login(
-    String email,
-    String password,
-    String deviceName,
-  ) async {
+      {required String email,
+      required String password,
+      String? deviceName,
+      String? fcmToken}) async {
     try {
       return await _service.dio.post(
         "${BaseService.authPath}/login",
         data: {
           "data": {"email": email, "password": password},
-          "device": {"name": deviceName},
+          "device": {
+            "name": deviceName,
+            "push_notification_token": fcmToken,
+          },
         },
       );
     } on DioError catch (e) {

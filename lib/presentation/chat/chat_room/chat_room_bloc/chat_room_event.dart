@@ -5,6 +5,8 @@ class ChatRoomEvent with _$ChatRoomEvent {
   const factory ChatRoomEvent.started({
     required String type,
     required String id,
+    required String chatRoomId,
+    String? latestMessageId,
   }) = Started;
 
   const factory ChatRoomEvent.refreshed() = ChatRoomRefreshed;

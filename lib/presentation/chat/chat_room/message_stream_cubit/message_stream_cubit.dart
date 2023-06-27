@@ -22,9 +22,9 @@ class MessageStreamCubit extends Cubit<MessageStreamState> {
   final MessageUseCase _messageUseCase;
   late final StreamSubscription<MessageEntity> _subNewMessageStream;
 
-  Future<void> started(String id, String typeChatRoom) async {
+  Future<void> started(String id) async {
     try {
-      await _messageUseCase.connectSocket(id, typeChatRoom);
+      await _messageUseCase.connectSocket(id);
 
       //register a subscription new message stream from Socket
       _subNewMessageStream = _messageUseCase.getNewMessage().listen((message) {

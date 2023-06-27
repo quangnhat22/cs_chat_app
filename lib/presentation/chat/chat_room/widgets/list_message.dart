@@ -34,8 +34,8 @@ class _ListMessageState extends State<ListMessage> {
   Widget build(BuildContext context) {
     return BlocConsumer<ChatRoomBloc, ChatRoomState>(
       listener: (context, state) {
-        state.whenOrNull(
-            getChatRoomInfoSuccess: (messages, _, __, ___, ____, isLatest) {
+        state.whenOrNull(getChatRoomInfoSuccess:
+            (messages, _, __, ___, ____, _____, isLatest) {
           _pagingController.itemList = messages;
           if (isLatest) {
             _pagingController.appendLastPage([]);
@@ -44,13 +44,15 @@ class _ListMessageState extends State<ListMessage> {
       },
       builder: (context, state) {
         return state.maybeWhen(
-          getChatRoomInfoSuccess: (messages, _, __, ___, ____, _____) {
+          getChatRoomInfoSuccess: (messages, _, __, ___, ____, _____, ______) {
             return PagedSliverList<String, MessageEntity>(
               pagingController: _pagingController,
               builderDelegate: PagedChildBuilderDelegate<MessageEntity>(
                 noItemsFoundIndicatorBuilder: (context) {
                   return Container();
                 },
+                newPageProgressIndicatorBuilder: (context) => Container(),
+                firstPageProgressIndicatorBuilder: (context) => Container(),
                 itemBuilder: (context, item, index) {
                   final isMe = item.isMe ?? false;
                   return Padding(

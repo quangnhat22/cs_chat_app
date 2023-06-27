@@ -6,17 +6,25 @@ class ListRequestFriendSend extends StatelessWidget {
   final List<FriendRequestEntity> listSentRequest;
 
   void _onTapRecallButton(BuildContext ctx, String? recevierId) {
-    if (recevierId == null) return;
-    ctx.read<FriendRequestActionCubit>().recallRequest(recevierId);
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(AppLocalizations.of(ctx)!.confirm)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_revoke_friend)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .setOnPositive(() {
+          if (recevierId == null) return;
+          ctx.read<FriendRequestActionCubit>().recallRequest(recevierId);
+          Navigator.of(ctx).pop();
+        })
+        .buildDialog(ctx)
+        .show(ctx);
   }
 
   @override
   Widget build(BuildContext context) {
     return listSentRequest.isEmpty
-        ? const Padding(
-            padding: EdgeInsets.all(32.0),
-            child: Text("You didn't send request!"),
-          )
+        ? const EmptyView()
         : ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

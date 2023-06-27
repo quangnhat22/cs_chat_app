@@ -8,20 +8,33 @@ class ButtonGroupSubmit extends StatelessWidget {
     super.key,
   });
 
-  void _handleOnPress(BuildContext ctx, String groupName, String? groupAvatar) {
-    ctx.read<CubitSubmitNewGroupCubit>().createGroup(
-        groupName: groupName, groupAvatar: groupAvatar, members: []);
+  void _handleOnPress(BuildContext ctx) {
+    final createGroupBloc = ctx.read<CreateGroupCubit>().state;
+    if (createGroupBloc.groupName.isNotEmpty &&
+        createGroupBloc.groupName.trim() != '') {
+      ctx.read<CubitSubmitNewGroupCubit>().createGroup(
+            groupName: createGroupBloc.groupName.trim(),
+            groupAvatar: createGroupBloc.groupImage ?? '',
+            members: createGroupBloc.members,
+          );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateGroupCubit, CreateGroupState>(
+    return BlocBuilder<CubitSubmitNewGroupCubit, CubitSubmitNewGroupState>(
       builder: (context, state) {
-        return BlocBuilder<CreateGroupCubit, CreateGroupState>(
-          builder: (context, state) {
+        return state.maybeWhen(
+          submitInProgress: () => const Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 16.0,
+            ),
+            child: CircularProgressIndicator(),
+          ),
+          orElse: () {
             return IconButton(
-              onPressed: () =>
-                  _handleOnPress(context, state.groupName, state.groupImage),
+              onPressed: () => _handleOnPress(context),
               icon: const Icon(Icons.done),
             );
           },

@@ -1,17 +1,42 @@
+import 'package:chatapp/presentation/search/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../../../common/widgets/stateless/app_bar/m_home_app_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../widgets/search_friend.dart';
+import '../widgets/search_group.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MHomeAppBar(
-        title: AppLocalizations.of(context)!.search,
-      ),
+    return const SearchView();
+  }
+}
+
+class SearchView extends StatelessWidget {
+  const SearchView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: const <Widget>[
+                ResultFriend(),
+                ResultGroup(),
+                //ResultMessage(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

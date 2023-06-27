@@ -57,48 +57,48 @@ class FriendRepositoryImpl extends FriendRepository {
     }
   }
 
-  @override
-  Future<List<MessageEntity>> getListChatWithFriends({
-    required String userId,
-    String? latestMessageId,
-    int? limit,
-  }) async {
-    try {
-      final res = await _service.getListChat(
-        userId: userId,
-        latestMessageId: latestMessageId,
-        limit: limit,
-      );
-      if (res.statusCode == 200) {
-        final listMessageJson = res.data["data"] as List<dynamic>?;
-        if (listMessageJson != null) {
-          final listMessageModel = listMessageJson
-              .map((messageJson) => MessageModel.fromJson(messageJson))
-              .toList();
+  // @override
+  // Future<List<MessageEntity>> getListChatWithFriends({
+  //   required String userId,
+  //   String? latestMessageId,
+  //   int? limit,
+  // }) async {
+  //   try {
+  //     final res = await _service.getListChat(
+  //       userId: userId,
+  //       latestMessageId: latestMessageId,
+  //       limit: limit,
+  //     );
+  //     if (res.statusCode == 200) {
+  //       final listMessageJson = res.data["data"] as List<dynamic>?;
+  //       if (listMessageJson != null) {
+  //         final listMessageModel = listMessageJson
+  //             .map((messageJson) => MessageModel.fromJson(messageJson))
+  //             .toList();
 
-          DateTime? dateTimePrev;
-          final listMessageEntity =
-              listMessageModel.mapIndexed((index, messageModel) {
-            if (index == 0) dateTimePrev = messageModel.createdAt;
+  //         DateTime? dateTimePrev;
+  //         final listMessageEntity =
+  //             listMessageModel.mapIndexed((index, messageModel) {
+  //           if (index == 0) dateTimePrev = messageModel.createdAt;
 
-            return MessageEntity.convertToMessageEntity(
-                model: messageModel,
-                isSameDate: messageModel.createdAt == dateTimePrev);
-          }).toList();
+  //           return MessageEntity.convertToMessageEntity(
+  //               model: messageModel,
+  //               isSameDate: messageModel.createdAt == dateTimePrev);
+  //         }).toList();
 
-          return listMessageEntity;
-        }
-      }
-      return List<MessageEntity>.empty();
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
+  //         return listMessageEntity;
+  //       }
+  //     }
+  //     return List<MessageEntity>.empty();
+  //   } catch (e) {
+  //     throw Exception(e);
+  //   }
+  // }
 
   @override
   Future<List<UserEntity>> getListFriend() async {
     try {
-      final res = await _service.findFriend();
+      final res = await _service.getListFriend();
       if (res.statusCode == 200) {
         final listFriendJson = res.data["data"] as List<dynamic>?;
 

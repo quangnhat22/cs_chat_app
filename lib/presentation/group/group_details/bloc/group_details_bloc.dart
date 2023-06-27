@@ -1,32 +1,36 @@
-import 'package:bloc/bloc.dart';
+import 'package:chatapp/domain/entities/chat_room_entity.dart';
+import 'package:chatapp/domain/modules/chat_room/chat_room_use_case.dart';
 import 'package:chatapp/domain/modules/group/group_usecase.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../../domain/entities/group_entity.dart';
+import 'package:injectable/injectable.dart';
 
 part 'group_details_event.dart';
 part 'group_details_state.dart';
 part 'group_details_bloc.freezed.dart';
 
+@Injectable()
 class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
-  GroupDetailsBloc({required GroupUseCase groupUC})
-      : _groupUC = groupUC,
-        super(const _Initial()) {
+  GroupDetailsBloc(this._chatRoomUseCase, this._groupUseCase)
+      : super(const _Initial()) {
     on<GroupDetailsEvent>((event, emit) async {
       await event.map(
         started: (event) => _started(event, emit),
+        leaved: (event) => _leaved(event, emit),
         refreshed: (event) => _refresh(event, emit),
       );
     });
   }
 
-  final GroupUseCase _groupUC;
+  final ChatRoomUseCase _chatRoomUseCase;
+  final GroupUseCase _groupUseCase;
 
   Future<void> _started(_Started event, Emitter<GroupDetailsState> emit) async {
     try {
       emit(const GetGroupDetailsInProgress());
-      final groupDetails = await _groupUC.getListGroup();
-      emit(GetGroupDetailsInSuccess(groupDetails: groupDetails));
+      final groupDetails =
+          await _chatRoomUseCase.getChatRoomDetailById(event.id);
+      emit(GetGroupDetailsInSuccess(groupInfo: groupDetails));
     } catch (e) {
       emit(GetGroupDetailsInFailed(message: e.toString()));
     }
@@ -34,11 +38,25 @@ class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
 
   Future<void> _refresh(
       GroupDetailsRefreshed event, Emitter<GroupDetailsState> emit) async {
+    // try {
+    //   final groupDetails = await _groupUC.getListGroup();
+    //   emit(GetGroupDetailsInSuccess(groupDetails: groupDetails));
+    // } catch (e) {
+    //   emit(GetGroupDetailsInFailed(message: e.toString()));
+    // }
+  }
+
+  Future<void> _leaved(
+      GroupDetailsLeaved event, Emitter<GroupDetailsState> emit) async {
     try {
-      final groupDetails = await _groupUC.getListGroup();
-      emit(GetGroupDetailsInSuccess(groupDetails: groupDetails));
+      final isSentSuccess = await _groupUseCase.leaveGroup(event.id);
+      if (isSentSuccess) {
+        emit(const LeaveGroupDetailsInSuccess());
+      } else {
+        emit(const LeaveGroupDetailsInFailed());
+      }
     } catch (e) {
-      emit(GetGroupDetailsInFailed(message: e.toString()));
+      emit(const LeaveGroupDetailsInFailed());
     }
   }
 }

@@ -27,9 +27,9 @@ class ListRequestGroupReceive extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(listReceiveRequest[index].receiver?.name ?? ""),
+                title: Text(listReceiveRequest[index].sender?.name ?? ""),
                 leading: CustomAvatarImage(
-                  urlImage: listReceiveRequest[index].receiver?.imageUrl,
+                  urlImage: listReceiveRequest[index].sender?.avatar,
                   maxRadiusEmptyImg: 20,
                   widthImage: 48,
                   heightImage: 48,

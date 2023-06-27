@@ -12,11 +12,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatRoomPage extends StatelessWidget {
-  const ChatRoomPage({Key? key, required this.id, required this.type})
-      : super(key: key);
-
   final String id;
+  final String chatRoomId;
   final String type;
+
+  const ChatRoomPage({
+    Key? key,
+    required this.id,
+    required this.type,
+    required this.chatRoomId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +29,11 @@ class ChatRoomPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => getIt<ChatRoomBloc>()
-            ..add(ChatRoomEvent.started(id: id, type: type)),
+            ..add(ChatRoomEvent.started(
+                id: id, chatRoomId: chatRoomId, type: type)),
         ),
         BlocProvider(
-          create: (_) => getIt<MessageStreamCubit>()..started(id, type),
+          create: (_) => getIt<MessageStreamCubit>()..started(chatRoomId),
         ),
         BlocProvider(
           create: (_) => getIt<InputMessageCubit>(),

@@ -4,6 +4,7 @@ import 'package:chatapp/data/data_sources/local/local_data_src.dart';
 import 'package:chatapp/data/data_sources/remote/service/auth_service.dart';
 import 'package:chatapp/domain/modules/auth/auth_repository.dart';
 import 'package:chatapp/domain/modules/user/user_repository.dart';
+import 'package:chatapp/service/notification_service.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../core/utils/detect_info_device.dart';
@@ -15,9 +16,10 @@ class AuthRepositoryImpl extends AuthRepository {
   final UserRepository _userRepo;
   final AuthLocalDataSrc _authLocalDataSrc;
   final LocalDataSrc _localDataSrc;
+  final NotificationService _notificationService;
 
   AuthRepositoryImpl(this._authFirebase, this._authService, this._userRepo,
-      this._authLocalDataSrc, this._localDataSrc);
+      this._authLocalDataSrc, this._localDataSrc, this._notificationService);
 
   @override
   Stream<String?> checkAccessTokenStream() {
@@ -43,8 +45,10 @@ class AuthRepositoryImpl extends AuthRepository {
       if (idToken != null) {
         // get device name
         final deviceName = await DetectDeviceInfo.getDeviceName();
+        final fcmToken = await _getFCMToken();
         //call api
-        final res = await _authService.loginWithFirebase(idToken, deviceName);
+        final res = await _authService.loginWithFirebase(
+            idToken: idToken, deviceName: deviceName, fcmToken: fcmToken);
         // handle res data
         if (res.statusCode == 200) {
           final data = res.data["data"];
@@ -65,8 +69,14 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       // get device name
       final deviceName = await DetectDeviceInfo.getDeviceName();
+      final fcmToken = await _getFCMToken();
       //call api
-      final res = await _authService.login(email, password, deviceName);
+      final res = await _authService.login(
+        email: email,
+        password: password,
+        deviceName: deviceName,
+        fcmToken: fcmToken,
+      );
       // handle res data
       if (res.statusCode == 200) {
         final data = res.data["data"];
@@ -90,8 +100,14 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       // get device name
       final deviceName = await DetectDeviceInfo.getDeviceName();
+      final fcmToken = await _getFCMToken();
       //call api
-      final res = await _authService.register(email, password, deviceName);
+      final res = await _authService.register(
+          email: email,
+          password: password,
+          deviceName: deviceName,
+          fcmToken: fcmToken);
+
       // handle res data
       if (res.statusCode == 200) {
         final data = res.data["data"];
@@ -152,5 +168,9 @@ class AuthRepositoryImpl extends AuthRepository {
     } finally {
       await _localDataSrc.deleteAll();
     }
+  }
+
+  Future<String?> _getFCMToken() async {
+    return await _notificationService.getFirebaseMessagingToken();
   }
 }

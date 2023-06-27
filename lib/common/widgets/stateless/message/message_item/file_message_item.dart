@@ -54,7 +54,7 @@ class FileItem extends StatefulWidget {
 
 class _FileItemState extends State<FileItem> {
   final ReceivePort _port = ReceivePort();
-  bool _isExist = false;
+  // bool _isExist = false;
   String _fileName = "";
   int _fileSize = 0;
 
@@ -77,14 +77,15 @@ class _FileItemState extends State<FileItem> {
     }
   }
 
-  Future<void> _checkFileExistInStorage(BuildContext context) async {
+  Future<bool> _checkFileExistInStorage(BuildContext context) async {
     String savePath = '/storage/emulated/0/Download/$_fileName';
     final isExist = await File(savePath).exists();
-    if (context.mounted) {
-      setState(() {
-        _isExist = isExist;
-      });
-    }
+    return isExist;
+    // if (context.mounted) {
+    //   setState(() {
+    //     _isExist = isExist;
+    //   });
+    // }
   }
 
   Future<String?> _getSavedDir() async {
@@ -107,7 +108,7 @@ class _FileItemState extends State<FileItem> {
   }
 
   Future<void> _handleDownload(String? url) async {
-    if (_isExist || url == null) return;
+    if (url == null) return;
     final localPath = (await _getSavedDir())!;
     await FlutterDownloader.enqueue(
       url: url,
@@ -119,8 +120,12 @@ class _FileItemState extends State<FileItem> {
     );
   }
 
-  void _openFile() async {
+  void _openFile(BuildContext ctx, String? url) async {
     try {
+      final isExist = await _checkFileExistInStorage(ctx);
+      if (!isExist) {
+        await _handleDownload(url);
+      }
       String savePath = '/storage/emulated/0/Download/$_fileName';
       await OpenFile.open(savePath);
     } catch (e) {
@@ -135,10 +140,11 @@ class _FileItemState extends State<FileItem> {
     (() async {
       if (mounted) {
         await _getFileInfo(context);
-        if (mounted) {
-          await _checkFileExistInStorage(context);
-        }
       }
+
+      // if (mounted) {
+      //   await _checkFileExistInStorage(context);
+      // }
     })();
 
     AssetsUtils.registerPort(_port.sendPort);
@@ -217,15 +223,15 @@ class _FileItemState extends State<FileItem> {
                     softWrap: true,
                     maxLines: 3,
                   ),
-                  !_isExist
-                      ? TextButton(
-                          onPressed: () async => _handleDownload(widget.url),
-                          child: const Text("Download"),
-                        )
-                      : TextButton(
-                          onPressed: _openFile,
-                          child: const Text("Open"),
-                        ),
+                  // !_isExist
+                  //     ? TextButton(
+                  //         onPressed: () async => _handleDownload(widget.url),
+                  //         child: const Text("Download"),
+                  //       )
+                  TextButton(
+                    onPressed: () => _openFile(context, widget.url),
+                    child: const Text("Open"),
+                  ),
                 ],
               ),
             ),

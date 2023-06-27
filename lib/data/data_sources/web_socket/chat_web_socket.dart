@@ -26,9 +26,9 @@ class ChatWebSocket {
     _streamController = StreamController();
   }
 
-  Future<void> connect(String id, String type) async {
+  Future<void> connect(String id) async {
     try {
-      final urlSocket = "$url/$type";
+      final urlSocket = "$url/group";
       final accessToken = await localDataSrc.getAccessToken();
       _channel = IOWebSocketChannel.connect(
           Uri.parse("ws://$urlSocket/$id/chat/ws"),
@@ -44,7 +44,7 @@ class ChatWebSocket {
     }
   }
 
-  void disconnect() async {
+  Future<void> disconnect() async {
     try {
       await _channel.sink.close();
       await _streamController.close();

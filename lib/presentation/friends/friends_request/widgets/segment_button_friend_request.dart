@@ -16,33 +16,45 @@ class _SegmentButtonFriendRequestState
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<Request>(
-      style: const ButtonStyle(alignment: AlignmentDirectional.center),
-      segments: <ButtonSegment<Request>>[
-        ButtonSegment(
-            value: Request.sent,
-            label: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                AppLocalizations.of(context)!.requests_sent_text_button_segment,
-              ),
-            )),
-        ButtonSegment(
-            value: Request.received,
-            label: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                AppLocalizations.of(context)!
-                    .requests_receive_text_button_segment,
-              ),
-            )),
-      ],
-      selected: <Request>{requestView},
-      onSelectionChanged: (Set<Request> newSelection) {
-        setState(() {
-          requestView = newSelection.first;
-          widget.onViewChange(newSelection.first);
-        });
+    return BlocBuilder<ListFriendRequestBloc, ListFriendRequestState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        final listSentRequest = (state is GetListFriendRequestSuccess &&
+                state.friendRequestSent.isNotEmpty)
+            ? state.friendRequestSent.length.toString()
+            : "";
+        final listReceiveRequest = (state is GetListFriendRequestSuccess &&
+                state.friendRequestReceive.isNotEmpty)
+            ? state.friendRequestReceive.length.toString()
+            : "";
+        return SegmentedButton<Request>(
+          style: const ButtonStyle(alignment: AlignmentDirectional.center),
+          segments: <ButtonSegment<Request>>[
+            ButtonSegment(
+                value: Request.sent,
+                label: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    "${AppLocalizations.of(context)!.requests_sent_text_button_segment} $listSentRequest",
+                  ),
+                )),
+            ButtonSegment(
+                value: Request.received,
+                label: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Text(
+                    "${AppLocalizations.of(context)!.requests_receive_text_button_segment} $listReceiveRequest",
+                  ),
+                )),
+          ],
+          selected: <Request>{requestView},
+          onSelectionChanged: (Set<Request> newSelection) {
+            setState(() {
+              requestView = newSelection.first;
+              widget.onViewChange(newSelection.first);
+            });
+          },
+        );
       },
     );
   }
