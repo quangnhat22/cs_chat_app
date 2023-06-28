@@ -1,46 +1,35 @@
-// import 'package:chatapp/core/utils/formz/password.dart';
+// import 'package:chatapp/presentation/setting/change_password/cubit/change_password_cubit.dart';
 // import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+// import '../../../../common/widgets/stateless/button/custom_elevated_button.dart';
 
 // class BtnChangePassword extends StatelessWidget {
 //   const BtnChangePassword({
 //     super.key,
 //   });
 
-//   void _onPressEditBtn(
-//     BuildContext ctx,
-//     Password? password,
-//     Password? new_password,
-//     Password? confirm_password,
-//   ) {
-//     ctx.read<EditFormSubmitBloc>().add(EditFormSubmitted(
-//           password: password,
-//           new_password: new_password,
-//           confirm_password: confirm_password,
-//         ));
+//   void _handleOnPress(BuildContext ctx, String password, String oldPassword) {
+//     ctx.read<ChangePasswordCubit>().updatePassword(password: password);
 //   }
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return BlocBuilder<EditFormSubmitBloc, EditFormSubmitState>(
-//       builder: (context, EditFormSubmitState formState) {
-//         return BlocBuilder<EditProfileFormCubit, EditProfileFormState>(
+//     return BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
+//       builder: (context, formState) {
+//         return BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
 //           builder: (context, state) {
 //             return formState.maybeWhen(
-//               loading: () => const CircularProgressIndicator(),
+//               // loading: () => const CircularProgressIndicator(),
 //               orElse: () => Padding(
 //                 padding: const EdgeInsets.only(top: 48),
 //                 child: SizedBox(
 //                   width: double.infinity,
 //                   child: CustomElevatedButton(
 //                     buttonText: AppLocalizations.of(context)!.confirm,
-//                     onPressed: () => _onPressEditBtn(
-//                       context,
-//                       state.name,
-//                       state.phoneNumber,
-//                       state.birthday,
-//                       state.gender,
-//                       state.bio,
-//                     ),
+//                     onPressed: () {},
+//                     // onPressed: () => _handleOnPress(ctx, password, oldPassword),
 //                     backgroundColor: Theme.of(context).colorScheme.primary,
 //                   ),
 //                 ),
