@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/widgets/stateless/form/text_field.dart';
 
-
 class InputPassword extends StatefulWidget {
   const InputPassword({super.key});
 
@@ -25,10 +24,10 @@ class _InputpasswordState extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     return CTextFormField(
-        // controller: _controller,
-        icon: const Icon(Icons.lock),
-        label: AppLocalizations.of(context)!.password,
-      );
+      // controller: _controller,
+      icon: const Icon(Icons.lock),
+      label: AppLocalizations.of(context)!.password,
+    );
   }
 
   // @override
