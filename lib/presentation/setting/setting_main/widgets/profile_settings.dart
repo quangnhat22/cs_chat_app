@@ -53,7 +53,9 @@ class ProfileSetting extends StatelessWidget {
           InkWellDynamicBorder(
             title: AppLocalizations.of(context)!.change_password,
             leading: const Icon(Icons.password_outlined),
-            onTap: () {},
+            onTap: () => {
+              NavigationUtil.pushNamed(route: RouteName.changePassword),
+            },
             hasTopBorderRadius: false,
             hasBottomBorderRadius: true,
           ),
