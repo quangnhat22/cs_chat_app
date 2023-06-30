@@ -1,3 +1,4 @@
+import 'package:chatapp/data/models/message_model.dart';
 import 'package:chatapp/data/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,7 +14,7 @@ class SearchModel with _$SearchModel {
   factory SearchModel({
     List<UserModel>? friends,
     List<ChatRoomModel>? groups,
-    List<ChatRoomModel>? messages,
+    List<MessageModel>? messages,
   }) = _SearchModel;
 
   factory SearchModel.fromJson(Map<String, dynamic> json) =>

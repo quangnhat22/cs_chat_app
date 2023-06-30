@@ -56,20 +56,22 @@ class ChatRoomRepoImpl extends ChatRoomRepository {
               .map((messageJson) => MessageModel.fromJson(messageJson))
               .toList();
 
-          String? dateTimePrev;
+          final format = DateFormat('yyyy-MM-dd HH:mm');
 
-          final format = DateFormat('yyyy-MM-dd');
+          String dateTimePrev =
+              format.format(listMessageModel[0].createdAt!.toUtc());
 
           final listMessageEntity =
               listMessageModel.mapIndexed((index, messageModel) {
-            if (index == 0) {
-              dateTimePrev = format.format(messageModel.createdAt!);
+            if (index > 0) {
+              dateTimePrev =
+                  format.format(listMessageModel[index - 1].createdAt!);
             }
 
             return MessageEntity.convertToMessageEntity(
                 model: messageModel,
-                isSameDate:
-                    format.format(messageModel.createdAt!) == dateTimePrev);
+                isSameDate: format.format(messageModel.createdAt!.toUtc()) ==
+                    dateTimePrev);
           }).toList();
 
           return (order == "dsc")
@@ -149,5 +151,14 @@ class ChatRoomRepoImpl extends ChatRoomRepository {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+}
+
+extension CheckHHDDMMYYYOnlyCompare on DateTime {
+  bool isSameHours(DateTime other) {
+    return year == other.year &&
+        month == other.month &&
+        day == other.day &&
+        hour == other.hour;
   }
 }

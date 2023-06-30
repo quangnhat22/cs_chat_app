@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:chatapp/domain/modules/chat_room/chat_room_use_case.dart';
-import 'package:chatapp/domain/modules/user/user_usecase.dart';
+import 'package:chatapp/presentation/chat/chat_main/bloc/list_chat_room_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -14,11 +14,9 @@ part 'chat_room_state.dart';
 
 @Injectable()
 class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
-  final UserUseCase _userUseCase;
   final ChatRoomUseCase _chatRoomUseCase;
 
-  ChatRoomBloc(this._userUseCase, this._chatRoomUseCase)
-      : super(const ChatRoomState.initial()) {
+  ChatRoomBloc(this._chatRoomUseCase) : super(const ChatRoomState.initial()) {
     on<ChatRoomEvent>((event, emit) async {
       await event.map(
           started: (event) async => await _started(event, emit),
@@ -27,11 +25,14 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
           newMessageNotified: (event) async =>
               await _newMessageNotified(event, emit),
           newMessageTopLoaded: (event) async =>
-              await _newMessageTopLoaded(event, emit));
+              await _newMessageTopLoaded(event, emit),
+          newMessageBottomLoaded: (event) async =>
+              await _newMessageBottomLoaded(event, emit));
     });
   }
 
   bool isGroup = false;
+  String? _searchId;
 
   Future<void> _started(Started event, Emitter<ChatRoomState> emit) async {
     try {
@@ -52,10 +53,30 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       //   chatRoomAvatar = friendInfo?.avatar;
       // }
 
-      listMessage = await _chatRoomUseCase.getListMessage(
-        chatRoomId: event.chatRoomId,
-        lastId: event.latestMessageId,
-      );
+      if (event.searchMessage != null) {
+        _searchId = event.searchMessage!.id;
+        final topListMessage = await _chatRoomUseCase.getListMessage(
+          chatRoomId: event.chatRoomId,
+          lastId: event.searchMessage!.id,
+          order: 'dsc',
+          limit: 10,
+        );
+        final bottomListMessage = await _chatRoomUseCase.getListMessage(
+          chatRoomId: event.chatRoomId,
+          lastId: event.searchMessage!.id,
+          order: 'asc',
+          limit: 10,
+        );
+
+        listMessage = [
+          ...bottomListMessage.reversed,
+          event.searchMessage!.copyWith(isResultSearch: true),
+          ...topListMessage,
+        ];
+      } else {
+        listMessage =
+            await _chatRoomUseCase.getListMessage(chatRoomId: event.chatRoomId);
+      }
 
       emit(ChatRoomInfoSuccess(
         messages: listMessage,
@@ -64,6 +85,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
         isGroupChatRoom: isGroup,
         chatRoomName: chatRoomName,
         chatRoomAvatar: chatRoomAvatar,
+        searchMessageId: event.searchMessage?.id,
       ));
     } catch (e) {
       emit(ChatRoomInfoFailure(message: e.toString()));
@@ -72,12 +94,29 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
   }
 
   Future<void> _refreshed(
-      ChatRoomRefreshed event, Emitter<ChatRoomState> emit) async {}
+      ChatRoomRefreshed event, Emitter<ChatRoomState> emit) async {
+    try {
+      if (state is ChatRoomInfoSuccess) {
+        final chatRoomState = state as ChatRoomInfoSuccess;
+        final listMessage = await _chatRoomUseCase.getListMessage(
+            chatRoomId: chatRoomState.chatRoomId);
+
+        emit(chatRoomState.copyWith(
+          messages: listMessage,
+          searchMessageId: null,
+        ));
+      }
+    } catch (e) {
+      emit(ChatRoomInfoFailure(message: e.toString()));
+      throw Exception(e.toString());
+    }
+  }
 
   void _addMessageTemp(
       ChatRoomAddMessageTemp event, Emitter<ChatRoomState> emit) {
     try {
       if (state is ChatRoomInfoSuccess) {
+        add(const ChatRoomRefreshed());
         List<MessageEntity> listMessageCurrent =
             (state as ChatRoomInfoSuccess).messages;
 
@@ -96,6 +135,12 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     try {
       List<MessageEntity> listMessageCurrent =
           (state as ChatRoomInfoSuccess).messages;
+
+      // final isSearching =
+      //     (state as ChatRoomInfoSuccess).searchMessageId != null &&
+      //         (state as ChatRoomInfoSuccess).isLatestMessage == false;
+
+      // if (isSearching)
 
       //remove message temp
       if (event.newMessage.optional != null) {
@@ -132,17 +177,47 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
           lastId: listMessageCurrent.last.id,
         );
 
-        bool isLatest = false;
+        bool isTop = false;
 
         if (loadedMessages.isEmpty) {
-          isLatest = true;
+          isTop = true;
         }
 
         final List<MessageEntity> newListMessage = List.from(listMessageCurrent)
           ..addAll(loadedMessages);
         emit((state as ChatRoomInfoSuccess).copyWith(
           messages: newListMessage,
-          isLatest: isLatest,
+          isTopMessage: isTop,
+        ));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> _newMessageBottomLoaded(
+      ChatRoomNewMessageBottomLoaded event, Emitter<ChatRoomState> emit) async {
+    try {
+      if (_searchId == null) return;
+
+      if (state is ChatRoomInfoSuccess) {
+        if ((state as ChatRoomInfoSuccess).isLatestMessage) return;
+        final chatRoomId = (state as ChatRoomInfoSuccess).chatRoomId;
+
+        final listMessageCurrent = (state as ChatRoomInfoSuccess).messages;
+
+        final loadedMessages = await _chatRoomUseCase.getListMessage(
+          chatRoomId: chatRoomId,
+          lastId: listMessageCurrent.first.id,
+          order: 'asc',
+          limit: 5,
+        );
+
+        List<MessageEntity> newListMessage = List.from(listMessageCurrent);
+        newListMessage = [...loadedMessages.reversed, ...newListMessage];
+        emit((state as ChatRoomInfoSuccess).copyWith(
+          messages: newListMessage,
+          isLatestMessage: (loadedMessages.length < 5),
         ));
       }
     } catch (e) {

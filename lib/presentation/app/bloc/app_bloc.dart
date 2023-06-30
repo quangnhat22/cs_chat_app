@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/di/injector.dart';
-import '../../../service/notification_controller.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -48,7 +47,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   late final StreamSubscription<Uri> _appLinkSubscription;
 
   void _onAppStarted(AppStarted event, Emitter<AppState> emit) {
-    getIt<NotificationController>().initializeNotificationsEventListeners();
+    //getIt<NotificationController>().initializeNotificationsEventListeners();
   }
 
   Future<void> _onAppUserChanged(

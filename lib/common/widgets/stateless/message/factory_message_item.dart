@@ -5,6 +5,7 @@ import 'message_item.dart';
 import 'message_item/audio_message_item.dart';
 import 'message_item/file_message_item.dart';
 import 'message_item/image_message_item.dart';
+import 'message_item/system_message_item.dart';
 import 'message_item/text_message_item.dart';
 import 'message_item/video_message_item.dart';
 
@@ -35,18 +36,10 @@ class FactoryMessageItem {
             createdAt: createdAt,
           );
         }
-      // case "emoji":
-      //   {
-      //     return EmojiMessageItem(content: content!);
-      //   }
-      // case "sticker":
-      //   {
-      //     return StickerMessageItem(content: content!);
-      //   }
-      // case "system":
-      //   {
-      //     return SystemMessageItem(nameActor: nameActor, content: content!);
-      //   }
+      case "system":
+        {
+          return SystemMessageItem(nameActor: nameActor, content: content!);
+        }
       case "video":
         {
           return VideoMessageItem(

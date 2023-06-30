@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/config/app_assets.dart';
 import '../../../../core/config/app_text_style.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../button/custom_elevated_button.dart';
 import '../button/custom_text_button.dart';

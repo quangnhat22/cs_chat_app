@@ -11,7 +11,6 @@ class AppTheme {
   }
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
-    scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     useMaterial3: true,
     textTheme: ThemeData.light().textTheme.apply(
         //fontFamily: "Roboto",

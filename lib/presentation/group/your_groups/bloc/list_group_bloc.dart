@@ -1,11 +1,9 @@
 import 'package:chatapp/domain/modules/chat_room/chat_room_use_case.dart';
-import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../domain/entities/chat_room_entity.dart';
-import '../../../../domain/entities/group_entity.dart';
 
 part 'list_group_bloc.freezed.dart';
 part 'list_group_event.dart';

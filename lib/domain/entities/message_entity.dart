@@ -2,39 +2,45 @@ import 'package:chatapp/core/config/app_enum.dart';
 import 'package:chatapp/data/models/message_model.dart';
 import 'package:chatapp/domain/entities/group_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class MessageEntity {
-  final String id;
-  final String? type;
-  final UserEntity? sender;
-  final GroupEntity? groupEntity;
-  final UserEntity? receiver;
-  final String? message;
-  final String? videoUrl;
-  final String? recordUrl;
-  final DateTime? createdAt;
-  final bool? isMe;
-  final String? optional;
-  final AppSendMessageStatus? sendStatus;
-  final bool isSameDate;
+part 'message_entity.freezed.dart';
 
-  MessageEntity({
-    required this.id,
-    this.type,
-    this.sender,
-    this.groupEntity,
-    this.receiver,
-    this.message,
-    this.videoUrl,
-    this.recordUrl,
-    this.createdAt,
-    this.isMe,
-    this.optional,
-    this.sendStatus,
-    this.isSameDate = false,
-  });
+@freezed
+class MessageEntity with _$MessageEntity {
+  // final String id;
+  // final String? type;
+  // final UserEntity? sender;
+  // final GroupEntity? groupEntity;
+  // final UserEntity? receiver;
+  // final String? message;
+  // final String? videoUrl;
+  // final String? recordUrl;
+  // final DateTime? createdAt;
+  // final bool? isMe;
+  // final String? optional;
+  // final bool? isResultSearch;
+  // final AppSendMessageStatus? sendStatus;
+  // final bool isSameDate;
 
-  static final messageEntityEmpty = MessageEntity(id: "-1");
+  const factory MessageEntity({
+    required String id,
+    String? type,
+    UserEntity? sender,
+    GroupEntity? groupEntity,
+    UserEntity? receiver,
+    String? message,
+    String? videoUrl,
+    String? recordUrl,
+    DateTime? createdAt,
+    bool? isMe,
+    String? optional,
+    AppSendMessageStatus? sendStatus,
+    @Default(false) bool? isResultSearch,
+    @Default(false) bool? isSameDate,
+  }) = _MessageEntity;
+
+  static const messageEntityEmpty = MessageEntity(id: "-1");
 
   static MessageEntity convertToMessageEntity(
       {MessageModel? model, bool isSameDate = false}) {

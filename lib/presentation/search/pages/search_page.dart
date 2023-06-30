@@ -1,8 +1,9 @@
 import 'package:chatapp/presentation/search/bloc/search_bloc.dart';
+import 'package:chatapp/presentation/search/widgets/result_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../widgets/search_friend.dart';
-import '../widgets/search_group.dart';
+import '../widgets/result_friend.dart';
+import '../widgets/result_group.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -31,7 +32,7 @@ class SearchView extends StatelessWidget {
               children: const <Widget>[
                 ResultFriend(),
                 ResultGroup(),
-                //ResultMessage(),
+                ResultMessage(),
               ],
             ),
           ),

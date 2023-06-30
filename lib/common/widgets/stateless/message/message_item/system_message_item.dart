@@ -39,17 +39,17 @@ class SystemMessageItem extends IMessageItem {
 
   static String convertSystemString(String content) {
     switch (content) {
-      case "createRoom":
+      case "group-created":
         {
-          return "created room";
+          return "created group";
         }
-      case "joinRoom":
+      case "member-joined":
         {
-          return "joined room";
+          return "joined the group";
         }
-      case "becomeFriend":
+      case "member-leaved":
         {
-          return "and you became friends";
+          return "member-leaved";
         }
       case "removedFromRoom":
         {

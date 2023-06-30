@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/routes/app_routes.dart';
 import '../../core/routes/route_name.dart';
 import '../others/loading_page.dart';
+import 'cubit/app_notification_cubit.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -20,6 +21,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (_) => getIt<AppNotificationCubit>(),
+        ),
         BlocProvider(
           create: (_) => getIt<AppBloc>(),
         ),

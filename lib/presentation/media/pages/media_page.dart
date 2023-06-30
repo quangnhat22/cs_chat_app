@@ -7,7 +7,6 @@ import 'package:chatapp/presentation/media/views/media_video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../common/widgets/stateless/app_bar/m_home_app_bar.dart';
 
 class MediaPage extends StatelessWidget {
   const MediaPage({super.key, required this.chatRoomId});

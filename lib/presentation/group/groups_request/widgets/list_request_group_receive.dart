@@ -53,7 +53,7 @@ class ListRequestGroupReceive extends StatelessWidget {
                         OutlinedButton(
                           onPressed: () => _onRejectRequest(
                             context,
-                            listReceiveRequest[index].sender!.id,
+                            listReceiveRequest[index].group!.id,
                           ),
                           style: const ButtonStyle(
                               padding: MaterialStatePropertyAll(
@@ -63,7 +63,7 @@ class ListRequestGroupReceive extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () => _onAcceptRequest(
-                              context, listReceiveRequest[index].sender!.id),
+                              context, listReceiveRequest[index].group!.id),
                           style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   Theme.of(context).colorScheme.primary,

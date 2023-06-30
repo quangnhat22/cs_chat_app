@@ -11,6 +11,26 @@ import '../../../../core/routes/app_navigation.dart';
 class GroupDetailsSmallCardBottom extends StatelessWidget {
   const GroupDetailsSmallCardBottom({super.key});
 
+  void _inviteNewMember(BuildContext ctx) {
+    final state = ctx.read<GroupDetailsBloc>().state;
+    if (state is GetGroupDetailsInSuccess) {
+      NavigationUtil.pushNamed(
+        route: RouteName.inviteNewMemberGroup,
+        args: state.groupInfo.members,
+      );
+    }
+  }
+
+  void _handleSeeMemberGroup(BuildContext ctx) {
+    final state = ctx.read<GroupDetailsBloc>().state;
+    if (state is GetGroupDetailsInSuccess) {
+      NavigationUtil.pushNamed(
+        route: RouteName.listMemberGroup,
+        args: state.groupInfo.members,
+      );
+    }
+  }
+
   void _handleSeeMedia(BuildContext ctx) {
     final state = ctx.read<GroupDetailsBloc>().state;
     if (state is GetGroupDetailsInSuccess) {
@@ -36,7 +56,8 @@ class GroupDetailsSmallCardBottom extends StatelessWidget {
           InkWellDynamicBorder(
             title: AppLocalizations.of(context)!.add_members,
             leading: const Icon(Icons.group_add_outlined),
-            // onTap: () {},
+            onTap: () => _inviteNewMember(context),
+            trailing: const Icon(Icons.chevron_right),
             hasTopBorderRadius: false,
             hasBottomBorderRadius: true,
           ),
@@ -44,7 +65,8 @@ class GroupDetailsSmallCardBottom extends StatelessWidget {
           InkWellDynamicBorder(
             title: AppLocalizations.of(context)!.view_members,
             leading: const Icon(Icons.group_outlined),
-            // onTap: () {},
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => _handleSeeMemberGroup(context),
             hasTopBorderRadius: false,
             hasBottomBorderRadius: false,
           ),

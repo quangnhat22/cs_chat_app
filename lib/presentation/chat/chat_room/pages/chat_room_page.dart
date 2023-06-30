@@ -15,12 +15,14 @@ class ChatRoomPage extends StatelessWidget {
   final String id;
   final String chatRoomId;
   final String type;
+  final MessageEntity? messageSearch;
 
   const ChatRoomPage({
     Key? key,
     required this.id,
     required this.type,
     required this.chatRoomId,
+    this.messageSearch,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,11 @@ class ChatRoomPage extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<ChatRoomBloc>()
             ..add(ChatRoomEvent.started(
-                id: id, chatRoomId: chatRoomId, type: type)),
+              id: id,
+              chatRoomId: chatRoomId,
+              type: type,
+              searchMessage: messageSearch,
+            )),
         ),
         BlocProvider(
           create: (_) => getIt<MessageStreamCubit>()..started(chatRoomId),
@@ -71,6 +77,7 @@ class ChatRoomView extends StatelessWidget {
                   type: type,
                   isMe: true,
                   sendStatus: AppSendMessageStatus.sending,
+                  isSameDate: true,
                 );
                 context
                     .read<ChatRoomBloc>()

@@ -19,7 +19,6 @@ import '../../../common/widgets/stateless/circle_avatar/custom_avatar_image.dart
 import '../../../common/widgets/stateless/divider/divider_space_left.dart';
 import '../../../common/widgets/stateless/ink_well/ink_well_dynamic_border.dart';
 import '../../../core/di/injector.dart';
-import '../../../core/utils/show_diaglog.dart';
 import '../setting_theme/setting_theme.dart';
 import 'cubit/setting_main_cubit.dart';
 
