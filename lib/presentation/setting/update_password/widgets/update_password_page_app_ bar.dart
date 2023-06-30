@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../common/widgets/stateless/button/float_back_button.dart';
 import '../../../../core/config/app_text_style.dart';
 
-class ChangePassWordPageAppBar extends StatelessWidget
+class UpdatePasswordPageAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const ChangePassWordPageAppBar({
+  const UpdatePasswordPageAppBar({
     super.key,
     required this.title,
     this.bottomWidget,
@@ -24,8 +24,9 @@ class ChangePassWordPageAppBar extends StatelessWidget
       leading: Padding(
         padding: const EdgeInsets.only(left: 14.0),
         child: FloatBackButton(
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-            iconColor: Theme.of(context).colorScheme.onPrimary),
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          iconColor: Theme.of(context).colorScheme.onPrimary,
+        ),
       ),
       centerTitle: true,
       title: Text(

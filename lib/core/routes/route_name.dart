@@ -15,5 +15,5 @@ class RouteName {
   static const String createGroup = '/create-group';
   static const String groupDetails = '/group-details';
   static const String googleMap = '/google-map';
-  static const String changePassword = '/change-password';
+  static const String updatePassword = '/update-password';
 }

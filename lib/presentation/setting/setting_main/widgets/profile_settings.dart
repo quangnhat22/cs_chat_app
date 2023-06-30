@@ -54,7 +54,7 @@ class ProfileSetting extends StatelessWidget {
             title: AppLocalizations.of(context)!.change_password,
             leading: const Icon(Icons.password_outlined),
             onTap: () => {
-              NavigationUtil.pushNamed(route: RouteName.changePassword),
+              NavigationUtil.pushNamed(route: RouteName.updatePassword),
             },
             hasTopBorderRadius: false,
             hasBottomBorderRadius: true,

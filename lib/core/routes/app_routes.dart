@@ -11,8 +11,8 @@ import 'package:chatapp/presentation/group/group_details/pages/group_details_pag
 import 'package:chatapp/presentation/home/pages/home_page.dart';
 import 'package:chatapp/presentation/others/loading_page.dart';
 import 'package:chatapp/presentation/map/pages/map_page.dart';
-import 'package:chatapp/presentation/setting/change_password/pages/change_password_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
+import 'package:chatapp/presentation/setting/update_password/pages/update_password_page.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -93,8 +93,8 @@ class AppRoutes {
             type: "group",
           ),
         );
-      case RouteName.changePassword:
-        return _buildRoute(settings, const ChangePasswordPage());
+      case RouteName.updatePassword:
+        return _buildRoute(settings, const UpdatePasswordPage());
       case RouteName.deviceAdministration:
         return _buildRoute(settings, const DeviceMainPage());
       case RouteName.createGroup:
