@@ -3,16 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable()
-class DeviceService {
-  DeviceService({required BaseService service}) : _service = service;
+class NotificationsService {
+  NotificationsService({required BaseService service}) : _service = service;
 
   final BaseService _service;
 
-  Future<Response> getListDevice() async {
+  Future<Response> getListNotification() async {
     try {
-      return await _service.dio.get(
-        BaseService.devicePath,
-      );
+      return await _service.dio.get(BaseService.notficationPath);
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
@@ -20,13 +18,9 @@ class DeviceService {
     }
   }
 
-  Future<Response> updateDevice(
-      String name, String? pushNotificationToken) async {
+  Future<Response> deleteAllNotification() async {
     try {
-      return await _service.dio.put(BaseService.devicePath, data: {
-        "name": name,
-        "push_notification_token": pushNotificationToken ?? '',
-      });
+      return await _service.dio.delete(BaseService.notficationPath);
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
@@ -34,11 +28,9 @@ class DeviceService {
     }
   }
 
-  Future<Response> deleteDevice(String id) async {
+  Future<Response> deleteNotificationById(String id) async {
     try {
-      return await _service.dio.delete(
-        "${BaseService.devicePath}/$id",
-      );
+      return await _service.dio.delete("${BaseService.notficationPath}/$id");
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {

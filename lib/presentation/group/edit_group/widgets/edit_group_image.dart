@@ -42,7 +42,7 @@ class EditGroupImage extends StatelessWidget {
             }
         }
 
-        if (ctx.mounted) {
+        if (ctx.mounted && filePath != null) {
           ctx.read<EditGroupCubit>().groupImageChanged(filePath);
         }
       },

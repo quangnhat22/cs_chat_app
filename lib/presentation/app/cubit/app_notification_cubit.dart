@@ -1,6 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:chatapp/core/routes/app_navigation.dart';
+import 'package:chatapp/core/routes/app_routes.dart';
+import 'package:chatapp/core/routes/route_name.dart';
+import 'package:chatapp/data/models/notification_model.dart';
+import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
+import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +19,11 @@ part 'app_notification_cubit.freezed.dart';
 
 @Singleton()
 class AppNotificationCubit extends Cubit<AppNotificationState> {
-  AppNotificationCubit() : super(const AppNotificationState.initial()) {
+  final FriendUseCase _friendUseCase;
+  final GroupUseCase _groupUseCase;
+
+  AppNotificationCubit(this._friendUseCase, this._groupUseCase)
+      : super(const AppNotificationState.initial()) {
     _initializeNotificationsEventListeners();
   }
 
@@ -31,7 +42,8 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
   }
 
   @pragma("vm:entry-point")
-  Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
+  static Future<void> onActionReceivedMethod(
+      ReceivedAction receivedAction) async {
     // Always ensure that all plugins was initialized
     WidgetsFlutterBinding.ensureInitialized();
     log(receivedAction.toString(), name: "onReceivedAction");
@@ -41,7 +53,7 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
   }
 
   @pragma("vm:entry-point")
-  Future<void> receiveCallNotificationAction(
+  static Future<void> receiveCallNotificationAction(
       ReceivedAction receivedAction) async {
     switch (receivedAction.buttonKeyPressed) {
       case 'REJECT':
@@ -65,23 +77,54 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
 
   Future<void> onDismissActionReceivedMethod(
       ReceivedAction receivedAction) async {
-    switch (receivedAction.buttonKeyPressed) {
-      case 'REJECT':
-        // Is not necessary to do anything, because the reject button is
-        // already auto dismissible
-        break;
+    try {
+      if (receivedAction.payload == null) return;
+      final notiJson = jsonDecode(receivedAction.payload!["notification"]!);
+      final payload = NotificationsModel.fromJson(notiJson);
+      if (payload.action == 'receive-friend-request') {
+        switch (receivedAction.buttonKeyPressed) {
+          case 'deny':
+            if (payload.prep?.id != null) {
+              await _friendUseCase.rejectReceiveRequest(payload.prep!.id);
+            }
+            break;
 
-      case 'ACCEPT':
-        // NavigationUtil.loadSingletonPage(
-        //   targetPage: RouteName.personalCall,
-        //   receivedAction: receivedAction,
-        // );
-        break;
+          case 'accept':
+            if (payload.prep?.id != null) {
+              await _friendUseCase.acceptReceiveRequest(payload.prep!.id);
+            }
+            break;
 
-      default:
-        // loadSingletonPage(App.navigatorKey.currentState,
-        //     targetPage: PAGE_PHONE_CALL, receivedAction: receivedAction);
-        break;
+          default:
+            NavigationUtil.loadSingletonPage(
+              targetPage: RouteName.homePage,
+              receivedAction: receivedAction,
+            );
+            break;
+        }
+      }
+      if (payload.action == 'receive-group-request') {
+        switch (receivedAction.buttonKeyPressed) {
+          case 'deny':
+            // Is not necessary to do anything, because the reject button is
+            // already auto dismissible
+            break;
+
+          case 'accept':
+            // NavigationUtil.loadSingletonPage(
+            //   targetPage: RouteName.personalCall,
+            //   receivedAction: receivedAction,
+            // );
+            break;
+
+          default:
+            // loadSingletonPage(App.navigatorKey.currentState,
+            //     targetPage: PAGE_PHONE_CALL, receivedAction: receivedAction);
+            break;
+        }
+      }
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

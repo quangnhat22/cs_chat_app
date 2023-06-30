@@ -16,6 +16,7 @@ class BaseService {
   static const String groupPath = '/group';
   static const String devicePath = "/device";
   static const String searchPath = "/search";
+  static const String notficationPath = "/notification";
 
   BaseService({required this.interceptor}) {
     initDio();

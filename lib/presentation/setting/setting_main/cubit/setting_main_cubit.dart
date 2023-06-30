@@ -64,6 +64,10 @@ class SettingMainCubit extends Cubit<SettingMainState> {
     await authUseCase.logOut();
   }
 
+  void changeStatusNoti(bool value) {
+    emit(state.copyWith(isTurnOnNotifi: value));
+  }
+
   @override
   Future<void> close() {
     userSubcription.cancel();

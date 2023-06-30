@@ -1,71 +1,44 @@
 part of notifications_lib;
 
 class NotificationList extends StatelessWidget {
-  NotificationList({super.key});
-
-  final names = ['Lê Đức Hậu', 'Nguyễn Đình Nhật Quang'];
+  const NotificationList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: RichText(
-              text: TextSpan(
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                TextSpan(
-                  text: names[index],
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-                TextSpan(
-                  text: AppLocalizations.of(context)!.want_to_friend_with_you,
-                  style: const TextStyle(fontWeight: FontWeight.w300),
-                )
-              ])),
-          leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.tertiary,
-            child: Text(
-              'A',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ))),
-          subtitle: Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Wrap(
-              spacing: 20,
-              children: <Widget>[
-                OutlinedButton(
-                  onPressed: () {},
-                  style: const ButtonStyle(
-                      padding: MaterialStatePropertyAll(
-                          EdgeInsets.symmetric(horizontal: 30))),
-                  child: Text(AppLocalizations.of(context)!.reject_request),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSecondary,
-                      padding: const EdgeInsets.symmetric(horizontal: 30)),
-                  onPressed: () {},
-                  child: Text(AppLocalizations.of(context)!.accept_request),
-                )
-              ],
-            ),
-          ),
-          tileColor: index % 2 == 0
-              ? Theme.of(context).colorScheme.surfaceVariant
-              : null,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+    return BlocBuilder<NotificationBloc, NotificationState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          getListInSuccess: (listNoti) {
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  //if (index.isEven) {
+                  return NotificationItem(noti: listNoti[index]);
+                  //}
+                  //return const DividerSpaceLeft();
+                },
+                childCount: listNoti.length,
+              ),
+            );
+          },
+          getListInProgress: () {
+            return const SliverFillRemaining(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          },
+          orElse: () {
+            return SliverFillRemaining(
+              child: Center(
+                child: Text(
+                    AppLocalizations.of(context)!.something_wrong_try_again),
+              ),
+            );
+          },
+          getListFail: (message) => Text(message ?? ''),
         );
       },
-      itemCount: names.length,
     );
   }
 }

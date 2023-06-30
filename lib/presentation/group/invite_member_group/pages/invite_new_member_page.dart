@@ -32,10 +32,6 @@ class InviteNewMemberPage extends StatelessWidget {
 class InviteNewMemberView extends StatelessWidget {
   const InviteNewMemberView({super.key});
 
-  void _inputChange(String value, BuildContext ctx) {
-    ctx.read<InviteNewMemberCubit>().inputChanged(value);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

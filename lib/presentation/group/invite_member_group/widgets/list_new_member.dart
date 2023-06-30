@@ -18,6 +18,10 @@ class ListNewMember extends StatefulWidget {
 class _ListNewMemberState extends State<ListNewMember> {
   final List<UserEntity?> selectedFriends = [];
 
+  void _inputChange(String value, BuildContext ctx) {
+    ctx.read<InviteNewMemberCubit>().inputChanged(value);
+  }
+
   void handleSelectMembers(BuildContext ctx, UserEntity member) {
     ctx.read<InviteNewMemberFormCubit>().groupMembersChanged(member);
 
@@ -42,6 +46,7 @@ class _ListNewMemberState extends State<ListNewMember> {
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
           child: TextField(
+            onChanged: (value) => _inputChange(value, context),
             decoration: InputDecoration(
                 suffixIcon: const Icon(Icons.search),
                 filled: true,

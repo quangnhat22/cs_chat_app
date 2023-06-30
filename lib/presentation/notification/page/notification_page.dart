@@ -5,18 +5,35 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          getIt<NotificationBloc>()..add(const NotificationEvent.started()),
+      child: const NotificationView(),
+    );
+  }
+}
+
+class NotificationView extends StatelessWidget {
+  const NotificationView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: MHomeAppBar(
         title: AppLocalizations.of(context)!.notifications,
         actionButton: IconButton(
-          icon: const Icon(Icons.settings),
+          icon: Icon(
+            Icons.delete_outline,
+            color: Theme.of(context).colorScheme.error,
+          ),
           onPressed: () {},
         ),
       ),
-       body: SingleChildScrollView(
-        child: NotificationList(),
+      body: const CustomScrollView(
+        slivers: [
+          NotificationList(),
+        ],
       ),
-      
     );
   }
 }

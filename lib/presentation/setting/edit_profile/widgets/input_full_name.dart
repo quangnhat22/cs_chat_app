@@ -31,7 +31,7 @@ class _InputFullNameState extends State<InputFullName> {
       child: CTextFormField(
         controller: _controller,
         icon: const Icon(Icons.badge_outlined),
-        label: AppLocalizations.of(context)!.full_name,
+        label: '${AppLocalizations.of(context)!.full_name} (*)',
         typeCheck: TypeValueCheck.text,
       ),
     );

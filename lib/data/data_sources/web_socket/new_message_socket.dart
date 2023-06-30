@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
-import 'package:chatapp/data/models/chat_room_model.dart';
 import 'package:chatapp/data/models/message_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_socket_channel/io.dart';

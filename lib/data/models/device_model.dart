@@ -11,6 +11,8 @@ class DeviceModel with _$DeviceModel {
     required String id,
     String? name,
     String? pushNotificationToken,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _DeviceModel;
 
   factory DeviceModel.fromJson(Map<String, dynamic> json) =>

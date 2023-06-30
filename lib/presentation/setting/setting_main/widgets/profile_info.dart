@@ -11,7 +11,7 @@ class ProfileInfo extends StatelessWidget {
           previous.name != current.name ||
           previous.email != current.email,
       builder: (context, state) {
-        return state.when(initial: ((avatar, name, email, _, __) {
+        return state.when(initial: ((avatar, name, email, _, __, ___) {
           return Column(
             children: <Widget>[
               CustomAvatarImage(

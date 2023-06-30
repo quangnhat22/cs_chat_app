@@ -18,6 +18,10 @@ class GroupDetailsSmallCardTop extends StatelessWidget {
         "groupId": groupInfo.id,
         "groupName": groupInfo.name,
         "groupAvatar": groupInfo.avatar
+      }).then((isUpdate) {
+        if (isUpdate == true && ctx.mounted) {
+          ctx.read<GroupDetailsBloc>().add(const GroupDetailsRefreshed());
+        }
       });
     }
   }

@@ -39,16 +39,25 @@ class EditProfileView extends StatelessWidget {
               context, warningMessage, TypesSnackBar.warning),
         );
       },
-      child: Scaffold(
-        appBar: MPageAppBar(
-          title: AppLocalizations.of(context)!.edit_profile,
-        ),
-        body: const SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: EditProfileForm(),
-          ),
-        ),
+      child: BlocBuilder<EditProfileFormCubit, EditProfileFormState>(
+        builder: (context, formState) {
+          return WillPopScope(
+            onWillPop: () async {
+              return formState.isDone;
+            },
+            child: Scaffold(
+              appBar: MPageAppBar(
+                title: AppLocalizations.of(context)!.edit_profile,
+              ),
+              body: const SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: EditProfileForm(),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

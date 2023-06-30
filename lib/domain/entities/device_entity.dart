@@ -4,8 +4,16 @@ class DeviceEntity {
   final String id;
   final String? name;
   final String? pushNotificationToken;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  DeviceEntity({required this.id, this.name, this.pushNotificationToken});
+  DeviceEntity({
+    required this.id,
+    this.name,
+    this.pushNotificationToken,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   static final deviceEntityEmpty = DeviceEntity(id: "-1");
 
@@ -14,8 +22,11 @@ class DeviceEntity {
   }) {
     if (deviceModel == null) return deviceEntityEmpty;
     return DeviceEntity(
-        id: deviceModel.id,
-        name: deviceModel.name,
-        pushNotificationToken: deviceModel.pushNotificationToken);
+      id: deviceModel.id,
+      name: deviceModel.name,
+      pushNotificationToken: deviceModel.pushNotificationToken,
+      createdAt: deviceModel.createdAt,
+      updatedAt: deviceModel.updatedAt,
+    );
   }
 }
