@@ -123,6 +123,7 @@
   },
   "open_gmail_app": "Mở ứng dụng Gmail",
   "change_email": "Thay đổi Email khôi phục.",
-  "old_password: "Mật khẩu cũ",
-  "new_password": "Mật khẩu mới"
+  "new_password": "Mật khẩu mới",
+  "update_password_success": "Cập nhật mật khẩu của bạn thành công",
+  "update_password_fail": "Cập nhật mật khẩu của bạn thất bại"
 }

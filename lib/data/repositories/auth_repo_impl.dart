@@ -117,9 +117,10 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<bool> updatePassword(String password, String oldPassword) async {
+  Future<bool> updatePassword(String? password, String? oldPassword) async {
     try {
-      final res = await _authService.updatePassword(password, oldPassword);
+      final res =
+          await _authService.updatePassword(password ?? "", oldPassword ?? "");
       if (res.statusCode == 200) {
         return true;
       }
