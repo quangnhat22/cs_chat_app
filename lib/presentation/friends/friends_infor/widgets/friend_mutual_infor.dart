@@ -42,7 +42,7 @@ class FriendMutualInfor extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 160.h,
+              top: 165.h,
               child: Card(
                 elevation: 6,
                 child: SizedBox(
@@ -74,31 +74,31 @@ class FriendMutualInfor extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: VerticalDivider(),
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            const Text(
-                              "0",
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Text(
-                              AppLocalizations.of(context)!
-                                  .friend_mutual_groups,
-                              style: const TextStyle(
-                                fontSize: 16,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      // const Padding(
+                      //   padding: EdgeInsets.symmetric(vertical: 20),
+                      //   child: VerticalDivider(),
+                      // ),
+                      // Expanded(
+                      //   child: Column(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: <Widget>[
+                      //       const Text(
+                      //         "0",
+                      //         style: TextStyle(fontSize: 30),
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 12,
+                      //       ),
+                      //       Text(
+                      //         AppLocalizations.of(context)!
+                      //             .friend_mutual_groups,
+                      //         style: const TextStyle(
+                      //           fontSize: 16,
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

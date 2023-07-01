@@ -131,5 +131,9 @@
   "images": "Hình ảnh",
   "unknown_name": "Tên không xác định",
   "unknown_group": "Nhóm không xác định",
-  "no_friends_found": "Không tìm thấy bạn bè"
+  "no_friends_found": "Không tìm thấy bạn bè",
+  "delete_noti": "Xoá thông báo",
+  "delete_all_noti": "Delete all notification",
+  "do_you_want_delete_all_noti": "Do you want to delete all notifications?",
+  "noti_empty": "Danh sách thông báo rỗng"
 }

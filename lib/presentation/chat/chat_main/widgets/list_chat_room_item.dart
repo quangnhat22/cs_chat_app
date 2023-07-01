@@ -4,7 +4,6 @@ import 'package:chatapp/core/config/app_text_style.dart';
 import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:chatapp/domain/entities/chat_room_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routes/app_navigation.dart';
 import '../../../../core/routes/route_name.dart';

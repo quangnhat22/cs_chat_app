@@ -16,6 +16,32 @@ class NotificationPage extends StatelessWidget {
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
 
+  void _deleteAllNotification(BuildContext ctx) {
+    final state = ctx.read<NotificationBloc>().state;
+    if (state is GetListNotificationInSuccess) {
+      if (state.listNotification.isEmpty) {
+        SnackBarApp.showSnackBar(
+            null, AppLocalizations.of(ctx)!.noti_empty, TypesSnackBar.warning);
+      } else {
+        AppDefaultDialogWidget()
+            .setAppDialogType(AppDialogType.confirm)
+            .setTitle(AppLocalizations.of(ctx)!.delete_noti)
+            .setContent(AppLocalizations.of(ctx)!.do_you_want_reject_friend)
+            .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+            .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+            .setOnPositive(() {
+              ctx.read<NotificationBloc>().add(const ListNotificationDeleted());
+              Navigator.of(ctx).pop();
+            })
+            .setOnNegative(() {
+              Navigator.of(ctx).pop();
+            })
+            .buildDialog(ctx)
+            .show(ctx);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +52,7 @@ class NotificationView extends StatelessWidget {
             Icons.delete_outline,
             color: Theme.of(context).colorScheme.error,
           ),
-          onPressed: () {},
+          onPressed: () => _deleteAllNotification(context),
         ),
       ),
       body: const CustomScrollView(

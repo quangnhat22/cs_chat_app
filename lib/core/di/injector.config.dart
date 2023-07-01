@@ -327,8 +327,11 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i82.ListMemberCubit(gh<_i65.UserUseCase>()));
     gh.factory<_i83.LoginCubit>(
         () => _i83.LoginCubit(authUC: gh<_i69.AuthUseCase>()));
-    gh.factory<_i84.NotificationBloc>(
-        () => _i84.NotificationBloc(gh<_i59.NotificationUseCase>()));
+    gh.factory<_i84.NotificationBloc>(() => _i84.NotificationBloc(
+          gh<_i59.NotificationUseCase>(),
+          gh<_i45.FriendUseCase>(),
+          gh<_i49.GroupUseCase>(),
+        ));
     gh.factory<_i85.SearchBloc>(
         () => _i85.SearchBloc(gh<_i62.SearchUseCase>()));
     gh.factory<_i86.SettingMainCubit>(() => _i86.SettingMainCubit(

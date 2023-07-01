@@ -131,5 +131,9 @@
   "images": "Images",
   "unknown_name": "Unknown name",
   "unknown_group": "Unknown group",
-  "no_friends_found": "No friends found"
+  "no_friends_found": "No friends found",
+  "delete_noti": "Delete notification",
+  "delete_all_noti": "Delete all notification",
+  "do_you_want_delete_all_noti": "Do you want to delete all notifications?",
+  "noti_empty": "Notification is empty"
 }
