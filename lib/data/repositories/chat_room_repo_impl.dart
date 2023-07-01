@@ -2,6 +2,7 @@ import 'package:chatapp/data/data_sources/remote/service/group_service.dart';
 import 'package:chatapp/data/data_sources/web_socket/new_message_socket.dart';
 import 'package:chatapp/data/models/chat_room_model.dart';
 import 'package:chatapp/domain/entities/chat_room_entity.dart';
+import 'package:chatapp/domain/entities/latest_message_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/modules/chat_room/chat_room_repository.dart';
 import 'package:collection/collection.dart';
@@ -25,7 +26,11 @@ class ChatRoomRepoImpl extends ChatRoomRepository {
       final listGroupChatRoom = _convertJsonToChatRoomModel(res);
 
       // listChatRoom.sort((i1, i2) => i1.la)
-      return listGroupChatRoom;
+      return listGroupChatRoom
+          .where((chatroom) =>
+              chatroom.latestMessageEntity !=
+              LatestMessageEntity.latestMessageEmpty)
+          .toList();
     } catch (e) {
       throw Exception(e.toString());
     }

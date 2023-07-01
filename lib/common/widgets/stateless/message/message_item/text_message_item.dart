@@ -26,7 +26,7 @@ class TextMessageItem extends IMessageItem {
         decoration: BoxDecoration(
           color: isMe
               ? Theme.of(context).colorScheme.primaryContainer
-              : Colors.white,
+              : Theme.of(context).colorScheme.outline,
           borderRadius: isMe ? _borderMessageRight() : _borderMessageLeft(),
           border: Border.all(
             color: Theme.of(context).colorScheme.primaryContainer,

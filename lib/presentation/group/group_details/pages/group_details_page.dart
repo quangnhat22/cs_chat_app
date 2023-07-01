@@ -38,12 +38,12 @@ class GroupDetailView extends StatelessWidget {
         state.whenOrNull(
           leaveGroupSuccess: () {
             SnackBarApp.showSnackBar(
-                context, "Leave group fail! Try again.", TypesSnackBar.error);
+                context, "Leave group success", TypesSnackBar.success);
+            NavigationUtil.pushNamedAndRemoveUntil(route: RouteName.homePage);
           },
           leaveGroupFail: () {
             SnackBarApp.showSnackBar(
-                context, "Leave group success", TypesSnackBar.success);
-            NavigationUtil.pushNamedAndRemoveUntil(route: RouteName.homePage);
+                context, "Leave group fail! Try again.", TypesSnackBar.error);
           },
         );
       },
@@ -51,18 +51,24 @@ class GroupDetailView extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: const MPageAppBar(title: "Details"),
         body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const GroupDetaiInfo(),
-                const GroupDetailsSmallCardTop(),
-                SizedBox(
-                  height: 4.h,
-                ),
-                const GroupDetailsSmallCardBottom(),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const GroupDetaiInfo(),
+                  SizedBox(
+                    height: 8.h,
+                  ),
+                  const GroupDetailsSmallCardTop(),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  const GroupDetailsSmallCardBottom(),
+                ],
+              ),
             ),
           ),
         ),

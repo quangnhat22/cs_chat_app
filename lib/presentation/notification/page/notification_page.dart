@@ -46,13 +46,28 @@ class NotificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MHomeAppBar(
-        title: AppLocalizations.of(context)!.notifications,
-        actionButton: IconButton(
-          icon: Icon(
-            Icons.delete_outline,
-            color: Theme.of(context).colorScheme.error,
-          ),
-          onPressed: () => _deleteAllNotification(context),
+        title: '',
+        actionButton: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.refresh_outlined,
+              ),
+              onPressed: () {
+                context
+                    .read<NotificationBloc>()
+                    .add(const NotificationRefreshed());
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.delete_outline,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              onPressed: () => _deleteAllNotification(context),
+            ),
+          ],
         ),
       ),
       body: const CustomScrollView(

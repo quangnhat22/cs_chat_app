@@ -9,6 +9,17 @@ class NotificationList extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           getListInSuccess: (listNoti) {
+            if (listNoti.isEmpty) {
+              return SliverFillRemaining(
+                child: RefreshPage(
+                    label: 'Notification refresh',
+                    onRefresh: () {
+                      context
+                          .read<NotificationBloc>()
+                          .add(const NotificationRefreshed());
+                    }),
+              );
+            }
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
@@ -30,10 +41,13 @@ class NotificationList extends StatelessWidget {
           },
           orElse: () {
             return SliverFillRemaining(
-              child: Center(
-                child: Text(
-                    AppLocalizations.of(context)!.something_wrong_try_again),
-              ),
+              child: RefreshPage(
+                  label: 'Notification refresh',
+                  onRefresh: () {
+                    context
+                        .read<NotificationBloc>()
+                        .add(const NotificationRefreshed());
+                  }),
             );
           },
           getListFail: (message) => Text(message ?? ''),

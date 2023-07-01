@@ -89,17 +89,16 @@ class EditGroupImage extends StatelessWidget {
                                 ),
                               ),
                       ),
-                    if (state.groupAvatar != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 32),
-                        child: GestureDetector(
-                          onTap: () => _showImageDialog(context),
-                          child: Text(
-                            AppLocalizations.of(context)!.set_new_photo,
-                            style: AppTextStyles.captionTextStyle,
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 32),
+                      child: GestureDetector(
+                        onTap: () => _showImageDialog(context),
+                        child: Text(
+                          AppLocalizations.of(context)!.set_new_photo,
+                          style: AppTextStyles.captionTextStyle,
                         ),
-                      )
+                      ),
+                    )
                   ],
                 )
               ],

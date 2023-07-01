@@ -7,6 +7,7 @@ enum GetFriendsStatus { initial, inProgress, success, fail }
 @freezed
 class InviteNewMemberState with _$InviteNewMemberState {
   const factory InviteNewMemberState.initial({
+    String? chatRoomId,
     List<UserEntity>? listMembers,
     List<UserEntity>? displayMembers,
     @Default(GetFriendsStatus.initial) getFriendsStatus,

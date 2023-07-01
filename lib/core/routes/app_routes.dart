@@ -19,6 +19,7 @@ import 'package:chatapp/presentation/media/pages/media_page.dart';
 import 'package:chatapp/presentation/others/loading_page.dart';
 import 'package:chatapp/presentation/map/pages/map_page.dart';
 import 'package:chatapp/presentation/setting/edit_profile/edit_profile.dart';
+import 'package:chatapp/presentation/setting/update_password/pages/update_password_page.dart';
 import 'package:flutter/material.dart';
 
 import 'route_name.dart';
@@ -117,6 +118,15 @@ class AppRoutes {
           return _buildAnimationRoute(
               settings, GroupDetailPage(groupId: settings.arguments as String));
         }
+      // return _buildRoute(
+      //   settings,
+      //   ChatRoomPage(
+      //     id: settings.arguments as String,
+      //     type: "group",
+      //   ),
+      // );
+      case RouteName.updatePassword:
+        return _buildRoute(settings, const UpdatePasswordPage());
 
       case RouteName.deviceAdministration:
         return _buildAnimationRoute(settings, const DeviceMainPage());
@@ -126,8 +136,8 @@ class AppRoutes {
         {
           final args = settings.arguments as Map<String, dynamic>;
           final groupId = args["groupId"] as String;
-          final groupName = args["groupName"] as String;
-          final groupAvatar = args["groupAvatar"] as String;
+          final groupName = args["groupName"] as String?;
+          final groupAvatar = args["groupAvatar"] as String?;
           return _buildAnimationRoute(
             settings,
             EditGroupPage(
@@ -147,10 +157,15 @@ class AppRoutes {
         }
       case RouteName.inviteNewMemberGroup:
         {
+          final args = settings.arguments as Map<String, dynamic>;
+          final groupId = args["groupId"] as String;
+          final listMember = args["member"] as List<UserEntity>;
           return _buildAnimationRoute(
             settings,
             InviteNewMemberPage(
-                listMember: settings.arguments as List<UserEntity>),
+              listMember: listMember,
+              chatRoomId: groupId,
+            ),
           );
         }
       case RouteName.googleMap:

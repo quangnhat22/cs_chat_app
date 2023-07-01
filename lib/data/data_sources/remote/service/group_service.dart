@@ -9,7 +9,7 @@ class GroupService {
   final BaseService _service;
 
   Future<Response> createGroup(
-      String name, String imageUrl, List<String> members) async {
+      String name, String? imageUrl, List<String> members) async {
     try {
       return await _service.dio.post(BaseService.groupPath, data: {
         "name": name,
@@ -160,10 +160,10 @@ class GroupService {
   }
 
   Future<Response> inviteNewMember(
-      {required String groupId, List<String>? memberId}) async {
+      {required String groupId, required String friendId}) async {
     try {
       return await _service.dio
-          .put('${BaseService.groupPath}/$groupId', data: {});
+          .post('${BaseService.groupPath}/request/$groupId/$friendId');
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
@@ -171,12 +171,12 @@ class GroupService {
     }
   }
 
-  Future<Response> leaveGroup({required String groupId}) async {
+  Future<Response> leaveGroup(String groupId) async {
     try {
       return await _service.dio
-          .put('${BaseService.groupPath}/$groupId', data: {});
+          .delete("${BaseService.groupPath}/$groupId/leave");
     } on DioError catch (e) {
-      throw Exception(e.message.toString());
+      throw Exception(e.message);
     } catch (e) {
       throw Exception(e.toString());
     }

@@ -7,7 +7,7 @@ abstract class AuthRepository {
 
   Future<void> signUpWithEmailAndPassword(String email, String password);
 
-  Future<bool> updatePassword(String password, String oldPassword);
+  Future<bool> updatePassword(String? password, String? oldPassword);
 
   Future<void> logOut();
 

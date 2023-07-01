@@ -1,5 +1,6 @@
 import 'package:chatapp/common/widgets/stateless/builder_dialog/app_dialog_base_builder.dart';
 import 'package:chatapp/common/widgets/stateless/circle_avatar/custom_avatar_image.dart';
+import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:chatapp/domain/entities/notification_entity.dart';
 import 'package:chatapp/presentation/notification/bloc/notification_bloc.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class NotificationItem extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onBackground),
                 children: <TextSpan>[
               TextSpan(
-                text: noti.subject?.name,
+                text: noti.prep?.name,
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               TextSpan(
@@ -76,12 +77,16 @@ class NotificationItem extends StatelessWidget {
               )
             ])),
         leading: CustomAvatarImage(
-          urlImage: noti.subject?.image,
+          urlImage: noti.prep?.image,
           widthImage: 48,
           heightImage: 48,
         ),
-        subtitle: (noti.action != 'accept-request' && noti.action != null)
-            ? Padding(
+        subtitle: Column(
+          children: [
+            Text(AppDateTimeFormat.convertToHourMinuteFollowDay(
+                noti.createdAt ?? DateTime.now())),
+            if ((noti.action != 'accept-request' && noti.action != null))
+              Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Wrap(
                   spacing: 20,
@@ -107,8 +112,9 @@ class NotificationItem extends StatelessWidget {
                     )
                   ],
                 ),
-              )
-            : Container(),
+              ),
+          ],
+        ),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       ),

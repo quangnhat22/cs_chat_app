@@ -16,7 +16,10 @@ class GroupDetailsSmallCardBottom extends StatelessWidget {
     if (state is GetGroupDetailsInSuccess) {
       NavigationUtil.pushNamed(
         route: RouteName.inviteNewMemberGroup,
-        args: state.groupInfo.members,
+        args: {
+          "groupId": state.groupInfo.id,
+          "member": state.groupInfo.members,
+        },
       );
     }
   }

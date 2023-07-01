@@ -135,5 +135,10 @@
   "delete_noti": "Delete notification",
   "delete_all_noti": "Delete all notification",
   "do_you_want_delete_all_noti": "Do you want to delete all notifications?",
-  "noti_empty": "Notification is empty"
+  "noti_empty": "Notification is empty",
+  "new_password": "New password",
+  "update_password_success": "Update your password success",
+  "update_password_fail": "Update your password fail",
+  "invite_new_member": "Invite new member",
+  "invite_new_member_success": "Invite new member_success"
 }

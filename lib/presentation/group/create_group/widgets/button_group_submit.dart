@@ -14,7 +14,7 @@ class ButtonGroupSubmit extends StatelessWidget {
         createGroupBloc.groupName.trim() != '') {
       ctx.read<CubitSubmitNewGroupCubit>().createGroup(
             groupName: createGroupBloc.groupName.trim(),
-            groupAvatar: createGroupBloc.groupImage ?? '',
+            groupAvatar: createGroupBloc.groupImage,
             members: createGroupBloc.members,
           );
     }

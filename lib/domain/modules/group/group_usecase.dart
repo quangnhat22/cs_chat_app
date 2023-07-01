@@ -88,14 +88,14 @@ class GroupUseCaseImpl extends GroupUseCase {
   }
 
   @override
-  Future<bool> leaveGroup(String grouId) {
-    return _repo.leaveGroup(grouId);
+  Future<bool> leaveGroup(String grouId) async {
+    return await _repo.leaveGroup(grouId);
   }
 
   @override
   Future<bool> inviteNewMember(
-      {required String groupId, List<String>? membersId}) {
-    return _repo.inviteNewMember(groupId: groupId, membersId: membersId);
+      {required String groupId, List<String>? membersId}) async {
+    return await _repo.inviteNewMember(groupId: groupId, membersId: membersId);
   }
 
   @override

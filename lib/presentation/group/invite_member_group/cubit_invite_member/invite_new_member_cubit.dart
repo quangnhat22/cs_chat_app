@@ -1,3 +1,4 @@
+import 'package:chatapp/core/utils/snack_bar.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
 import 'package:chatapp/domain/modules/group/group_usecase.dart';
@@ -19,7 +20,7 @@ class InviteNewMemberCubit extends Cubit<InviteNewMemberState> {
     this._friendUseCase,
   ) : super(const InviteNewMemberState.initial());
 
-  Future<void> pageStarted(List<UserEntity> members) async {
+  Future<void> pageStarted(List<UserEntity> members, String chatRoomId) async {
     try {
       emit(state.copyWith(getFriendsStatus: GetFriendsStatus.inProgress));
       final listFriends = await _friendUseCase.getListFriend();
@@ -30,6 +31,7 @@ class InviteNewMemberCubit extends Cubit<InviteNewMemberState> {
       emit(state.copyWith(
           listMembers: displayMember,
           displayMembers: displayMember,
+          chatRoomId: chatRoomId,
           getFriendsStatus: GetFriendsStatus.success));
     } catch (e) {
       emit(state.copyWith(getFriendsStatus: GetFriendsStatus.fail));
@@ -53,14 +55,22 @@ class InviteNewMemberCubit extends Cubit<InviteNewMemberState> {
 
   Future<void> inviteNewMemberSubmitted(List<UserEntity> members) async {
     try {
+      if (state.chatRoomId == null) return;
       emit(state.copyWith(status: InviteNewMemberStatus.inProgress));
-      // final listFriends = await _friendUseCase.getListFriend();
-      // final displayMember = listFriends
-      //     .where((friend) => !_isMemberExist(members, friend))
-      //     .toList();
-
-      emit(state.copyWith(status: InviteNewMemberStatus.success));
+      final membersId = members.map((user) => user.id).toList();
+      final isSuccess = await _groupUseCase.inviteNewMember(
+          groupId: state.chatRoomId!, membersId: membersId);
+      if (isSuccess) {
+        SnackBarApp.showSnackBar(
+            null, "Invite new member success", TypesSnackBar.success);
+        emit(state.copyWith(status: InviteNewMemberStatus.success));
+      } else {
+        SnackBarApp.showSnackBar(
+            null, "Invite new member fail", TypesSnackBar.error);
+      }
     } catch (e) {
+      SnackBarApp.showSnackBar(
+          null, "Invalid request! Please check.", TypesSnackBar.error);
       emit(state.copyWith(status: InviteNewMemberStatus.fail));
       throw Exception(e.toString());
     }

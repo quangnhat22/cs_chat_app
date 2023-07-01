@@ -135,5 +135,10 @@
   "delete_noti": "Xoá thông báo",
   "delete_all_noti": "Delete all notification",
   "do_you_want_delete_all_noti": "Do you want to delete all notifications?",
-  "noti_empty": "Danh sách thông báo rỗng"
+  "noti_empty": "Danh sách thông báo rỗng",
+  "new_password": "Mật khẩu mới",
+  "update_password_success": "Cập nhật mật khẩu của bạn thành công",
+  "update_password_fail": "Cập nhật mật khẩu của bạn thất bại",
+  "invite_new_member": "Mời bạn bè",
+  "invite_new_member_success": "Mời bạn bè thành công"
 }
