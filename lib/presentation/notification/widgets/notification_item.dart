@@ -69,7 +69,9 @@ class NotificationItem extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               TextSpan(
-                text: AppLocalizations.of(context)!.want_to_friend_with_you,
+                text: noti.action == 'accept-request'
+                    ? " accept your request"
+                    : AppLocalizations.of(context)!.want_to_friend_with_you,
                 style: const TextStyle(fontWeight: FontWeight.w300),
               )
             ])),
@@ -86,7 +88,7 @@ class NotificationItem extends StatelessWidget {
                   children: <Widget>[
                     OutlinedButton(
                       onPressed: () =>
-                          _handleOnTapAccept(context, noti.action!),
+                          _handleOnTapReject(context, noti.action!),
                       style: const ButtonStyle(
                           padding: MaterialStatePropertyAll(
                               EdgeInsets.symmetric(horizontal: 30))),
@@ -100,7 +102,7 @@ class NotificationItem extends StatelessWidget {
                               Theme.of(context).colorScheme.onSecondary,
                           padding: const EdgeInsets.symmetric(horizontal: 30)),
                       onPressed: () =>
-                          _handleOnTapReject(context, noti.action!),
+                          _handleOnTapAccept(context, noti.action!),
                       child: Text(AppLocalizations.of(context)!.accept_request),
                     )
                   ],

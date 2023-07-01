@@ -106,6 +106,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       if (isSuccess) {
         SnackBarApp.showSnackBar(
             null, 'Action with notification success', TypesSnackBar.success);
+        add(const NotificationRefreshed());
       } else {
         SnackBarApp.showSnackBar(
             null, 'Action with notification fail', TypesSnackBar.success);
