@@ -8,21 +8,6 @@ part 'message_entity.freezed.dart';
 
 @freezed
 class MessageEntity with _$MessageEntity {
-  // final String id;
-  // final String? type;
-  // final UserEntity? sender;
-  // final GroupEntity? groupEntity;
-  // final UserEntity? receiver;
-  // final String? message;
-  // final String? videoUrl;
-  // final String? recordUrl;
-  // final DateTime? createdAt;
-  // final bool? isMe;
-  // final String? optional;
-  // final bool? isResultSearch;
-  // final AppSendMessageStatus? sendStatus;
-  // final bool isSameDate;
-
   const factory MessageEntity({
     required String id,
     String? type,
@@ -35,6 +20,8 @@ class MessageEntity with _$MessageEntity {
     DateTime? createdAt,
     bool? isMe,
     String? optional,
+    String? systemEvent,
+    int? sizeImage,
     AppSendMessageStatus? sendStatus,
     @Default(false) bool? isResultSearch,
     @Default(false) bool? isSameDate,
@@ -61,6 +48,8 @@ class MessageEntity with _$MessageEntity {
       createdAt: model.createdAt,
       isMe: model.isMe,
       isSameDate: isSameDate,
+      systemEvent: model.systemEvent,
+      sizeImage: model.sizeImage,
       optional: model.optional,
     );
   }

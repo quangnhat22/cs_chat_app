@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:chatapp/data/data_sources/firebase/file_firebase.dart';
 import 'package:chatapp/data/data_sources/local/auth_local_data_src.dart';
 import 'package:chatapp/data/models/message_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'package:web_socket_channel/io.dart';
@@ -76,9 +79,29 @@ class ChatWebSocket {
         return;
       }
 
-      if (type == "image" || type == "audio" || type == "file") {
+      if (type == "image" || type == "audio") {
         messageContent = await storageFirebase.uploadFile(message);
         if (messageContent == null) return;
+      }
+
+      if (type == "file") {
+        final fileName = basename(message);
+        // path for file in firestore
+        Reference ref = FirebaseStorage.instance.ref();
+        Reference refDirImage = ref.child(TypeFile.images.toString());
+        Reference refToUpload = refDirImage.child(fileName);
+
+        UploadTask? uploadTask = refToUpload.putFile(File(message));
+        final snapshot = await uploadTask.whenComplete(() => {});
+        final urlDownloadImage = await snapshot.ref.getDownloadURL();
+        final fileSize = snapshot.metadata?.size ?? 0;
+        _channel.sink.add(jsonEncode({
+          "type": type,
+          "message": urlDownloadImage,
+          "size_image": fileSize,
+          "optional": option
+        }));
+        return;
       }
       _channel.sink.add(jsonEncode(
           {"type": type, "message": messageContent, "optional": option}));

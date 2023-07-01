@@ -140,5 +140,13 @@
   "update_password_success": "Update your password success",
   "update_password_fail": "Update your password fail",
   "invite_new_member": "Invite new member",
-  "invite_new_member_success": "Invite new member_success"
+  "invite_new_member_success": "Invite new member_success",
+  "current_password": "Current password",
+  "sending": "Sending...",
+  "sending_fail": "Sent fail",
+  "group_created": " created group",
+  "member_joined": " joined",
+  "member_leaved": " leaved",
+  "open": "Open",
+  "open_location": "Open location"
 }

@@ -76,3 +76,13 @@ enum AppSendMessageStatus {
 
   final String value;
 }
+
+enum AppSystemEvent {
+  groupCreated("group-created"),
+  memberJoined("member-joined"),
+  memberLeaved("member-leaved");
+
+  const AppSystemEvent(this.systemEvent);
+
+  final String systemEvent;
+}

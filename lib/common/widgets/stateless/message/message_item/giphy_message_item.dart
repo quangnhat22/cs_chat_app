@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:chatapp/core/config/app_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:giphy_get/giphy_get.dart';
 
 import '../message_item.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../message_item.dart';
 
@@ -27,9 +28,8 @@ class SystemMessageItem extends IMessageItem {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Colors.grey[400]!)),
       child: Text(
-        '${nameActor ?? ''} ${convertSystemString(content ?? '')}',
+        '${nameActor ?? ''} ${convertSystemString(context, content ?? '')}',
         style: TextStyle(
-          color: Colors.black87,
           fontSize: 14.sp,
           //fontWeight: FontWeight.w400,
         ),
@@ -37,19 +37,19 @@ class SystemMessageItem extends IMessageItem {
     );
   }
 
-  static String convertSystemString(String content) {
+  static String convertSystemString(BuildContext ctx, String content) {
     switch (content) {
       case "group-created":
         {
-          return "created group";
+          return AppLocalizations.of(ctx)!.group_created;
         }
       case "member-joined":
         {
-          return "joined the group";
+          return AppLocalizations.of(ctx)!.member_joined;
         }
       case "member-leaved":
         {
-          return "member-leaved";
+          return AppLocalizations.of(ctx)!.member_leaved;
         }
       case "removedFromRoom":
         {

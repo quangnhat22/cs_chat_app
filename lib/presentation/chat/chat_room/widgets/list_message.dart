@@ -72,9 +72,11 @@ class _ListMessageState extends State<ListMessage> {
                             ? Theme.of(context).colorScheme.surfaceVariant
                             : Colors.transparent,
                         child: Row(
-                          mainAxisAlignment: isMe
-                              ? MainAxisAlignment.end
-                              : MainAxisAlignment.start,
+                          mainAxisAlignment: item.type == 'system'
+                              ? MainAxisAlignment.center
+                              : isMe
+                                  ? MainAxisAlignment.end
+                                  : MainAxisAlignment.start,
                           children: [
                             MessgeItem(
                               isMe: isMe,

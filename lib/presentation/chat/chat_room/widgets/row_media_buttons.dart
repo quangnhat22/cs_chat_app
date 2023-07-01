@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:giphy_get/giphy_get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../core/utils/assets_picker.dart';
 import '../../../map/pages/map_page.dart';
@@ -99,9 +100,11 @@ class RowMediaButton extends StatelessWidget {
       },
     ).then((result) {
       if (result != null && result["currentLocation"] != null) {
-        ctx
-            .read<MessageStreamCubit>()
-            .sendMessage(type: "map", message: result["currentLocation"]);
+        final currentLocation = jsonDecode(result["currentLocation"]) as List;
+        ctx.read<MessageStreamCubit>().sendMessage(
+            type: "map",
+            message:
+                "https://www.google.com/maps/search/?api=1&query=${currentLocation.first},${currentLocation.last}");
       }
     });
     //NavigationUtil.pushNamed(route: RouteName.googleMap);

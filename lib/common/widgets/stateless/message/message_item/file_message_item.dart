@@ -10,20 +10,22 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../message_item.dart';
 
 class FileMessageItem extends IMessageItem {
-  const FileMessageItem({
-    super.key,
-    this.content,
-    this.isMe = false,
-    this.createdAt,
-  });
+  const FileMessageItem(
+      {super.key,
+      this.content,
+      this.isMe = false,
+      this.createdAt,
+      this.sizeImage});
 
   final String? content;
   final bool isMe;
   final DateTime? createdAt;
+  final int? sizeImage;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class FileMessageItem extends IMessageItem {
       isMe: isMe,
       url: content,
       createAt: createdAt,
+      fileSize: sizeImage,
     );
   }
 }
@@ -42,11 +45,13 @@ class FileItem extends StatefulWidget {
     this.url,
     required this.isMe,
     this.createAt,
+    this.fileSize,
   });
 
   final String? url;
   final bool isMe;
   final DateTime? createAt;
+  final int? fileSize;
 
   @override
   State<FileItem> createState() => _FileItemState();
@@ -56,22 +61,12 @@ class _FileItemState extends State<FileItem> {
   final ReceivePort _port = ReceivePort();
   // bool _isExist = false;
   String _fileName = "";
-  int _fileSize = 0;
 
   Future<void> _getFileInfo(BuildContext context) async {
     try {
       if (widget.url == null || !context.mounted) return;
       final ref = FirebaseStorage.instance.refFromURL(widget.url!);
       _fileName = ref.name;
-      if (_fileSize == 0) {
-        ref.getMetadata().then((metaData) {
-          if (context.mounted) {
-            setState(() {
-              _fileSize = metaData.size ?? 0;
-            });
-          }
-        });
-      }
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -81,11 +76,6 @@ class _FileItemState extends State<FileItem> {
     String savePath = '/storage/emulated/0/Download/$_fileName';
     final isExist = await File(savePath).exists();
     return isExist;
-    // if (context.mounted) {
-    //   setState(() {
-    //     _isExist = isExist;
-    //   });
-    // }
   }
 
   Future<String?> _getSavedDir() async {
@@ -213,7 +203,7 @@ class _FileItemState extends State<FileItem> {
                     height: 8.h,
                   ),
                   Text(
-                    AssetsUtils.getFileSizeString(bytes: _fileSize),
+                    AssetsUtils.getFileSizeString(bytes: widget.fileSize ?? 0),
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w300,
@@ -223,14 +213,9 @@ class _FileItemState extends State<FileItem> {
                     softWrap: true,
                     maxLines: 3,
                   ),
-                  // !_isExist
-                  //     ? TextButton(
-                  //         onPressed: () async => _handleDownload(widget.url),
-                  //         child: const Text("Download"),
-                  //       )
                   TextButton(
                     onPressed: () => _openFile(context, widget.url),
-                    child: const Text("Open"),
+                    child: Text(AppLocalizations.of(context)!.open),
                   ),
                 ],
               ),

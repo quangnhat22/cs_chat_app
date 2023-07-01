@@ -1,4 +1,4 @@
-import 'package:chatapp/common/widgets/stateless/form/text_field.dart';
+import 'package:chatapp/common/widgets/stateless/form/password_text_field.dart';
 import 'package:chatapp/presentation/setting/update_password/cubit/update_password_form_dart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,11 +25,25 @@ class _InputOldPasswordState extends State<InputOldPassword> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return CTextFormField(
-      controller: _controller,
-      icon: const Icon(Icons.lock),
-      label: AppLocalizations.of(context)!.password,
+    return BlocBuilder<UpdatePasswordFormDartCubit,
+        UpdatePasswordFormDartState>(
+      builder: (context, state) {
+        return CPasswordTextField(
+          key: const Key('updatePassword_oldPasswordInput_textField'),
+          controller: _controller,
+          label: AppLocalizations.of(context)!.current_password,
+          errorText: state.oldPassword.displayError != null
+              ? state.oldPassword.error?.message
+              : null,
+        );
+      },
     );
   }
 }

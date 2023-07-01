@@ -85,8 +85,11 @@ class AuthService {
 
   Future<Response> updatePassword(String password, String oldPassword) async {
     try {
-      return await _service.dio.post("${BaseService.authPath}/update-password",
-          data: {"password": password});
+      return await _service.dio
+          .post("${BaseService.authPath}/update-password", data: {
+        "new_password": password,
+        "old_password": oldPassword,
+      });
     } on DioError catch (e) {
       throw Exception(e.message);
     } catch (e) {

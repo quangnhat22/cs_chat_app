@@ -20,6 +20,7 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
       await event.map(
           started: (event) async => await _started(event, emit),
           refreshed: (event) async => await _refreshed(event, emit),
+          updateChatRoom: (event) async => await _chatRoomUpdated(event, emit),
           addMessageTemp: (event) async => _addMessageTemp(event, emit),
           newMessageNotified: (event) async =>
               await _newMessageNotified(event, emit),
@@ -39,18 +40,10 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
 
       isGroup = (event.type == "personal") ? false : true;
 
-      String? chatRoomName = "";
-      String? chatRoomAvatar = "";
       List<MessageEntity> listMessage;
 
-      // if (isGroup) {
-      //   //final groupInfo = await _groupUseCase.getListChatWithGroup(groupId: event.id);
-      //   //TODO: gán groupInfo
-      // } else {
-      //   final friendInfo = await _userUseCase.getUserById(event.id);
-      //   chatRoomName = friendInfo?.name;
-      //   chatRoomAvatar = friendInfo?.avatar;
-      // }
+      final chatRoomDetail =
+          await _chatRoomUseCase.getChatRoomDetailById(event.chatRoomId);
 
       if (event.searchMessage != null) {
         _searchId = event.searchMessage!.id;
@@ -82,8 +75,8 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
         chatRoomId: event.chatRoomId,
         id: event.id,
         isGroupChatRoom: isGroup,
-        chatRoomName: chatRoomName,
-        chatRoomAvatar: chatRoomAvatar,
+        chatRoomName: chatRoomDetail.name,
+        chatRoomAvatar: chatRoomDetail.avatar,
         searchMessageId: event.searchMessage?.id,
       ));
     } catch (e) {
@@ -134,12 +127,6 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
     try {
       List<MessageEntity> listMessageCurrent =
           (state as ChatRoomInfoSuccess).messages;
-
-      // final isSearching =
-      //     (state as ChatRoomInfoSuccess).searchMessageId != null &&
-      //         (state as ChatRoomInfoSuccess).isLatestMessage == false;
-
-      // if (isSearching)
 
       //remove message temp
       if (event.newMessage.optional != null) {
@@ -218,6 +205,26 @@ class ChatRoomBloc extends Bloc<ChatRoomEvent, ChatRoomState> {
           messages: newListMessage,
           isLatestMessage: (loadedMessages.length < 5),
         ));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> _chatRoomUpdated(
+      ChatRoomUpdated event, Emitter<ChatRoomState> emit) async {
+    try {
+      if (state is ChatRoomInfoSuccess) {
+        final chatRoomState = (state as ChatRoomInfoSuccess);
+        final chatRoomId = (state as ChatRoomInfoSuccess).chatRoomId;
+        final chatRoomDetail =
+            await _chatRoomUseCase.getChatRoomDetailById(chatRoomId);
+
+        emit(
+          chatRoomState.copyWith(
+              chatRoomAvatar: chatRoomDetail.avatar,
+              chatRoomName: chatRoomDetail.name),
+        );
       }
     } catch (e) {
       throw Exception(e.toString());

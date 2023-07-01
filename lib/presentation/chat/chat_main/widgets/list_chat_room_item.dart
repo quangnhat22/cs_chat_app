@@ -66,8 +66,9 @@ class ListChatRoomItem extends StatelessWidget {
                                   chatRoom.latestMessageEntity?.message != null)
                                 Text(
                                   "${chatRoom.latestMessageEntity?.senderName}: ${chatRoom.latestMessageEntity?.message}",
-                                  style: AppTextStyles.captionTextStyle,
-                                  maxLines: 1,
+                                  style: AppTextStyles.captionTextStyle
+                                      .copyWith(fontWeight: FontWeight.w400),
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                             ],

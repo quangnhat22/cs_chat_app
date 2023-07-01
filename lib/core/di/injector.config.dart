@@ -78,7 +78,7 @@ import 'package:chatapp/domain/modules/user/user_repository.dart' as _i63;
 import 'package:chatapp/domain/modules/user/user_usecase.dart' as _i65;
 import 'package:chatapp/presentation/app/app_settings_cubit/app_settings_cubit.dart'
     as _i26;
-import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i90;
+import 'package:chatapp/presentation/app/bloc/app_bloc.dart' as _i89;
 import 'package:chatapp/presentation/app/cubit/app_notification_cubit.dart'
     as _i66;
 import 'package:chatapp/presentation/auth/fogot_password/cubit_forgot_pasword/forgot_password_cubit.dart'
@@ -146,10 +146,8 @@ import 'package:chatapp/presentation/setting/setting_main/cubit/setting_main_cub
     as _i86;
 import 'package:chatapp/presentation/setting/setting_theme/cubit/setting_theme_cubit.dart'
     as _i25;
-import 'package:chatapp/presentation/setting/update_password/bloc/update_password_bloc.dart'
-    as _i88;
 import 'package:chatapp/presentation/setting/update_password/cubit/update_password_form_dart_cubit.dart'
-    as _i89;
+    as _i88;
 import 'package:chatapp/service/notification_service.dart' as _i12;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -345,11 +343,9 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i87.SignUpCubit>(
         () => _i87.SignUpCubit(authUC: gh<_i69.AuthUseCase>()));
-    gh.factory<_i88.UpdatePasswordBloc>(
-        () => _i88.UpdatePasswordBloc(authUseCase: gh<_i69.AuthUseCase>()));
-    gh.factory<_i89.UpdatePasswordFormDartCubit>(() =>
-        _i89.UpdatePasswordFormDartCubit(authUseCase: gh<_i69.AuthUseCase>()));
-    gh.lazySingleton<_i90.AppBloc>(() => _i90.AppBloc(
+    gh.factory<_i88.UpdatePasswordFormDartCubit>(() =>
+        _i88.UpdatePasswordFormDartCubit(authUseCase: gh<_i69.AuthUseCase>()));
+    gh.lazySingleton<_i89.AppBloc>(() => _i89.AppBloc(
           gh<_i69.AuthUseCase>(),
           gh<_i65.UserUseCase>(),
         ));

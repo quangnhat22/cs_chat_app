@@ -140,5 +140,13 @@
   "update_password_success": "Cập nhật mật khẩu của bạn thành công",
   "update_password_fail": "Cập nhật mật khẩu của bạn thất bại",
   "invite_new_member": "Mời bạn bè",
-  "invite_new_member_success": "Mời bạn bè thành công"
+  "invite_new_member_success": "Mời bạn bè thành công",
+  "current_password": "Mật khẩu hiện tại",
+  "sending": "Đang gửi...",
+  "sending_fail": "Gửi thất bại",
+  "group_created": " tạo nhóm",
+  "member_joined": " tham gia",
+  "member_leaved": " rời khỏi nhóm",
+  "open": "Mở",
+  "open_location": "Mở vị trí"
 }

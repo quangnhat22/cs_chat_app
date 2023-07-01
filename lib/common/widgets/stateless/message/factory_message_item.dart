@@ -1,4 +1,5 @@
 import 'package:chatapp/common/widgets/stateless/message/message_item/giphy_message_item.dart';
+import 'package:chatapp/common/widgets/stateless/message/message_item/map_message_item.dart';
 import 'package:flutter/material.dart';
 
 import 'message_item.dart';
@@ -10,15 +11,17 @@ import 'message_item/text_message_item.dart';
 import 'message_item/video_message_item.dart';
 
 class FactoryMessageItem {
-  static IMessageItem buildMessageItem(
-    String id,
+  static IMessageItem buildMessageItem({
+    required String id,
     String? type,
     bool? isMe,
     String? content,
     String? videoUrl,
     String? nameActor,
     DateTime? createdAt,
-  ) {
+    String? systemEvent,
+    int? fileSize,
+  }) {
     switch (type) {
       case "text":
         {
@@ -38,7 +41,10 @@ class FactoryMessageItem {
         }
       case "system":
         {
-          return SystemMessageItem(nameActor: nameActor, content: content!);
+          return SystemMessageItem(
+            nameActor: nameActor,
+            content: systemEvent!,
+          );
         }
       case "video":
         {
@@ -61,6 +67,7 @@ class FactoryMessageItem {
             key: ValueKey(id),
             content: content!,
             isMe: isMe ?? false,
+            sizeImage: fileSize,
           );
         }
       case "giphy":
@@ -73,7 +80,7 @@ class FactoryMessageItem {
         }
       case "map":
         {
-          return TextMessageItem(
+          return MapMessageItem(
             content: content!,
             isMe: isMe ?? false,
           );

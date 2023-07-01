@@ -16,7 +16,10 @@ class HeaderButtonDetail extends StatelessWidget {
         NavigationUtil.pushNamed(
           route: RouteName.groupChatRoom,
           args: chatRoomBlocState.chatRoomId,
-        );
+        ).then((_) => {
+              if (ctx.mounted)
+                {ctx.read<ChatRoomBloc>().add(const ChatRoomUpdated())}
+            });
       } else {
         NavigationUtil.pushNamed(
             route: RouteName.personalChatRoom,

@@ -1,5 +1,5 @@
-import 'package:chatapp/presentation/auth/register/register.dart';
 import 'package:chatapp/presentation/setting/update_password/widgets/btn_change_password.dart';
+import 'package:chatapp/presentation/setting/update_password/widgets/input_confirm_password.dart';
 import 'package:chatapp/presentation/setting/update_password/widgets/input_new_password.dart';
 import 'package:chatapp/presentation/setting/update_password/widgets/input_old_password.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,17 @@ class _UpdatePasswordFormState extends State<UpdatePasswordForm> {
         child: Column(
           children: const <Widget>[
             InputOldPassword(),
+            SizedBox(
+              height: 4,
+            ),
             InputNewPassword(),
+            SizedBox(
+              height: 4,
+            ),
+            InputConfirmPassword(),
+            SizedBox(
+              height: 8,
+            ),
             BtnChangePassword(),
           ],
         ),
