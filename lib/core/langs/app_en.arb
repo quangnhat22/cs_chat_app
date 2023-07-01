@@ -148,5 +148,13 @@
   "member_joined": " joined",
   "member_leaved": " leaved",
   "open": "Open",
-  "open_location": "Open location"
+  "open_location": "Open location",
+  "invited_you_to_join_group": " invited you to join group ",
+  "didnt_receive_group_request": "You didn't receive a group request",
+  "didnt_send_group_request": "You didn't send a group request",
+  "did_accept_request": " did accept your request ",
+  "refresh_page": "Refresh Page",
+  "last_message": "Last active: ",
+  "is_invited_to_join": "is invited to join: ",
+  "leave_group": "Do you want to leave this group?"
 }

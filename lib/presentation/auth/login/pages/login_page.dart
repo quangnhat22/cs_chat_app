@@ -23,7 +23,7 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {
         if (state.statusSubmit == FormzSubmissionStatus.failure) {
           SnackBarApp.showSnackBar(
-              context, state.errorMessage, TypesSnackBar.error);
+              context, 'Login fail! Try again.', TypesSnackBar.error);
         }
       },
       builder: (context, state) {

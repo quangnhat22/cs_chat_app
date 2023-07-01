@@ -148,5 +148,13 @@
   "member_joined": " tham gia",
   "member_leaved": " rời khỏi nhóm",
   "open": "Mở",
-  "open_location": "Mở vị trí"
+  "open_location": "Mở vị trí",
+  "invited_you_to_join_group": " đã mời bạn tham gia nhóm ",
+  "didnt_receive_group_request": "Bạn chưa có lời mời tham gia vào nhóm nào!",
+  "didnt_send_group_request": "Bạn chưa gửi lời mời gia nhập nhóm nào!",
+  "did_accept_request": " đã chấp nhập lời mời của bạn ",
+  "refresh_page": "Làm mới trang",
+  "last_message": "Lần cuối hoạt động: ",
+  "is_invited_to_join": "được mời tham gia nhóm: ",
+  "leave_group": "Bạn có muốn rời khỏi nhóm này hay không?"
 }

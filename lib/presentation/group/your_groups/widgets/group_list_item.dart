@@ -31,6 +31,12 @@ class ListGroupItem extends StatelessWidget {
             groupItem.name ?? "",
             style: const TextStyle(fontWeight: FontWeight.w500),
           ),
+          subtitle: (groupItem.latestMessageEntity != null)
+              ? Text(
+                  "${AppLocalizations.of(context)!.last_message} ${AppDateTimeFormat.convertToHourMinuteFollowDay(groupItem.latestMessageEntity!.createdAt!)}",
+                  style: const TextStyle(fontWeight: FontWeight.w500),
+                )
+              : Container(),
           leading: CustomAvatarImage(
             urlImage: groupItem.avatar,
             widthImage: 48,

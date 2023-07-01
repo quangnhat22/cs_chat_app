@@ -5,71 +5,48 @@ import 'package:injectable/injectable.dart';
 class OtherLocalDataSrc {
   static Box? _box;
   final String _otherBox = "other_box";
-  final String _friendRequestKey = "_friendRequestKey";
-  final String _groupRequestKey = "_groupRequestKey";
-  final String _notificationKey = "_notificationKey";
-  final String _newChatRoomKey = "_newChatRoomKey";
+  final String _locationTurnOnKey = "_locationTurnOnKey";
+  final String _newLocationKey = "_newLocationKey";
 
   Future<Box> _openBox() async {
     _box ??= await Hive.openBox(_otherBox);
     return _box!;
   }
 
-  Future<void> setFriendRequest() async {
+  Future<void> setLocationTurnOn() async {
     await _openBox().then((box) async {
-      await box.put(_friendRequestKey, 1);
+      await box.put(_locationTurnOnKey, true);
     });
   }
 
-  Future<void> setGroupRequest() async {
+  Future<void> setLocationTurnOff() async {
     await _openBox().then((box) async {
-      await box.put(_groupRequestKey, 1);
+      await box.put(_locationTurnOnKey, false);
     });
   }
 
-  Future<void> setNotification() async {
-    await _openBox().then((box) async {
-      await box.put(_notificationKey, 1);
-    });
-  }
-
-  Future<void> setNewChatRoomReceive(String newChatRoomId) async {
-    await _openBox().then((box) async {
-      List<String> listNewChatRoom =
-          await box.get(_newChatRoomKey, defaultValue: []);
-      listNewChatRoom = [...listNewChatRoom, newChatRoomId];
-      await box.put(_newChatRoomKey, listNewChatRoom);
-    });
-  }
-
-  Future<void> deleteChatRoomId(String newChatRoomId) async {
-    await _openBox().then((box) async {
-      List<String> listNewChatRoom =
-          await box.get(_newChatRoomKey, defaultValue: []);
-      listNewChatRoom = listNewChatRoom
-          .where((chatRoomId) => chatRoomId != newChatRoomId)
-          .toList();
-      await box.put(_newChatRoomKey, listNewChatRoom);
-    });
-  }
-
-  Stream<int?> getFriendRequest() async* {
+  Stream<bool> getLocationStatusStream() async* {
     final box = await _openBox();
-    yield* box.watch(key: _friendRequestKey).map((event) {
+    yield* box.watch(key: _locationTurnOnKey).map((event) {
       return event.value;
     });
   }
 
-  Stream<int?> getGroupRequest() async* {
-    final box = await _openBox();
-    yield* box.watch(key: _groupRequestKey).map((event) {
-      return event.value;
+  Future<void> setNewLocation() async {
+    await _openBox().then((box) async {
+      await box.put(_newLocationKey, true);
     });
   }
 
-  Stream<int?> getNotificationRequest() async* {
+  Future<void> removeNewLocation() async {
+    await _openBox().then((box) async {
+      await box.put(_newLocationKey, false);
+    });
+  }
+
+  Stream<bool> getNewLocation() async* {
     final box = await _openBox();
-    yield* box.watch(key: _notificationKey).map((event) {
+    yield* box.watch(key: _newLocationKey).map((event) {
       return event.value;
     });
   }

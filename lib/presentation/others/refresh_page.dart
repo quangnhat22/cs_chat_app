@@ -13,27 +13,26 @@ class RefreshPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              label,
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            IconButton(
-              onPressed: onRefresh,
-              icon: const Icon(
-                Icons.refresh,
-              ),
-            )
-          ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+          height: 24.h,
         ),
-      ),
+        Text(
+          label,
+        ),
+        SizedBox(
+          height: 24.h,
+        ),
+        IconButton(
+          onPressed: onRefresh,
+          icon: const Icon(
+            Icons.refresh,
+          ),
+        )
+      ],
     );
   }
 }

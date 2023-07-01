@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class InkWellDynamicBorder extends StatelessWidget {
-  const InkWellDynamicBorder({
-    Key? key,
-    required this.title,
-    this.leading,
-    this.trailing,
-    this.onTap,
-    this.hasTopBorderRadius = false,
-    this.hasBottomBorderRadius = false,
-    this.radius = 10.0,
-  }) : super(key: key);
+  const InkWellDynamicBorder(
+      {Key? key,
+      required this.title,
+      this.leading,
+      this.trailing,
+      this.onTap,
+      this.hasTopBorderRadius = false,
+      this.hasBottomBorderRadius = false,
+      this.radius = 10.0,
+      this.colorTitle})
+      : super(key: key);
 
+  final Color? colorTitle;
   final String title;
   final Widget? leading;
   final Widget? trailing;
@@ -42,7 +44,14 @@ class InkWellDynamicBorder extends StatelessWidget {
       onTap: onTap,
       child: ListTile(
         leading: leading,
-        title: Text(title),
+        title: colorTitle != null
+            ? Text(
+                title,
+                style: TextStyle(
+                  color: colorTitle,
+                ),
+              )
+            : Text(title),
         trailing: trailing,
       ),
     );

@@ -216,14 +216,18 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i31.FriendService(service: gh<_i29.BaseService>()));
     gh.factory<_i32.GroupService>(
         () => _i32.GroupService(service: gh<_i29.BaseService>()));
-    gh.factory<_i33.NotificationsService>(
-        () => _i33.NotificationsService(service: gh<_i29.BaseService>()));
+    gh.factory<_i33.NotificationsService>(() => _i33.NotificationsService(
+          gh<_i29.BaseService>(),
+          gh<_i13.OtherLocalDataSrc>(),
+        ));
     gh.factory<_i34.SearchService>(
         () => _i34.SearchService(service: gh<_i29.BaseService>()));
     gh.lazySingleton<_i35.UserService>(
         () => _i35.UserService(service: gh<_i29.BaseService>()));
-    gh.lazySingleton<_i36.AuthService>(
-        () => _i36.AuthService(service: gh<_i29.BaseService>()));
+    gh.lazySingleton<_i36.AuthService>(() => _i36.AuthService(
+          gh<_i29.BaseService>(),
+          gh<_i13.OtherLocalDataSrc>(),
+        ));
     gh.factory<_i37.ChatRoomRepository>(() => _i38.ChatRoomRepoImpl(
           gh<_i32.GroupService>(),
           gh<_i11.NewMessageSocket>(),

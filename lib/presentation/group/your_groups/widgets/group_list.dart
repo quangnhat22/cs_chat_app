@@ -10,22 +10,32 @@ class GroupList extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           inSuccess: (listGroup) {
+            if (listGroup.isEmpty) {
+              return SliverFillRemaining(
+                child: RefreshPage(
+                    label: AppLocalizations.of(context)!.refresh_page,
+                    onRefresh: () {
+                      context
+                          .read<ListGroupBloc>()
+                          .add(const ListGroupEvent.refreshed());
+                    }),
+              );
+            }
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   //if (index.isEven) {
-                  return ListGroupItem(
-                    groupItem: listGroup[index],
+                  return Column(
+                    children: [
+                      ListGroupItem(
+                        groupItem: listGroup[index],
+                      ),
+                      const DividerSpaceLeft(),
+                    ],
                   );
                   //}
-                  //return const DividerSpaceLeft();
+                  //return
                 },
-                // semanticIndexCallback: (Widget widget, int localIndex) {
-                //   if (localIndex.isEven) {
-                //     return localIndex ~/ 2;
-                //   }
-                //   return null;
-                // },
                 childCount: listGroup.length,
               ),
             );

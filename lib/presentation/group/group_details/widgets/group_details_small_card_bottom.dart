@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../common/widgets/stateless/builder_dialog/app_dialog_base_builder.dart';
 import '../../../../common/widgets/stateless/ink_well/ink_well_dynamic_border.dart';
 import '../../../../core/routes/app_navigation.dart';
 
@@ -45,9 +46,20 @@ class GroupDetailsSmallCardBottom extends StatelessWidget {
   void _handleLeaveGroup(BuildContext ctx) {
     final state = ctx.read<GroupDetailsBloc>().state;
     if (state is GetGroupDetailsInSuccess) {
-      ctx
-          .read<GroupDetailsBloc>()
-          .add(GroupDetailsLeaved(id: state.groupInfo.id));
+      AppDefaultDialogWidget()
+          .setAppDialogType(AppDialogType.confirm)
+          .setTitle(AppLocalizations.of(ctx)!.confirm)
+          .setContent(AppLocalizations.of(ctx)!.leave_group)
+          .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+          .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+          .setOnPositive(() {
+            ctx
+                .read<GroupDetailsBloc>()
+                .add(GroupDetailsLeaved(id: state.groupInfo.id));
+            Navigator.of(ctx).pop();
+          })
+          .buildDialog(ctx)
+          .show(ctx);
     }
   }
 
@@ -85,7 +97,11 @@ class GroupDetailsSmallCardBottom extends StatelessWidget {
           const DividerSpaceLeft(),
           InkWellDynamicBorder(
             title: AppLocalizations.of(context)!.exit_group,
-            leading: const Icon(Icons.exit_to_app),
+            colorTitle: Theme.of(context).colorScheme.error,
+            leading: Icon(
+              Icons.exit_to_app,
+              color: Theme.of(context).colorScheme.error,
+            ),
             onTap: () => _handleLeaveGroup(context),
             hasTopBorderRadius: false,
             hasBottomBorderRadius: true,

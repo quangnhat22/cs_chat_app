@@ -6,6 +6,7 @@ class NotificationEntity {
   final DateTime? createdAt;
   final NotificationSubjectEntity? subject;
   final NotificationSubjectEntity? prep;
+  final NotificationSubjectEntity? indirect;
   final String? action;
 
   NotificationEntity({
@@ -13,6 +14,7 @@ class NotificationEntity {
     this.createdAt,
     this.subject,
     this.prep,
+    this.indirect,
     this.action,
   });
 
@@ -28,6 +30,8 @@ class NotificationEntity {
           model: model.subject),
       prep: NotificationSubjectEntity.convertToFriendRequestEntity(
           model: model.prep),
+      indirect: NotificationSubjectEntity.convertToFriendRequestEntity(
+          model: model.indirect),
       action: model.action,
     );
   }

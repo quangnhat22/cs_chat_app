@@ -29,7 +29,13 @@ class ListRequestFriendReceive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (listReceiveRequest.isEmpty)
-        ? const EmptyView()
+        ? RefreshPage(
+            label: AppLocalizations.of(context)!.refresh_page,
+            onRefresh: () {
+              context
+                  .read<ListFriendRequestBloc>()
+                  .add(const ListFriendRequestEvent.listRequestRefreshed());
+            })
         : ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

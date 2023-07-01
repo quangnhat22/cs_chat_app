@@ -14,6 +14,7 @@ class NotificationsModel with _$NotificationsModel {
     @JsonKey(name: "created_at") DateTime? createdAt,
     NotificationSubjectModel? subject,
     NotificationSubjectModel? prep,
+    NotificationSubjectModel? indirect,
     String? action,
   }) = _NotificationsModel;
 

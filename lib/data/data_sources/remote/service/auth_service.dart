@@ -1,3 +1,4 @@
+import 'package:chatapp/data/data_sources/local/other_local_data_src.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -6,8 +7,9 @@ import '../base_service.dart';
 @LazySingleton()
 class AuthService {
   final BaseService _service;
+  final OtherLocalDataSrc _otherLocalDataSrc;
 
-  AuthService({required BaseService service}) : _service = service;
+  AuthService(this._service, this._otherLocalDataSrc);
 
   Future<Response> register(
       {required String email,
@@ -15,6 +17,7 @@ class AuthService {
       String? deviceName,
       String? fcmToken}) async {
     try {
+      await _otherLocalDataSrc.setLocationTurnOn();
       return await _service.dio.post(
         "${BaseService.authPath}/register",
         data: {
@@ -35,6 +38,7 @@ class AuthService {
   Future<Response> loginWithFirebase(
       {required String idToken, String? deviceName, String? fcmToken}) async {
     try {
+      await _otherLocalDataSrc.setLocationTurnOn();
       return await _service.dio.post(
         "${BaseService.authPath}/login-with-firebase",
         data: {
@@ -56,6 +60,7 @@ class AuthService {
       String? deviceName,
       String? fcmToken}) async {
     try {
+      await _otherLocalDataSrc.setLocationTurnOn();
       return await _service.dio.post(
         "${BaseService.authPath}/login",
         data: {

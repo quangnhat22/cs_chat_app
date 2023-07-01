@@ -1,4 +1,3 @@
-import 'package:chatapp/common/widgets/stateless/app_bar/m_page_app_bar.dart';
 import 'package:chatapp/core/routes/app_navigation.dart';
 import 'package:chatapp/presentation/group/invite_member_group/cubit_invite_member/invite_new_member_cubit.dart';
 import 'package:chatapp/presentation/group/invite_member_group/cubit_invite_new_member_form/invite_new_member_form_cubit.dart';

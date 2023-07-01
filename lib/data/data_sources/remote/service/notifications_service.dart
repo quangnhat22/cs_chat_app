@@ -1,12 +1,14 @@
+import 'package:chatapp/data/data_sources/local/other_local_data_src.dart';
 import 'package:chatapp/data/data_sources/remote/base_service.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable()
 class NotificationsService {
-  NotificationsService({required BaseService service}) : _service = service;
+  NotificationsService(this._service, this._localDataSrc);
 
   final BaseService _service;
+  final OtherLocalDataSrc _localDataSrc;
 
   Future<Response> getListNotification() async {
     try {
