@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:chatapp/core/routes/app_navigation.dart';
-import 'package:chatapp/core/routes/app_routes.dart';
 import 'package:chatapp/core/routes/route_name.dart';
 import 'package:chatapp/data/models/notification_model.dart';
 import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
@@ -106,20 +105,18 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
       if (payload.action == 'receive-group-request') {
         switch (receivedAction.buttonKeyPressed) {
           case 'deny':
-            // Is not necessary to do anything, because the reject button is
-            // already auto dismissible
+            await _groupUseCase.rejectRequest(payload.indirect!.id);
             break;
 
           case 'accept':
-            // NavigationUtil.loadSingletonPage(
-            //   targetPage: RouteName.personalCall,
-            //   receivedAction: receivedAction,
-            // );
+            await _groupUseCase.acceptRequest(payload.indirect!.id);
             break;
 
           default:
-            // loadSingletonPage(App.navigatorKey.currentState,
-            //     targetPage: PAGE_PHONE_CALL, receivedAction: receivedAction);
+            NavigationUtil.loadSingletonPage(
+              targetPage: RouteName.homePage,
+              receivedAction: receivedAction,
+            );
             break;
         }
       }

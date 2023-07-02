@@ -164,10 +164,12 @@ class _FileItemState extends State<FileItem> {
         decoration: BoxDecoration(
           color: widget.isMe
               ? Theme.of(context).colorScheme.primaryContainer
-              : Colors.white,
+              : Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: Theme.of(context).colorScheme.primaryContainer,
+            color: widget.isMe
+                ? Theme.of(context).colorScheme.primaryContainer
+                : Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
             width: 1,
           ),
         ),

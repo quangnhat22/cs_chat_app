@@ -32,8 +32,7 @@ class GroupDetailsSmallCardTop extends StatelessWidget {
       child: Column(
         children: <Widget>[
           InkWellDynamicBorder(
-            title: AppLocalizations.of(context)!
-                .change_profile_picture_or_your_name,
+            title: AppLocalizations.of(context)!.edit_image_group_and_name,
             leading: const Icon(Icons.group_add),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _editGroupInfo(context),

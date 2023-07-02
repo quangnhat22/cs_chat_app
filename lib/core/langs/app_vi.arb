@@ -156,5 +156,7 @@
   "refresh_page": "Làm mới trang",
   "last_message": "Lần cuối hoạt động: ",
   "is_invited_to_join": "được mời tham gia nhóm: ",
-  "leave_group": "Bạn có muốn rời khỏi nhóm này hay không?"
+  "leave_group": "Bạn có muốn rời khỏi nhóm này hay không?",
+  "notification_refresh": "Làm mới thông báo",
+  "edit_image_group_and_name": "Thay đổi tên và ảnh nhóm"
 }

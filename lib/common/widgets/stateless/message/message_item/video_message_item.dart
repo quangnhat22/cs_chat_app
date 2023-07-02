@@ -31,7 +31,7 @@ class VideoMessageItem extends IMessageItem {
         decoration: BoxDecoration(
           color: isMe
               ? Theme.of(context).colorScheme.primaryContainer
-              : Colors.white,
+              : Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
           borderRadius: BorderRadius.circular(16),
         ),
         child: content != null
@@ -271,8 +271,8 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                                       onPressed: () => _seekTo(
                                           position: const Duration(seconds: 15),
                                           isBack: true),
-                                      icon:
-                                          const Icon(Icons.restart_alt_rounded),
+                                      icon: const Icon(Icons
+                                          .keyboard_double_arrow_left_outlined),
                                     ),
                                     IconButton(
                                       onPressed: () {
@@ -292,8 +292,8 @@ class _VideoPlayPageState extends State<VideoPlayPage> {
                                       onPressed: () => _seekTo(
                                           position:
                                               const Duration(seconds: 15)),
-                                      icon: const Icon(
-                                          Icons.not_started_outlined),
+                                      icon: const Icon(Icons
+                                          .keyboard_double_arrow_right_outlined),
                                     ),
                                   ],
                                 ),

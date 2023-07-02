@@ -42,7 +42,7 @@ class NotificationList extends StatelessWidget {
           orElse: () {
             return SliverFillRemaining(
               child: RefreshPage(
-                  label: 'Notification refresh',
+                  label: AppLocalizations.of(context)!.notification_refresh,
                   onRefresh: () {
                     context
                         .read<NotificationBloc>()

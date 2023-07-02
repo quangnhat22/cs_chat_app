@@ -22,7 +22,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         started: (event) => _started(event, emit),
         inputChanged: (event) async => await _inputChanged(event, emit),
       );
-    }, transformer: debounce(const Duration(milliseconds: 500)));
+    }, transformer: debounce(const Duration(milliseconds: 300)));
   }
 
   _started(_Started event, Emitter<SearchState> emit) {}

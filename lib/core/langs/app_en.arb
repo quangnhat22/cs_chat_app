@@ -156,5 +156,7 @@
   "refresh_page": "Refresh Page",
   "last_message": "Last active: ",
   "is_invited_to_join": "is invited to join: ",
-  "leave_group": "Do you want to leave this group?"
+  "leave_group": "Do you want to leave this group?",
+  "notification_refresh": "Notification Refresh",
+  "edit_image_group_and_name": "Edit group avatar and name"
 }

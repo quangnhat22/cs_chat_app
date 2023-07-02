@@ -55,14 +55,14 @@ class DeviceSettings extends StatelessWidget {
                   //   hasTopBorderRadius: false,
                   //   hasBottomBorderRadius: false,
                   // ),
-                  SwitchListTile(
-                    value: isTurnNoti,
-                    title: Text(AppLocalizations.of(context)!.notifications),
-                    secondary: const Icon(Icons.notifications_outlined),
-                    onChanged: (value) {
-                      context.read<SettingMainCubit>().changeStatusNoti(value);
-                    },
-                  ),
+                  // SwitchListTile(
+                  //   value: isTurnNoti,
+                  //   title: Text(AppLocalizations.of(context)!.notifications),
+                  //   secondary: const Icon(Icons.notifications_outlined),
+                  //   onChanged: (value) {
+                  //     context.read<SettingMainCubit>().changeStatusNoti(value);
+                  //   },
+                  // ),
                   const DividerSpaceLeft(),
                   InkWellDynamicBorder(
                     title: AppLocalizations.of(context)!.devices,

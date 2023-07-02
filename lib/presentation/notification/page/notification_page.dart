@@ -33,9 +33,6 @@ class NotificationView extends StatelessWidget {
               ctx.read<NotificationBloc>().add(const ListNotificationDeleted());
               Navigator.of(ctx).pop();
             })
-            .setOnNegative(() {
-              Navigator.of(ctx).pop();
-            })
             .buildDialog(ctx)
             .show(ctx);
       }
