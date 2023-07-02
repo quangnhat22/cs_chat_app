@@ -174,7 +174,7 @@ class GroupRepoImpl extends GroupRepository {
       for (var memberId in membersId) {
         final res = await _groupService.inviteNewMember(
             groupId: groupId, friendId: memberId);
-        if (res.statusCode != 200) {
+        if (res.statusCode! > 300) {
           throw Exception("Invalid request");
         }
       }

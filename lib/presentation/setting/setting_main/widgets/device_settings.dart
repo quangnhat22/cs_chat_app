@@ -63,7 +63,7 @@ class DeviceSettings extends StatelessWidget {
                   //     context.read<SettingMainCubit>().changeStatusNoti(value);
                   //   },
                   // ),
-                  const DividerSpaceLeft(),
+                  //const DividerSpaceLeft(),
                   InkWellDynamicBorder(
                     title: AppLocalizations.of(context)!.devices,
                     leading: const Icon(Icons.devices_outlined),

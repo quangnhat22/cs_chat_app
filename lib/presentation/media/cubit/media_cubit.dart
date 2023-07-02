@@ -17,7 +17,7 @@ class MediaCubit extends Cubit<MediaState> {
     try {
       emit(const GetListMediaInProgress());
       final listMessage = await _chatRoomUseCase.getListMessage(
-          chatRoomId: chatRoomId, limit: 100);
+          chatRoomId: chatRoomId, limit: 200);
 
       final listMessagePhoto =
           listMessage.where((message) => message.type == "image").toList();
