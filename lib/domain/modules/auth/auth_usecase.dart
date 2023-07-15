@@ -10,7 +10,7 @@ abstract class AuthUseCase {
 
   Future<void> logOut();
 
-  Future<bool> updatePassword(String password, String oldPassword);
+  Future<bool> updatePassword({String? password, String? oldPassword});
 
   Future<bool> checkIsLoggedIn();
 
@@ -43,8 +43,9 @@ class AuthUseCaeImpl extends AuthUseCase {
   }
 
   @override
-  Future<bool> updatePassword(String password, String oldPassword) async {
-    return repo.updatePassword(password, oldPassword);
+  Future<bool> updatePassword({String? password, String? oldPassword}) async {
+    // return repo.updatePassword(password, oldPassword);
+    return await repo.updatePassword(password, oldPassword);
   }
 
   @override

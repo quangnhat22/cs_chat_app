@@ -1,3 +1,4 @@
+import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:chatapp/domain/entities/device_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,16 @@ class DeviceListItem extends StatelessWidget {
             ),
           ),
           title: Text(deviceItem.name ?? ""),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                  'Last time using: ${AppDateTimeFormat.formatDDMMYYYY(deviceItem.updatedAt)}')
+            ],
+          ),
           tileColor: Theme.of(context).colorScheme.surfaceVariant,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),

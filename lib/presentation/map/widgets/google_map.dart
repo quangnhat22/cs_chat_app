@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:chatapp/core/routes/app_navigation.dart';
 import 'package:chatapp/core/utils/permission_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -116,7 +115,8 @@ class _GoogleMapBodyState extends State<GoogleMapBody> {
         Column(
           children: [
             TextButton(
-                onPressed: _sendMyLocation, child: Text("Send my location")),
+                onPressed: _sendMyLocation,
+                child: const Text("Send my location")),
           ],
         )
       ],

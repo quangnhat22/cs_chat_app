@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/modules/search/search_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,16 +20,27 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SearchEvent>((event, emit) async {
       await event.map(
         started: (event) => _started(event, emit),
-        inputChanged: (event) => _listRequestRefreshed(event, emit),
+        inputChanged: (event) async => await _inputChanged(event, emit),
       );
-    }, transformer: debounce(const Duration(milliseconds: 10000)));
+    }, transformer: debounce(const Duration(milliseconds: 300)));
   }
 
   _started(_Started event, Emitter<SearchState> emit) {}
 
-  _listRequestRefreshed(
+  Future<void> _inputChanged(
       SearchInputChanged event, Emitter<SearchState> emit) async {
-    log(event.query.toString());
+    try {
+      final res = await _searchUseCase.searchGlobally(event.query);
+      if (res != null) {
+        emit(state.copyWith(
+          friends: res.friends,
+          groups: res.groups,
+          messages: res.messages,
+        ));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   EventTransformer<E> debounce<E>(Duration duration) {

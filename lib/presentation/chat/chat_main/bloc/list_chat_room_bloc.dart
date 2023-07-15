@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:chatapp/domain/entities/latest_message_entity.dart';
 import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/modules/chat_room/chat_room_use_case.dart';
@@ -93,15 +92,6 @@ class ListChatRoomBloc extends Bloc<ListChatRoomEvent, ListChatRoomState> {
         type: event.newMessage.groupEntity!.type,
       );
 
-      await AwesomeNotifications().createNotification(
-        content: NotificationContent(
-          id: 199,
-          channelKey: 'local_chatroom_new_message_channel',
-          title: 'Simple Notification',
-          body: 'Simple body',
-          actionType: ActionType.KeepOnTop,
-        ),
-      );
       listCurrentChatRoom = [newChatRoom, ...listCurrentChatRoom];
 
       emit(GetListChatRoomInSucess(listChatRoom: listCurrentChatRoom));

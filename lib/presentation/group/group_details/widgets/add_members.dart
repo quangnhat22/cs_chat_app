@@ -1,4 +1,3 @@
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -6,13 +5,6 @@ import '../../../../core/config/app_text_style.dart';
 
 class AddMembers extends StatelessWidget {
   AddMembers({Key? key}) : super(key: key);
-
-  final List<String> allFriends = [
-    'Nguyễn Đình Nhật Quang',
-    'Trần Đình Lộc',
-    'Lê Hà Gia Bảo',
-    'Lê Đức Hậu',
-  ];
 
   final List<String> selectedFriends = [];
   late List<String> friendResults = [];

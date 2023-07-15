@@ -35,12 +35,11 @@ class GroupRepoImpl extends GroupRepository {
   Future<bool> createGroup(
       String name, String? imageUrl, List<String> members) async {
     try {
-      String? avatarUrl = "";
-      if (imageUrl != null || imageUrl != "") {
-        avatarUrl = await _storageFirebase.uploadFile(imageUrl!);
+      String? avatarUrl;
+      if (imageUrl != null && imageUrl != "") {
+        avatarUrl = await _storageFirebase.uploadFile(imageUrl);
       }
-      final res =
-          await _groupService.createGroup(name, avatarUrl ?? "", members);
+      final res = await _groupService.createGroup(name, avatarUrl, members);
       if (res.statusCode == 201) {
         return true;
       } else {
@@ -155,22 +154,31 @@ class GroupRepoImpl extends GroupRepository {
   }
 
   @override
-  Future<bool> leaveGroup(String grouId) {
-    // TODO: implement leaveGroup
-    throw UnimplementedError();
+  Future<bool> leaveGroup(String groupId) async {
+    try {
+      final res = await _groupService.leaveGroup(groupId);
+      if (res.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override
   Future<bool> inviteNewMember(
       {required String groupId, List<String>? membersId}) async {
     try {
-      final res = await _groupService.inviteNewMember(
-          groupId: groupId, memberId: membersId);
-      if (res.statusCode == 200) {
-        return true;
-      } else {
-        return false;
+      if (membersId == null) return false;
+      for (var memberId in membersId) {
+        final res = await _groupService.inviteNewMember(
+            groupId: groupId, friendId: memberId);
+        if (res.statusCode != 200) {
+          throw Exception("Invalid request");
+        }
       }
+      return true;
     } catch (e) {
       throw Exception(e.toString());
     }

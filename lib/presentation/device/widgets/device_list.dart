@@ -1,9 +1,7 @@
 part of device_administration_lib;
 
 class DeviceList extends StatelessWidget {
-  DeviceList({super.key});
-
-  final devices = ['Device name 1', 'Device name 2'];
+  const DeviceList({super.key});
 
   @override
   Widget build(BuildContext context) {

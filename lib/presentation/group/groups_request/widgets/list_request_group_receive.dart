@@ -7,7 +7,18 @@ class ListRequestGroupReceive extends StatelessWidget {
 
   void _onRejectRequest(BuildContext ctx, String? receiverId) {
     if (receiverId == null) return;
-    ctx.read<GroupRequestActionCubit>().rejectRequest(receiverId);
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(AppLocalizations.of(ctx)!.confirm)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_reject_group)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .setOnPositive(() {
+          ctx.read<GroupRequestActionCubit>().rejectRequest(receiverId);
+          Navigator.of(ctx).pop();
+        })
+        .buildDialog(ctx)
+        .show(ctx);
   }
 
   void _onAcceptRequest(BuildContext ctx, String? receiverId) {
@@ -18,16 +29,20 @@ class ListRequestGroupReceive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (listReceiveRequest.isEmpty)
-        ? const Padding(
-            padding: EdgeInsets.all(32.0),
-            child: Text('No request now!'),
-          )
+        ? RefreshPage(
+            label: AppLocalizations.of(context)!.didnt_receive_group_request,
+            onRefresh: () {
+              context
+                  .read<ListGroupRequestBloc>()
+                  .add(const ListGroupRequestRefreshed());
+            })
         : ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(listReceiveRequest[index].sender?.name ?? ""),
+                title: Text(
+                    "${listReceiveRequest[index].sender?.name} ${AppLocalizations.of(context)!.invited_you_to_join_group} \"${listReceiveRequest[index].group?.name}\""),
                 leading: CustomAvatarImage(
                   urlImage: listReceiveRequest[index].sender?.avatar,
                   maxRadiusEmptyImg: 20,
@@ -53,7 +68,7 @@ class ListRequestGroupReceive extends StatelessWidget {
                         OutlinedButton(
                           onPressed: () => _onRejectRequest(
                             context,
-                            listReceiveRequest[index].sender!.id,
+                            listReceiveRequest[index].group!.id,
                           ),
                           style: const ButtonStyle(
                               padding: MaterialStatePropertyAll(
@@ -63,7 +78,7 @@ class ListRequestGroupReceive extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () => _onAcceptRequest(
-                              context, listReceiveRequest[index].sender!.id),
+                              context, listReceiveRequest[index].group!.id),
                           style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   Theme.of(context).colorScheme.primary,

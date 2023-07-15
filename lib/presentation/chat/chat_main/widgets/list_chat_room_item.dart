@@ -4,7 +4,6 @@ import 'package:chatapp/core/config/app_text_style.dart';
 import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:chatapp/domain/entities/chat_room_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routes/app_navigation.dart';
 import '../../../../core/routes/route_name.dart';
@@ -67,8 +66,9 @@ class ListChatRoomItem extends StatelessWidget {
                                   chatRoom.latestMessageEntity?.message != null)
                                 Text(
                                   "${chatRoom.latestMessageEntity?.senderName}: ${chatRoom.latestMessageEntity?.message}",
-                                  style: AppTextStyles.captionTextStyle,
-                                  maxLines: 1,
+                                  style: AppTextStyles.captionTextStyle
+                                      .copyWith(fontWeight: FontWeight.w400),
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                             ],
@@ -86,24 +86,10 @@ class ListChatRoomItem extends StatelessWidget {
                       AppDateTimeFormat.convertToHourMinuteFollowDay(
                           chatRoom.latestMessageEntity?.createdAt ??
                               DateTime.now()),
-                      // style: TextStyle(
-                      //   fontSize: 12,
-                      //   fontWeight:
-                      //       isMessageRead ? FontWeight.bold : FontWeight.normal,
-                      // ),
                     ),
                     const SizedBox(
                       height: 4,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 4.0),
-                      child: Icon(
-                        Icons.circle_rounded,
-                        color: Theme.of(context).colorScheme.primary,
-                        size: 14.sp,
-                      ),
-                    )
                   ],
                 ),
               ],

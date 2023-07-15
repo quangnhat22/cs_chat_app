@@ -36,15 +36,19 @@ class BtnEditProfile extends StatelessWidget {
                   width: double.infinity,
                   child: CustomElevatedButton(
                     buttonText: AppLocalizations.of(context)!.confirm,
-                    onPressed: () => _onPressEditBtn(
-                      context,
-                      state.name,
-                      state.phoneNumber,
-                      state.birthday,
-                      state.gender,
-                      state.bio,
-                    ),
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    onPressed: !state.isDone
+                        ? null
+                        : () => _onPressEditBtn(
+                              context,
+                              state.name,
+                              state.phoneNumber,
+                              state.birthday,
+                              state.gender,
+                              state.bio,
+                            ),
+                    backgroundColor: !state.isDone
+                        ? Colors.grey[400]
+                        : Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),

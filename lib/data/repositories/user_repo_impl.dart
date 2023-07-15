@@ -37,7 +37,9 @@ class UserRepositoryImpl extends UserRepository {
           phone: phone,
           birthday: birthday,
           bio: bio,
+          isProfileUpdate: true,
         );
+        // await getSelf();
         return true;
       }
       return false;

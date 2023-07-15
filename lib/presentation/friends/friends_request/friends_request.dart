@@ -7,6 +7,7 @@ import 'package:chatapp/core/utils/snack_bar.dart';
 import 'package:chatapp/domain/entities/friend_request_entity.dart';
 import 'package:chatapp/presentation/friends/friends_request/friend_request_action_cubit/friend_request_action_cubit.dart';
 import 'package:chatapp/presentation/friends/friends_request/list_friend_request_bloc/list_friend_request_bloc.dart';
+import 'package:chatapp/presentation/others/refresh_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

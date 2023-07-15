@@ -7,22 +7,43 @@ class ListRequestGroupSend extends StatelessWidget {
 
   void _onTapRecallButton(BuildContext ctx, String? friendId, String? groupId) {
     if (groupId == null) return;
-    ctx.read<GroupRequestActionCubit>().recallRequest(groupId, friendId ?? "");
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(AppLocalizations.of(ctx)!.confirm)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_revoke_group)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .setOnPositive(() {
+          ctx
+              .read<GroupRequestActionCubit>()
+              .recallRequest(groupId, friendId ?? "");
+          Navigator.of(ctx).pop();
+        })
+        .buildDialog(ctx)
+        .show(ctx);
   }
 
   @override
   Widget build(BuildContext context) {
     return listSendRequest.isEmpty
-        ? const Padding(
-            padding: EdgeInsets.all(32.0),
-            child: Text("You didn't send request!"),
-          )
+        ? RefreshPage(
+            label: AppLocalizations.of(context)!.didnt_send_group_request,
+            onRefresh: () {
+              context
+                  .read<ListGroupRequestBloc>()
+                  .add(const ListGroupRequestRefreshed());
+            })
         : ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(listSendRequest[index].receiver?.name ?? ""),
+                title: Text(
+                  "${listSendRequest[index].receiver?.name} ${AppLocalizations.of(context)!.is_invited_to_join} ${listSendRequest[index].group?.name}",
+                  maxLines: 2,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 subtitle: Text(
                   listSendRequest[index].createdAt != null
                       ? AppDateTimeFormat.formatDDMMYYYY(

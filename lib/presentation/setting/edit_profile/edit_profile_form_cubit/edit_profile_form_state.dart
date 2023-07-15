@@ -8,5 +8,6 @@ class EditProfileFormState with _$EditProfileFormState {
     DateTime? birthday,
     @Default(AppGender.others) AppGender gender,
     String? bio,
+    @Default(false) bool isDone,
   }) = _Initial;
 }

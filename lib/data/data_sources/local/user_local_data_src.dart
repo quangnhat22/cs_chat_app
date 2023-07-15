@@ -15,7 +15,6 @@ class UserLocalDataSrc {
 
   Future<void> setUser(UserModel user) async {
     await _openBox().then((box) async {
-      await box.delete(_userKeyName);
       await box.put(_userKeyName, user);
       await getUser();
     });
@@ -27,14 +26,14 @@ class UserLocalDataSrc {
     });
   }
 
-  Future<void> updateUser({
-    String? name,
-    String? avatar,
-    String? phone,
-    String? bio,
-    DateTime? birthday,
-    String? gender,
-  }) async {
+  Future<void> updateUser(
+      {String? name,
+      String? avatar,
+      String? phone,
+      String? bio,
+      DateTime? birthday,
+      String? gender,
+      bool? isProfileUpdate}) async {
     return await _openBox().then((box) async {
       final currentUser = box.get(_userKeyName);
       if (currentUser != null) {
@@ -45,6 +44,7 @@ class UserLocalDataSrc {
           birthday: birthday ?? currentUser.birthday,
           gender: gender ?? currentUser.gender,
           bio: bio ?? currentUser.bio,
+          profileUpdated: isProfileUpdate ?? true,
         );
         setUser(tempUser);
       }
@@ -59,14 +59,6 @@ class UserLocalDataSrc {
   }
 
   Future<void> deleteBoxUser() async {
-    // getBox().then((box) {
-    //   return print(
-    //       box.get(refreshTokenKeyName, defaultValue: "no refresh token"));
-    // });
     await _openBox().then((box) => box.clear());
-    // _openBox().then((box) {
-    //   return print(
-    //       box.get(_accessTokenKeyName, defaultValue: "no refresh token"));
-    // });
   }
 }

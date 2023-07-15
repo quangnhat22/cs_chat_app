@@ -1,5 +1,4 @@
 import 'package:chatapp/common/widgets/stateless/app_bar/m_page_app_bar.dart';
-import 'package:chatapp/common/widgets/stateless/circle_avatar/custom_avatar_image.dart';
 import 'package:chatapp/core/di/injector.dart';
 import 'package:chatapp/presentation/friends/friends_detail/cubit/friend_detail_cubit.dart';
 import 'package:flutter/material.dart';

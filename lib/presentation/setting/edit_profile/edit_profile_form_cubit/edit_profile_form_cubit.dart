@@ -30,12 +30,27 @@ class EditProfileFormCubit extends Cubit<EditProfileFormState> {
     ));
   }
 
+  void isDone() {
+    if (state.name == null ||
+        state.name!.isEmpty ||
+        state.phoneNumber == null ||
+        !state.phoneNumber!.isValid) {
+      emit(state.copyWith(isDone: false));
+    } else {
+      emit(state.copyWith(isDone: true));
+    }
+  }
+
   Future<void> fullnameChanged(String? value) async {
-    emit(state.copyWith(name: value));
+    emit(state.copyWith(
+      name: value,
+    ));
+    isDone();
   }
 
   void phoneNumberChanged(String? value) {
     emit(state.copyWith(phoneNumber: PhoneNumber.dirty(value ?? "")));
+    isDone();
   }
 
   void birthdayChanged(DateTime value) {

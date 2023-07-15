@@ -33,8 +33,7 @@ class EditGroupCubit extends Cubit<EditGroupState> {
       emit(state.copyWith(status: EditGroupSubmitStatus.inProgress));
       if (state.groupId != null &&
           state.groupName != null &&
-          state.groupName!.trim().isNotEmpty &&
-          state.groupAvatar != null) {
+          state.groupName!.trim().isNotEmpty) {
         final isSuccess = await _groupUC.updateGroup(
             groupId: state.groupId!,
             groupName: state.groupName,

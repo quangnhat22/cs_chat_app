@@ -23,7 +23,7 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
     return BlocListener<EditProfileFormCubit, EditProfileFormState>(
       listenWhen: (previous, current) =>
           previous.phoneNumber!.value != current.phoneNumber!.value &&
-          previous.phoneNumber!.value == "",
+          previous.phoneNumber!.isPure,
       listener: (context, state) {
         if (state.phoneNumber != null) {
           _controller.text = state.phoneNumber?.value ?? "";
@@ -32,7 +32,9 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
       child: CTextFormField(
         controller: _controller,
         icon: const Icon(Icons.phone_outlined),
-        label: AppLocalizations.of(context)!.phone_number,
+        label: '${AppLocalizations.of(context)!.phone_number} (*)',
+        type: InputType.phoneNumber,
+        typeCheck: TypeValueCheck.text,
       ),
     );
   }

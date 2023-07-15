@@ -26,7 +26,7 @@ class AudioMessage extends IMessageItem {
         decoration: BoxDecoration(
           color: isMe
               ? Theme.of(context).colorScheme.primaryContainer
-              : Colors.white,
+              : Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
           borderRadius: BorderRadius.circular(16),
         ),
         child: AudioMessageItem(

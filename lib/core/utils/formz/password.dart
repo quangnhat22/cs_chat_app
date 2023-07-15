@@ -1,7 +1,8 @@
 import 'package:formz/formz.dart';
 
 enum PasswordValidationError {
-  invalid("Password is not valid");
+  invalid(
+      "Password is not valid. Password must have at least 8 characters and at least 1 uppercase letter");
 
   const PasswordValidationError(this.message);
 

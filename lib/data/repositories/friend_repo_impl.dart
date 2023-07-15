@@ -1,12 +1,9 @@
 import 'package:chatapp/data/data_sources/remote/service/friend_service.dart';
 import 'package:chatapp/data/models/friend_request_model.dart';
-import 'package:chatapp/data/models/message_model.dart';
 import 'package:chatapp/data/models/user_model.dart';
 import 'package:chatapp/domain/entities/friend_request_entity.dart';
-import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 import 'package:chatapp/domain/modules/friend/friend_repository.dart';
-import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

@@ -17,7 +17,7 @@ class DividerSpaceLeft extends StatelessWidget {
           child: Container(
             width: constraints.maxWidth - spaceLeft,
             height: 1,
-            color: Colors.grey,
+            color: Theme.of(context).colorScheme.outline,
           ),
         );
       },

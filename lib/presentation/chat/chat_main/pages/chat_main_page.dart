@@ -1,7 +1,6 @@
 import 'package:chatapp/core/di/injector.dart';
 import 'package:chatapp/presentation/chat/chat_main/bloc/list_chat_room_bloc.dart';
 import 'package:chatapp/presentation/chat/chat_main/widgets/list_chat_room.dart';
-import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

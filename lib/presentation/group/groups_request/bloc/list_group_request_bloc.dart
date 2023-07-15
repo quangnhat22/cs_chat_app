@@ -44,10 +44,17 @@ class ListGroupRequestBloc
 
   Future<void> _listRequestRefreshed(ListGroupRequestRefreshed event,
       Emitter<ListGroupRequestState> emit) async {
-    if (state is GetListGroupRequestSuccess) {
-      add(const ListGroupRequestEvent.started());
-    } else {
-      return;
+    try {
+      final listSentRequest = await _groupUC.getSentRequest();
+      final listReceivedRequest = await _groupUC.getReceiveRequest();
+      //sort list
+      listSentRequest.sortBy((sent) => sent.createdAt!);
+      listReceivedRequest.sortBy((receive) => receive.createdAt!);
+      emit(GetListGroupRequestSuccess(
+          groupRequestSent: listSentRequest,
+          groupRequestReceive: listReceivedRequest));
+    } catch (e) {
+      emit(GetListGroupRequestFail(message: e.toString()));
     }
   }
 }

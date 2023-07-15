@@ -40,13 +40,16 @@ class _DetailChatRoomViewState extends State<DetailChatRoomView> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SetPhoto(),
-            const InputName(),
-            AddMembers(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SetPhoto(),
+              const InputName(),
+              AddMembers(),
+            ],
+          ),
         ),
       ),
     );

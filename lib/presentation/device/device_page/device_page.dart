@@ -22,17 +22,8 @@ class DeviceMainPageView extends StatelessWidget {
       appBar: MPageAppBar(
         title: AppLocalizations.of(context)!.devices,
       ),
-      body: CustomScrollView(
+      body: const CustomScrollView(
         slivers: <Widget>[
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 18,
-                vertical: 40,
-              ),
-              child: SegmentButtonDevice(),
-            ),
-          ),
           DeviceList(),
         ],
       ),

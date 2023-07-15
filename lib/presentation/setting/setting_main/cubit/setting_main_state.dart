@@ -6,6 +6,7 @@ class SettingMainState with _$SettingMainState {
     String? avatar,
     String? name,
     String? email,
+    @Default(true) bool isTurnOnNotifi,
     @Default("") String theme,
     @Default("") String lang,
   }) = _Initial;

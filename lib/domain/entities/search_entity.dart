@@ -1,4 +1,5 @@
 import 'package:chatapp/domain/entities/chat_room_entity.dart';
+import 'package:chatapp/domain/entities/message_entity.dart';
 import 'package:chatapp/domain/entities/user_entity.dart';
 
 import '../../data/models/search_model.dart';
@@ -6,7 +7,7 @@ import '../../data/models/search_model.dart';
 class SearchEntity {
   List<UserEntity>? friends;
   List<ChatRoomEntity>? groups;
-  List<ChatRoomEntity>? messages;
+  List<MessageEntity>? messages;
 
   SearchEntity({this.friends, this.groups, this.messages});
 
@@ -24,8 +25,8 @@ class SearchEntity {
               ChatRoomEntity.convertToChatRoomEntity(chatRoomModel: group))
           .toList(),
       messages: model.messages
-          ?.map((message) =>
-              ChatRoomEntity.convertToChatRoomEntity(chatRoomModel: message))
+          ?.map(
+              (message) => MessageEntity.convertToMessageEntity(model: message))
           .toList(),
     );
   }

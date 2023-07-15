@@ -1,4 +1,5 @@
 import 'package:chatapp/common/widgets/stateless/skeleton/list_skeleton.dart';
+import 'package:chatapp/core/utils/date_time_format.dart';
 import 'package:chatapp/presentation/chat/chat_room/chat_room_bloc/chat_room_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,7 @@ class _ListMessageState extends State<ListMessage> {
     return BlocConsumer<ChatRoomBloc, ChatRoomState>(
       listener: (context, state) {
         state.whenOrNull(getChatRoomInfoSuccess:
-            (messages, _, __, ___, ____, _____, isLatest) {
+            (messages, _, __, ___, ____, _____, ______, isLatest, _______) {
           _pagingController.itemList = messages;
           if (isLatest) {
             _pagingController.appendLastPage([]);
@@ -44,7 +45,8 @@ class _ListMessageState extends State<ListMessage> {
       },
       builder: (context, state) {
         return state.maybeWhen(
-          getChatRoomInfoSuccess: (messages, _, __, ___, ____, _____, ______) {
+          getChatRoomInfoSuccess:
+              (messages, _, __, ___, ____, _____, ______, _______, ________) {
             return PagedSliverList<String, MessageEntity>(
               pagingController: _pagingController,
               builderDelegate: PagedChildBuilderDelegate<MessageEntity>(
@@ -55,20 +57,36 @@ class _ListMessageState extends State<ListMessage> {
                 firstPageProgressIndicatorBuilder: (context) => Container(),
                 itemBuilder: (context, item, index) {
                   final isMe = item.isMe ?? false;
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: isMe
-                          ? MainAxisAlignment.end
-                          : MainAxisAlignment.start,
-                      children: [
-                        MessgeItem(
-                          isMe: isMe,
-                          message: item,
-                          isSendStatus: item.sendStatus,
-                        )
-                      ],
-                    ),
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (item.createdAt != null &&
+                          item.isSameDate != null &&
+                          item.isSameDate == false)
+                        Text(AppDateTimeFormat.convertToHourMinuteFollowDay(
+                            item.createdAt!)),
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        color: item.isResultSearch != null &&
+                                item.isResultSearch == true
+                            ? Theme.of(context).colorScheme.surfaceVariant
+                            : Colors.transparent,
+                        child: Row(
+                          mainAxisAlignment: item.type == 'system'
+                              ? MainAxisAlignment.center
+                              : isMe
+                                  ? MainAxisAlignment.end
+                                  : MainAxisAlignment.start,
+                          children: [
+                            MessgeItem(
+                              isMe: isMe,
+                              message: item,
+                              isSendStatus: item.sendStatus,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),

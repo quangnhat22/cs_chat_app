@@ -21,11 +21,11 @@ class DeviceService {
   }
 
   Future<Response> updateDevice(
-      String name, String pushNotificationToken) async {
+      String name, String? pushNotificationToken) async {
     try {
       return await _service.dio.put(BaseService.devicePath, data: {
         "name": name,
-        "push_notification_token": pushNotificationToken,
+        "push_notification_token": pushNotificationToken ?? '',
       });
     } on DioError catch (e) {
       throw Exception(e.message.toString());

@@ -44,6 +44,7 @@ class _CPasswordTextFieldState extends State<CPasswordTextField> {
           ),
           label: Text(widget.label),
           errorText: widget.errorText,
+          errorMaxLines: 3,
           border: const OutlineInputBorder(
             borderSide: BorderSide(width: 1),
             borderRadius: BorderRadius.all(

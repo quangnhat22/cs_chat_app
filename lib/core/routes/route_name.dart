@@ -20,4 +20,5 @@ class RouteName {
   static const String groupDetails = '/group-details';
   static const String googleMap = '/google-map';
   static const String medias = '/media';
+  static const String updatePassword = '/update-password';
 }

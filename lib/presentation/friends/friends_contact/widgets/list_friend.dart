@@ -13,7 +13,13 @@ class ListFriend extends StatelessWidget {
         return state.maybeWhen(
           success: (friends) {
             return friends.isEmpty
-                ? const EmptyView()
+                ? RefreshPage(
+                    label: AppLocalizations.of(context)!.refresh_page,
+                    onRefresh: () {
+                      context
+                          .read<FriendsContactBloc>()
+                          .add(const FriendsContactEvent.started());
+                    })
                 : ListView.separated(
                     shrinkWrap: true,
                     separatorBuilder: (context, index) =>

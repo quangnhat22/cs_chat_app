@@ -1,5 +1,4 @@
 import 'package:chatapp/domain/entities/user_entity.dart';
-import 'package:chatapp/domain/modules/friend/friend_usecase.dart';
 import 'package:chatapp/domain/modules/group/group_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

@@ -38,12 +38,16 @@ class GroupDetailsBloc extends Bloc<GroupDetailsEvent, GroupDetailsState> {
 
   Future<void> _refresh(
       GroupDetailsRefreshed event, Emitter<GroupDetailsState> emit) async {
-    // try {
-    //   final groupDetails = await _groupUC.getListGroup();
-    //   emit(GetGroupDetailsInSuccess(groupDetails: groupDetails));
-    // } catch (e) {
-    //   emit(GetGroupDetailsInFailed(message: e.toString()));
-    // }
+    try {
+      if (state is GetGroupDetailsInSuccess) {
+        final chatRoomInfoId = (state as GetGroupDetailsInSuccess).groupInfo.id;
+        final groupDetails =
+            await _chatRoomUseCase.getChatRoomDetailById(chatRoomInfoId);
+        emit(GetGroupDetailsInSuccess(groupInfo: groupDetails));
+      }
+    } catch (e) {
+      emit(GetGroupDetailsInFailed(message: e.toString()));
+    }
   }
 
   Future<void> _leaved(

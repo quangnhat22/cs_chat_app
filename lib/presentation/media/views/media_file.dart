@@ -20,6 +20,7 @@ class MediaFile extends StatelessWidget {
                       horizontal: 8.0, vertical: 4.0),
                   child: FileMessageItem(
                     content: listFile![index].message,
+                    sizeImage: listFile[index].sizeImage,
                     isMe: true,
                   ),
                 );

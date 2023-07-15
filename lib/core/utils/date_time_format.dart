@@ -27,8 +27,8 @@ class AppDateTimeFormat {
 
   static int _calculateDifference(DateTime date) {
     DateTime now = DateTime.now();
-    return DateTime(date.year, date.month, date.day)
-        .difference(DateTime(now.year, now.month, now.day))
+    return DateTime.utc(date.year, date.month, date.day)
+        .difference(DateTime.utc(now.year, now.month, now.day))
         .inDays;
   }
 }

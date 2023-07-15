@@ -19,7 +19,7 @@ abstract class GroupRepository {
 
   Future<bool> acceptRequestt(String groupId);
 
-  Future<bool> leaveGroup(String grouId);
+  Future<bool> leaveGroup(String groupId);
 
   Future<List<MessageEntity>> getListChatWithGroup(
       {required String groupId, String? latestMessageId, int? limit});

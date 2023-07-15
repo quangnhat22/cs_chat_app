@@ -88,7 +88,7 @@ class AuthRepositoryImpl extends AuthRepository {
         );
 
         await _userRepo.getSelf();
-        await _sendEmailVerify();
+        // await _sendEmailVerify();
       }
     } catch (e) {
       throw Exception(e);
@@ -125,17 +125,18 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
-  Future<void> _sendEmailVerify() async {
-    final isVerifyEmail = await _authLocalDataSrc.getIsVerifyEmail();
-    if (isVerifyEmail) {
-      await _authService.sendVerifyEmail();
-    }
-  }
+  // Future<void> _sendEmailVerify() async {
+  //   final isVerifyEmail = await _authLocalDataSrc.getIsVerifyEmail();
+  //   if (isVerifyEmail) {
+  //     await _authService.sendVerifyEmail();
+  //   }
+  // }
 
   @override
-  Future<bool> updatePassword(String password, String oldPassword) async {
+  Future<bool> updatePassword(String? password, String? oldPassword) async {
     try {
-      final res = await _authService.updatePassword(password, oldPassword);
+      final res =
+          await _authService.updatePassword(password ?? "", oldPassword ?? "");
       if (res.statusCode == 200) {
         return true;
       }

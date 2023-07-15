@@ -25,7 +25,7 @@ class DeviceSettings extends StatelessWidget {
     return BlocBuilder<SettingMainCubit, SettingMainState>(
       builder: (context, state) {
         return state.maybeWhen(
-          initial: (_, __, ___, theme, lang) {
+          initial: (_, __, ___, isTurnNoti, theme, lang) {
             return Card(
               child: Column(
                 children: <Widget>[
@@ -47,14 +47,22 @@ class DeviceSettings extends StatelessWidget {
                     hasBottomBorderRadius: false,
                   ),
                   const DividerSpaceLeft(),
-                  InkWellDynamicBorder(
-                    title: AppLocalizations.of(context)!.notifications,
-                    leading: const Icon(Icons.notifications_outlined),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {},
-                    hasTopBorderRadius: false,
-                    hasBottomBorderRadius: false,
-                  ),
+                  // InkWellDynamicBorder(
+                  //   title: AppLocalizations.of(context)!.notifications,
+                  //   leading: const Icon(Icons.notifications_outlined),
+                  //   trailing: const Icon(Icons.chevron_right),
+                  //   onTap: () {},
+                  //   hasTopBorderRadius: false,
+                  //   hasBottomBorderRadius: false,
+                  // ),
+                  // SwitchListTile(
+                  //   value: isTurnNoti,
+                  //   title: Text(AppLocalizations.of(context)!.notifications),
+                  //   secondary: const Icon(Icons.notifications_outlined),
+                  //   onChanged: (value) {
+                  //     context.read<SettingMainCubit>().changeStatusNoti(value);
+                  //   },
+                  // ),
                   const DividerSpaceLeft(),
                   InkWellDynamicBorder(
                     title: AppLocalizations.of(context)!.devices,

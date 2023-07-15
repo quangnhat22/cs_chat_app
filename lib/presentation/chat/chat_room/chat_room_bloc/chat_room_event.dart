@@ -7,9 +7,12 @@ class ChatRoomEvent with _$ChatRoomEvent {
     required String id,
     required String chatRoomId,
     String? latestMessageId,
+    MessageEntity? searchMessage,
   }) = Started;
 
   const factory ChatRoomEvent.refreshed() = ChatRoomRefreshed;
+
+  const factory ChatRoomEvent.updateChatRoom() = ChatRoomUpdated;
 
   const factory ChatRoomEvent.addMessageTemp({
     required MessageEntity newMessage,
@@ -22,4 +25,6 @@ class ChatRoomEvent with _$ChatRoomEvent {
 
   const factory ChatRoomEvent.newMessageTopLoaded() =
       ChatRoomNewMessageTopLoaded;
+  const factory ChatRoomEvent.newMessageBottomLoaded() =
+      ChatRoomNewMessageBottomLoaded;
 }

@@ -6,13 +6,13 @@ class GroupSetPhoto extends StatelessWidget {
   void _showImageDialog(BuildContext ctx) {
     showDialog(
         context: ctx,
-        builder: (_) {
+        builder: (context) {
           return AssetDialog(
             handlePhotoFromCamera: () async {
-              Navigator.of(ctx).pop(AppMediaResource.camera);
+              Navigator.of(context).pop(AppMediaResource.camera);
             },
             handlePhotoFromGallery: () async {
-              Navigator.of(ctx).pop(AppMediaResource.gallery);
+              Navigator.of(context).pop(AppMediaResource.gallery);
             },
           );
         }).then(
@@ -32,7 +32,9 @@ class GroupSetPhoto extends StatelessWidget {
         }
 
         if (ctx.mounted) {
-          ctx.read<CreateGroupCubit>().groupImageChanged(filePath);
+          if (filePath != null) {
+            ctx.read<CreateGroupCubit>().groupImageChanged(filePath);
+          }
         }
       },
     );

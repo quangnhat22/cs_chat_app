@@ -14,7 +14,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+        autovalidateMode: AutovalidateMode.always,
         child: Column(
           children: const <Widget>[
             InputFullName(),
