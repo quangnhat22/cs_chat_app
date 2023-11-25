@@ -4,26 +4,25 @@ import 'package:chatapp/data/data_sources/remote/service/notifications_service.d
 import 'package:chatapp/data/models/notification_model.dart';
 import 'package:chatapp/domain/entities/notification_entity.dart';
 import 'package:chatapp/domain/modules/notification/notfication_repository.dart';
-import 'package:chatapp/service/notification_service.dart';
+// import 'package:chatapp/service/notification_service.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: NotificationRepository)
 class NotificationRepositoryImpl extends NotificationRepository {
   final NotificationsService _service;
-  final NotificationService _awesomeService;
+  // final NotificationService _awesomeService;
   final DeviceService _deviceService;
 
-  NotificationRepositoryImpl(
-      this._service, this._awesomeService, this._deviceService);
+  NotificationRepositoryImpl(this._service, this._deviceService);
 
   @override
   Future<bool> changeTurnOnAndOffNotification(bool isTurnOn) async {
     try {
       // get device name
       final deviceName = await DetectDeviceInfo.getDeviceName();
-      final fcmToken =
-          isTurnOn ? await _awesomeService.getFirebaseMessagingToken() : '';
-      final res = await _deviceService.updateDevice(deviceName, fcmToken);
+      // final fcmToken =
+      //     isTurnOn ? await _awesomeService.getFirebaseMessagingToken() : '';
+      final res = await _deviceService.updateDevice(deviceName, '');
       if (res.statusCode == 200) {
         return true;
       } else {

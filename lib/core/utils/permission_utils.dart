@@ -7,11 +7,11 @@ class PermissionUtils {
   const PermissionUtils._();
 
   static Future<void> checkPermissions() async {
-    final status = await Permission.notification.request();
+    // final status = await Permission.notification.request();
 
-    if (status.isPermanentlyDenied) {
-      log('Notification Permission disabled');
-    }
+    // if (status.isPermanentlyDenied) {
+    //   log('Notification Permission disabled');
+    // }
   }
 
   static Future<bool> _checkServiceEnable() async {

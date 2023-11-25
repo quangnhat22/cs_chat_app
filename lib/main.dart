@@ -43,6 +43,6 @@ void _registerAdapterHive() {
 }
 
 Future<void> _initLocalNotification() async {
-  await NotificationService.initializeLocalNotifications(debug: true);
-  await NotificationService.initializeRemoteNotifications(debug: true);
+  // await NotificationService.initializeLocalNotifications(debug: true);
+  // await NotificationService.initializeRemoteNotifications(debug: true);
 }

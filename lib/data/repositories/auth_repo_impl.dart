@@ -16,10 +16,10 @@ class AuthRepositoryImpl extends AuthRepository {
   final UserRepository _userRepo;
   final AuthLocalDataSrc _authLocalDataSrc;
   final LocalDataSrc _localDataSrc;
-  final NotificationService _notificationService;
+  // final NotificationService _notificationService;
 
   AuthRepositoryImpl(this._authFirebase, this._authService, this._userRepo,
-      this._authLocalDataSrc, this._localDataSrc, this._notificationService);
+      this._authLocalDataSrc, this._localDataSrc);
 
   @override
   Stream<String?> checkAccessTokenStream() {
@@ -45,10 +45,10 @@ class AuthRepositoryImpl extends AuthRepository {
       if (idToken != null) {
         // get device name
         final deviceName = await DetectDeviceInfo.getDeviceName();
-        final fcmToken = await _getFCMToken();
+        //final fcmToken = await _getFCMToken();
         //call api
         final res = await _authService.loginWithFirebase(
-            idToken: idToken, deviceName: deviceName, fcmToken: fcmToken);
+            idToken: idToken, deviceName: deviceName, fcmToken: '');
         // handle res data
         if (res.statusCode == 200) {
           final data = res.data["data"];
@@ -69,13 +69,13 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       // get device name
       final deviceName = await DetectDeviceInfo.getDeviceName();
-      final fcmToken = await _getFCMToken();
+      //final fcmToken = await _getFCMToken();
       //call api
       final res = await _authService.login(
         email: email,
         password: password,
         deviceName: deviceName,
-        fcmToken: fcmToken,
+        fcmToken: '',
       );
       // handle res data
       if (res.statusCode == 200) {
@@ -100,13 +100,13 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       // get device name
       final deviceName = await DetectDeviceInfo.getDeviceName();
-      final fcmToken = await _getFCMToken();
+      //final fcmToken = await _getFCMToken();
       //call api
       final res = await _authService.register(
           email: email,
           password: password,
           deviceName: deviceName,
-          fcmToken: fcmToken);
+          fcmToken: '');
 
       // handle res data
       if (res.statusCode == 200) {
@@ -171,7 +171,7 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
-  Future<String?> _getFCMToken() async {
-    return await _notificationService.getFirebaseMessagingToken();
-  }
+  // Future<String?> _getFCMToken() async {
+  //   return await _notificationService.getFirebaseMessagingToken();
+  // }
 }
